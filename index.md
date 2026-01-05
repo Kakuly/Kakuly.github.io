@@ -41,7 +41,7 @@ body {
 
 /* ボタンを押した時だけ付与するクラス */
 body.mode-transition {
-  transition: background-color 1.0s ease, color 1.0s ease !important;
+  transition: background-color 0.5s ease, color 0.5s ease !important;
 }
 
   /* 4. 見出し・タイトルのフォント統一 */
