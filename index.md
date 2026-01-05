@@ -2,42 +2,6 @@
 layout: home
 title: Home
 ---
-<body class="is-loading">
-
-  <style>
-    /* ここに clip-path の設定を書く */
-    body {
-      clip-path: circle(0% at 50% 50%);
-      transition: clip-path 0.6s cubic-bezier(0.65, 0, 0.15, 1);
-      background-color: var(--bg-color);
-    }
-    body:not(.is-loading) { clip-path: circle(150% at 50% 50%); }
-    body.is-exiting { clip-path: circle(0% at 50% 50%) !important; }
-  </style>
-
-  <div>
-    <h1>My Portfolio</h1>
-    ...
-  </div>
-
-  <script>
-    window.addEventListener('load', () => {
-      // 読み込み完了後に円を開く指示
-      setTimeout(() => {
-        document.body.classList.remove('is-loading');
-      }, 100);
-
-      // リンクを押した時に円を閉じる指示
-      document.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', (e) => {
-          // ...ここにさっきのクリック処理を書く
-        });
-      });
-    });
-  </script>
-
-</body>
-
 <div class="profile-container">
   <img src="/assets/img/profile.png" class="profile-icon">
   
@@ -191,7 +155,20 @@ title: Home
     .profile-icon { width: 200px; height: 200px; }
   }
 
-/* 1. メインの円（塗りつぶし）：背景と同じ色 */
+/* --- イン（入場）の設定：body自体の切り抜き --- */
+body {
+  background-color: var(--bg-color) !important;
+  /* 最初は穴が 0% */
+  clip-path: circle(0% at 50% 50%);
+  transition: clip-path 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+/* 読み込み完了後、穴を広げて中身を見せる */
+body:not(.is-loading) {
+  clip-path: circle(150% at 50% 50%);
+}
+
+/* --- アウト（退場）の設定：丸い板を広げる --- */
 body::before {
   content: "";
   position: fixed;
@@ -200,23 +177,16 @@ body::before {
   background-color: var(--bg-color); 
   z-index: 99999;
   pointer-events: none;
-  border-radius: 50%; /* 100%と同じですが、より「円」らしい指定 */
+  border-radius: 50%;
+  /* 最初は 0（隠しておく） */
   transform: translate(-50%, -50%) scale(0);
-  /* 「ぐぅぅう...（溜め）」から「わあ！（爆発）」への曲線 */
-  transition: transform 0.6s cubic-bezier(0.65, 0, 0.15, 1);
+  transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-/* 2. 縁は不要なので、表示されないようにする（または削除） */
-body::after {
-  display: none;
-}
-
-/* 3. スイッチが入った瞬間 */
+/* リンクを押した時、板を 1.5倍 まで広げて中身を隠す */
 body.is-exiting::before {
-  transform: translate(-50%, -50%) scale(1.5);
+  transform: translate(-50%, -50%) scale(1.5) !important;
 }
-
-
   
   </style>
 
@@ -252,38 +222,27 @@ body.is-exiting::before {
     }, 500);
   });
 
-    //サイト　アウト　アニメーション
-document.querySelectorAll('.page-link').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault(); // すぐにページが飛ばないように止める
-    const targetUrl = link.href;
 
-    // bodyに「今から出るよ」というクラスをつける（これで上のCSSが発動！）
-    document.body.classList.add('is-exiting');
-
-    // 図形が画面を覆い尽くすのを待ってから移動（0.65秒）
-    setTimeout(() => {
-      window.location.href = targetUrl;
-    }, 650);
-  });
-});
-
-  //サイト　イン　アニメーション
 window.addEventListener('load', () => {
-  // 読み込みが終わったら「is-loading」を外して、円を広げる（視界開通！）
+  // イン：0.1秒後に body の穴を開ける
   setTimeout(() => {
     document.body.classList.remove('is-loading');
   }, 100);
 
-  // リンククリックで「is-exiting」をつけて、円を閉じる
+  // アウト：クリックで body::before の板を広げる
   document.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
-      if (!href || href.startsWith('#') || href.includes('mailto:')) return;
+      // 外部リンクや特殊リンクは除外
+      if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
       
       e.preventDefault();
       document.body.classList.add('is-exiting');
-      setTimeout(() => { window.location.href = href; }, 650);
+
+      // 板が広がる時間を待ってから移動
+      setTimeout(() => {
+        window.location.href = href;
+      }, 800);
     });
   });
 });
