@@ -164,31 +164,19 @@ body::before {
   background-color: var(--bg-color); 
   z-index: 99999;
   pointer-events: none;
-  border-radius: 100%; /* これで丸にする */
+  border-radius: 50%; /* 100%と同じですが、より「円」らしい指定 */
   transform: translate(-50%, -50%) scale(0);
-  /* 「ぐぅぅう...（溜め）」を強調した曲線 */
+  /* 「ぐぅぅう...（溜め）」から「わあ！（爆発）」への曲線 */
   transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-/* 2. メインの縁（ふち）：文字と同じ色 */
+/* 2. 縁は不要なので、表示されないようにする（または削除） */
 body::after {
-  content: "";
-  position: fixed;
-  top: 50%; left: 50%;
-  width: 150vmax; height: 150vmax;
-  border: 10px solid var(--text-color); /* 太めの縁 */
-  box-sizing: border-box;
-  z-index: 100000;
-  pointer-events: none;
-  border-radius: 100%; /* これで丸にする */
-  transform: translate(-50%, -50%) scale(0);
-  /* 本体と完全に同期 */
-  transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+  display: none;
 }
 
-/* 3. スイッチが入った瞬間、1.5倍まで爆発！ */
-body.is-exiting::before,
-body.is-exiting::after {
+/* 3. スイッチが入った瞬間 */
+body.is-exiting::before {
   transform: translate(-50%, -50%) scale(1.5);
 }
   
