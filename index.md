@@ -66,6 +66,13 @@ title: Home
 </div>
 
 <style>
+  .sns-links {
+  display: flex;
+  /* ここを 20px から 45px くらいに増やす */
+  gap: 45px !important; 
+  
+  margin-top: 25px; /* 上の名前との距離も少し広げるとゆったりします */
+}
 .sns-links img {
   width: 35px;
   height: 35px;
