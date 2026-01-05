@@ -151,8 +151,10 @@ body {
 .page-link, 
 .profile-name, 
 h1, h2 { 
-  font-weight: 400 !important; /* ここで細く戻す */
-  letter-spacing: 0.02em;      /* 細い文字は少し字間を広げるとオシャレに見えます */
+  font-family: 'Montserrat', sans-serif !important; /* フォントを再指定 */
+  font-weight: 400 !important;                      /* 太さを標準に戻す */
+  letter-spacing: 0.05em;                           /* 少し字間を開けるとより洗練されます */
+  text-transform: uppercase;                        /* 任意：小文字を自動で大文字にしてよりロゴっぽく */
 }
 
   /* 5. モード切り替えボタン */
