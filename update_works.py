@@ -154,4 +154,7 @@ def update_markdown(items):
         f.write(content)
 
 if __name__ == "__main__":
-    items = get
+    items = get_playlist_items()
+    if items:
+        update_markdown(items)
+        print("Successfully updated works.md")
