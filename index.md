@@ -19,7 +19,7 @@ title: Home
   </div>
 </div>
 
-2006年生まれ。2020年から音楽活動を開始。
+<h1>2006</h1>年生まれ。2020年から音楽活動を開始。
 エレクトロポップ／ハイパーポップを中心に、たくさん迷いながら音楽を作っている。
 元気に生きるために音楽を摂取します。いつもありがとう。
 
@@ -162,35 +162,36 @@ title: Home
 
 
 
-
-/* --- イン（入場）：穴が広がる演出 --- */
+/* 1. 演出用の影を「全要素の頂点」に持っていく */
 #iris-in {
   position: fixed;
-  top: 50%; left: 50%;
-  width: 10px; height: 10px;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  /* 影をさらに濃く、z-indexを最強にする */
   box-shadow: 0 0 0 500vmax var(--bg-color);
-  z-index: 9999999 !important; /* ここを最強に！ */
+  /* z-indexを極端に大きくしてヘッダーを封じ込める */
+  z-index: 9999999 !important; 
   pointer-events: none;
   transform: translate(-50%, -50%) scale(0);
   transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-/* ヘッダーを含めた全要素を最初は隠す */
+/* 2. ヘッダーを含むすべてのコンテンツを、最初は「完全に透明」にする */
 body > *:not([id^="iris-"]) {
-  opacity: 0 !important; /* 最初は絶対に見せない */
+  opacity: 0 !important;
   transition: opacity 0.8s ease-out;
 }
 
-/* 穴が開いたらヘッダーも表示する */
+/* 3. 穴が開き始めたら、フワッと表示する */
 body.is-opening > *:not([id^="iris-"]) {
   opacity: 1 !important;
 }
 
-/* ヘッダー自体のz-indexが強すぎる場合があるので調整 */
+/* 4. ヘッダーが突き抜けないように念のためz-indexを下げる */
 .site-header {
-  z-index: 1000 !important; /* 演出パーツ(999999)より低ければOK */
+  z-index: 100 !important;
 }
 
 /* 実行時：穴を全開にする */
