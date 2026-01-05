@@ -120,7 +120,7 @@ html.dark-mode .sns-links img {
 }
 
   /* 1. フォント読み込み */
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Noto+Sans+JP:wght@400;700&display=swap');
 
   /* 2. カラー変数（Lightがデフォルト） */
   :root {
@@ -155,7 +155,7 @@ body {
   h1, h2, h3, .site-title { 
     font-family: 'Montserrat', sans-serif !important;
     font-size: 1.4rem !important; 
-    font-weight: 700 !important;
+    font-weight: 300 !important;
     letter-spacing: -0.05em !important;
     color: var(--text-color) !important;
     -webkit-font-smoothing: antialiased;
@@ -164,7 +164,7 @@ body {
   .page-link {
     font-family: 'Montserrat', sans-serif !important;
     color: var(--text-color) !important;
-    font-weight: 700 !important;
+    font-weight: 300 !important;
     letter-spacing: 0.05em !important;
     text-transform: uppercase;
     font-size: 0.9rem !important;
