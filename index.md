@@ -144,6 +144,7 @@ body {
   color: var(--text-color) !important; 
   font-family: 'Noto Sans JP', sans-serif !important;
   font-weight: 700 !important; /* 本文はしっかり太め */
+  -webkit-font-smoothing: antialiased;
 }
 
   /* 4. ヘッダー・ナビゲーション */
@@ -155,6 +156,7 @@ body {
     font-weight: 700 !important;
     letter-spacing: -0.05em !important;
     color: var(--text-color) !important;
+    -webkit-font-smoothing: antialiased;
   }
 
   .page-link {
@@ -167,6 +169,7 @@ body {
     margin-left: 20px !important;
     text-decoration: none !important;
     transition: 0.3s;
+    -webkit-font-smoothing: antialiased;
   }
 
   /* 5. モード切り替えボタン */
