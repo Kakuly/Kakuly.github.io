@@ -76,22 +76,24 @@ title: Home
     font-family: 'Montserrat', sans-serif !important;
     font-size: 1.4rem !important; 
     font-weight: 700 !important;
+    -webkit-font-smoothing: antialiased;
     letter-spacing: -0.05em !important;
     color: var(--text-color) !important;
-    -webkit-font-smoothing: antialiased;
+
   }
 
   .page-link {
     font-family: 'Montserrat', sans-serif !important;
     color: var(--text-color) !important;
     font-weight: 700 !important;
+    -webkit-font-smoothing: antialiased;
     letter-spacing: 0.05em !important;
     text-transform: uppercase;
     font-size: 0.9rem !important;
     margin-left: 20px !important;
     text-decoration: none !important;
     transition: 0.3s;
-    -webkit-font-smoothing: antialiased;
+
   }
 
   /* 6. 個別要素（Home専用の設定だが、強さをWorksに合わせる） */
