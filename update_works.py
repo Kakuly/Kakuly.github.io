@@ -24,13 +24,16 @@ def update_markdown(items):
         title = item['snippet']['title']
         video_id = item['snippet']['resourceId']['videoId']
         
-        # 各動画を囲む「タイル」
+# 各動画を囲む「タイル」
         content += '<div class="video-item">\n'
-        # 埋め込みプレイヤーのコード
-        content += f'  <iframe src="https://www.youtube.com/embed/{video_id}" frameborder="0" allowfullscreen></iframe>\n'
-        content += f'</div>\n'
-
-            content += f"  <h3>{title}</h3>\n"
+        
+        # 1. 先に動画（iframe）を表示
+        content += f'  <div class="video-wrapper">\n'
+        content += f'    <iframe src="https://www.youtube.com/embed/{video_id}" frameborder="0" allowfullscreen></iframe>\n'
+        content += f'  </div>\n'
+        
+        # 2. その後にタイトル（h3）を表示（これで下に来ます）
+        content += f"  <h3 class='video-title'>{title}</h3>\n"
         
     # 外枠を閉じる
     content += '</div>\n\n'
