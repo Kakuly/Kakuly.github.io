@@ -2,11 +2,13 @@ name: Update Works from YouTube
 
 on:
   push:
-    # ここ！ pyファイルを編集して push（保存してアップ）した時に発動
+    # pyファイルを編集して push した時に発動
     paths:
       - 'update_works.py'
   schedule:
     - cron: '0 15 * * *'
+  # ↓ これを追加することで「Run workflow」ボタンが復活します！
+  workflow_dispatch:
 
 jobs:
   build:
