@@ -160,39 +160,36 @@ body::before {
   content: "";
   position: fixed;
   top: 50%; left: 50%;
-  width: 150vmax; height: 150vmax; /* サイズを合わせる */
+  width: 150vmax; height: 150vmax;
   background-color: var(--bg-color); 
   z-index: 99999;
   pointer-events: none;
-  /* 45度回転した状態でスタンバイ */
   transform: translate(-50%, -50%) rotate(45deg) scale(0);
-  /* 0.7秒で一定の動き（数値はafterと完全同期） */
-  transition: transform 0.7s cubic-bezier(0.85, 0, 0.15, 1);
+  /* transitionの数字を変更：ぐぅぅうー（溜め）わあ！（加速） */
+  transition: transform 0.85s cubic-bezier(0.8, 0, 0.1, 1);
 }
 
-/* 2. メインの縁（ふち）になる線 */
+/* 2. メインの縁（ふち） */
 body::after {
   content: "";
   position: fixed;
   top: 50%; left: 50%;
-  width: 150vmax; height: 150vmax; /* beforeとサイズを完全に一致させる */
-  /* 線を引く（文字色＝Lightなら黒/Darkなら白） */
+  width: 150vmax; height: 150vmax;
   border: 8px solid var(--text-color); 
-  box-sizing: border-box; /* 線の太さをサイズの内側に含める */
+  box-sizing: border-box;
   z-index: 100000;
   pointer-events: none;
   transform: translate(-50%, -50%) rotate(45deg) scale(0);
-  /* beforeと秒数・加速具合を完全に一致させる */
-  transition: transform 0.7s cubic-bezier(0.85, 0, 0.15, 1);
+  /* beforeと完全に同期させる */
+  transition: transform 0.85s cubic-bezier(0.8, 0, 0.1, 1);
 }
 
-/* 3. スイッチが入った時の動き（一緒に scale(1.2) まで広がる） */
+/* 3. スイッチが入った時の動き */
 body.is-exiting::before,
 body.is-exiting::after {
-  transform: translate(-50%, -50%) rotate(45deg) scale(1.2);
-}
-  
-</style>
+  /* scaleを少し大きくして、加速の余韻を見せる */
+  transform: translate(-50%, -50%) rotate(45deg) scale(1.5);
+}tyle>
 
 <script>
   (function() {
