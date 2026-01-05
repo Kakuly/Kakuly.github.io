@@ -1,8 +1,7 @@
 ---
 layout: home
+title: Home
 ---
-
-# My Portfolio
 音楽を作っています。
 
 - [SoundCloud](https://soundcloud.com/kakuly-uni)
