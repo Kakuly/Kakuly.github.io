@@ -210,8 +210,6 @@ body.is-opening > *:not([id^="iris-"]) {
 }
 </style>
 
-</script>
-
 <button id="mode-toggle">🌙 Dark Mode</button>
 
 <script>
