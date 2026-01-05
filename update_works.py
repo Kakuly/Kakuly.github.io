@@ -72,4 +72,86 @@ def update_markdown(items):
   }
 
   .page-link {
-    font-family: 'Montserrat', sans-serif
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--text-color) !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase;
+    font-size: 0.9rem !important;
+    margin-left: 20px !important;
+    text-decoration: none !important;
+    transition: 0.3s;
+  }
+
+  /* 5. ギャラリー（4列）の設定 */
+  .video-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+    gap: 40px 20px !important;
+    padding-top: 20px;
+  }
+  
+  .video-item h3 {
+    font-family: 'Montserrat', 'Noto Sans JP', sans-serif !important;
+    font-size: 0.85rem !important;
+    height: 3em;
+    overflow: hidden;
+    margin-bottom: 10px !important;
+    line-height: 1.3;
+  }
+  
+  iframe {
+    width: 100% !important;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    background: #111;
+    border: none;
+  }
+
+  /* 6. 不要な要素の削除 */
+  .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
+
+  /* 7. モード切り替えボタン */
+  #mode-toggle {
+    cursor: pointer;
+    background: none;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    z-index: 9999;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif !important;
+  }
+</style>
+
+<button id="mode-toggle">🌙 Dark Mode</button>
+
+<script>
+  const btn = document.getElementById('mode-toggle');
+  const body = document.body;
+
+  if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark-mode');
+    btn.textContent = '☀️ Light Mode';
+  }
+
+  btn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    const isDark = body.classList.contains('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+  });
+</script>
+"""
+    # ↑ この上のクォート3つが重要です！
+
+    with open(FILE_PATH, 'w', encoding='utf-8') as f:
+        f.write(content)
+
+if __name__ == "__main__":
+    items = get
