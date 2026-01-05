@@ -154,7 +154,6 @@ h1, h2 {
   font-family: 'Montserrat', sans-serif !important; /* フォントを再指定 */
   font-weight: 400 !important;                      /* 太さを標準に戻す */
   letter-spacing: 0.05em;                           /* 少し字間を開けるとより洗練されます */
-  text-transform: uppercase;                        /* 任意：小文字を自動で大文字にしてよりロゴっぽく */
 }
 
   /* 5. モード切り替えボタン */
