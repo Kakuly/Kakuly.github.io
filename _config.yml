@@ -1,8 +1,11 @@
 title: Kakuly
 theme: minima
-minima:
-skin: dark
 
+# 公式ドキュメント準拠の書き方
+minima:
+  skin: dark
+
+# RSSフィードをオフにする
 feed:
   path: false
 
