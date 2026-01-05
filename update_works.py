@@ -3,7 +3,7 @@ import requests
 
 # 設定
 API_KEY = os.environ['YOUTUBE_API_KEY']
-PLAYLIST_ID = 'PLH9mX0wDlDAowW9zPkyOygWJXXzLcHDRN'
+PLAYLIST_ID = 'PLH9mX0wDlDAou_YCjcU01Q3pR6cCRQPWS'
 FILE_PATH = 'works.md'
 
 def get_playlist_items():
