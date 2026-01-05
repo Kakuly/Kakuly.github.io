@@ -12,3 +12,6 @@ feed:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+
+author: "Music Producer" # 下側のKakulyがこの文字に変わります
+description: "Portfolio" # サイトの説明文になります
