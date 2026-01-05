@@ -37,9 +37,10 @@ def update_markdown(items):
     # 前回のデザイン設定（style）をそのまま残す
     content += """
 <style>
-  body { background-color: #000 !important; color: #fff !important; }
-  .site-header { border: none !important; background: transparent !important; }
-  .page-link { color: #fff !important; text-decoration: none !important; font-weight: bold; text-transform: uppercase; margin-left: 20px !important; font-size: 0.8rem !important; }
+  /* 2. フォントを「ダサくない」モダンなものに変える */
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
+  body, p, li { font-family: 'Noto Sans JP', sans-serif !important; line-height: 1.8; letter-spacing: -0.03em !important; }
+  .site-title, h1, h2, h3 { font-family: 'Montserrat', sans-serif !important; font-weight: 700:  !important; letter-spacing: -0.03em !important; }
   
   /* タイル状に並べる設定（横4つ） */
   .video-grid {
