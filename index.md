@@ -169,14 +169,28 @@ title: Home
   top: 50%; left: 50%;
   width: 10px; height: 10px;
   border-radius: 50%;
-  /* 画面を覆い尽くす巨大な影 */
+  /* 影をさらに濃く、z-indexを最強にする */
   box-shadow: 0 0 0 500vmax var(--bg-color);
-  z-index: 100000;
+  z-index: 9999999 !important; /* ここを最強に！ */
   pointer-events: none;
-  /* 最初は穴を閉じておく（＝画面が影で真っ暗/真っ白） */
   transform: translate(-50%, -50%) scale(0);
   transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
-  /* visibility: hidden; ← これを削除！最初から存在させる */
+}
+
+/* ヘッダーを含めた全要素を最初は隠す */
+body > *:not([id^="iris-"]) {
+  opacity: 0 !important; /* 最初は絶対に見せない */
+  transition: opacity 0.8s ease-out;
+}
+
+/* 穴が開いたらヘッダーも表示する */
+body.is-opening > *:not([id^="iris-"]) {
+  opacity: 1 !important;
+}
+
+/* ヘッダー自体のz-indexが強すぎる場合があるので調整 */
+.site-header {
+  z-index: 1000 !important; /* 演出パーツ(999999)より低ければOK */
 }
 
 /* 実行時：穴を全開にする */
