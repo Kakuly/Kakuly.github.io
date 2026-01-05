@@ -31,7 +31,7 @@ title: Home
 
   /* 名前の設定 */
   .profile-name {
-    font-size: 10rem;
+    font-size: 8.5rem;
     font-weight: bold;
     margin: 0;            /* 余計な隙間を消して中央に揃えやすくする */
     font-family: 'Montserrat', sans-serif !important;
