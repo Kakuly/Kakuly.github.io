@@ -86,6 +86,17 @@ title: Home
     font-family: 'Montserrat', sans-serif !important;
   }
 </style>
+<script>
+  // 画面が描画される「前」にクラスを付与する
+  (function() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark-mode');
+      document.body.classList.add('dark-mode');
+    }
+  })();
+</script>
+
 <button id="mode-toggle">🌙 Dark Mode</button>
 
 <script>
