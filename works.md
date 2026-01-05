@@ -6,178 +6,135 @@ permalink: /works/
 
 ## YouTube Playlist (Auto Updated)
 
-### 枕元 / kafu
-[![Thumbnail](https://i.ytimg.com/vi/x0VqpfLdEVI/mqdefault.jpg)](https://www.youtube.com/watch?v=x0VqpfLdEVI)
+<div class="video-grid">
 
-[動画を見る](https://www.youtube.com/watch?v=x0VqpfLdEVI)
+<div class="video-item">
+  <h3>枕元 / kafu</h3>
+  <iframe src="https://www.youtube.com/embed/x0VqpfLdEVI" frameborder="0" allowfullscreen></iframe>
+</div>
 
----
+<div class="video-item">
+  <h3>Kakuly × tato - direct & loop [official audio]</h3>
+  <iframe src="https://www.youtube.com/embed/YDPnby_OWWg" frameborder="0" allowfullscreen></iframe>
+</div>
 
-### Kakuly × tato - direct & loop [official audio]
-[![Thumbnail](https://i.ytimg.com/vi/YDPnby_OWWg/mqdefault.jpg)](https://www.youtube.com/watch?v=YDPnby_OWWg)
+<div class="video-item">
+  <h3>Kakuly × tato - freedom (remix) [official audio]</h3>
+  <iframe src="https://www.youtube.com/embed/uuFFToqXXsQ" frameborder="0" allowfullscreen></iframe>
+</div>
 
-[動画を見る](https://www.youtube.com/watch?v=YDPnby_OWWg)
+<div class="video-item">
+  <h3>Kakuly × tato - connect [official audio]</h3>
+  <iframe src="https://www.youtube.com/embed/oj7AKQW6PDY" frameborder="0" allowfullscreen></iframe>
+</div>
 
----
+<div class="video-item">
+  <h3>Kakuly × tato - glory days (feat.Akari24) [official audio]</h3>
+  <iframe src="https://www.youtube.com/embed/HDFmhVzat6Y" frameborder="0" allowfullscreen></iframe>
+</div>
 
-### Kakuly × tato - freedom (remix) [official audio]
-[![Thumbnail](https://i.ytimg.com/vi/uuFFToqXXsQ/mqdefault.jpg)](https://www.youtube.com/watch?v=uuFFToqXXsQ)
+<div class="video-item">
+  <h3>Kakuly × tato - hold the loop [official audio]</h3>
+  <iframe src="https://www.youtube.com/embed/UJbm_K-6YlU" frameborder="0" allowfullscreen></iframe>
+</div>
 
-[動画を見る](https://www.youtube.com/watch?v=uuFFToqXXsQ)
+<div class="video-item">
+  <h3>Kakuly × tato - cut and try [official audio]</h3>
+  <iframe src="https://www.youtube.com/embed/OhvvTOyJl78" frameborder="0" allowfullscreen></iframe>
+</div>
 
----
+<div class="video-item">
+  <h3>Kakuly × tato - about XX (feat.kafu) [official audio]</h3>
+  <iframe src="https://www.youtube.com/embed/wfc1V8YeuBQ" frameborder="0" allowfullscreen></iframe>
+</div>
 
-### Kakuly × tato - connect [official audio]
-[![Thumbnail](https://i.ytimg.com/vi/oj7AKQW6PDY/mqdefault.jpg)](https://www.youtube.com/watch?v=oj7AKQW6PDY)
+<div class="video-item">
+  <h3>Kakuly × tato - 脳dead U (feat.nui) [official audio]</h3>
+  <iframe src="https://www.youtube.com/embed/RjsNyzywWtk" frameborder="0" allowfullscreen></iframe>
+</div>
 
-[動画を見る](https://www.youtube.com/watch?v=oj7AKQW6PDY)
+<div class="video-item">
+  <h3>Kakuly × tato - 三角 [official audio]</h3>
+  <iframe src="https://www.youtube.com/embed/Wg0t0XrodUI" frameborder="0" allowfullscreen></iframe>
+</div>
 
----
+<div class="video-item">
+  <h3>Kakuly × tato - (don't know) you [official audio]</h3>
+  <iframe src="https://www.youtube.com/embed/s8wtr1bBHMU" frameborder="0" allowfullscreen></iframe>
+</div>
 
-### Kakuly × tato - glory days (feat.Akari24) [official audio]
-[![Thumbnail](https://i.ytimg.com/vi/HDFmhVzat6Y/mqdefault.jpg)](https://www.youtube.com/watch?v=HDFmhVzat6Y)
+<div class="video-item">
+  <h3>Kakuly × tato - [voicememo] [official audio]</h3>
+  <iframe src="https://www.youtube.com/embed/nwemY-pMKQ0" frameborder="0" allowfullscreen></iframe>
+</div>
 
-[動画を見る](https://www.youtube.com/watch?v=HDFmhVzat6Y)
+<div class="video-item">
+  <h3>Digital Album "DIRECT & LOOP" [XFD]</h3>
+  <iframe src="https://www.youtube.com/embed/nJwjaBef_jI" frameborder="0" allowfullscreen></iframe>
+</div>
 
----
+<div class="video-item">
+  <h3>[VocaDuo2025] いちご納豆ごはん - garden</h3>
+  <iframe src="https://www.youtube.com/embed/BWAdNu7HnJE" frameborder="0" allowfullscreen></iframe>
+</div>
 
-### Kakuly × tato - hold the loop [official audio]
-[![Thumbnail](https://i.ytimg.com/vi/UJbm_K-6YlU/mqdefault.jpg)](https://www.youtube.com/watch?v=UJbm_K-6YlU)
+<div class="video-item">
+  <h3>[VocaDuo2025] Quilter - dots</h3>
+  <iframe src="https://www.youtube.com/embed/wlmevRPxajk" frameborder="0" allowfullscreen></iframe>
+</div>
 
-[動画を見る](https://www.youtube.com/watch?v=UJbm_K-6YlU)
+<div class="video-item">
+  <h3>Wa!ter×Kakuly - はか</h3>
+  <iframe src="https://www.youtube.com/embed/rQ3cbuAqb3o" frameborder="0" allowfullscreen></iframe>
+</div>
 
----
+<div class="video-item">
+  <h3>Peterparker69, 野田洋次郎 - Hey phone (Kakuly remix + tato cover)</h3>
+  <iframe src="https://www.youtube.com/embed/lG2I7mA0VGE" frameborder="0" allowfullscreen></iframe>
+</div>
 
-### Kakuly × tato - cut and try [official audio]
-[![Thumbnail](https://i.ytimg.com/vi/OhvvTOyJl78/mqdefault.jpg)](https://www.youtube.com/watch?v=OhvvTOyJl78)
+<div class="video-item">
+  <h3>Kakuly - re:create (feat.重音テトSV)</h3>
+  <iframe src="https://www.youtube.com/embed/3uh6S-RRqAM" frameborder="0" allowfullscreen></iframe>
+</div>
 
-[動画を見る](https://www.youtube.com/watch?v=OhvvTOyJl78)
+<div class="video-item">
+  <h3>Akari24 - Juvenile Delinquency (Kakuly ver.)</h3>
+  <iframe src="https://www.youtube.com/embed/U9XdrefRvCg" frameborder="0" allowfullscreen></iframe>
+</div>
 
----
+<div class="video-item">
+  <h3>hello / hatsune miku</h3>
+  <iframe src="https://www.youtube.com/embed/paIePEOWhLc" frameborder="0" allowfullscreen></iframe>
+</div>
 
-### Kakuly × tato - about XX (feat.kafu) [official audio]
-[![Thumbnail](https://i.ytimg.com/vi/wfc1V8YeuBQ/mqdefault.jpg)](https://www.youtube.com/watch?v=wfc1V8YeuBQ)
+</div>
 
-[動画を見る](https://www.youtube.com/watch?v=wfc1V8YeuBQ)
-
----
-
-### Kakuly × tato - 脳dead U (feat.nui) [official audio]
-[![Thumbnail](https://i.ytimg.com/vi/RjsNyzywWtk/mqdefault.jpg)](https://www.youtube.com/watch?v=RjsNyzywWtk)
-
-[動画を見る](https://www.youtube.com/watch?v=RjsNyzywWtk)
-
----
-
-### Kakuly × tato - 三角 [official audio]
-[![Thumbnail](https://i.ytimg.com/vi/Wg0t0XrodUI/mqdefault.jpg)](https://www.youtube.com/watch?v=Wg0t0XrodUI)
-
-[動画を見る](https://www.youtube.com/watch?v=Wg0t0XrodUI)
-
----
 
 <style>
-<style>
-  /* 全体の背景と文字色 */
-  body { background-color: #000 !important; color: #fff !important; font-family: sans-serif; }
-
-  /* 1. 上のメニューをシュッとする */
+  body { background-color: #000 !important; color: #fff !important; }
   .site-header { border: none !important; background: transparent !important; }
-  .site-title { font-weight: 900 !important; letter-spacing: -0.05em !important; color: #fff !important; }
-  .page-link { 
-    color: #fff !important; 
-    text-decoration: none !important; 
-    font-size: 0.8rem !important; 
-    font-weight: bold !important; 
-    text-transform: uppercase; 
-    letter-spacing: 0.1em;
-    margin-left: 20px !important;
-  }
-  .page-link:hover { color: #888 !important; }
-
-  /* 2. 動画を横4つに並べる魔法の設定 */
-  /* Pythonが吐き出す構造に合わせて調整しています */
-  .post-content {
+  .page-link { color: #fff !important; text-decoration: none !important; font-weight: bold; text-transform: uppercase; margin-left: 20px !important; font-size: 0.8rem !important; }
+  
+  /* タイル状に並べる設定（横4つ） */
+  .video-grid {
     display: grid !important;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
-    gap: 30px 20px !important;
-    padding: 20px 0;
+    gap: 40px 20px !important;
+    padding-top: 20px;
   }
-
-  /* 3. 各動画ユニットの調整 */
-  /* 動画タイトルの文字サイズを抑えて、動画の真上に配置 */
-  h3 {
-    font-size: 0.9rem !important;
-    margin: 0 0 10px 0 !important;
-    height: 2.4em; /* 2行分確保して高さを揃える */
+  
+  .video-item h3 {
+    font-size: 0.85rem !important;
+    height: 3em;
     overflow: hidden;
-    line-height: 1.2;
+    margin-bottom: 10px !important;
   }
-
-  /* 動画本体 */
+  
   iframe {
     width: 100% !important;
     aspect-ratio: 16 / 9;
-    border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     background: #111;
   }
-
-  /* 「動画を見る」リンクなどはタイルの中では邪魔なので消すか控えめに */
-  .post-content a[href*="youtube"] {
-    display: block;
-    font-size: 0.7rem;
-    color: #666 !important;
-    text-decoration: none;
-    margin-top: 5px;
-  }
-
-  /* 4. 不要なものを消す */
-  .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
 </style>
-  
-  /* 1. 強制的にダークモードにする */
-  body { background-color: #111 !important; color: #eee !important; }
-  .site-title, .site-nav, .site-header, .site-footer { background-color: #111 !important; color: #eee !important; border: none !important; }
-  a { color: #1e90ff !important; }
-  .wrapper { background-color: #111 !important; }
-
-  /* 2. フォントを「ダサくない」モダンなものに変える */
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
-  body, p, li { font-family: 'Noto Sans JP', sans-serif !important; line-height: 1.8; letter-spacing: -0.03em !important; }
-  .site-title, h1, h2, h3 { font-family: 'Montserrat', sans-serif !important; font-weight: 700:  !important; letter-spacing: -0.03em !important; }
-
-  /* 3. 余計なものを消す */
-  .rss-subscribe, .feed-icon { display: none !important; }
-  body { -webkit-font-smoothing: antialiased; }
-
-  /* メニュー全体の見た目を整える */
-  .site-nav {
-    background-color: transparent !important; /* 背景を透かしてスッキリ */
-  }
-
-  /* メニューの文字を細く、間隔を調整 */
-  .page-link {
-    color: #eee !important;
-    font-weight: 400 !important;
-    letter-spacing: 0.05em !important;
-    text-transform: uppercase; /* 文字を大文字にしてプロっぽく */
-    font-size: 0.9rem !important;
-    margin-left: 20px !important;
-    text-decoration: none !important; /* 下線を消す */
-    transition: 0.3s; /* ホバーした時の動きを滑らかに */
-  }
-
-  /* マウスを乗せた時だけ少し明るくする */
-  .page-link:hover {
-    color: #1e90ff !important;
-    opacity: 0.8;
-  }
-
-  /* 左上のタイトル「Kakuly」をもっとデカく、強く */
-  .site-title {
-    font-size: 1.4rem !important;
-    letter-spacing: -0.05em !important;
-  }
-</style>
-
