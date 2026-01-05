@@ -24,7 +24,7 @@ title: Home
 元気に生きるために音楽を摂取します。いつもありがとう。
 
 <style>
-  /* 1. フォント読み込み（300, 400, 700をセット） */
+  /* 1. フォント読み込み */
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
 
   /* 2. 全体レイアウト */
