@@ -164,31 +164,33 @@ title: Home
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: var(--bg-color); /* 幕の色 */
+  background-color: var(--bg-color); /* 画面を隠す幕の色 */
   z-index: 999999;
   pointer-events: none;
-  /* 最初は「0%（穴がない＝真っ暗/真っ白）」でスタンバイ */
+  /* ★ポイント：最初は穴がない（circle(0%)）状態で画面を真っさらな幕にする */
   clip-path: circle(0% at 50% 50%);
 }
 
-/* イン：穴を「0%」から「150%」へ広げる（中身が見えてくる！） */
+/* イン：幕を「0%（穴なし）」から「150%（穴全開）」へ広げる */
+/* これで「幕がくり抜かれて中が見える」動きになります */
 body.is-loading #page-transition-overlay {
   animation: iris-in 0.8s cubic-bezier(0.85, 0, 0.15, 1) forwards;
 }
 
-/* アウト：穴を「150%」から「0%」へ閉じる（真っ暗/真っ白に戻る！） */
+/* アウト：逆に「150%（全開）」から「0%（穴なし）」へ閉じる */
+/* これで「幕の穴が閉じて画面が塗りつぶされる」動きになります */
 body.is-exiting #page-transition-overlay {
   animation: iris-out 0.8s cubic-bezier(0.85, 0, 0.15, 1) forwards;
 }
 
 @keyframes iris-in {
-  /* 幕をくり抜いていく */
+  /* 0% (幕が全面にある) -> 150% (穴が広がって消える) */
   from { clip-path: circle(0% at 50% 50%); }
   to { clip-path: circle(150% at 50% 50%); }
 }
 
 @keyframes iris-out {
-  /* 幕の穴を塞いでいく */
+  /* 150% (穴が開いている) -> 0% (穴が閉じて幕になる) */
   from { clip-path: circle(150% at 50% 50%); }
   to { clip-path: circle(0% at 50% 50%); }
 }
