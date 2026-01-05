@@ -155,43 +155,41 @@ title: Home
     .profile-icon { width: 200px; height: 200px; }
   }
 
-/* 1. メインのダイヤ（塗りつぶし）：背景色と同じ */
+/* 1. メインのダイヤ（塗りつぶし） */
 body::before {
   content: "";
   position: fixed;
   top: 50%; left: 50%;
-  width: 150vmax; height: 150vmax;
+  width: 150vmax; height: 150vmax; /* サイズを合わせる */
   background-color: var(--bg-color); 
   z-index: 99999;
   pointer-events: none;
-  /* clip-pathをやめて、45度回転でひし形を作る */
+  /* 45度回転した状態でスタンバイ */
   transform: translate(-50%, -50%) rotate(45deg) scale(0);
-  transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+  /* 0.7秒で一定の動き（数値はafterと完全同期） */
+  transition: transform 0.7s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-/* 2. 重なるダイヤの線（縁取り）：文字色と同じ */
+/* 2. メインの縁（ふち）になる線 */
 body::after {
   content: "";
   position: fixed;
   top: 50%; left: 50%;
-  /* 塗りより少し小さくする */
-  width: 100vmax; height: 100vmax; 
-  border: 4px solid var(--text-color); /* 太めの線に変更 */
+  width: 150vmax; height: 150vmax; /* beforeとサイズを完全に一致させる */
+  /* 線を引く（文字色＝Lightなら黒/Darkなら白） */
+  border: 8px solid var(--text-color); 
+  box-sizing: border-box; /* 線の太さをサイズの内側に含める */
   z-index: 100000;
   pointer-events: none;
-  /* 45度回転させて、本体の上に重ねる */
   transform: translate(-50%, -50%) rotate(45deg) scale(0);
-  /* 線を少し遅らせて「シュッ」と出す */
-  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  /* beforeと秒数・加速具合を完全に一致させる */
+  transition: transform 0.7s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-/* スイッチが入った時 */
-body.is-exiting::before {
-  transform: translate(-50%, -50%) rotate(45deg) scale(1.2);
-}
-
+/* 3. スイッチが入った時の動き（一緒に scale(1.2) まで広がる） */
+body.is-exiting::before,
 body.is-exiting::after {
-  transform: translate(-50%, -50%) rotate(45deg) scale(1.1);
+  transform: translate(-50%, -50%) rotate(45deg) scale(1.2);
 }
   
 </style>
