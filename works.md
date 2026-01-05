@@ -138,7 +138,7 @@ permalink: /works/
   /* 4. ヘッダー・ナビゲーション */
   .site-header { background-color: transparent !important; border: none !important; }
   
-  .site-title { 
+  h1, h2, h3, .site-title { 
     font-family: 'Montserrat', sans-serif !important;
     font-size: 1.4rem !important; 
     font-weight: 700 !important;
