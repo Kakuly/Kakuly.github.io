@@ -85,11 +85,40 @@ permalink: /works/
 
   /* 2. フォントを「ダサくない」モダンなものに変える */
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
-  body, p, li { font-family: 'Noto Sans JP', sans-serif !important; line-height: 1.8; }
-  .site-title, h1, h2, h3 { font-family: 'Montserrat', sans-serif !important; font-weight: 300 !important; letter-spacing: 0.03em !important; }
+  body, p, li { font-family: 'Noto Sans JP', sans-serif !important; line-height: 1.8; letter-spacing: -0.03em !important; }
+  .site-title, h1, h2, h3 { font-family: 'Montserrat', sans-serif !important; font-weight: 700:  !important; letter-spacing: -0.03em !important; }
 
   /* 3. 余計なものを消す */
   .rss-subscribe, .feed-icon { display: none !important; }
   body { -webkit-font-smoothing: antialiased; }
+
+  /* メニュー全体の見た目を整える */
+  .site-nav {
+    background-color: transparent !important; /* 背景を透かしてスッキリ */
+  }
+
+  /* メニューの文字を細く、間隔を調整 */
+  .page-link {
+    color: #eee !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase; /* 文字を大文字にしてプロっぽく */
+    font-size: 0.9rem !important;
+    margin-left: 20px !important;
+    text-decoration: none !important; /* 下線を消す */
+    transition: 0.3s; /* ホバーした時の動きを滑らかに */
+  }
+
+  /* マウスを乗せた時だけ少し明るくする */
+  .page-link:hover {
+    color: #1e90ff !important;
+    opacity: 0.8;
+  }
+
+  /* 左上のタイトル「Kakuly」をもっとデカく、強く */
+  .site-title {
+    font-size: 1.4rem !important;
+    letter-spacing: -0.05em !important;
+  }
 </style>
 
