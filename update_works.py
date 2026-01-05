@@ -37,6 +37,23 @@ def update_markdown(items):
     # デザイン設定（Homeと完全に同期）
     content += """
 <style>
+  /* サイト全体の最大幅を上書き */
+.wrapper {
+  max-width: 1100px !important; /* 800pxから1100pxに拡張 */
+  padding-right: 40px !important;
+  padding-left: 40px !important;
+}
+
+/* ヘッダーの幅も合わせる */
+.site-header .wrapper {
+  max-width: 1100px !important;
+}
+
+/* Worksの動画グリッドをより広々と見せる調整 */
+.video-grid {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important; /* 1つ1つの動画を少し大きく */
+  gap: 30px !important;
+}
   /* 1. フォント読み込み */
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
 
