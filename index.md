@@ -11,7 +11,7 @@ title: Home
 - [Twitter / X](https://x.com/kakuly_)
 
 <style>
-  <img src="/assets/img/profile.png" width="300" alt="プロフィール">
+  <img src="/assets/img/profile.png" width="75" alt="プロフィール">
   /* 1. フォント読み込み */
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
 
