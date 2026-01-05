@@ -189,7 +189,9 @@ body.is-exiting::before,
 body.is-exiting::after {
   /* scaleを少し大きくして、加速の余韻を見せる */
   transform: translate(-50%, -50%) rotate(45deg) scale(1.5);
-}tyle>
+}
+  
+  </style>
 
 <script>
   (function() {
@@ -223,29 +225,18 @@ body.is-exiting::after {
     }, 500);
   });
 
-// ページが完全に読み込まれてから動くようにする
-window.addEventListener('load', () => {
-  // すべての <a> タグ（リンク）に対して
-  const links = document.querySelectorAll('a');
-  
-  links.forEach(link => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
+document.querySelectorAll('.page-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault(); // すぐにページが飛ばないように止める
+    const targetUrl = link.href;
 
-      // 1. サイト外へのリンクや、同じページ内のリンク（#）は除外する
-      if (!href || href.startsWith('#') || href.includes('mailto:')) return;
-      
-      // 2. ブラウザの標準の「すぐ移動」を、何が何でも止める！
-      e.preventDefault();
-      
-      // 3. アニメーション開始！
-      document.body.classList.add('is-exiting');
+    // bodyに「今から出るよ」というクラスをつける（これで上のCSSが発動！）
+    document.body.classList.add('is-exiting');
 
-      // 4. 指定した時間（1500msなら1.5秒）を「絶対に」待ってから移動
-      setTimeout(() => {
-        window.location.href = href;
-      }, 1500); // ここをアニメーションの秒数に合わせる
-    });
+    // 図形が画面を覆い尽くすのを待ってから移動（0.7秒）
+    setTimeout(() => {
+      window.location.href = targetUrl;
+    }, 850);
   });
 });
 </script>
