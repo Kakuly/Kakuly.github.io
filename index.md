@@ -88,6 +88,12 @@ title: Home
     font-family: 'Montserrat', sans-serif !important;
   }
 </style>
+<script>
+  // 最速でダークモードを適用（白飛び防止）
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+  }
+</script>
 
 <button id="mode-toggle">🌙 Dark Mode</button>
 
