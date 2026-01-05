@@ -167,7 +167,7 @@ body::before {
   border-radius: 50%; /* 100%と同じですが、より「円」らしい指定 */
   transform: translate(-50%, -50%) scale(0);
   /* 「ぐぅぅう...（溜め）」から「わあ！（爆発）」への曲線 */
-  transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.15, 1);
 }
 
 /* 2. 縁は不要なので、表示されないようにする（または削除） */
@@ -222,10 +222,10 @@ document.querySelectorAll('.page-link').forEach(link => {
     // bodyに「今から出るよ」というクラスをつける（これで上のCSSが発動！）
     document.body.classList.add('is-exiting');
 
-    // 図形が画面を覆い尽くすのを待ってから移動（0.7秒）
+    // 図形が画面を覆い尽くすのを待ってから移動（0.65秒）
     setTimeout(() => {
       window.location.href = targetUrl;
-    }, 850);
+    }, 650);
   });
 });
 </script>
