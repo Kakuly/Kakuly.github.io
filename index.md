@@ -142,8 +142,10 @@ html.dark-mode .sns-links img {
 body { 
   background-color: var(--bg-color) !important; 
   color: var(--text-color) !important; 
+  /* 通常時は transition をオフにしてパカつきをゼロにする */
+  transition: none !important; 
   font-family: 'Noto Sans JP', sans-serif !important;
-  font-weight: 700 !important; /* 本文はしっかり太め */
+  font-weight: 700 !important;
   -webkit-font-smoothing: antialiased;
 }
 
