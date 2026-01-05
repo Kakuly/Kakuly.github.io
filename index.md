@@ -50,18 +50,23 @@ body.mode-transition {
   transition: background-color 0.5s ease, color 0.5s ease !important;
 }
 
-  /* 4. ヘッダー・ナビゲーション */
-  .site-header { background-color: transparent !important; border: none !important; -webkit-font-smoothing: antialiased; }
+/* 4. ヘッダー・ナビゲーション（Worksと完全同期） */
+  .site-header { 
+    background-color: transparent !important; 
+    border: none !important; 
+  }
   
-  h1, h2, h3, .site-title { 
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 1.4rem !important; 
+  /* 名前、タイトル、見出しをすべて共通の「太いMontserrat」にする */
+  .profile-name, h1, h2, h3, .site-title { 
+    font-family: 'Montserrat', sans-serif !important; /* ここでMontserratを強制 */
     font-weight: 700 !important;
-    letter-spacing: -0.05em !important;
+    letter-spacing: -0.05em !important; /* Worksと同じ詰まり具合 */
     color: var(--text-color) !important;
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased; /* 滑らかにする */
+    margin: 0;
   }
 
+  /* ページリンク（HOME/WORKS） */
   .page-link {
     font-family: 'Montserrat', sans-serif !important;
     color: var(--text-color) !important;
@@ -75,7 +80,7 @@ body.mode-transition {
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Kakuly の名前のサイズ設定 */
+  /* Kakuly の名前のサイズだけ個別に指定（フォントや太さは上で共通化済み） */
   .profile-name {
     font-size: 8.5rem;
     line-height: 1;
