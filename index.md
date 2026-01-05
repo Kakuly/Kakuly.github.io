@@ -2,6 +2,7 @@
 layout: home
 title: Home
 ---
+![プロフィール](/assets/img/profile.png)
 2006年生まれ。2020年から音楽活動を開始。
 エレクトロポップ／ハイパーポップを中心に、たくさん迷いながら音楽を作っている。
 元気に生きるために音楽を摂取します。いつもありがとう。
@@ -10,6 +11,7 @@ title: Home
 - [Twitter / X](https://x.com/kakuly_)
 
 <style>
+  <img src="/assets/img/profile.png" width="300" alt="プロフィール">
   /* 1. フォント読み込み */
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
 
