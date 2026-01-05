@@ -26,10 +26,11 @@ def update_markdown(items):
         
         # 各動画を囲む「タイル」
         content += '<div class="video-item">\n'
-        content += f"  <h3>{title}</h3>\n"
         # 埋め込みプレイヤーのコード
         content += f'  <iframe src="https://www.youtube.com/embed/{video_id}" frameborder="0" allowfullscreen></iframe>\n'
-        content += '</div>\n\n'
+        content += f'</div>\n'
+
+            content += f"  <h3>{title}</h3>\n"
         
     # 外枠を閉じる
     content += '</div>\n\n'
