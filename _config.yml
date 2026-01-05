@@ -1,4 +1,5 @@
 remote_theme: jekyll/minima
-title: kakuly
+title: Kakuly
+description: ポートフォリオ
 plugins:
   - jekyll-remote-theme
