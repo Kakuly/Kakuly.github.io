@@ -234,7 +234,7 @@ body.is-exiting::after {
     // 図形が画面を覆い尽くすのを待ってから移動（0.7秒）
     setTimeout(() => {
       window.location.href = targetUrl;
-    }, 700);
+    }, 850);
   });
 });
 </script>
