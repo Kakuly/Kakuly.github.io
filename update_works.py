@@ -21,24 +21,24 @@ def update_markdown(items):
     content += '<div class="video-grid">\n\n'
     
 for item in items:
-        title = item['snippet']['title']
-        video_id = item['snippet']['resourceId']['videoId']
-        # YouTubeの標準サムネイルURL（高画質版）
-        thumbnail_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
-        
-        content += '<div class="video-item">\n'
-        # 1. iframeをやめて、リンク付きの画像にする
-        content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
-        content += f'    <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail">\n'
-        content += f'  </a>\n'
-        
-        # 2. タイトルは下へ
-        content += f"  <h3 class='video-title'>{title}</h3>\n"
-        content += '</div>\n\n'
-
-        content += '<div id="iris-in"></div>'
-        content += '<div id="iris-out"></div>'
+    title = item['snippet']['title']
+    video_id = item['snippet']['resourceId']['videoId']
+    # YouTubeの標準サムネイルURL（高画質版）
+    thumbnail_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
     
+    content += '<div class="video-item">\n'
+    # 1. iframeをやめて、リンク付きの画像にする
+    content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
+    content += f'    <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail">\n'
+    content += f'  </a>\n'
+    
+    # 2. タイトルは下へ
+    content += f"  <h3 class='video-title'>{title}</h3>\n"
+    content += '</div>\n\n'
+
+    content += '<div id="iris-in"></div>'
+    content += '<div id="iris-out"></div>'
+
     # デザイン設定（Homeと完全に同期）
     content += """
 <style>
