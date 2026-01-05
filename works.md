@@ -185,7 +185,7 @@ body.mode-transition {
   /* 5. ギャラリー（4列）の設定 */
 /* Worksの動画グリッドをより広々と見せる調整 */
 .video-grid {
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 4fr)) !important;
   gap: 30px !important;
 }
   
@@ -225,6 +225,32 @@ body.mode-transition {
     font-weight: bold;
     font-family: 'Montserrat', sans-serif !important;
   }
+  
+ /* 1. メインの円（塗りつぶし）：背景と同じ色 */
+body::before {
+  content: "";
+  position: fixed;
+  top: 50%; left: 50%;
+  width: 150vmax; height: 150vmax;
+  background-color: var(--bg-color); 
+  z-index: 99999;
+  pointer-events: none;
+  border-radius: 50%; /* 100%と同じですが、より「円」らしい指定 */
+  transform: translate(-50%, -50%) scale(0);
+  /* 「ぐぅぅう...（溜め）」から「わあ！（爆発）」への曲線 */
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.15, 1);
+}
+
+/* 2. 縁は不要なので、表示されないようにする（または削除） */
+body::after {
+  display: none;
+}
+
+/* 3. スイッチが入った瞬間 */
+body.is-exiting::before {
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
 </style>
 
 <script>
@@ -264,4 +290,18 @@ body.mode-transition {
       body.classList.remove('mode-transition');
     }, 500); // 0.4sのアニメーションより少し長く設定
   });
+  document.querySelectorAll('.page-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault(); // すぐにページが飛ばないように止める
+    const targetUrl = link.href;
+
+    // bodyに「今から出るよ」というクラスをつける（これで上のCSSが発動！）
+    document.body.classList.add('is-exiting');
+
+    // 図形が画面を覆い尽くすのを待ってから移動（0.65秒）
+    setTimeout(() => {
+      window.location.href = targetUrl;
+    }, 650);
+  });
+});
 </script>
