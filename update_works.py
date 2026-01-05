@@ -72,7 +72,7 @@ def update_markdown(items):
 
 /* サイト全体の最大幅を上書き */
 .wrapper {
-  max-width: 1100px !important; /* 800pxから1100pxに拡張 */
+  max-width: 1300px !important; /* 800pxから1100pxに拡張 */
   padding-right: 40px !important;
   padding-left: 40px !important;
 }
@@ -145,7 +145,7 @@ h1, h2, h3, .site-title {
 /* Worksの動画グリッドをより広々と見せる調整 */
 .video-grid {
   display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(4, 1fr)) !important;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
   gap: 30px !important;
 }
 
