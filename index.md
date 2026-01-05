@@ -51,7 +51,7 @@ body.mode-transition {
 }
 
   /* 4. ヘッダー・ナビゲーション */
-  .site-header { background-color: transparent !important; border: none !important; }
+  .site-header { background-color: transparent !important; border: none !important; -webkit-font-smoothing: antialiased; }
   
   h1, h2, h3, .site-title { 
     font-family: 'Montserrat', sans-serif !important;
@@ -59,6 +59,7 @@ body.mode-transition {
     font-weight: 700 !important;
     letter-spacing: -0.05em !important;
     color: var(--text-color) !important;
+    -webkit-font-smoothing: antialiased;
   }
 
   .page-link {
@@ -71,6 +72,7 @@ body.mode-transition {
     margin-left: 20px !important;
     text-decoration: none !important;
     transition: 0.3s;
+    -webkit-font-smoothing: antialiased;
   }
 
   /* Kakuly の名前のサイズ設定 */
