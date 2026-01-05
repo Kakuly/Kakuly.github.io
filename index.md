@@ -3,6 +3,41 @@ layout: home
 title: Home
 ---
 <body class="is-loading">
+
+  <style>
+    /* ここに clip-path の設定を書く */
+    body {
+      clip-path: circle(0% at 50% 50%);
+      transition: clip-path 0.6s cubic-bezier(0.65, 0, 0.15, 1);
+      background-color: var(--bg-color);
+    }
+    body:not(.is-loading) { clip-path: circle(150% at 50% 50%); }
+    body.is-exiting { clip-path: circle(0% at 50% 50%) !important; }
+  </style>
+
+  <div>
+    <h1>My Portfolio</h1>
+    ...
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      // 読み込み完了後に円を開く指示
+      setTimeout(() => {
+        document.body.classList.remove('is-loading');
+      }, 100);
+
+      // リンクを押した時に円を閉じる指示
+      document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          // ...ここにさっきのクリック処理を書く
+        });
+      });
+    });
+  </script>
+
+</body>
+
 <div class="profile-container">
   <img src="/assets/img/profile.png" class="profile-icon">
   
@@ -182,24 +217,6 @@ body.is-exiting::before {
 }
 
 
-
-  /* 最初は視界が「0%」の点（何も見えない状態） */
-body {
-  clip-path: circle(0% at 50% 50%);
-  transition: clip-path 0.6s cubic-bezier(0.65, 0, 0.15, 1);
-  background-color: var(--bg-color);
-}
-
-/* ページに入った時：視界が 150% まで広がって全開になる */
-body:not(.is-loading) {
-  clip-path: circle(150% at 50% 50%);
-}
-
-/* ページを出る時：再び視界が 0% に向かって閉じる */
-body.is-exiting {
-  clip-path: circle(0% at 50% 50%) !important;
-}
-
   
   </style>
 
@@ -235,6 +252,7 @@ body.is-exiting {
     }, 500);
   });
 
+    //サイト　アウト　アニメーション
 document.querySelectorAll('.page-link').forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault(); // すぐにページが飛ばないように止める
@@ -250,6 +268,7 @@ document.querySelectorAll('.page-link').forEach(link => {
   });
 });
 
+  //サイト　イン　アニメーション
 window.addEventListener('load', () => {
   // 読み込みが終わったら「is-loading」を外して、円を広げる（視界開通！）
   setTimeout(() => {
