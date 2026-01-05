@@ -87,16 +87,27 @@ body.mode-transition {
   const body = document.body;
   const html = document.documentElement;
 
-  // 初期表示の文字更新
+  // 初期化スクリプトはそのまま（白飛び防止用）
   if (localStorage.getItem('theme') === 'dark') {
+    html.classList.add('dark-mode');
     body.classList.add('dark-mode');
     btn.textContent = '☀️ Light Mode';
   }
 
   btn.addEventListener('click', () => {
+    // 1. transition用のクラスを付与
+    body.classList.add('mode-transition');
+
+    // 2. モードを切り替え
     const isDark = html.classList.toggle('dark-mode');
     body.classList.toggle('dark-mode');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
     btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+
+    // 3. アニメーションが終わる頃にクラスを外す（次のページ移動に備える）
+    setTimeout(() => {
+      body.classList.remove('mode-transition');
+    }, 500); // 0.4sのアニメーションより少し長く設定
   });
 </script>
+
