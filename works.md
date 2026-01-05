@@ -4,7 +4,7 @@ title: Works
 permalink: /works/
 ---
 
-## My Works
+## Works
 ここに作品を並べていきます。
 
 <style>
