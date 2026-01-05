@@ -15,7 +15,7 @@ title: Home
   body { background-color: #000 !important; color: #eee !important; }
   .site-title, .site-nav, .site-header, .site-footer { background-color: #111 !important; color: #eee !important; border: none !important; }
   a { color: #1e90ff !important; }
-  .wrapper { background-color: #111 !important; }
+  .wrapper { background-color: #000 !important; }
 
   /* 2. フォントを「ダサくない」モダンなものに変える */
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
