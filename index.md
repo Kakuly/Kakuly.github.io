@@ -23,6 +23,9 @@ title: Home
 エレクトロポップ／ハイパーポップを中心に、たくさん迷いながら音楽を作っている。
 元気に生きるために音楽を摂取します。いつもありがとう。
 
+
+<div id="page-transition-overlay"></div>
+
 <style>
   /* 1. サイト全体の最大幅（Worksと同じ位置） */
   .wrapper {
@@ -155,37 +158,37 @@ title: Home
     .profile-icon { width: 200px; height: 200px; }
   }
 
-/* --- イン（入場）の設定：body自体の切り抜き --- */
-body {
-  background-color: var(--bg-color) !important;
-  /* 最初は穴が 0% */
-  clip-path: circle(0% at 50% 50%);
-  transition: clip-path 0.8s cubic-bezier(0.85, 0, 0.15, 1);
-}
-
-/* 読み込み完了後、穴を広げて中身を見せる */
-body:not(.is-loading) {
-  clip-path: circle(150% at 50% 50%);
-}
-
-/* --- アウト（退場）の設定：丸い板を広げる --- */
-body::before {
-  content: "";
+#page-transition-overlay {
   position: fixed;
-  top: 50%; left: 50%;
-  width: 150vmax; height: 150vmax;
-  background-color: var(--bg-color); 
-  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-color);
+  z-index: 999999;
   pointer-events: none;
-  border-radius: 50%;
-  /* 最初は 0（隠しておく） */
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+  /* 最初は「穴」が開いていない（真っさらな面）状態 */
+  clip-path: circle(0% at 50% 50%);
 }
 
-/* リンクを押した時、板を 1.5倍 まで広げて中身を隠す */
-body.is-exiting::before {
-  transform: translate(-50%, -50%) scale(1.5) !important;
+/* イン：読み込み時、穴をグワッと広げて中身を見せる */
+body.is-loading #page-transition-overlay {
+  animation: iris-in 0.8s cubic-bezier(0.85, 0, 0.15, 1) forwards;
+}
+
+/* アウト：出る時、逆に穴を閉じて真っさらに戻す */
+body.is-exiting #page-transition-overlay {
+  animation: iris-out 0.8s cubic-bezier(0.85, 0, 0.15, 1) forwards;
+}
+
+@keyframes iris-in {
+  from { clip-path: circle(0% at 50% 50%); }
+  to { clip-path: circle(150% at 50% 50%); }
+}
+
+@keyframes iris-out {
+  from { clip-path: circle(150% at 50% 50%); }
+  to { clip-path: circle(0% at 50% 50%); }
 }
   
   </style>
@@ -223,23 +226,21 @@ body.is-exiting::before {
   });
 
 
-window.addEventListener('load', () => {
-  // イン：0.1秒後に body の穴を開ける
-  setTimeout(() => {
-    document.body.classList.remove('is-loading');
-  }, 100);
+// ページが読み込まれたら「is-loading」クラスをつけて、インのアニメを開始
+document.body.classList.add('is-loading');
 
-  // アウト：クリックで body::before の板を広げる
+window.addEventListener('load', () => {
+  // リンククリック時のアウト処理
   document.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
-      // 外部リンクや特殊リンクは除外
       if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
       
       e.preventDefault();
+      // アウトのアニメを開始
+      document.body.classList.remove('is-loading');
       document.body.classList.add('is-exiting');
 
-      // 板が広がる時間を待ってから移動
       setTimeout(() => {
         window.location.href = href;
       }, 800);
