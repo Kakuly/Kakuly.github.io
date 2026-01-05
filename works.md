@@ -77,28 +77,64 @@ permalink: /works/
 ---
 
 <style>
-  /* 動画が並ぶエリアの設定 */
-.post-content {
-  display: grid !important;
-  /* 横に4つ、同じ幅で並べる。画面が狭いときは自動で調整 */
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px; /* 動画と動画のすき間 */
-  max-width: 100% !important;
-}
+<style>
+  /* 全体の背景と文字色 */
+  body { background-color: #000 !important; color: #fff !important; font-family: sans-serif; }
 
-/* 動画の枠（レスポンシブ対応） */
-iframe {
-  width: 100% !important;
-  aspect-ratio: 16 / 9; /* 横長をキープ */
-  height: auto !important;
-  border-radius: 8px; /* 角を少し丸くすると今っぽい */
-}
+  /* 1. 上のメニューをシュッとする */
+  .site-header { border: none !important; background: transparent !important; }
+  .site-title { font-weight: 900 !important; letter-spacing: -0.05em !important; color: #fff !important; }
+  .page-link { 
+    color: #fff !important; 
+    text-decoration: none !important; 
+    font-size: 0.8rem !important; 
+    font-weight: bold !important; 
+    text-transform: uppercase; 
+    letter-spacing: 0.1em;
+    margin-left: 20px !important;
+  }
+  .page-link:hover { color: #888 !important; }
 
-/* 動画のタイトルなどの文字も調整 */
-h3 {
-  grid-column: 1 / -1; /* タイトルは横断して表示させるならこれ */
-  margin-top: 30px !important;
-}
+  /* 2. 動画を横4つに並べる魔法の設定 */
+  /* Pythonが吐き出す構造に合わせて調整しています */
+  .post-content {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+    gap: 30px 20px !important;
+    padding: 20px 0;
+  }
+
+  /* 3. 各動画ユニットの調整 */
+  /* 動画タイトルの文字サイズを抑えて、動画の真上に配置 */
+  h3 {
+    font-size: 0.9rem !important;
+    margin: 0 0 10px 0 !important;
+    height: 2.4em; /* 2行分確保して高さを揃える */
+    overflow: hidden;
+    line-height: 1.2;
+  }
+
+  /* 動画本体 */
+  iframe {
+    width: 100% !important;
+    aspect-ratio: 16 / 9;
+    border: none;
+    border-radius: 4px;
+    background: #111;
+  }
+
+  /* 「動画を見る」リンクなどはタイルの中では邪魔なので消すか控えめに */
+  .post-content a[href*="youtube"] {
+    display: block;
+    font-size: 0.7rem;
+    color: #666 !important;
+    text-decoration: none;
+    margin-top: 5px;
+  }
+
+  /* 4. 不要なものを消す */
+  .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
+</style>
   
   /* 1. 強制的にダークモードにする */
   body { background-color: #111 !important; color: #eee !important; }
