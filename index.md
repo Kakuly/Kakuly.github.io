@@ -7,9 +7,9 @@ title: Home
   .profile-icon {
     width: 300px;       /* 好きな幅に調整してね */
     height: 300px;      /* 幅と同じにすると正円になります */
-    border-radius: 12%; /* これで丸くなります */
+    border-radius: 7%; /* これで丸くなります */
     object-fit: cover;  /* 画像が歪まないように調整 */
-    border: 0.5px solid var(--text-color); /* 枠線をつけると締まって見えます */
+    border: 0.1px solid var(--text-color); /* 枠線をつけると締まって見えます */
   }
 </style>
 
