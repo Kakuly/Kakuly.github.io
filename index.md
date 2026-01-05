@@ -30,7 +30,7 @@ title: Home
 <style>
   /* 1. サイト全体の最大幅（Worksと同じ位置） */
   .wrapper {
-    max-width: 1100px !important;
+    max-width: 1300px !important;
     padding-right: 40px !important;
     padding-left: 40px !important;
   }
