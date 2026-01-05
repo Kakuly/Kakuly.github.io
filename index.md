@@ -236,26 +236,40 @@ body.is-exiting #iris-out {
 
 
 
-// 1. ページ読み込み開始
-document.addEventListener('DOMContentLoaded', () => {
-  // すぐに「イン（穴あけ）」を開始
-  document.body.classList.add('is-opening');
+
+// ページが表示されるたびに実行される関数
+function startTransition() {
+  // 1. 前回のクラスを全部きれいに掃除する
+  document.body.classList.remove('is-opening', 'is-exiting');
+
+  // 2. ほんの少しだけ待ってから「イン（穴あけ）」を開始
+  // (一瞬待つことでブラウザにアニメーションの準備をさせる)
+  setTimeout(() => {
+    document.body.classList.add('is-opening');
+  }, 50);
+}
+
+// ページが新しく読み込まれた時、または「戻る」で表示された時に発火
+window.addEventListener('pageshow', (event) => {
+  // アニメーションを開始
+  startTransition();
 });
 
-window.addEventListener('load', () => {
-  // 2. リンククリック時の「アウト（板広げ）」
-  document.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
-      
-      e.preventDefault();
-      document.body.classList.add('is-exiting');
+// リンククリック時の処理（ここは前のままでOKですが整理しました）
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
+    
+    e.preventDefault();
+    // アウトのアニメを開始
+    document.body.classList.remove('is-opening');
+    document.body.classList.add('is-exiting');
 
-      setTimeout(() => {
-        window.location.href = href;
-      }, 800);
-    });
+    setTimeout(() => {
+      window.location.href = href;
+    }, 800);
   });
 });
 </script>
+
