@@ -1,13 +1,15 @@
 title: Kakuly
+# ダークモード設定
 minima_skin: dark
 
-# RSSボタンを消す
+# RSSボタンを強制オフ
 feed:
   path: false
 
-# テーマ設定
+# テーマの指定を一つに絞る
 remote_theme: jekyll/minima
 
+# 必要なプラグイン
 plugins:
   - jekyll-remote-theme
   - jekyll-feed
