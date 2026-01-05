@@ -9,105 +9,105 @@ permalink: /works/
 <div class="video-grid">
 
 <div class="video-item">
-  <h3>サ終あざした / 重音テトSV</h3>
-  <iframe src="https://www.youtube.com/embed/cknsKkzA2lM" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/cknsKkzA2lM" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>サ終あざした / 重音テトSV</h3>
 <div class="video-item">
-  <h3>HyperPopCorn!! / 初音ミク - shikisai × Kakuly</h3>
-  <iframe src="https://www.youtube.com/embed/zAURwtz_AY4" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/zAURwtz_AY4" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>HyperPopCorn!! / 初音ミク - shikisai × Kakuly</h3>
 <div class="video-item">
-  <h3>【 XFD 】Undefined 01</h3>
-  <iframe src="https://www.youtube.com/embed/dRd-CYI11fQ" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/dRd-CYI11fQ" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>【 XFD 】Undefined 01</h3>
 <div class="video-item">
-  <h3>Akari24 - Crack Cat / feat.初音ミク</h3>
-  <iframe src="https://www.youtube.com/embed/eSfYFhNjiB8" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/eSfYFhNjiB8" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>Akari24 - Crack Cat / feat.初音ミク</h3>
 <div class="video-item">
-  <h3>1st Album『(EN)CORE』クロスフェード</h3>
-  <iframe src="https://www.youtube.com/embed/YOoRO2OVICo" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/YOoRO2OVICo" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>1st Album『(EN)CORE』クロスフェード</h3>
 <div class="video-item">
-  <h3>花溺れ / 初音ミク, 花奏かのんβ</h3>
-  <iframe src="https://www.youtube.com/embed/Z7OQL1hQ5WY" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/Z7OQL1hQ5WY" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>花溺れ / 初音ミク, 花奏かのんβ</h3>
 <div class="video-item">
-  <h3>Akari24 - 言葉は魔法みたい / feat.初音ミク</h3>
-  <iframe src="https://www.youtube.com/embed/bqMBuLzCyMc" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/bqMBuLzCyMc" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>Akari24 - 言葉は魔法みたい / feat.初音ミク</h3>
 <div class="video-item">
-  <h3>SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)</h3>
-  <iframe src="https://www.youtube.com/embed/XsjuHvYlRyc" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/XsjuHvYlRyc" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)</h3>
 <div class="video-item">
-  <h3>映画『カラフルピーチ/魔王と予言の少女』</h3>
-  <iframe src="https://www.youtube.com/embed/y7DwWj1gHQE" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/y7DwWj1gHQE" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>映画『カラフルピーチ/魔王と予言の少女』</h3>
 <div class="video-item">
-  <h3>【オリジナル曲】スノーダンス/yuru【Vtuber/Vsinger】</h3>
-  <iframe src="https://www.youtube.com/embed/u3pMZtkugX8" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/u3pMZtkugX8" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>【オリジナル曲】スノーダンス/yuru【Vtuber/Vsinger】</h3>
 <div class="video-item">
-  <h3>【マイクラ】サバイバルであった出来事を歌にしてみた【カラフルピーチ】</h3>
-  <iframe src="https://www.youtube.com/embed/T9oeiJxs2kA" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/T9oeiJxs2kA" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>【マイクラ】サバイバルであった出来事を歌にしてみた【カラフルピーチ】</h3>
 <div class="video-item">
-  <h3>GYU P-『イミタティオ/ 初音ミク』【オリジナルMV】</h3>
-  <iframe src="https://www.youtube.com/embed/HIYdKgIvG0I" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/HIYdKgIvG0I" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>GYU P-『イミタティオ/ 初音ミク』【オリジナルMV】</h3>
 <div class="video-item">
-  <h3>［Melodic Dubstep/UKHARDCORE］Kakuly vs Sohukira - Blood of Ainu</h3>
-  <iframe src="https://www.youtube.com/embed/SErUMzCz8sA" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/SErUMzCz8sA" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>［Melodic Dubstep/UKHARDCORE］Kakuly vs Sohukira - Blood of Ainu</h3>
 <div class="video-item">
-  <h3>バットプロローグ/ONE</h3>
-  <iframe src="https://www.youtube.com/embed/tvtcZYBHfiQ" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/tvtcZYBHfiQ" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>バットプロローグ/ONE</h3>
 <div class="video-item">
-  <h3>【MV】アーティフィシャルスマイル／可不</h3>
-  <iframe src="https://www.youtube.com/embed/o94Im34pHHk" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/o94Im34pHHk" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>【MV】アーティフィシャルスマイル／可不</h3>
 <div class="video-item">
-  <h3>9m</h3>
-  <iframe src="https://www.youtube.com/embed/owXBgyrXQFg" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/owXBgyrXQFg" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>9m</h3>
 <div class="video-item">
-  <h3>ボカロP１１人がジャンキーナイトタウンオーケストラアレンジリレーしてみた！！</h3>
-  <iframe src="https://www.youtube.com/embed/cJ9pKeN1kWI" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/cJ9pKeN1kWI" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>ボカロP１１人がジャンキーナイトタウンオーケストラアレンジリレーしてみた！！</h3>
 <div class="video-item">
-  <h3>GYU P-『世界は無機物でできている / 初音ミク』【オリジナルMV】</h3>
-  <iframe src="https://www.youtube.com/embed/qLw7EM1W4B4" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/qLw7EM1W4B4" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>GYU P-『世界は無機物でできている / 初音ミク』【オリジナルMV】</h3>
 <div class="video-item">
-  <h3>学生ボカロPがエイリアンエイリアンアレンジリレーしてみた！！</h3>
-  <iframe src="https://www.youtube.com/embed/4OPusJbC4qg" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/4OPusJbC4qg" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>学生ボカロPがエイリアンエイリアンアレンジリレーしてみた！！</h3>
 <div class="video-item">
-  <h3>【結成】新実況グループ「カラフルピーチ 」</h3>
-  <iframe src="https://www.youtube.com/embed/f-atLIqnbdI" frameborder="0" allowfullscreen></iframe>
-</div>
-
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/f-atLIqnbdI" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3 class='video-title'>【結成】新実況グループ「カラフルピーチ 」</h3>
 </div>
 
 <div id="iris-in"></div><div id="iris-out"></div>
