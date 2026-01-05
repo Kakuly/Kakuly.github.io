@@ -139,7 +139,7 @@ body.mode-transition {
   /* 5. ギャラリー（4列）の設定 */
 /* Worksの動画グリッドをより広々と見せる調整 */
 .video-grid {
-  grid-template-columns: repeat(auto-fill, minmax(180px, 4fr)) !important;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
   gap: 30px !important;
 }
   
