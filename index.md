@@ -223,19 +223,29 @@ body.is-exiting::after {
     }, 500);
   });
 
-document.querySelectorAll('.page-link').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const targetUrl = link.href;
+// ページが完全に読み込まれてから動くようにする
+window.addEventListener('load', () => {
+  // すべての <a> タグ（リンク）に対して
+  const links = document.querySelectorAll('a');
+  
+  links.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
 
-    // カーテンを広げるスイッチを入れる
-    document.body.classList.add('is-exiting');
+      // 1. サイト外へのリンクや、同じページ内のリンク（#）は除外する
+      if (!href || href.startsWith('#') || href.includes('mailto:')) return;
+      
+      // 2. ブラウザの標準の「すぐ移動」を、何が何でも止める！
+      e.preventDefault();
+      
+      // 3. アニメーション開始！
+      document.body.classList.add('is-exiting');
 
-    // ★ ここが重要！
-    // アニメーションの時間（0.85s）に合わせて、850ミリ秒待ってから移動する
-    setTimeout(() => {
-      window.location.href = targetUrl;
-    }, 1500); 
+      // 4. 指定した時間（1500msなら1.5秒）を「絶対に」待ってから移動
+      setTimeout(() => {
+        window.location.href = href;
+      }, 1500); // ここをアニメーションの秒数に合わせる
+    });
   });
 });
 </script>
