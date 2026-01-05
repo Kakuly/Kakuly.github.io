@@ -2,18 +2,54 @@
 layout: home
 title: Home
 ---
-<img src="/assets/img/profile.png" class="profile-icon">
+<div class="profile-container">
+  <img src="/assets/img/profile.png" class="profile-icon">
+  
+  <div class="profile-text">
+    <p class="profile-name">Kakuly</p>
+  </div>
+</div>
+
 <style>
+  /* 横並びのレイアウト設定 */
+  .profile-container {
+    display: flex;
+    align-items: center;  /* 上下中央揃え */
+    gap: 30px;            /* 画像と文字の間の距離 */
+    margin-bottom: 20px;
+  }
+
+  /* 画像の設定（これまでの設定を維持） */
   .profile-icon {
-    width: 300px;       /* 好きな幅に調整してね */
-    height: 300px;      /* 幅と同じにすると正円になります */
-    border-radius: 7%; /* これで丸くなります */
-    object-fit: cover;  /* 画像が歪まないように調整 */
-    border: 0.1px solid var(--text-color); /* 枠線をつけると締まって見えます */
+    width: 300px;
+    height: 300px;
+    border-radius: 7%;
+    object-fit: cover;
+    border: 0.1px solid var(--text-color);
+    flex-shrink: 0;       /* 画面が狭くなっても画像が潰れないように固定 */
+  }
+
+  /* 名前の設定 */
+  .profile-name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;            /* 余計な隙間を消して中央に揃えやすくする */
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  /* スマホなど画面が狭い時の調整（任意） */
+  @media (max-width: 600px) {
+    .profile-container {
+      flex-direction: column; /* 縦並びにする */
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .profile-icon {
+      width: 200px; /* スマホでは少し小さくする */
+      height: 200px;
+    }
   }
 </style>
-
-<p style="font-size: 2rem; font-weight: bold;">Kakuly</p>
 
 2006年生まれ。2020年から音楽活動を開始。
 エレクトロポップ／ハイパーポップを中心に、たくさん迷いながら音楽を作っている。
