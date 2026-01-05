@@ -137,15 +137,22 @@ html.dark-mode .sns-links img {
     background-color: #000000 !important; /* HTMLごと黒くする */
   }
 
-  /* 3. 全体レイアウト */
+  /* 全体レイアウト */
+/* 1. 基本の太さを設定（本文に適用される） */
 body { 
   background-color: var(--bg-color) !important; 
   color: var(--text-color) !important; 
-  /* 通常時は transition をオフにしてパカつきをゼロにする */
-  transition: none !important; 
   font-family: 'Noto Sans JP', sans-serif !important;
-  font-weight: 700 !important;
-  -webkit-font-smoothing: antialiased;
+  font-weight: 500 !important; /* 本文はしっかり太め */
+}
+
+/* 2. タイトルやデカい文字だけを「細く」上書きする */
+.site-title, 
+.page-link, 
+.profile-name, 
+h1, h2 { 
+  font-weight: 400 !important; /* ここで細く戻す */
+  letter-spacing: 0.02em;      /* 細い文字は少し字間を広げるとオシャレに見えます */
 }
 
 /* ボタンを押した時だけ付与するクラス */
