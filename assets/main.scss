@@ -1,0 +1,9 @@
+---
+# このハイフン3つは消さないでね（Jekyllのおまじないです）
+---
+@import "minima";
+
+// タイトルの小文字化を無効にする設定
+.site-title {
+  text-transform: none !important;
+}
