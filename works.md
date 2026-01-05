@@ -9,6 +9,20 @@ permalink: /works/
 <div class="video-grid">
 
 <div class="video-item">
+  <a href="https://www.youtube.com/watch?v=p4M5wHkNHmc" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/p4M5wHkNHmc/maxresdefault.jpg" alt="「pluie.」feat. mare - Official Video" class="video-thumbnail">
+  </a>
+  <h3 class='video-title'>「pluie.」feat. mare - Official Video</h3>
+</div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=XIGbiSGclgA" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/XIGbiSGclgA/maxresdefault.jpg" alt="Departure / 姫野　- tato (cover)" class="video-thumbnail">
+  </a>
+  <h3 class='video-title'>Departure / 姫野　- tato (cover)</h3>
+</div>
+
+<div class="video-item">
   <a href="https://www.youtube.com/watch?v=cknsKkzA2lM" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/cknsKkzA2lM/maxresdefault.jpg" alt="サ終あざした / 重音テトSV" class="video-thumbnail">
   </a>
@@ -79,17 +93,17 @@ permalink: /works/
 </div>
 
 <div class="video-item">
-  <a href="https://www.youtube.com/watch?v=T9oeiJxs2kA" target="_blank" class="video-link">
-    <img src="https://img.youtube.com/vi/T9oeiJxs2kA/maxresdefault.jpg" alt="【マイクラ】サバイバルであった出来事を歌にしてみた【カラフルピーチ】" class="video-thumbnail">
-  </a>
-  <h3 class='video-title'>【マイクラ】サバイバルであった出来事を歌にしてみた【カラフルピーチ】</h3>
-</div>
-
-<div class="video-item">
   <a href="https://www.youtube.com/watch?v=HIYdKgIvG0I" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/HIYdKgIvG0I/maxresdefault.jpg" alt="GYU P-『イミタティオ/ 初音ミク』【オリジナルMV】" class="video-thumbnail">
   </a>
   <h3 class='video-title'>GYU P-『イミタティオ/ 初音ミク』【オリジナルMV】</h3>
+</div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=T9oeiJxs2kA" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/T9oeiJxs2kA/maxresdefault.jpg" alt="【マイクラ】サバイバルであった出来事を歌にしてみた【カラフルピーチ】" class="video-thumbnail">
+  </a>
+  <h3 class='video-title'>【マイクラ】サバイバルであった出来事を歌にしてみた【カラフルピーチ】</h3>
 </div>
 
 <div class="video-item">
@@ -132,20 +146,6 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/qLw7EM1W4B4/maxresdefault.jpg" alt="GYU P-『世界は無機物でできている / 初音ミク』【オリジナルMV】" class="video-thumbnail">
   </a>
   <h3 class='video-title'>GYU P-『世界は無機物でできている / 初音ミク』【オリジナルMV】</h3>
-</div>
-
-<div class="video-item">
-  <a href="https://www.youtube.com/watch?v=4OPusJbC4qg" target="_blank" class="video-link">
-    <img src="https://img.youtube.com/vi/4OPusJbC4qg/maxresdefault.jpg" alt="学生ボカロPがエイリアンエイリアンアレンジリレーしてみた！！" class="video-thumbnail">
-  </a>
-  <h3 class='video-title'>学生ボカロPがエイリアンエイリアンアレンジリレーしてみた！！</h3>
-</div>
-
-<div class="video-item">
-  <a href="https://www.youtube.com/watch?v=f-atLIqnbdI" target="_blank" class="video-link">
-    <img src="https://img.youtube.com/vi/f-atLIqnbdI/maxresdefault.jpg" alt="【結成】新実況グループ「カラフルピーチ 」" class="video-thumbnail">
-  </a>
-  <h3 class='video-title'>【結成】新実況グループ「カラフルピーチ 」</h3>
 </div>
 
 </div>
