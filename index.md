@@ -231,7 +231,10 @@ body.is-exiting #page-transition-overlay {
 
 
 // 1. ページ読み込み開始時にクラスを付与
-document.body.classList.add('is-loading');
+// ページを開いた瞬間に実行
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('is-loading'); 
+});
 
 window.addEventListener('load', () => {
   // 2. リンククリックで「退場」アニメ開始
