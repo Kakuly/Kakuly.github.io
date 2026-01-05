@@ -43,19 +43,23 @@ title: Home
     -webkit-font-smoothing: antialiased;
   }
 
-  /* 4. デカい文字を「細く」統一（ここが重要！） */
+/* 4. デカい文字を Works の「正解」に合わせる設定 */
   .profile-name, h1, h2, h3, .site-title, .page-link { 
     font-family: 'Montserrat', sans-serif !important;
-    font-weight: 700 !important; /* Boldを解除してLightに */
+    font-weight: 700 !important;      /* ★300から700（太字）に戻す */
+    text-transform: uppercase;         /* ★すべて大文字 */
+    letter-spacing: 0.05em !important; /* ★Worksと同じ詰まり具合に */
     color: var(--text-color) !important;
     -webkit-font-smoothing: antialiased;
     margin: 0;
+    text-decoration: none !important;
   }
 
+  /* Kakuly の名前だけ、サイズに合わせて字間を微調整 */
   .profile-name {
     font-size: 8.5rem;
     line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.02em !important; /* デカい文字は少し詰めるとWorksっぽくなります */
   }
 
   /* 5. プロフィール・SNSのレイアウト */
