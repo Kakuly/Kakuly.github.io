@@ -1,6 +1,7 @@
 title: Kakuly
 theme: minima
-minima_skin: dark
+minima:
+skin: dark
 
 feed:
   path: false
