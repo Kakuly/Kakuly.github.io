@@ -25,7 +25,7 @@ title: Home
 
 <style>
   /* 1. フォント読み込み（300, 400, 700をセット） */
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
 
   /* 2. 全体レイアウト */
   .wrapper {
@@ -46,7 +46,7 @@ title: Home
   /* 4. デカい文字を「細く」統一（ここが重要！） */
   .profile-name, h1, h2, h3, .site-title, .page-link { 
     font-family: 'Montserrat', sans-serif !important;
-    font-weight: 300 !important; /* Boldを解除してLightに */
+    font-weight: 700 !important; /* Boldを解除してLightに */
     color: var(--text-color) !important;
     -webkit-font-smoothing: antialiased;
     margin: 0;
