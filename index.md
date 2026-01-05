@@ -85,4 +85,23 @@ title: Home
     font-weight: bold;
     font-family: 'Montserrat', sans-serif !important;
   }
-</style
+</style>
+<button id="mode-toggle">🌙 Dark Mode</button>
+
+<script>
+  const btn = document.getElementById('mode-toggle');
+  const body = document.body;
+
+  if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark-mode');
+    btn.textContent = '☀️ Light Mode';
+  }
+
+  btn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    const isDark = body.classList.contains('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+  });
+</script>
+"""
