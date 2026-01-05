@@ -155,6 +155,17 @@ body.mode-transition {
   }
 
   
+/* スマホ対応 */
+  @media (max-width: 800px) {
+    .profile-container { flex-direction: column; align-items: flex-start; }
+    .profile-name { font-size: 5rem !important; }
+    .profile-icon { width: 200px; height: 200px; }
+  }
+
+
+
+
+
 /* --- イン（入場）：穴が広がる演出 --- */
 #iris-in {
   position: fixed;
