@@ -110,10 +110,7 @@ permalink: /works/
 
 </div>
 
-
-    <div id="iris-in"></div>
-    <div id="iris-out"></div>
-    
+<div id="iris-in"></div><div id="iris-out"></div>
 <style>
   /* サイト全体の最大幅を上書き */
 .wrapper {
