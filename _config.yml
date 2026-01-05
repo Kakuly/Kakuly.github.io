@@ -1,18 +1,12 @@
 title: Kakuly
-theme: minima # 標準テーマも一応指定
-remote_theme: jekyll/minima # GitHub Pagesで最新版を使うために必要
+theme: minima
 
-# 公式の書き方
+# ここは念のため残す
 minima:
   skin: dark
 
-# RSSを消す（これは成功済みのはず）
-feed:
-  path: false
-
+# WiFiマークを消すために、feedをあえて入れない
 plugins:
-  - jekyll-remote-theme # remote_themeを使うために必須
-  - jekyll-feed
   - jekyll-seo-tag
 
 author: "Music Producer" # 下側のKakulyがこの文字に変わります
