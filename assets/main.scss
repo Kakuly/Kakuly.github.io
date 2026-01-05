@@ -1,9 +1,8 @@
 ---
-# このハイフン3つは消さないでね（Jekyllのおまじないです）
+# Front Matterは空でもハイフン3つ必要です
 ---
-@import "minima";
+@import "jekyll-theme-minima";
 
-// タイトルの小文字化を無効にする設定
 .site-title {
   text-transform: none !important;
 }
