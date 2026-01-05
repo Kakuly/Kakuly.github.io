@@ -160,44 +160,45 @@ title: Home
   }
 
 
-/* --- イン（入場）用：穴が開く演出 --- */
+
+/* --- イン（入場）用：サイズを3倍にして隙間を抹殺 --- */
 #iris-in {
   position: fixed;
   top: 50%; left: 50%;
-  width: 100vmax; height: 100vmax;
-  /* 巨大な「穴あき」の板を作る（内側が透明、外側が背景色） */
-  background: radial-gradient(circle, transparent 10%, var(--bg-color) 10.5%);
+  /* 300vmax にすれば、地球上のどんなモニターでも端まで届きます */
+  width: 300vmax; height: 300vmax;
+  /* 穴の境界線を少しだけ調整（10% → 5%）して、拡大率に余裕を持たせます */
+  background: radial-gradient(circle, transparent 5%, var(--bg-color) 5.3%);
   z-index: 100000;
   pointer-events: none;
-  /* 最初は穴がめちゃくちゃ小さい（scale 0.1 = ほぼ真っ暗/真っ白） */
-  transform: translate(-50%, -50%) scale(0.1);
-  transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
-  visibility: hidden; /* 最初は隠しておく */
+  /* 最初は 0.01倍（ほぼ点）からスタート */
+  transform: translate(-50%, -50%) scale(0.01);
+  transition: transform 1s cubic-bezier(0.85, 0, 0.15, 1);
+  visibility: hidden;
 }
 
-/* 実行時：穴を巨大化させる（中身が見える！） */
+/* 実行時：20倍くらいまで一気に拡大して穴を全開にする */
 body.is-opening #iris-in {
   visibility: visible;
-  transform: translate(-50%, -50%) scale(10);
+  transform: translate(-50%, -50%) scale(20);
 }
 
-/* --- アウト（退場）用：板が広がる演出 --- */
+/* --- アウト（退場）用：こちらも巨大化 --- */
 #iris-out {
   position: fixed;
   top: 50%; left: 50%;
-  width: 150vmax; height: 150vmax;
+  width: 300vmax; height: 300vmax;
   background-color: var(--bg-color);
   border-radius: 50%;
   z-index: 100001;
   pointer-events: none;
-  /* 最初は点（scale 0） */
   transform: translate(-50%, -50%) scale(0);
   transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-/* 実行時：板を巨大化させて画面を塗りつぶす */
 body.is-exiting #iris-out {
-  transform: translate(-50%, -50%) scale(1) !important;
+  /* 0.6倍くらいで画面を完全に覆い尽くせます */
+  transform: translate(-50%, -50%) scale(0.6) !important;
 }
 </style>
 
