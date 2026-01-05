@@ -90,4 +90,5 @@ permalink: /works/
 
   /* 3. 余計なものを消す */
   .rss-subscribe, .feed-icon { display: none !important; }
+  body { -webkit-font-smoothing: antialiased; }
 </style>
