@@ -11,79 +11,43 @@ title: Home
 
 
 <style>
-  /* --- ベースの設定 --- */
   :root {
     --bg-color: #ffffff;
     --text-color: #111111;
-    --header-bg: #ffffff;
   }
   
-  /* --- ダークモード時の色定義 --- */
   body.dark-mode {
     --bg-color: #000000;
     --text-color: #eeeeee;
-    --header-bg: #000000;
   }
 
   body { 
     background-color: var(--bg-color) !important; 
     color: var(--text-color) !important; 
-    transition: 0.3s; /* 切り替えをふわっとさせる */
+    transition: 0.3s;
   }
 
   .site-header, .site-title, .page-link { 
-    background-color: var(--header-bg) !important; 
+    background-color: transparent !important; 
     color: var(--text-color) !important; 
   }
 
-  /* ギャラリーの設定（4列用） */
-  .video-grid {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
-    gap: 30px;
-  }
-
-  /* --- 切り替えボタンの見た目 --- */
+  /* モード切り替えボタンのスタイル */
   #mode-toggle {
     cursor: pointer;
     background: none;
     border: 1px solid var(--text-color);
     color: var(--text-color);
-    padding: 5px 10px;
+    padding: 4px 12px;
     border-radius: 20px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     position: fixed;
-    top: 20px;
+    top: 15px;
     right: 20px;
     z-index: 9999;
-  }
-</style>
-
-<button id="mode-toggle">🌙 Dark Mode</button>
-
-<script>
-  const btn = document.getElementById('mode-toggle');
-  const body = document.body;
-
-  // ページ読み込み時に保存されたモードを適用
-  if (localStorage.getItem('theme') === 'dark') {
-    body.classList.add('dark-mode');
-    btn.textContent = '☀️ Light Mode';
+    font-weight: bold;
   }
 
-  // クリックイベント
-  btn.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    
-    if (body.classList.contains('dark-mode')) {
-      localStorage.setItem('theme', 'dark');
-      btn.textContent = '☀️ Light Mode';
-    } else {
-      localStorage.setItem('theme', 'light');
-      btn.textContent = '🌙 Dark Mode';
-    }
-  });
-</script>
 
   /* 2. フォントを「ダサくない」モダンなものに変える */
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
@@ -123,3 +87,23 @@ title: Home
     letter-spacing: -0.05em !important;
   }
 </style>
+
+<button id="mode-toggle">🌙 Dark Mode</button>
+
+<script>
+  const btn = document.getElementById('mode-toggle');
+  const body = document.body;
+
+  // 保存されたテーマを適用
+  if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark-mode');
+    btn.textContent = '☀️ Light Mode';
+  }
+
+  btn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    const isDark = body.classList.contains('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+  });
+</script>
