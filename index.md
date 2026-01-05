@@ -55,7 +55,6 @@ title: Home
 エレクトロポップ／ハイパーポップを中心に、たくさん迷いながら音楽を作っている。
 元気に生きるために音楽を摂取します。いつもありがとう。
 
-`` SNSリンク
 <div class="sns-links">
   <a href="https://soundcloud.com/kakuly-uni" target="_blank" rel="noopener">
     <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Antu_soundcloud.svg" alt="SoundCloud">
