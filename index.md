@@ -155,7 +155,7 @@ title: Home
     .profile-icon { width: 200px; height: 200px; }
   }
 
-/* 1. メインのダイヤ */
+/* 1. メインのダイヤ（背景色） */
 body::before {
   content: "";
   position: fixed;
@@ -164,31 +164,32 @@ body::before {
   background-color: var(--bg-color); 
   z-index: 99999;
   pointer-events: none;
-  /* 最初は -45度 にしておく */
-  transform: translate(-50%, -50%) rotate(-45deg) scale(0);
-  /* 緩急（イージング）をもっと極端な「超・溜め」に変更 */
-  transition: transform 0.85s cubic-bezier(0.95, 0.05, 0.2, 1);
+  /* ★ 最初は「-90度」にひねって、サイズは「0」 */
+  transform: translate(-50%, -50%) rotate(-90deg) scale(0);
+  /* ★ 動きのカーブを「ほぼ垂直」に。最初ガチガチに固まって、最後に弾ける */
+  transition: transform 0.9s cubic-bezier(1, 0, 0, 1);
 }
 
-/* 2. メインの縁（ふち） */
+/* 2. メインの縁（文字色） */
 body::after {
   content: "";
   position: fixed;
   top: 50%; left: 50%;
   width: 150vmax; height: 150vmax;
-  border: 8px solid var(--text-color); 
+  border: 12px solid var(--text-color); /* 線をより太くして存在感を出す */
   box-sizing: border-box;
   z-index: 100000;
   pointer-events: none;
-  /* 同じく -45度 */
-  transform: translate(-50%, -50%) rotate(-45deg) scale(0);
-  transition: transform 0.85s cubic-bezier(0.95, 0.05, 0.2, 1);
+  /* ★ beforeと全く同じ初期状態 */
+  transform: translate(-50%, -50%) rotate(-90deg) scale(0);
+  transition: transform 0.9s cubic-bezier(1, 0, 0, 1);
 }
 
-/* 3. スイッチが入った時 */
+/* 3. スイッチが入った時の「爆発」 */
 body.is-exiting::before,
 body.is-exiting::after {
-  /* 大きくなる時に、回転を「45度」までグワッ！と回す */
+  /* ★ 「45度」まで一気に回転しながら、1.5倍まで巨大化 */
+  /* -90度から45度まで「135度」も一気に回ります */
   transform: translate(-50%, -50%) rotate(45deg) scale(1.5);
 }
   
