@@ -1,9 +1,14 @@
-remote_theme: jekyll/minima
 title: Kakuly
 minima_skin: dark
 
+# RSSボタンを消す
 feed:
   path: false
 
+# テーマ設定
+remote_theme: jekyll/minima
+
 plugins:
   - jekyll-remote-theme
+  - jekyll-feed
+  - jekyll-seo-tag
