@@ -2,6 +2,7 @@
 layout: home
 title: Home
 ---
+<body class="is-loading">
 <div class="profile-container">
   <img src="/assets/img/profile.png" class="profile-icon">
   
@@ -179,6 +180,26 @@ body::after {
 body.is-exiting::before {
   transform: translate(-50%, -50%) scale(1.5);
 }
+
+
+
+  /* 最初は視界が「0%」の点（何も見えない状態） */
+body {
+  clip-path: circle(0% at 50% 50%);
+  transition: clip-path 0.6s cubic-bezier(0.65, 0, 0.15, 1);
+  background-color: var(--bg-color);
+}
+
+/* ページに入った時：視界が 150% まで広がって全開になる */
+body:not(.is-loading) {
+  clip-path: circle(150% at 50% 50%);
+}
+
+/* ページを出る時：再び視界が 0% に向かって閉じる */
+body.is-exiting {
+  clip-path: circle(0% at 50% 50%) !important;
+}
+
   
   </style>
 
@@ -228,4 +249,24 @@ document.querySelectorAll('.page-link').forEach(link => {
     }, 650);
   });
 });
+
+window.addEventListener('load', () => {
+  // 読み込みが終わったら「is-loading」を外して、円を広げる（視界開通！）
+  setTimeout(() => {
+    document.body.classList.remove('is-loading');
+  }, 100);
+
+  // リンククリックで「is-exiting」をつけて、円を閉じる
+  document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.includes('mailto:')) return;
+      
+      e.preventDefault();
+      document.body.classList.add('is-exiting');
+      setTimeout(() => { window.location.href = href; }, 650);
+    });
+  });
+});
+  
 </script>
