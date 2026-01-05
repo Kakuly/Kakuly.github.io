@@ -1,9 +1,12 @@
 name: Update Works from YouTube
 
 on:
+  push:
+    # ここ！ pyファイルを編集して push（保存してアップ）した時に発動
+    paths:
+      - 'update_works.py'
   schedule:
-    - cron: '0 0 * * *' # 毎日日本時間の午前9時に実行
-  workflow_dispatch: # 手動で今すぐ実行するためのボタンを表示
+    - cron: '0 15 * * *'
 
 jobs:
   build:
