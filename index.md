@@ -24,7 +24,7 @@ title: Home
 元気に生きるために音楽を摂取します。いつもありがとう。
 
 
-<div id="page-transition-overlay"></div>
+<div id="iris-overlay"></div>
 
 <style>
   /* 1. サイト全体の最大幅（Worksと同じ位置） */
@@ -158,42 +158,35 @@ title: Home
     .profile-icon { width: 200px; height: 200px; }
   }
 
-#page-transition-overlay {
+
+#iris-overlay {
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background-color: var(--bg-color); /* 幕の色 */
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  /* 穴の外側を「超巨大な枠線」で塗りつぶす（150vmax = 画面を余裕で覆う太さ） */
+  border: 150vmax solid var(--bg-color);
+  border-radius: 50%;
   z-index: 999999;
   pointer-events: none;
-
-  /* ★ここがポイント：中心以外を塗りつぶす「ドーナツ状」のマスク */
-  -webkit-mask-image: radial-gradient(circle, transparent 0%, black 0%);
-  mask-image: radial-gradient(circle, transparent 0%, black 0%);
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
+  /* 最初は Scale(1) = 穴が閉じていて、画面が枠線で塗りつぶされている状態 */
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-/* イン：中心の「透明な穴」を 0% から 150% へ広げる */
-body.is-loading #page-transition-overlay {
-  animation: iris-in 0.8s cubic-bezier(0.85, 0, 0.15, 1) forwards;
+/* イン：穴を Scale(0) にして、枠線を消し去る（中身が見える！） */
+body.is-opening #iris-overlay {
+  transform: translate(-50%, -50%) scale(0);
 }
 
-/* アウト：中心の「透明な穴」を 150% から 0% へ閉じる */
-body.is-exiting #page-transition-overlay {
-  animation: iris-out 0.8s cubic-bezier(0.85, 0, 0.15, 1) forwards;
-}
-
-@keyframes iris-in {
-  from { -webkit-mask-image: radial-gradient(circle, transparent 0%, black 0%); }
-  to { -webkit-mask-image: radial-gradient(circle, transparent 150%, black 150%); }
-}
-
-@keyframes iris-out {
-  from { -webkit-mask-image: radial-gradient(circle, transparent 150%, black 150%); }
-  to { -webkit-mask-image: radial-gradient(circle, transparent 0%, black 0%); }
+/* アウト：穴を Scale(1) に戻して、再び枠線で塗りつぶす（真っ暗に戻る！） */
+body.is-exiting #iris-overlay {
+  transform: translate(-50%, -50%) scale(1) !important;
 }
   
-  </style>
+</style>
+
 
 <script>
   (function() {
@@ -228,22 +221,24 @@ body.is-exiting #page-transition-overlay {
   });
 
 
-// 1. ページ読み込み開始時にクラスを付与
-// ページを開いた瞬間に実行
-document.addEventListener('DOMContentLoaded', () => {
-  document.body.classList.add('is-loading'); 
-});
-
+// 1. ページが読み込まれた瞬間、まず「穴を閉じた状態」で開始
+// (CSSで初期状態がscale(1)なので、ここではクラスを操作するだけ)
 window.addEventListener('load', () => {
-  // 2. リンククリックで「退場」アニメ開始
+  // 2. 0.1秒後に「is-opening」をつけて穴を広げる
+  setTimeout(() => {
+    document.body.classList.add('is-opening');
+  }, 100);
+
+  // 3. リンクをクリックした時の処理
   document.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
       if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
       
       e.preventDefault();
-      document.body.classList.remove('is-loading'); // loadingを外して
-      document.body.classList.add('is-exiting');    // exitingをつける
+      // 4. 「is-opening」を外して「is-exiting」をつけ、穴を閉じる
+      document.body.classList.remove('is-opening');
+      document.body.classList.add('is-exiting');
 
       setTimeout(() => {
         window.location.href = href;
@@ -251,5 +246,4 @@ window.addEventListener('load', () => {
     });
   });
 });
-  
 </script>
