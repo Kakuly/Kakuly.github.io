@@ -9,111 +9,111 @@ permalink: /works/
 <div class="video-grid">
 
 <div class="video-item">
-  <h3>枕元 / kafu</h3>
-  <iframe src="https://www.youtube.com/embed/x0VqpfLdEVI" frameborder="0" allowfullscreen></iframe>
+  <h3>サ終あざした / 重音テトSV</h3>
+  <iframe src="https://www.youtube.com/embed/cknsKkzA2lM" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>Kakuly × tato - direct & loop [official audio]</h3>
-  <iframe src="https://www.youtube.com/embed/YDPnby_OWWg" frameborder="0" allowfullscreen></iframe>
+  <h3>HyperPopCorn!! / 初音ミク - shikisai × Kakuly</h3>
+  <iframe src="https://www.youtube.com/embed/zAURwtz_AY4" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>Kakuly × tato - freedom (remix) [official audio]</h3>
-  <iframe src="https://www.youtube.com/embed/uuFFToqXXsQ" frameborder="0" allowfullscreen></iframe>
+  <h3>【 XFD 】Undefined 01</h3>
+  <iframe src="https://www.youtube.com/embed/dRd-CYI11fQ" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>Kakuly × tato - connect [official audio]</h3>
-  <iframe src="https://www.youtube.com/embed/oj7AKQW6PDY" frameborder="0" allowfullscreen></iframe>
+  <h3>Akari24 - Crack Cat / feat.初音ミク</h3>
+  <iframe src="https://www.youtube.com/embed/eSfYFhNjiB8" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>Kakuly × tato - glory days (feat.Akari24) [official audio]</h3>
-  <iframe src="https://www.youtube.com/embed/HDFmhVzat6Y" frameborder="0" allowfullscreen></iframe>
+  <h3>1st Album『(EN)CORE』クロスフェード</h3>
+  <iframe src="https://www.youtube.com/embed/YOoRO2OVICo" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>Kakuly × tato - hold the loop [official audio]</h3>
-  <iframe src="https://www.youtube.com/embed/UJbm_K-6YlU" frameborder="0" allowfullscreen></iframe>
+  <h3>花溺れ / 初音ミク, 花奏かのんβ</h3>
+  <iframe src="https://www.youtube.com/embed/Z7OQL1hQ5WY" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>Kakuly × tato - cut and try [official audio]</h3>
-  <iframe src="https://www.youtube.com/embed/OhvvTOyJl78" frameborder="0" allowfullscreen></iframe>
+  <h3>Akari24 - 言葉は魔法みたい / feat.初音ミク</h3>
+  <iframe src="https://www.youtube.com/embed/bqMBuLzCyMc" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>Kakuly × tato - about XX (feat.kafu) [official audio]</h3>
-  <iframe src="https://www.youtube.com/embed/wfc1V8YeuBQ" frameborder="0" allowfullscreen></iframe>
+  <h3>SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)</h3>
+  <iframe src="https://www.youtube.com/embed/XsjuHvYlRyc" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>Kakuly × tato - 脳dead U (feat.nui) [official audio]</h3>
-  <iframe src="https://www.youtube.com/embed/RjsNyzywWtk" frameborder="0" allowfullscreen></iframe>
+  <h3>映画『カラフルピーチ/魔王と予言の少女』</h3>
+  <iframe src="https://www.youtube.com/embed/y7DwWj1gHQE" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>Kakuly × tato - 三角 [official audio]</h3>
-  <iframe src="https://www.youtube.com/embed/Wg0t0XrodUI" frameborder="0" allowfullscreen></iframe>
+  <h3>【オリジナル曲】スノーダンス/yuru【Vtuber/Vsinger】</h3>
+  <iframe src="https://www.youtube.com/embed/u3pMZtkugX8" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>Kakuly × tato - (don't know) you [official audio]</h3>
-  <iframe src="https://www.youtube.com/embed/s8wtr1bBHMU" frameborder="0" allowfullscreen></iframe>
+  <h3>【マイクラ】サバイバルであった出来事を歌にしてみた【カラフルピーチ】</h3>
+  <iframe src="https://www.youtube.com/embed/T9oeiJxs2kA" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>Kakuly × tato - [voicememo] [official audio]</h3>
-  <iframe src="https://www.youtube.com/embed/nwemY-pMKQ0" frameborder="0" allowfullscreen></iframe>
+  <h3>GYU P-『イミタティオ/ 初音ミク』【オリジナルMV】</h3>
+  <iframe src="https://www.youtube.com/embed/HIYdKgIvG0I" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>Digital Album "DIRECT & LOOP" [XFD]</h3>
-  <iframe src="https://www.youtube.com/embed/nJwjaBef_jI" frameborder="0" allowfullscreen></iframe>
+  <h3>［Melodic Dubstep/UKHARDCORE］Kakuly vs Sohukira - Blood of Ainu</h3>
+  <iframe src="https://www.youtube.com/embed/SErUMzCz8sA" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>[VocaDuo2025] いちご納豆ごはん - garden</h3>
-  <iframe src="https://www.youtube.com/embed/BWAdNu7HnJE" frameborder="0" allowfullscreen></iframe>
+  <h3>バットプロローグ/ONE</h3>
+  <iframe src="https://www.youtube.com/embed/tvtcZYBHfiQ" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>[VocaDuo2025] Quilter - dots</h3>
-  <iframe src="https://www.youtube.com/embed/wlmevRPxajk" frameborder="0" allowfullscreen></iframe>
+  <h3>【MV】アーティフィシャルスマイル／可不</h3>
+  <iframe src="https://www.youtube.com/embed/o94Im34pHHk" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>Wa!ter×Kakuly - はか</h3>
-  <iframe src="https://www.youtube.com/embed/rQ3cbuAqb3o" frameborder="0" allowfullscreen></iframe>
+  <h3>9m</h3>
+  <iframe src="https://www.youtube.com/embed/owXBgyrXQFg" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>Peterparker69, 野田洋次郎 - Hey phone (Kakuly remix + tato cover)</h3>
-  <iframe src="https://www.youtube.com/embed/lG2I7mA0VGE" frameborder="0" allowfullscreen></iframe>
+  <h3>ボカロP１１人がジャンキーナイトタウンオーケストラアレンジリレーしてみた！！</h3>
+  <iframe src="https://www.youtube.com/embed/cJ9pKeN1kWI" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>Kakuly - re:create (feat.重音テトSV)</h3>
-  <iframe src="https://www.youtube.com/embed/3uh6S-RRqAM" frameborder="0" allowfullscreen></iframe>
+  <h3>GYU P-『世界は無機物でできている / 初音ミク』【オリジナルMV】</h3>
+  <iframe src="https://www.youtube.com/embed/qLw7EM1W4B4" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>Akari24 - Juvenile Delinquency (Kakuly ver.)</h3>
-  <iframe src="https://www.youtube.com/embed/U9XdrefRvCg" frameborder="0" allowfullscreen></iframe>
+  <h3>学生ボカロPがエイリアンエイリアンアレンジリレーしてみた！！</h3>
+  <iframe src="https://www.youtube.com/embed/4OPusJbC4qg" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="video-item">
-  <h3>hello / hatsune miku</h3>
-  <iframe src="https://www.youtube.com/embed/paIePEOWhLc" frameborder="0" allowfullscreen></iframe>
+  <h3>【結成】新実況グループ「カラフルピーチ 」</h3>
+  <iframe src="https://www.youtube.com/embed/f-atLIqnbdI" frameborder="0" allowfullscreen></iframe>
 </div>
 
 </div>
-
 
 
     <div id="iris-in"></div>
     <div id="iris-out"></div>
+    
 <style>
   /* サイト全体の最大幅を上書き */
 .wrapper {
@@ -230,6 +230,17 @@ body.mode-transition {
   }
 
   
+/* スマホ対応 */
+  @media (max-width: 800px) {
+    .profile-container { flex-direction: column; align-items: flex-start; }
+    .profile-name { font-size: 5rem !important; }
+    .profile-icon { width: 200px; height: 200px; }
+  }
+
+
+
+
+
 /* --- イン（入場）：穴が広がる演出 --- */
 #iris-in {
   position: fixed;
