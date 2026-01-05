@@ -185,36 +185,22 @@ h1, h2, h3, .site-title {
   .profile-icon { width: 200px; height: 200px; }
 }
 
-
-
-/* 1. そもそも最初から「全要素」を非表示にしておく（超重要） */
-body > *:not([id^="iris-"]) {
-  opacity: 0;
-  pointer-events: none; /* 穴が開くまではクリックもさせない */
-}
-
-/* 2. 穴が開く演出パーツ。z-indexを最大に */
+/* --- イン（入場）：穴が広がる演出 --- */
 #iris-in {
   position: fixed;
   top: 50%; left: 50%;
   width: 10px; height: 10px;
   border-radius: 50%;
   box-shadow: 0 0 0 500vmax var(--bg-color);
-  z-index: 9999999 !important; 
+  z-index: 100000;
   pointer-events: none;
   transform: translate(-50%, -50%) scale(0);
-  /* transitionの時間を少しだけ短くすると、パカつきを感じる暇がなくなります */
-  transition: transform 1.0s cubic-bezier(0.85, 0, 0.15, 1);
+  transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-/* 3. JSでクラスがついた瞬間だけ表示する */
-body.is-opening > *:not([id^="iris-"]) {
-  opacity: 1 !important;
-  pointer-events: auto;
-  transition: opacity 0.5s ease-in !important;
+body.is-opening #iris-in {
+  transform: translate(-50%, -50%) scale(500);
 }
-
-
 
 /* --- アウト（退場）：板が広がる演出 --- */
 #iris-out {
