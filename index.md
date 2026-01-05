@@ -154,6 +154,28 @@ title: Home
     .profile-name { font-size: 5rem !important; }
     .profile-icon { width: 200px; height: 200px; }
   }
+
+    /* 1. CSSだけで図形を作る（擬似要素） */
+body::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 150vmax;
+  height: 150vmax;
+  background-color: var(--text-color); /* ライトなら黒、ダークなら白 */
+  transform: translate(-50%, -50%) scale(0); /* 最初は中心に消えている */
+  border-radius: 100%; /* 円形（ここを 0% にすれば四角形になります） */
+  z-index: 99999;
+  pointer-events: none;
+  /* 広がるスピードと動きの心地よさ */
+  transition: transform 0.7s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+/* 2. JavaScriptから「is-exiting」というクラスが body についた瞬間、ブワッと広がる */
+body.is-exiting::before {
+  transform: translate(-50%, -50%) scale(1);
+}
 </style>
 
 <script>
@@ -187,4 +209,19 @@ title: Home
       body.classList.remove('mode-transition');
     }, 500);
   });
+
+  document.querySelectorAll('.page-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault(); // すぐにページが飛ばないように止める
+    const targetUrl = link.href;
+
+    // bodyに「今から出るよ」というクラスをつける（これで上のCSSが発動！）
+    document.body.classList.add('is-exiting');
+
+    // 図形が画面を覆い尽くすのを待ってから移動（0.7秒）
+    setTimeout(() => {
+      window.location.href = targetUrl;
+    }, 700);
+  });
+});
 </script>
