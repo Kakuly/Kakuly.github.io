@@ -155,27 +155,44 @@ title: Home
     .profile-icon { width: 200px; height: 200px; }
   }
 
-    /* 1. CSSだけで図形を作る（擬似要素） */
+/* 1. 中心から広がるメインのダイヤ型（塗り） */
 body::before {
   content: "";
   position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 150vmax;
-  height: 150vmax;
-  background-color: var(--text-color); /* ライトなら黒、ダークなら白 */
-  transform: translate(-50%, -50%) scale(0); /* 最初は中心に消えている */
-  border-radius: 100%; /* 円形（ここを 0% にすれば四角形になります） */
+  top: 50%; left: 50%;
+  width: 150vmax; height: 150vmax;
+  background-color: var(--text-color);
   z-index: 99999;
   pointer-events: none;
-  /* 広がるスピードと動きの心地よさ */
+  /* ダイヤ型に切り抜く */
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  /* 最初は小さく */
+  transform: translate(-50%, -50%) scale(0);
   transition: transform 0.7s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-/* 2. JavaScriptから「is-exiting」というクラスが body についた瞬間、ブワッと広がる */
-body.is-exiting::before {
-  transform: translate(-50%, -50%) scale(1);
+/* 2. 重なって広がる細いひし形の「線」 */
+body::after {
+  content: "";
+  position: fixed;
+  top: 50%; left: 50%;
+  width: 145vmax; height: 145vmax; /* メインより少し小さく */
+  border: 2px solid var(--text-color); /* 線だけにする */
+  z-index: 99998; /* メインの少し後ろ */
+  pointer-events: none;
+  /* 縦に細長いひし形に切り抜く */
+  clip-path: polygon(50% 10%, 60% 50%, 50% 90%, 40% 50%);
+  transform: translate(-50%, -50%) scale(0);
+  /* 線の方は少しだけ遅れて、かつ速く動かすとカッコいい */
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* 3. スイッチが入った時の動き */
+body.is-exiting::before,
+body.is-exiting::after {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+  
 </style>
 
 <script>
