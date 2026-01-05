@@ -20,23 +20,21 @@ def update_markdown(items):
     # 横並びにするための「外枠」を開始
     content += '<div class="video-grid">\n\n'
     
-    for item in items:
+for item in items:
         title = item['snippet']['title']
         video_id = item['snippet']['resourceId']['videoId']
+        # YouTubeの標準サムネイルURL（高画質版）
+        thumbnail_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
         
-# 各動画を囲む「タイル」
         content += '<div class="video-item">\n'
+        # 1. iframeをやめて、リンク付きの画像にする
+        content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
+        content += f'    <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail">\n'
+        content += f'  </a>\n'
         
-        # 1. 先に動画（iframe）を表示
-        content += f'  <div class="video-wrapper">\n'
-        content += f'    <iframe src="https://www.youtube.com/embed/{video_id}" frameborder="0" allowfullscreen></iframe>\n'
-        content += f'  </div>\n'
-        
-        # 2. その後にタイトル（h3）を表示（これで下に来ます）
+        # 2. タイトルは下へ
         content += f"  <h3 class='video-title'>{title}</h3>\n"
-        
-    # 外枠を閉じる
-    content += '</div>\n\n'
+        content += '</div>\n\n'
 
     content += '<div id="iris-in"></div>'
     content += '<div id="iris-out"></div>'
@@ -44,6 +42,30 @@ def update_markdown(items):
     # デザイン設定（Homeと完全に同期）
     content += """
 <style>
+.video-thumbnail {
+  width: 100%;
+  aspect-ratio: 16 / 9; /* 比率を固定 */
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* マウスを乗せた時の演出 */
+.video-link:hover .video-thumbnail {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.video-title {
+  margin-top: 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  /* 2行目以降を「...」にする（タイトルが長い時用） */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
   /* サイト全体の最大幅を上書き */
 .wrapper {
   max-width: 1100px !important; /* 800pxから1100pxに拡張 */
