@@ -112,6 +112,80 @@ permalink: /works/
 
 
 <style>
+  /* --- ベースの設定 --- */
+  :root {
+    --bg-color: #ffffff;
+    --text-color: #111111;
+    --header-bg: #ffffff;
+  }
+  
+  /* --- ダークモード時の色定義 --- */
+  body.dark-mode {
+    --bg-color: #000000;
+    --text-color: #eeeeee;
+    --header-bg: #000000;
+  }
+
+  body { 
+    background-color: var(--bg-color) !important; 
+    color: var(--text-color) !important; 
+    transition: 0.3s; /* 切り替えをふわっとさせる */
+  }
+
+  .site-header, .site-title, .page-link { 
+    background-color: var(--header-bg) !important; 
+    color: var(--text-color) !important; 
+  }
+
+  /* ギャラリーの設定（4列用） */
+  .video-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+    gap: 30px;
+  }
+
+  /* --- 切り替えボタンの見た目 --- */
+  #mode-toggle {
+    cursor: pointer;
+    background: none;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
+</style>
+
+<button id="mode-toggle">🌙 Dark Mode</button>
+
+<script>
+  const btn = document.getElementById('mode-toggle');
+  const body = document.body;
+
+  // ページ読み込み時に保存されたモードを適用
+  if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark-mode');
+    btn.textContent = '☀️ Light Mode';
+  }
+
+  // クリックイベント
+  btn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+      localStorage.setItem('theme', 'dark');
+      btn.textContent = '☀️ Light Mode';
+    } else {
+      localStorage.setItem('theme', 'light');
+      btn.textContent = '🌙 Dark Mode';
+    }
+  });
+</script>
+
   /* 2. フォントを「ダサくない」モダンなものに変える */
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
   body, p, li { font-family: 'Noto Sans JP', sans-serif !important; line-height: 1.8; letter-spacing: -0.03em !important; }
