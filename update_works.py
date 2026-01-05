@@ -48,12 +48,6 @@ def update_markdown(items):
 .site-header .wrapper {
   max-width: 1100px !important;
 }
-
-/* Worksの動画グリッドをより広々と見せる調整 */
-.video-grid {
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important; /* 1つ1つの動画を少し大きく */
-  gap: 30px !important;
-}
   /* 1. フォント読み込み */
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
 
@@ -112,12 +106,11 @@ body.mode-transition {
   }
 
   /* 5. ギャラリー（4列）の設定 */
-  .video-grid {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
-    gap: 40px 20px !important;
-    padding-top: 20px;
-  }
+/* Worksの動画グリッドをより広々と見せる調整 */
+.video-grid {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important; /* 1つ1つの動画を少し大きく */
+  gap: 30px !important;
+}
   
   .video-item h3 {
     font-family: 'Montserrat', 'Noto Sans JP', sans-serif !important;
