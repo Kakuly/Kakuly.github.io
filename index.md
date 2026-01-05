@@ -66,30 +66,31 @@ title: Home
 </div>
 
 <style>
-  .sns-links {
-    display: flex;
-    gap: 20px;          /* アイコン同士の隙間 */
-    margin-top: 15px;   /* 上（名前など）との隙間 */
-  }
+.sns-links img {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  transition: transform 0.2s, filter 0.3s, opacity 0.3s; /* 変化を滑らかに */
+  
+  /* 1. 全体をグレーにする */
+  filter: grayscale(100%) brightness(1.2); 
+  opacity: 0.7; /* 少し透かして背景に馴染ませる */
+}
 
-  .sns-links img {
-    width: 35px;        /* アイコンのサイズ */
-    height: 35px;
-    object-fit: contain;
-    transition: transform 0.2s, opacity 0.2s; /* ホバー時のアニメーション */
-    filter: var(--icon-filter); /* ダークモード対応用（後述） */
-  }
+/* 2. マウスを乗せた時の演出（お好みで選んでね） */
+.sns-links img:hover {
+  transform: translateY(-3px);
+  opacity: 1;
 
-  /* マウスを乗せた時に少し浮き上がらせる */
-  .sns-links img:hover {
-    transform: translateY(-3px);
-    opacity: 0.8;
-  }
+  /* パターンB：マウスを乗せてもモノクロのまま（さらに明るくするだけ） */
+  filter: grayscale(100%) brightness(2); 
+}
 
-  /* ダークモードの時に黒いアイコン（Xなど）を見やすくする設定 */
-  html.dark-mode .sns-links img {
-    filter: invert(1) brightness(2); /* 黒い画像を白っぽく反転させる */
-  }
+/* 3. ダークモードの時の微調整 */
+html.dark-mode .sns-links img {
+  /* 黒背景でも見えやすいように、白っぽく反転させてからグレーにする */
+  filter: invert(1) grayscale(100%) brightness(1.5);
+}
 </style>
 
 <style>
