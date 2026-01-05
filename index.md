@@ -24,7 +24,8 @@ title: Home
 元気に生きるために音楽を摂取します。いつもありがとう。
 
 
-<div id="iris-overlay"></div>
+<div id="iris-in"></div>
+<div id="iris-out"></div>
 
 <style>
   /* 1. サイト全体の最大幅（Worksと同じ位置） */
@@ -159,32 +160,45 @@ title: Home
   }
 
 
-#iris-overlay {
+/* --- イン（入場）用：穴が開く演出 --- */
+#iris-in {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  /* 穴の外側を「超巨大な枠線」で塗りつぶす（150vmax = 画面を余裕で覆う太さ） */
-  border: 150vmax solid var(--bg-color);
-  border-radius: 50%;
-  z-index: 999999;
+  top: 50%; left: 50%;
+  width: 100vmax; height: 100vmax;
+  /* 巨大な「穴あき」の板を作る（内側が透明、外側が背景色） */
+  background: radial-gradient(circle, transparent 10%, var(--bg-color) 10.5%);
+  z-index: 100000;
   pointer-events: none;
-  /* 最初は Scale(1) = 穴が閉じていて、画面が枠線で塗りつぶされている状態 */
-  transform: translate(-50%, -50%) scale(1);
+  /* 最初は穴がめちゃくちゃ小さい（scale 0.1 = ほぼ真っ暗/真っ白） */
+  transform: translate(-50%, -50%) scale(0.1);
+  transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+  visibility: hidden; /* 最初は隠しておく */
+}
+
+/* 実行時：穴を巨大化させる（中身が見える！） */
+body.is-opening #iris-in {
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(10);
+}
+
+/* --- アウト（退場）用：板が広がる演出 --- */
+#iris-out {
+  position: fixed;
+  top: 50%; left: 50%;
+  width: 150vmax; height: 150vmax;
+  background-color: var(--bg-color);
+  border-radius: 50%;
+  z-index: 100001;
+  pointer-events: none;
+  /* 最初は点（scale 0） */
+  transform: translate(-50%, -50%) scale(0);
   transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-/* イン：穴を Scale(0) にして、枠線を消し去る（中身が見える！） */
-body.is-opening #iris-overlay {
-  transform: translate(-50%, -50%) scale(0);
-}
-
-/* アウト：穴を Scale(1) に戻して、再び枠線で塗りつぶす（真っ暗に戻る！） */
-body.is-exiting #iris-overlay {
+/* 実行時：板を巨大化させて画面を塗りつぶす */
+body.is-exiting #iris-out {
   transform: translate(-50%, -50%) scale(1) !important;
 }
-  
 </style>
 
 
@@ -221,23 +235,21 @@ body.is-exiting #iris-overlay {
   });
 
 
-// 1. ページが読み込まれた瞬間、まず「穴を閉じた状態」で開始
-// (CSSで初期状態がscale(1)なので、ここではクラスを操作するだけ)
-window.addEventListener('load', () => {
-  // 2. 0.1秒後に「is-opening」をつけて穴を広げる
-  setTimeout(() => {
-    document.body.classList.add('is-opening');
-  }, 100);
 
-  // 3. リンクをクリックした時の処理
+// 1. ページ読み込み開始
+document.addEventListener('DOMContentLoaded', () => {
+  // すぐに「イン（穴あけ）」を開始
+  document.body.classList.add('is-opening');
+});
+
+window.addEventListener('load', () => {
+  // 2. リンククリック時の「アウト（板広げ）」
   document.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
       if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
       
       e.preventDefault();
-      // 4. 「is-opening」を外して「is-exiting」をつけ、穴を閉じる
-      document.body.classList.remove('is-opening');
       document.body.classList.add('is-exiting');
 
       setTimeout(() => {
