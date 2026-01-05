@@ -293,42 +293,32 @@ h1, h2, h3, .site-title {
 }
 
 
-/* 1. 演出用の影を「全要素の頂点」に持っていく */
+
+/* 1. そもそも最初から「全要素」を非表示にしておく（超重要） */
+body > *:not([id^="iris-"]) {
+  opacity: 0;
+  pointer-events: none; /* 穴が開くまではクリックもさせない */
+}
+
+/* 2. 穴が開く演出パーツ。z-indexを最大に */
 #iris-in {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 10px;
-  height: 10px;
+  top: 50%; left: 50%;
+  width: 10px; height: 10px;
   border-radius: 50%;
   box-shadow: 0 0 0 500vmax var(--bg-color);
-  /* z-indexを極端に大きくしてヘッダーを封じ込める */
   z-index: 9999999 !important; 
   pointer-events: none;
   transform: translate(-50%, -50%) scale(0);
-  transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+  /* transitionの時間を少しだけ短くすると、パカつきを感じる暇がなくなります */
+  transition: transform 1.0s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-/* 2. ヘッダーを含むすべてのコンテンツを、最初は「完全に透明」にする */
-body > *:not([id^="iris-"]) {
-  opacity: 0 !important;
-  transition: opacity 0.8s ease-out;
-}
-
-/* 3. 穴が開き始めたら、フワッと表示する */
+/* 3. JSでクラスがついた瞬間だけ表示する */
 body.is-opening > *:not([id^="iris-"]) {
   opacity: 1 !important;
-}
-
-/* 4. ヘッダーが突き抜けないように念のためz-indexを下げる */
-.site-header {
-  z-index: 100 !important;
-}
-
-/* 実行時：穴を全開にする */
-body.is-opening #iris-in {
-  /* visibility: visible; ← これも不要 */
-  transform: translate(-50%, -50%) scale(500);
+  pointer-events: auto;
+  transition: opacity 0.5s ease-in !important;
 }
 
 
