@@ -20,7 +20,7 @@ title: Home
   /* 2. フォントを「ダサくない」モダンなものに変える */
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
   body, p, li { font-family: 'Noto Sans JP', sans-serif !important; line-height: 1.8; }
-  .site-title, h1, h2, h3 { font-family: 'Montserrat', sans-serif !important; font-weight: 700 !important; letter-spacing: -0.03em !important; }
+  .site-title, h1, h2, h3 { font-family: 'Montserrat', sans-serif !important; font-weight: 300 !important; letter-spacing: 0.03em !important; }
 
   /* 3. 余計なものを消す */
   .rss-subscribe, .feed-icon { display: none !important; }
