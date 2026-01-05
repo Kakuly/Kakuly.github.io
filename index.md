@@ -120,7 +120,7 @@ html.dark-mode .sns-links img {
 }
 
   /* 1. フォント読み込み */
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
 
   /* 2. カラー変数（Lightがデフォルト） */
   :root {
