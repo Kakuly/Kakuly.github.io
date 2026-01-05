@@ -111,6 +111,9 @@ permalink: /works/
 </div>
 
 
+
+    <div id="iris-in"></div>
+    <div id="iris-out"></div>
 <style>
   /* サイト全体の最大幅を上書き */
 .wrapper {
@@ -225,40 +228,63 @@ body.mode-transition {
     font-weight: bold;
     font-family: 'Montserrat', sans-serif !important;
   }
+
   
- /* 1. メインの円（塗りつぶし）：背景と同じ色 */
-body::before {
-  content: "";
+/* --- イン（入場）：穴が広がる演出 --- */
+#iris-in {
+  position: fixed;
+  top: 50%; left: 50%;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  /* 画面を覆い尽くす巨大な影 */
+  box-shadow: 0 0 0 500vmax var(--bg-color);
+  z-index: 100000;
+  pointer-events: none;
+  /* 最初は穴を閉じておく（＝画面が影で真っ暗/真っ白） */
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+  /* visibility: hidden; ← これを削除！最初から存在させる */
+}
+
+/* 実行時：穴を全開にする */
+body.is-opening #iris-in {
+  /* visibility: visible; ← これも不要 */
+  transform: translate(-50%, -50%) scale(500);
+}
+
+/* --- アウト（退場）：板が広がる演出 --- */
+#iris-out {
   position: fixed;
   top: 50%; left: 50%;
   width: 150vmax; height: 150vmax;
-  background-color: var(--bg-color); 
-  z-index: 99999;
+  background-color: var(--bg-color);
+  border-radius: 50%;
+  z-index: 100001;
   pointer-events: none;
-  border-radius: 50%; /* 100%と同じですが、より「円」らしい指定 */
   transform: translate(-50%, -50%) scale(0);
-  /* 「ぐぅぅう...（溜め）」から「わあ！（爆発）」への曲線 */
-  transition: transform 0.6s cubic-bezier(0.65, 0, 0.15, 1);
+  transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-/* 2. 縁は不要なので、表示されないようにする（または削除） */
-body::after {
-  display: none;
+body.is-exiting #iris-out {
+  transform: translate(-50%, -50%) scale(1.2) !important;
 }
 
-/* 3. スイッチが入った瞬間 */
-body.is-exiting::before {
-  transform: translate(-50%, -50%) scale(1.5);
+/* =========================================
+   ★追加：コンテンツの中身をフェードインさせる設定
+   ========================================= */
+/* 演出用パーツ(#iris-...)以外の、body直下のすべての要素を対象にする */
+body > *:not([id^="iris-"]) {
+  opacity: 0; /* 最初は透明にして隠す */
+  transition: opacity 0.8s ease-out; /* フワッと表示させる */
 }
 
+/* アイリスが開くと同時に、中身も不透明（見える状態）にする */
+body.is-opening > *:not([id^="iris-"]) {
+  opacity: 1;
+  transition-delay: 0.2s; /* アイリスが少し開いてから表示開始する時差演出 */
+}
 </style>
 
-<script>
-  (function() {
-    if (localStorage.getItem('theme') === 'dark') {
-      document.documentElement.classList.add('dark-mode');
-    }
-  })();
 </script>
 
 <button id="mode-toggle">🌙 Dark Mode</button>
@@ -290,18 +316,29 @@ body.is-exiting::before {
       body.classList.remove('mode-transition');
     }, 500); // 0.4sのアニメーションより少し長く設定
   });
-  document.querySelectorAll('.page-link').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault(); // すぐにページが飛ばないように止める
-    const targetUrl = link.href;
-
-    // bodyに「今から出るよ」というクラスをつける（これで上のCSSが発動！）
-    document.body.classList.add('is-exiting');
-
-    // 図形が画面を覆い尽くすのを待ってから移動（0.65秒）
+  
+function startIris() {
+  document.body.classList.remove('is-opening', 'is-exiting');
+  // ブラウザの描画を待つために少し遅らせる
+  requestAnimationFrame(() => {
     setTimeout(() => {
-      window.location.href = targetUrl;
-    }, 650);
+      document.body.classList.add('is-opening');
+    }, 50);
+  });
+}
+
+// ページ表示時に必ず実行
+window.addEventListener('pageshow', startIris);
+
+// リンククリック時
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
+    
+    e.preventDefault();
+    document.body.classList.add('is-exiting');
+    setTimeout(() => { window.location.href = href; }, 800);
   });
 });
 </script>
