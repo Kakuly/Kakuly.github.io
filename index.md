@@ -25,6 +25,8 @@ title: Home
     --text-color: #eeeeee;
     --link-color: #80c0ff; /* ダークモード時のリンク色 */
   }
+  /* 遷移時のパカパカ防止 */
+  html, body { background-color: var(--bg-color) !important; color: var(--text-color) !important; }
 
   /* 3. 全体レイアウト */
   body { 
