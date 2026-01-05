@@ -2,7 +2,17 @@
 layout: home
 title: Home
 ---
-<img src="/assets/img/profile.png" width="300" alt="プロフィール">
+<img src="/assets/img/profile.png" width="300" class="profile-icon">
+<style>
+  .profile-icon {
+    width: 150px;       /* 好きな幅に調整してね */
+    height: 150px;      /* 幅と同じにすると正円になります */
+    border-radius: 25%; /* これで丸くなります */
+    object-fit: cover;  /* 画像が歪まないように調整 */
+    border: 2px solid var(--text-color); /* 枠線をつけると締まって見えます */
+  }
+</style>
+
 <span style="font-size: 1.5rem;">Kakuly</span>
 
 2006年生まれ。2020年から音楽活動を開始。
