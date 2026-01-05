@@ -164,29 +164,31 @@ title: Home
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: var(--bg-color);
+  background-color: var(--bg-color); /* 幕の色 */
   z-index: 999999;
   pointer-events: none;
-  /* 最初は「穴」が開いていない（真っさらな面）状態 */
+  /* 最初は「0%（穴がない＝真っ暗/真っ白）」でスタンバイ */
   clip-path: circle(0% at 50% 50%);
 }
 
-/* イン：読み込み時、穴をグワッと広げて中身を見せる */
+/* イン：穴を「0%」から「150%」へ広げる（中身が見えてくる！） */
 body.is-loading #page-transition-overlay {
   animation: iris-in 0.8s cubic-bezier(0.85, 0, 0.15, 1) forwards;
 }
 
-/* アウト：出る時、逆に穴を閉じて真っさらに戻す */
+/* アウト：穴を「150%」から「0%」へ閉じる（真っ暗/真っ白に戻る！） */
 body.is-exiting #page-transition-overlay {
   animation: iris-out 0.8s cubic-bezier(0.85, 0, 0.15, 1) forwards;
 }
 
 @keyframes iris-in {
+  /* 幕をくり抜いていく */
   from { clip-path: circle(0% at 50% 50%); }
   to { clip-path: circle(150% at 50% 50%); }
 }
 
 @keyframes iris-out {
+  /* 幕の穴を塞いでいく */
   from { clip-path: circle(150% at 50% 50%); }
   to { clip-path: circle(0% at 50% 50%); }
 }
@@ -226,20 +228,19 @@ body.is-exiting #page-transition-overlay {
   });
 
 
-// ページが読み込まれたら「is-loading」クラスをつけて、インのアニメを開始
+// 1. ページ読み込み開始時にクラスを付与
 document.body.classList.add('is-loading');
 
 window.addEventListener('load', () => {
-  // リンククリック時のアウト処理
+  // 2. リンククリックで「退場」アニメ開始
   document.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
       if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
       
       e.preventDefault();
-      // アウトのアニメを開始
-      document.body.classList.remove('is-loading');
-      document.body.classList.add('is-exiting');
+      document.body.classList.remove('is-loading'); // loadingを外して
+      document.body.classList.add('is-exiting');    // exitingをつける
 
       setTimeout(() => {
         window.location.href = href;
