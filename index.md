@@ -164,10 +164,10 @@ body::before {
   background-color: var(--bg-color); 
   z-index: 99999;
   pointer-events: none;
-  /* ★ 最初は「-90度」にひねって、サイズは「0」 */
-  transform: translate(-50%, -50%) rotate(-90deg) scale(0);
-  /* ★ 動きのカーブを「ほぼ垂直」に。最初ガチガチに固まって、最後に弾ける */
-  transition: transform 0.9s cubic-bezier(1, 0, 0, 1);
+  /* clip-pathで「超細長いひし形」からスタート */
+  clip-path: polygon(50% 45%, 52% 50%, 50% 55%, 48% 50%);
+  /* 緩急：最初はほぼ止まっているように見せ、後半で一気に加速 */
+  transition: clip-path 0.8s cubic-bezier(0.8, 0, 0.1, 1);
 }
 
 /* 2. メインの縁（文字色） */
@@ -176,21 +176,21 @@ body::after {
   position: fixed;
   top: 50%; left: 50%;
   width: 150vmax; height: 150vmax;
-  border: 12px solid var(--text-color); /* 線をより太くして存在感を出す */
+  /* 文字色の「線」だけ作る */
+  border: 10px solid var(--text-color);
   box-sizing: border-box;
   z-index: 100000;
   pointer-events: none;
-  /* ★ beforeと全く同じ初期状態 */
-  transform: translate(-50%, -50%) rotate(-90deg) scale(0);
-  transition: transform 0.9s cubic-bezier(1, 0, 0, 1);
+  /* 本体と同じ「超細長いひし形」に切り抜く */
+  clip-path: polygon(50% 45%, 52% 50%, 50% 55%, 48% 50%);
+  transition: clip-path 0.8s cubic-bezier(0.8, 0, 0.1, 1);
 }
 
-/* 3. スイッチが入った時の「爆発」 */
+/* 3. スイッチが入った時：一気に「巨大なひし形」へ変形！ */
 body.is-exiting::before,
 body.is-exiting::after {
-  /* ★ 「45度」まで一気に回転しながら、1.5倍まで巨大化 */
-  /* -90度から45度まで「135度」も一気に回ります */
-  transform: translate(-50%, -50%) rotate(45deg) scale(1.5);
+  /* 画面全体を覆う普通のひし形に広げる */
+  clip-path: polygon(50% -50%, 150% 50%, 50% 150%, -50% 50%);
 }
   
   </style>
