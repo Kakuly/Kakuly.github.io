@@ -34,37 +34,43 @@ title: Home
   }
   .site-header .wrapper { max-width: 1100px !important; }
 
-  /* 3. ベース設定（本文） */
-  body { 
-    background-color: var(--bg-color) !important; 
-    color: var(--text-color) !important; 
-    font-family: 'Noto Sans JP', sans-serif !important;
-    font-weight: 700 !important; /* 本文の太さは維持 */
-    -webkit-font-smoothing: antialiased;
-  }
+  /* 3. 全体レイアウト */
+body { 
+  background-color: var(--bg-color) !important; 
+  color: var(--text-color) !important; 
+  /* 通常時は transition をオフにしてパカつきをゼロにする */
+  transition: none !important; 
+  font-family: 'Noto Sans JP', sans-serif !important;
+  font-weight: 700 !important;
+  -webkit-font-smoothing: antialiased;
+}
 
-  /* A. サイト全体の共通タイトルや名前（入力した通りの文字が出る） */
-  .profile-name, h1, h2, h3, .site-title { 
+/* ボタンを押した時だけ付与するクラス */
+body.mode-transition {
+  transition: background-color 0.5s ease, color 0.5s ease !important;
+}
+
+  /* 4. ヘッダー・ナビゲーション */
+  .site-header { background-color: transparent !important; border: none !important; }
+  
+  h1, h2, h3, .site-title { 
     font-family: 'Montserrat', sans-serif !important;
-    font-weight: 700 !important;      /* 太字 */
-    letter-spacing: -0.02em !important; /* 少し詰めて力強く */
+    font-size: 1.4rem !important; 
+    font-weight: 700 !important;
+    letter-spacing: -0.05em !important;
     color: var(--text-color) !important;
-    -webkit-font-smoothing: antialiased;
-    margin: 0;
-    /* text-transform: uppercase; ← これを消すことで小文字が通るようになります */
   }
 
-  /* B. ページリンク（ここだけ強制的に大文字にする） */
   .page-link {
     font-family: 'Montserrat', sans-serif !important;
-    font-weight: 700 !important;      /* 太字 */
-    text-transform: uppercase;         /* ★ここだけ大文字にする */
-    letter-spacing: 0.05em !important; /* Worksと同じ字間 */
+    color: var(--text-color) !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase;
     font-size: 0.9rem !important;
     margin-left: 20px !important;
     text-decoration: none !important;
-    color: var(--text-color) !important;
-    -webkit-font-smoothing: antialiased;
+    transition: 0.3s;
   }
 
   /* Kakuly の名前のサイズ設定 */
