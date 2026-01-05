@@ -223,18 +223,19 @@ body.is-exiting::after {
     }, 500);
   });
 
-  document.querySelectorAll('.page-link').forEach(link => {
+document.querySelectorAll('.page-link').forEach(link => {
   link.addEventListener('click', (e) => {
-    e.preventDefault(); // すぐにページが飛ばないように止める
+    e.preventDefault();
     const targetUrl = link.href;
 
-    // bodyに「今から出るよ」というクラスをつける（これで上のCSSが発動！）
+    // カーテンを広げるスイッチを入れる
     document.body.classList.add('is-exiting');
 
-    // 図形が画面を覆い尽くすのを待ってから移動（0.7秒）
+    // ★ ここが重要！
+    // アニメーションの時間（0.85s）に合わせて、850ミリ秒待ってから移動する
     setTimeout(() => {
       window.location.href = targetUrl;
-    }, 850);
+    }, 1500); 
   });
 });
 </script>
