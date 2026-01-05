@@ -252,7 +252,7 @@ h1, h2, h3, .site-title {
 /* Worksの動画グリッドをより広々と見せる調整 */
 .video-grid {
   display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+  grid-template-columns: repeat(auto-fill, minmax(4, 1fr)) !important;
   gap: 30px !important;
 }
 
