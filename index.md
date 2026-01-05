@@ -162,36 +162,42 @@ title: Home
 
 
 
-/* 1. 演出用の「影」。これが一番上！ */
+/* 1. 演出用の影を「全要素の頂点」に持っていく */
 #iris-in {
   position: fixed;
-  top: 50%; left: 50%;
-  width: 10px; height: 10px;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   box-shadow: 0 0 0 500vmax var(--bg-color);
-  z-index: 9999999 !important;
+  /* z-indexを極端に大きくしてヘッダーを封じ込める */
+  z-index: 9999999 !important; 
   pointer-events: none;
-  /* 最初はスケール0（穴が閉じた状態） */
   transform: translate(-50%, -50%) scale(0);
-  /* 穴が開くスピード：1.2秒 */
   transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+/* 2. ヘッダーを含むすべてのコンテンツを、最初は「完全に透明」にする */
+body > *:not([id^="iris-"]) {
+  opacity: 0 !important;
+  transition: opacity 0.8s ease-out;
+}
+
+/* 3. 穴が開き始めたら、フワッと表示する */
+body.is-opening > *:not([id^="iris-"]) {
+  opacity: 1 !important;
+}
+
+/* 4. ヘッダーが突き抜けないように念のためz-indexを下げる */
+.site-header {
+  z-index: 100 !important;
 }
 
 /* 実行時：穴を全開にする */
 body.is-opening #iris-in {
+  /* visibility: visible; ← これも不要 */
   transform: translate(-50%, -50%) scale(500);
-}
-
-/* 2. 中身（ヘッダーなど）の設定 */
-body > *:not([id^="iris-"]) {
-  opacity: 0; /* 最初は隠す */
-}
-
-/* 3. 穴が開ききった頃に、フワッと実体化させる */
-body.is-opening > *:not([id^="iris-"]) {
-  opacity: 1 !important;
-  /* ★重要：穴が少し開くまで（0.3秒）待ってからフェード開始 */
-  transition: opacity 0.8s ease-out 0.3s !important;
 }
 
 /* --- アウト（退場）：板が広がる演出 --- */
@@ -288,4 +294,3 @@ document.querySelectorAll('a').forEach(link => {
   });
 });
 </script>
-
