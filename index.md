@@ -9,30 +9,67 @@ title: Home
 - [SoundCloud](https://soundcloud.com/kakuly-uni)
 - [Twitter / X](https://x.com/kakuly_)
 
-
 <style>
+  /* 1. フォント読み込み */
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
+
+  /* 2. カラー変数設定 */
   :root {
     --bg-color: #ffffff;
     --text-color: #111111;
+    --link-color: #0066cc; /* ライトモード時のリンク色 */
   }
   
   body.dark-mode {
     --bg-color: #000000;
     --text-color: #eeeeee;
+    --link-color: #80c0ff; /* ダークモード時のリンク色 */
   }
 
+  /* 3. 全体レイアウト */
   body { 
     background-color: var(--bg-color) !important; 
     color: var(--text-color) !important; 
     transition: 0.3s;
+    font-family: 'Noto Sans JP', sans-serif !important;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
   }
 
-  .site-header, .site-title, .page-link { 
-    background-color: transparent !important; 
-    color: var(--text-color) !important; 
+  /* 4. ヘッダー・ナビゲーション（フォント同期） */
+  .site-header { background-color: transparent !important; border: none !important; }
+  
+  .site-title { 
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1.4rem !important; 
+    font-weight: 700 !important;
+    letter-spacing: -0.05em !important;
+    color: var(--text-color) !important;
   }
 
-  /* モード切り替えボタンのスタイル */
+  .page-link {
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--text-color) !important; /* モードに合わせて色を変える */
+    font-weight: 700 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase;
+    font-size: 0.9rem !important;
+    margin-left: 20px !important;
+    text-decoration: none !important;
+    transition: 0.3s;
+  }
+
+  .page-link:hover {
+    opacity: 0.6;
+  }
+
+  /* 5. コンテンツ内のリンク色 */
+  a { color: var(--link-color); }
+
+  /* 6. 不要な要素の削除 */
+  .rss-subscribe, .feed-icon { display: none !important; }
+
+  /* 7. モード切り替えボタン */
   #mode-toggle {
     cursor: pointer;
     background: none;
@@ -46,64 +83,6 @@ title: Home
     right: 20px;
     z-index: 9999;
     font-weight: bold;
+    font-family: 'Montserrat', sans-serif !important;
   }
-
-
-  /* 2. フォントを「ダサくない」モダンなものに変える */
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
-  body, p, li { font-family: 'Noto Sans JP', sans-serif !important; line-height: 1.8; letter-spacing: -0.03em !important; }
-  .site-title, h1, h2, h3 { font-family: 'Montserrat', sans-serif !important; font-weight: 700:  !important; letter-spacing: -0.03em !important; }
-
-  /* 3. 余計なものを消す */
-  .rss-subscribe, .feed-icon { display: none !important; }
-  body { -webkit-font-smoothing: antialiased; }
-
-  /* メニュー全体の見た目を整える */
-  .site-nav {
-    background-color: transparent !important; /* 背景を透かしてスッキリ */
-  }
-
-  /* メニューの文字を細く、間隔を調整 */
-  .page-link {
-    color: #eee !important;
-    font-weight: 400 !important;
-    letter-spacing: 0.05em !important;
-    text-transform: uppercase; /* 文字を大文字にしてプロっぽく */
-    font-size: 0.9rem !important;
-    margin-left: 20px !important;
-    text-decoration: none !important; /* 下線を消す */
-    transition: 0.3s; /* ホバーした時の動きを滑らかに */
-  }
-
-  /* マウスを乗せた時だけ少し明るくする */
-  .page-link:hover {
-    color: #1e90ff !important;
-    opacity: 0.8;
-  }
-
-  /* 左上のタイトル「Kakuly」をもっとデカく、強く */
-  .site-title {
-    font-size: 1.4rem !important;
-    letter-spacing: -0.05em !important;
-  }
-</style>
-
-<button id="mode-toggle">🌙 Dark Mode</button>
-
-<script>
-  const btn = document.getElementById('mode-toggle');
-  const body = document.body;
-
-  // 保存されたテーマを適用
-  if (localStorage.getItem('theme') === 'dark') {
-    body.classList.add('dark-mode');
-    btn.textContent = '☀️ Light Mode';
-  }
-
-  btn.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    const isDark = body.classList.contains('dark-mode');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
-  });
-</script>
+</style
