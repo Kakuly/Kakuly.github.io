@@ -13,70 +13,48 @@ title: Home
   /* 1. フォント読み込み */
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
 
-  /* 2. カラー変数設定 */
+  /* 2. カラー変数（Lightがデフォルト） */
   :root {
     --bg-color: #ffffff;
     --text-color: #111111;
-    --link-color: #0066cc; /* ライトモード時のリンク色 */
+    --link-color: #0066cc;
   }
   
-  body.dark-mode {
+  /* ダークモード時の上書き */
+  html.dark-mode, body.dark-mode {
     --bg-color: #000000;
     --text-color: #eeeeee;
-    --link-color: #80c0ff; /* ダークモード時のリンク色 */
+    --link-color: #80c0ff;
+    background-color: #000000 !important; /* HTMLごと黒くする */
   }
-  /* 遷移時のパカパカ防止 */
-  html, body { background-color: var(--bg-color) !important; color: var(--text-color) !important; }
 
   /* 3. 全体レイアウト */
   body { 
     background-color: var(--bg-color) !important; 
     color: var(--text-color) !important; 
-    transition: 0.3s;
+    transition: background-color 0.1s; /* 短くしてパカつきを隠す */
     font-family: 'Noto Sans JP', sans-serif !important;
-    line-height: 1.8;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* 4. ヘッダー・ナビゲーション（フォント同期） */
-  .site-header { background-color: transparent !important; border: none !important; }
-  
-  h1, h2, h3, .site-title { 
+  /* 4. 見出し・タイトルのフォント統一 */
+  h1, h2, h3, .site-title, .page-link, #mode-toggle { 
     font-family: 'Montserrat', sans-serif !important;
-    font-size: 1.4rem !important; 
     font-weight: 700 !important;
-    letter-spacing: -0.05em !important;
     color: var(--text-color) !important;
   }
 
-  .page-link {
-    font-family: 'Montserrat', sans-serif !important;
-    color: var(--text-color) !important; /* モードに合わせて色を変える */
-    font-weight: 700 !important;
-    letter-spacing: 0.05em !important;
-    text-transform: uppercase;
-    font-size: 0.9rem !important;
-    margin-left: 20px !important;
-    text-decoration: none !important;
-    transition: 0.3s;
-  }
-
-  .page-link:hover {
-    opacity: 0.6;
-  }
-
-  /* 5. コンテンツ内のリンク色 */
+  .site-header { background-color: transparent !important; border: none !important; }
+  .site-title { font-size: 1.4rem !important; letter-spacing: -0.05em !important; }
+  .page-link { font-size: 0.9rem !important; margin-left: 20px !important; text-transform: uppercase; text-decoration: none !important; }
   a { color: var(--link-color); }
-
-  /* 6. 不要な要素の削除 */
   .rss-subscribe, .feed-icon { display: none !important; }
 
-  /* 7. モード切り替えボタン */
+  /* 5. モード切り替えボタン */
   #mode-toggle {
     cursor: pointer;
     background: none;
     border: 1px solid var(--text-color);
-    color: var(--text-color);
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.75rem;
@@ -84,15 +62,15 @@ title: Home
     top: 15px;
     right: 20px;
     z-index: 9999;
-    font-weight: bold;
-    font-family: 'Montserrat', sans-serif !important;
   }
 </style>
+
 <script>
-  // 最速でダークモードを適用（白飛び防止）
-  if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark-mode');
-  }
+  (function() {
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark-mode');
+    }
+  })();
 </script>
 
 <button id="mode-toggle">🌙 Dark Mode</button>
@@ -100,17 +78,18 @@ title: Home
 <script>
   const btn = document.getElementById('mode-toggle');
   const body = document.body;
+  const html = document.documentElement;
 
+  // 初期表示の文字更新
   if (localStorage.getItem('theme') === 'dark') {
     body.classList.add('dark-mode');
     btn.textContent = '☀️ Light Mode';
   }
 
   btn.addEventListener('click', () => {
+    const isDark = html.classList.toggle('dark-mode');
     body.classList.toggle('dark-mode');
-    const isDark = body.classList.contains('dark-mode');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
     btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
   });
 </script>
-"""
