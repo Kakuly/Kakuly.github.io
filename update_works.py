@@ -13,44 +13,55 @@ def get_playlist_items():
     return items
 
 def update_markdown(items):
-    # ヘッダー部分
+    # --- 1. ヘッダー部分 ---
     content = "---\nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
-    content += "## YouTube Playlist (Auto Updated)\n\n"
+    content += "## Works\n\n"
     
     # 横並びにするための「外枠」を開始
     content += '<div class="video-grid">\n\n'
     
-for item in items:
-    title = item['snippet']['title']
-    video_id = item['snippet']['resourceId']['videoId']
-    # YouTubeの標準サムネイルURL（高画質版）
-    thumbnail_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
-    
-    content += '<div class="video-item">\n'
-    # 1. iframeをやめて、リンク付きの画像にする
-    content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
-    content += f'    <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail">\n'
-    content += f'  </a>\n'
-    
-    # 2. タイトルは下へ
-    content += f"  <h3 class='video-title'>{title}</h3>\n"
+    # --- 2. 動画リスト部分（ループ） ---
+    for item in items:
+        title = item['snippet']['title']
+        video_id = item['snippet']['resourceId']['videoId']
+        # YouTubeの標準サムネイルURL（高画質版）
+        thumbnail_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
+        
+        content += '<div class="video-item">\n'
+        # リンク付きの画像
+        content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
+        content += f'    <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail">\n'
+        content += f'  </a>\n'
+        # タイトルを下に配置
+        content += f"  <h3 class='video-title'>{title}</h3>\n"
+        content += '</div>\n\n'
+
+    # グリッドの外枠を閉じる
     content += '</div>\n\n'
 
+    # --- 3. 演出用パーツとデザイン・スクリプト（1回だけ追加） ---
     content += '<div id="iris-in"></div>'
     content += '<div id="iris-out"></div>'
+    content += '<button id="mode-toggle">🌙 Dark Mode</button>\n'
 
-    # デザイン設定（Homeと完全に同期）
     content += """
 <style>
+/* 動画グリッドの設定 */
+.video-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+  gap: 30px !important;
+  width: 100%;
+}
+
 .video-thumbnail {
   width: 100%;
-  aspect-ratio: 16 / 9; /* 比率を固定 */
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* マウスを乗せた時の演出 */
 .video-link:hover .video-thumbnail {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
@@ -58,163 +69,58 @@ for item in items:
 
 .video-title {
   margin-top: 15px;
-  font-size: 1rem;
+  font-size: 0.9rem !important;
   font-weight: 600;
-  /* 2行目以降を「...」にする（タイトルが長い時用） */
+  color: var(--text-color);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-  /* サイト全体の最大幅を上書き */
-.wrapper {
-  max-width: 1100px !important; /* 800pxから1100pxに拡張 */
-  padding-right: 40px !important;
-  padding-left: 40px !important;
+  line-height: 1.4;
 }
 
-/* ヘッダーの幅も合わせる */
-.site-header .wrapper {
-  max-width: 1100px !important;
+/* レイアウト・フォント設定 */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111111;
 }
-  /* 1. フォント読み込み */
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
 
-  /* 2. カラー変数（Lightがデフォルト） */
-  :root {
-    --bg-color: #ffffff;
-    --text-color: #111111;
-    --link-color: #0066cc;
-  }
-  
-  /* ダークモード時の上書き */
-  html.dark-mode, body.dark-mode {
-    --bg-color: #000000;
-    --text-color: #eeeeee;
-    --link-color: #80c0ff;
-    background-color: #000000 !important; /* HTMLごと黒くする */
-  }
+html.dark-mode, body.dark-mode {
+  --bg-color: #000000;
+  --text-color: #eeeeee;
+}
 
-  /* 3. 全体レイアウト */
 body { 
   background-color: var(--bg-color) !important; 
   color: var(--text-color) !important; 
-  /* 通常時は transition をオフにしてパカつきをゼロにする */
-  transition: none !important; 
   font-family: 'Noto Sans JP', sans-serif !important;
   font-weight: 700 !important;
-  -webkit-font-smoothing: antialiased;
 }
 
-/* ボタンを押した時だけ付与するクラス */
-body.mode-transition {
-  transition: background-color 0.5s ease, color 0.5s ease !important;
+.wrapper {
+  max-width: 1100px !important;
+  padding: 0 40px !important;
 }
 
-  /* 4. ヘッダー・ナビゲーション */
-  .site-header { background-color: transparent !important; border: none !important; -webkit-font-smoothing: antialiased; }
-  
-  h1, h2, h3, .site-title { 
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 1.4rem !important; 
-    font-weight: 700 !important;
-    letter-spacing: -0.05em !important;
-    color: var(--text-color) !important;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .page-link {
-    font-family: 'Montserrat', sans-serif !important;
-    color: var(--text-color) !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.05em !important;
-    text-transform: uppercase;
-    font-size: 0.9rem !important;
-    margin-left: 20px !important;
-    text-decoration: none !important;
-    transition: 0.3s;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* 5. ギャラリー（4列）の設定 */
-/* Worksの動画グリッドをより広々と見せる調整 */
-.video-grid {
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
-  gap: 30px !important;
-}
-  
-  .video-item h3 {
-    font-family: 'Montserrat', 'Noto Sans JP', sans-serif !important;
-    font-size: 0.85rem !important;
-    height: 3em;
-    overflow: hidden;
-    margin-bottom: 10px !important;
-    line-height: 1.3;
-  }
-  
-  iframe {
-    width: 100% !important;
-    aspect-ratio: 16 / 9;
-    border-radius: 8px;
-    background: #111;
-    border: none;
-  }
-
-  /* 6. 不要な要素の削除 */
-  .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
-
-  /* 7. モード切り替えボタン */
-  #mode-toggle {
-    cursor: pointer;
-    background: none;
-    border: 1px solid var(--text-color);
-    color: var(--text-color);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    position: fixed;
-    top: 15px;
-    right: 20px;
-    z-index: 9999;
-    font-weight: bold;
-    font-family: 'Montserrat', sans-serif !important;
-  }
-
-  
-/* スマホ対応 */
-  @media (max-width: 800px) {
-    .profile-container { flex-direction: column; align-items: flex-start; }
-    .profile-name { font-size: 5rem !important; }
-    .profile-icon { width: 200px; height: 200px; }
-  }
-
-
-
-
-
-/* --- イン（入場）：穴が広がる演出 --- */
+/* アイリス演出のCSS */
 #iris-in {
   position: fixed;
   top: 50%; left: 50%;
   width: 10px; height: 10px;
   border-radius: 50%;
-  /* 画面を覆い尽くす巨大な影 */
   box-shadow: 0 0 0 500vmax var(--bg-color);
   z-index: 100000;
   pointer-events: none;
-  /* 最初は穴を閉じておく（＝画面が影で真っ暗/真っ白） */
   transform: translate(-50%, -50%) scale(0);
   transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
-  /* visibility: hidden; ← これを削除！最初から存在させる */
 }
 
-/* 実行時：穴を全開にする */
 body.is-opening #iris-in {
-  /* visibility: visible; ← これも不要 */
   transform: translate(-50%, -50%) scale(500);
 }
 
-/* --- アウト（退場）：板が広がる演出 --- */
 #iris-out {
   position: fixed;
   top: 50%; left: 50%;
@@ -231,30 +137,36 @@ body.is-exiting #iris-out {
   transform: translate(-50%, -50%) scale(1.2) !important;
 }
 
-/* =========================================
-   ★追加：コンテンツの中身をフェードインさせる設定
-   ========================================= */
-/* 演出用パーツ(#iris-...)以外の、body直下のすべての要素を対象にする */
 body > *:not([id^="iris-"]) {
-  opacity: 0; /* 最初は透明にして隠す */
-  transition: opacity 0.8s ease-out; /* フワッと表示させる */
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
 }
 
-/* アイリスが開くと同時に、中身も不透明（見える状態）にする */
 body.is-opening > *:not([id^="iris-"]) {
   opacity: 1;
-  transition-delay: 0.2s; /* アイリスが少し開いてから表示開始する時差演出 */
+}
+
+/* モード切り替えボタン */
+#mode-toggle {
+  cursor: pointer;
+  background: none;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  position: fixed;
+  top: 15px; right: 20px;
+  z-index: 9999;
+  font-family: 'Montserrat', sans-serif !important;
 }
 </style>
-
-<button id="mode-toggle">🌙 Dark Mode</button>
 
 <script>
   const btn = document.getElementById('mode-toggle');
   const body = document.body;
   const html = document.documentElement;
 
-  // 初期化スクリプトはそのまま（白飛び防止用）
   if (localStorage.getItem('theme') === 'dark') {
     html.classList.add('dark-mode');
     body.classList.add('dark-mode');
@@ -262,48 +174,34 @@ body.is-opening > *:not([id^="iris-"]) {
   }
 
   btn.addEventListener('click', () => {
-    // 1. transition用のクラスを付与
     body.classList.add('mode-transition');
-
-    // 2. モードを切り替え
     const isDark = html.classList.toggle('dark-mode');
     body.classList.toggle('dark-mode');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
     btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
-
-    // 3. アニメーションが終わる頃にクラスを外す（次のページ移動に備える）
-    setTimeout(() => {
-      body.classList.remove('mode-transition');
-    }, 500); // 0.4sのアニメーションより少し長く設定
+    setTimeout(() => { body.classList.remove('mode-transition'); }, 500);
   });
-  
-function startIris() {
-  document.body.classList.remove('is-opening', 'is-exiting');
-  // ブラウザの描画を待つために少し遅らせる
-  requestAnimationFrame(() => {
-    setTimeout(() => {
-      document.body.classList.add('is-opening');
-    }, 50);
-  });
-}
 
-// ページ表示時に必ず実行
-window.addEventListener('pageshow', startIris);
+  function startIris() {
+    document.body.classList.remove('is-opening', 'is-exiting');
+    requestAnimationFrame(() => {
+      setTimeout(() => { document.body.classList.add('is-opening'); }, 50);
+    });
+  }
 
-// リンククリック時
-document.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', (e) => {
-    const href = link.getAttribute('href');
-    if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
-    
-    e.preventDefault();
-    document.body.classList.add('is-exiting');
-    setTimeout(() => { window.location.href = href; }, 800);
+  window.addEventListener('pageshow', startIris);
+
+  document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || link.target === "_blank") return;
+      e.preventDefault();
+      document.body.classList.add('is-exiting');
+      setTimeout(() => { window.location.href = href; }, 800);
+    });
   });
-});
 </script>
 """
-    # ↑ この上のクォート3つが重要です！
 
     with open(FILE_PATH, 'w', encoding='utf-8') as f:
         f.write(content)
