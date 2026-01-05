@@ -162,32 +162,36 @@ title: Home
 
 
 
-/* 1. 演出用の影。絶対にヘッダーより上に！ */
+/* 1. 演出用の「影」。これが一番上！ */
 #iris-in {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 10px;
-  height: 10px;
+  top: 50%; left: 50%;
+  width: 10px; height: 10px;
   border-radius: 50%;
   box-shadow: 0 0 0 500vmax var(--bg-color);
-  z-index: 9999999 !important; /* 最前面 */
+  z-index: 9999999 !important;
   pointer-events: none;
+  /* 最初はスケール0（穴が閉じた状態） */
   transform: translate(-50%, -50%) scale(0);
+  /* 穴が開くスピード：1.2秒 */
   transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
-  /* もし丸が出ない場合は、ここを強制的に表示させる */
-  display: block !important;
 }
 
-/* 2. 中身を隠す設定 */
+/* 実行時：穴を全開にする */
+body.is-opening #iris-in {
+  transform: translate(-50%, -50%) scale(500);
+}
+
+/* 2. 中身（ヘッダーなど）の設定 */
 body > *:not([id^="iris-"]) {
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
+  opacity: 0; /* 最初は隠す */
 }
 
-/* 3. 穴が開いたら中身を出す */
+/* 3. 穴が開ききった頃に、フワッと実体化させる */
 body.is-opening > *:not([id^="iris-"]) {
   opacity: 1 !important;
+  /* ★重要：穴が少し開くまで（0.3秒）待ってからフェード開始 */
+  transition: opacity 0.8s ease-out 0.3s !important;
 }
 
 /* --- アウト（退場）：板が広がる演出 --- */
