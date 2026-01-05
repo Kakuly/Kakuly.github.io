@@ -155,7 +155,7 @@ title: Home
     .profile-icon { width: 200px; height: 200px; }
   }
 
-/* 1. メインのダイヤ（塗りつぶし） */
+/* 1. メインのダイヤ */
 body::before {
   content: "";
   position: fixed;
@@ -164,9 +164,10 @@ body::before {
   background-color: var(--bg-color); 
   z-index: 99999;
   pointer-events: none;
-  transform: translate(-50%, -50%) rotate(45deg) scale(0);
-  /* transitionの数字を変更：ぐぅぅうー（溜め）わあ！（加速） */
-  transition: transform 0.85s cubic-bezier(0.8, 0, 0.1, 1);
+  /* 最初は -45度 にしておく */
+  transform: translate(-50%, -50%) rotate(-45deg) scale(0);
+  /* 緩急（イージング）をもっと極端な「超・溜め」に変更 */
+  transition: transform 0.85s cubic-bezier(0.95, 0.05, 0.2, 1);
 }
 
 /* 2. メインの縁（ふち） */
@@ -179,15 +180,15 @@ body::after {
   box-sizing: border-box;
   z-index: 100000;
   pointer-events: none;
-  transform: translate(-50%, -50%) rotate(45deg) scale(0);
-  /* beforeと完全に同期させる */
-  transition: transform 0.85s cubic-bezier(0.8, 0, 0.1, 1);
+  /* 同じく -45度 */
+  transform: translate(-50%, -50%) rotate(-45deg) scale(0);
+  transition: transform 0.85s cubic-bezier(0.95, 0.05, 0.2, 1);
 }
 
-/* 3. スイッチが入った時の動き */
+/* 3. スイッチが入った時 */
 body.is-exiting::before,
 body.is-exiting::after {
-  /* scaleを少し大きくして、加速の余韻を見せる */
+  /* 大きくなる時に、回転を「45度」までグワッ！と回す */
   transform: translate(-50%, -50%) rotate(45deg) scale(1.5);
 }
   
