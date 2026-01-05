@@ -35,7 +35,7 @@ body {
   /* 通常時は transition をオフにしてパカつきをゼロにする */
   transition: none !important; 
   font-family: 'Noto Sans JP', sans-serif !important;
-  font-weight: 500 !important;
+  font-weight: 700 !important;
   -webkit-font-smoothing: antialiased;
 }
 
