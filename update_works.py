@@ -15,7 +15,7 @@ def get_playlist_items():
 def update_markdown(items):
     # --- 1. ヘッダー部分（元のまま） ---
     content = "---\nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
-    content += "## YouTube Playlist (Auto Updated)\n\n"
+    content += "## Music, Mix, Mastering, Movie...etc\n\n"
     
     # 横並びにするための「外枠」を開始
     content += '<div class="video-grid">\n\n'
