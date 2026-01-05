@@ -40,25 +40,36 @@ def update_markdown(items):
   /* 1. フォント読み込み */
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
 
-  /* 2. カラー変数設定 */
+  /* 2. カラー変数（Lightがデフォルト） */
   :root {
     --bg-color: #ffffff;
     --text-color: #111111;
+    --link-color: #0066cc;
   }
   
-  body.dark-mode {
+  /* ダークモード時の上書き */
+  html.dark-mode, body.dark-mode {
     --bg-color: #000000;
     --text-color: #eeeeee;
+    --link-color: #80c0ff;
+    background-color: #000000 !important; /* HTMLごと黒くする */
   }
 
   /* 3. 全体レイアウト */
-  body { 
-    background-color: var(--bg-color) !important; 
-    color: var(--text-color) !important; 
-    transition: 0.3s;
-    font-family: 'Noto Sans JP', sans-serif !important;
-    -webkit-font-smoothing: antialiased;
-  }
+body { 
+  background-color: var(--bg-color) !important; 
+  color: var(--text-color) !important; 
+  /* 通常時は transition をオフにしてパカつきをゼロにする */
+  transition: none !important; 
+  font-family: 'Noto Sans JP', sans-serif !important;
+  font-weight: 700 !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ボタンを押した時だけ付与するクラス */
+body.mode-transition {
+  transition: background-color 0.5s ease, color 0.5s ease !important;
+}
 
   /* 4. ヘッダー・ナビゲーション */
   .site-header { background-color: transparent !important; border: none !important; }
@@ -129,22 +140,42 @@ def update_markdown(items):
   }
 </style>
 
+<script>
+  (function() {
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark-mode');
+    }
+  })();
+</script>
+
 <button id="mode-toggle">🌙 Dark Mode</button>
 
 <script>
   const btn = document.getElementById('mode-toggle');
   const body = document.body;
+  const html = document.documentElement;
 
+  // 初期化スクリプトはそのまま（白飛び防止用）
   if (localStorage.getItem('theme') === 'dark') {
+    html.classList.add('dark-mode');
     body.classList.add('dark-mode');
     btn.textContent = '☀️ Light Mode';
   }
 
   btn.addEventListener('click', () => {
+    // 1. transition用のクラスを付与
+    body.classList.add('mode-transition');
+
+    // 2. モードを切り替え
+    const isDark = html.classList.toggle('dark-mode');
     body.classList.toggle('dark-mode');
-    const isDark = body.classList.contains('dark-mode');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
     btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+
+    // 3. アニメーションが終わる頃にクラスを外す（次のページ移動に備える）
+    setTimeout(() => {
+      body.classList.remove('mode-transition');
+    }, 500); // 0.4sのアニメーションより少し長く設定
   });
 </script>
 """
