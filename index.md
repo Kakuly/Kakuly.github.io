@@ -12,7 +12,7 @@ title: Home
 
 <style>
   /* 1. 強制的にダークモードにする */
-  body { background-color: #111 !important; color: #eee !important; }
+  body { background-color: #000 !important; color: #eee !important; }
   .site-title, .site-nav, .site-header, .site-footer { background-color: #111 !important; color: #eee !important; border: none !important; }
   a { color: #1e90ff !important; }
   .wrapper { background-color: #111 !important; }
