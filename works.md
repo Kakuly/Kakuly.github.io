@@ -4,7 +4,7 @@ title: Works
 permalink: /works/
 ---
 
-### Music/Mix/Mastering/Movie
+### Music / Mix / Mastering / Movie
 
 <div class="video-grid">
 
