@@ -34,6 +34,11 @@ title: Home
   }
   .site-header .wrapper { max-width: 1100px !important; }
 
+    /* ダークモード設定 */
+  :root { --bg-color: #ffffff; --text-color: #111111; }
+  html.dark-mode { --bg-color: #000000; --text-color: #eeeeee; }
+  html.dark-mode .sns-links img { filter: invert(1) grayscale(100%) brightness(1.5); }
+
   /* 3. 全体レイアウト */
 body { 
   background-color: var(--bg-color) !important; 
@@ -123,10 +128,7 @@ body.mode-transition {
     filter: grayscale(100%) brightness(2);
   }
 
-  /* ダークモード設定 */
-  :root { --bg-color: #ffffff; --text-color: #111111; }
-  html.dark-mode { --bg-color: #000000; --text-color: #eeeeee; }
-  html.dark-mode .sns-links img { filter: invert(1) grayscale(100%) brightness(1.5); }
+
 
   /* スマホ対応 */
   @media (max-width: 800px) {
