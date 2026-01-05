@@ -77,6 +77,29 @@ permalink: /works/
 ---
 
 <style>
+  /* 動画が並ぶエリアの設定 */
+.post-content {
+  display: grid !important;
+  /* 横に4つ、同じ幅で並べる。画面が狭いときは自動で調整 */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px; /* 動画と動画のすき間 */
+  max-width: 100% !important;
+}
+
+/* 動画の枠（レスポンシブ対応） */
+iframe {
+  width: 100% !important;
+  aspect-ratio: 16 / 9; /* 横長をキープ */
+  height: auto !important;
+  border-radius: 8px; /* 角を少し丸くすると今っぽい */
+}
+
+/* 動画のタイトルなどの文字も調整 */
+h3 {
+  grid-column: 1 / -1; /* タイトルは横断して表示させるならこれ */
+  margin-top: 30px !important;
+}
+  
   /* 1. 強制的にダークモードにする */
   body { background-color: #111 !important; color: #eee !important; }
   .site-title, .site-nav, .site-header, .site-footer { background-color: #111 !important; color: #eee !important; border: none !important; }
