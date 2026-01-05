@@ -162,31 +162,32 @@ title: Home
 
 
 
-/* 1. そもそも最初から「全要素」を非表示にしておく（超重要） */
-body > *:not([id^="iris-"]) {
-  opacity: 0;
-  pointer-events: none; /* 穴が開くまではクリックもさせない */
-}
-
-/* 2. 穴が開く演出パーツ。z-indexを最大に */
+/* 1. 演出用の影。絶対にヘッダーより上に！ */
 #iris-in {
   position: fixed;
-  top: 50%; left: 50%;
-  width: 10px; height: 10px;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   box-shadow: 0 0 0 500vmax var(--bg-color);
-  z-index: 9999999 !important; 
+  z-index: 9999999 !important; /* 最前面 */
   pointer-events: none;
   transform: translate(-50%, -50%) scale(0);
-  /* transitionの時間を少しだけ短くすると、パカつきを感じる暇がなくなります */
-  transition: transform 1.0s cubic-bezier(0.85, 0, 0.15, 1);
+  transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+  /* もし丸が出ない場合は、ここを強制的に表示させる */
+  display: block !important;
 }
 
-/* 3. JSでクラスがついた瞬間だけ表示する */
+/* 2. 中身を隠す設定 */
+body > *:not([id^="iris-"]) {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+/* 3. 穴が開いたら中身を出す */
 body.is-opening > *:not([id^="iris-"]) {
   opacity: 1 !important;
-  pointer-events: auto;
-  transition: opacity 0.5s ease-in !important;
 }
 
 /* --- アウト（退場）：板が広がる演出 --- */
