@@ -36,9 +36,9 @@ def update_markdown(items):
     
     # デザイン設定（Homeと完全に同期）
     content += """
-
     <div id="iris-in"></div>
     <div id="iris-out"></div>
+    
 <style>
   /* サイト全体の最大幅を上書き */
 .wrapper {
