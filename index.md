@@ -43,23 +43,34 @@ title: Home
     -webkit-font-smoothing: antialiased;
   }
 
-/* 4. デカい文字を Works の「正解」に合わせる設定 */
-  .profile-name, h1, h2, h3, .site-title, .page-link { 
+  /* A. サイト全体の共通タイトルや名前（入力した通りの文字が出る） */
+  .profile-name, h1, h2, h3, .site-title { 
     font-family: 'Montserrat', sans-serif !important;
-    font-weight: 700 !important;      /* ★300から700（太字）に戻す */
-    text-transform: uppercase;         /* ★すべて大文字 */
-    letter-spacing: 0.05em !important; /* ★Worksと同じ詰まり具合に */
+    font-weight: 700 !important;      /* 太字 */
+    letter-spacing: -0.02em !important; /* 少し詰めて力強く */
     color: var(--text-color) !important;
     -webkit-font-smoothing: antialiased;
     margin: 0;
-    text-decoration: none !important;
+    /* text-transform: uppercase; ← これを消すことで小文字が通るようになります */
   }
 
-  /* Kakuly の名前だけ、サイズに合わせて字間を微調整 */
+  /* B. ページリンク（ここだけ強制的に大文字にする） */
+  .page-link {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 700 !important;      /* 太字 */
+    text-transform: uppercase;         /* ★ここだけ大文字にする */
+    letter-spacing: 0.05em !important; /* Worksと同じ字間 */
+    font-size: 0.9rem !important;
+    margin-left: 20px !important;
+    text-decoration: none !important;
+    color: var(--text-color) !important;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Kakuly の名前のサイズ設定 */
   .profile-name {
     font-size: 8.5rem;
     line-height: 1;
-    letter-spacing: -0.02em !important; /* デカい文字は少し詰めるとWorksっぽくなります */
   }
 
   /* 5. プロフィール・SNSのレイアウト */
