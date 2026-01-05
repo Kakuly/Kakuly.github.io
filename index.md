@@ -55,8 +55,43 @@ title: Home
 エレクトロポップ／ハイパーポップを中心に、たくさん迷いながら音楽を作っている。
 元気に生きるために音楽を摂取します。いつもありがとう。
 
-- [SoundCloud](https://soundcloud.com/kakuly-uni)
-- [Twitter / X](https://x.com/kakuly_)
+`` SNSリンク
+<div class="sns-links">
+  <a href="https://soundcloud.com/kakuly-uni" target="_blank" rel="noopener">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Antu_soundcloud.svg" alt="SoundCloud">
+  </a>
+
+  <a href="https://x.com/kakuly_" target="_blank" rel="noopener">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" alt="X">
+  </a>
+</div>
+
+<style>
+  .sns-links {
+    display: flex;
+    gap: 20px;          /* アイコン同士の隙間 */
+    margin-top: 15px;   /* 上（名前など）との隙間 */
+  }
+
+  .sns-links img {
+    width: 35px;        /* アイコンのサイズ */
+    height: 35px;
+    object-fit: contain;
+    transition: transform 0.2s, opacity 0.2s; /* ホバー時のアニメーション */
+    filter: var(--icon-filter); /* ダークモード対応用（後述） */
+  }
+
+  /* マウスを乗せた時に少し浮き上がらせる */
+  .sns-links img:hover {
+    transform: translateY(-3px);
+    opacity: 0.8;
+  }
+
+  /* ダークモードの時に黒いアイコン（Xなど）を見やすくする設定 */
+  html.dark-mode .sns-links img {
+    filter: invert(1) brightness(2); /* 黒い画像を白っぽく反転させる */
+  }
+</style>
 
 <style>
 
