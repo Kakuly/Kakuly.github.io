@@ -120,7 +120,7 @@ permalink: /works/
   /* タイル状に並べる設定（横4つ） */
   .video-grid {
     display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
     gap: 40px 20px !important;
     padding-top: 20px;
   }
