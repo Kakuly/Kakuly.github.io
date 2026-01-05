@@ -29,13 +29,20 @@ title: Home
   }
 
   /* 3. 全体レイアウト */
-  body { 
-    background-color: var(--bg-color) !important; 
-    color: var(--text-color) !important; 
-    transition: background-color 0.1s; /* 短くしてパカつきを隠す */
-    font-family: 'Noto Sans JP', sans-serif !important;
-    -webkit-font-smoothing: antialiased;
-  }
+body { 
+  background-color: var(--bg-color) !important; 
+  color: var(--text-color) !important; 
+  /* 通常時は transition をオフにしてパカつきをゼロにする */
+  transition: none !important; 
+  font-family: 'Noto Sans JP', sans-serif !important;
+  font-weight: 500 !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ボタンを押した時だけ付与するクラス */
+body.mode-transition {
+  transition: background-color 1.0s ease, color 1.0s ease !important;
+}
 
   /* 4. 見出し・タイトルのフォント統一 */
   h1, h2, h3, .site-title, .page-link, #mode-toggle { 
