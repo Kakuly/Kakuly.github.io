@@ -1,4 +1,6 @@
 remote_theme: jekyll/minima
 title: Kakuly
+minima_skin: dark
 plugins:
   - jekyll-remote-theme
+  
