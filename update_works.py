@@ -153,26 +153,27 @@ body.mode-transition {
     font-weight: bold;
     font-family: 'Montserrat', sans-serif !important;
   }
+
   
 /* --- イン（入場）：穴が広がる演出 --- */
 #iris-in {
   position: fixed;
   top: 50%; left: 50%;
-  width: 10px; height: 10px; /* 穴の正体はこれ */
+  width: 10px; height: 10px;
   border-radius: 50%;
-  /* ★最強のポイント：穴の外側を500vw（画面の5倍）の影で塗りつぶす */
-  box-shadow: 0 0 0 500vmax var(--bg-color); 
+  /* 画面を覆い尽くす巨大な影 */
+  box-shadow: 0 0 0 500vmax var(--bg-color);
   z-index: 100000;
   pointer-events: none;
-  /* 最初は Scale(0) で穴を閉じておく（画面全体が影で埋まる） */
+  /* 最初は穴を閉じておく（＝画面が影で真っ暗/真っ白） */
   transform: translate(-50%, -50%) scale(0);
   transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
-  visibility: hidden;
+  /* visibility: hidden; ← これを削除！最初から存在させる */
 }
 
-/* 実行時：Scaleを500倍にして穴を全開にする */
+/* 実行時：穴を全開にする */
 body.is-opening #iris-in {
-  visibility: visible;
+  /* visibility: visible; ← これも不要 */
   transform: translate(-50%, -50%) scale(500);
 }
 
@@ -193,14 +194,22 @@ body.is-exiting #iris-out {
   transform: translate(-50%, -50%) scale(1.2) !important;
 }
 
+/* =========================================
+   ★追加：コンテンツの中身をフェードインさせる設定
+   ========================================= */
+/* 演出用パーツ(#iris-...)以外の、body直下のすべての要素を対象にする */
+body > *:not([id^="iris-"]) {
+  opacity: 0; /* 最初は透明にして隠す */
+  transition: opacity 0.8s ease-out; /* フワッと表示させる */
+}
+
+/* アイリスが開くと同時に、中身も不透明（見える状態）にする */
+body.is-opening > *:not([id^="iris-"]) {
+  opacity: 1;
+  transition-delay: 0.2s; /* アイリスが少し開いてから表示開始する時差演出 */
+}
 </style>
 
-<script>
-  (function() {
-    if (localStorage.getItem('theme') === 'dark') {
-      document.documentElement.classList.add('dark-mode');
-    }
-  })();
 </script>
 
 <button id="mode-toggle">🌙 Dark Mode</button>
