@@ -158,33 +158,7 @@ permalink: /works/
     right: 20px;
     z-index: 9999;
   }
-</style>
 
-<button id="mode-toggle">🌙 Dark Mode</button>
-
-<script>
-  const btn = document.getElementById('mode-toggle');
-  const body = document.body;
-
-  // ページ読み込み時に保存されたモードを適用
-  if (localStorage.getItem('theme') === 'dark') {
-    body.classList.add('dark-mode');
-    btn.textContent = '☀️ Light Mode';
-  }
-
-  // クリックイベント
-  btn.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    
-    if (body.classList.contains('dark-mode')) {
-      localStorage.setItem('theme', 'dark');
-      btn.textContent = '☀️ Light Mode';
-    } else {
-      localStorage.setItem('theme', 'light');
-      btn.textContent = '🌙 Dark Mode';
-    }
-  });
-</script>
 
   /* 2. フォントを「ダサくない」モダンなものに変える */
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
@@ -213,3 +187,29 @@ permalink: /works/
     background: #111;
   }
 </style>
+
+<button id="mode-toggle">🌙 Dark Mode</button>
+
+<script>
+  const btn = document.getElementById('mode-toggle');
+  const body = document.body;
+
+  // ページ読み込み時に保存されたモードを適用
+  if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark-mode');
+    btn.textContent = '☀️ Light Mode';
+  }
+
+  // クリックイベント
+  btn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+      localStorage.setItem('theme', 'dark');
+      btn.textContent = '☀️ Light Mode';
+    } else {
+      localStorage.setItem('theme', 'light');
+      btn.textContent = '🌙 Dark Mode';
+    }
+  });
+</script>
