@@ -1,8 +1,5 @@
 ---
-# Front Matterは空でもハイフン3つ必要です
 ---
-@import "jekyll-theme-minima";
+@import "minima";
 
-.site-title {
-  text-transform: none !important;
-}
+.site-title { text-transform: none !important; }
