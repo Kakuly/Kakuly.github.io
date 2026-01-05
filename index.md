@@ -13,7 +13,7 @@ title: Home
   }
 </style>
 
-<h1>Kakuly</h1>
+<p style="font-size: 2rem; font-weight: bold;">Kakuly</p>
 
 2006年生まれ。2020年から音楽活動を開始。
 エレクトロポップ／ハイパーポップを中心に、たくさん迷いながら音楽を作っている。
