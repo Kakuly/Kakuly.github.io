@@ -146,33 +146,14 @@ body {
   font-weight: 700 !important; /* 本文はしっかり太め */
 }
 
-/* ボタンを押した時だけ付与するクラス */
-body.mode-transition {
-  transition: background-color 0.5s ease, color 0.5s ease !important;
+/* 2. タイトルやデカい文字だけを「細く」上書きする */
+.site-title, 
+.page-link, 
+.profile-name, 
+h1, h2 { 
+  font-weight: 400 !important; /* ここで細く戻す */
+  letter-spacing: 0.02em;      /* 細い文字は少し字間を広げるとオシャレに見えます */
 }
-
-  /* 4. 見出し・タイトルのフォント統一 */
-  .site-header { background-color: transparent !important; border: none !important; }
-  
-  h1, h2, h3, .site-title { 
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 1.4rem !important; 
-    font-weight: 700 !important;
-    letter-spacing: -0.05em !important;
-    color: var(--text-color) !important;
-  }
-
-  .page-link {
-    font-family: 'Montserrat', sans-serif !important;
-    color: var(--text-color) !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.05em !important;
-    text-transform: uppercase;
-    font-size: 0.9rem !important;
-    margin-left: 20px !important;
-    text-decoration: none !important;
-    transition: 0.3s;
-  }
 
   /* 5. モード切り替えボタン */
   #mode-toggle {
