@@ -2,7 +2,6 @@
 layout: page
 title: Works
 permalink: /works/
-minima_skin: dark
 ---
 
 ## YouTube Playlist (Auto Updated)
