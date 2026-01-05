@@ -127,6 +127,22 @@ body.mode-transition {
     .profile-name { font-size: 5rem; }
     .profile-icon { width: 200px; height: 200px; }
   }
+    /* 7. モード切り替えボタン */
+  #mode-toggle {
+    cursor: pointer;
+    background: none;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    z-index: 9999;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif !important;
+  }
 </style>
 
 
