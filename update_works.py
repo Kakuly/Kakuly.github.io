@@ -72,7 +72,7 @@ def update_markdown(items):
 
 /* サイト全体の最大幅を上書き */
 .wrapper {
-  max-width: 1300px !important; /* 800pxから1100pxに拡張 */
+  max-width: 1300px !important; /* 800pxから1300pxに拡張 */
   padding-right: 40px !important;
   padding-left: 40px !important;
 }
