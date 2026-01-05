@@ -36,6 +36,9 @@ def update_markdown(items):
     
     # デザイン設定（Homeと完全に同期）
     content += """
+
+    <div id="iris-in"></div>
+    <div id="iris-out"></div>
 <style>
   /* サイト全体の最大幅を上書き */
 .wrapper {
@@ -151,29 +154,43 @@ body.mode-transition {
     font-family: 'Montserrat', sans-serif !important;
   }
   
- /* 1. メインの円（塗りつぶし）：背景と同じ色 */
-body::before {
-  content: "";
+/* --- イン（入場）：穴が広がる演出 --- */
+#iris-in {
+  position: fixed;
+  top: 50%; left: 50%;
+  width: 10px; height: 10px; /* 穴の正体はこれ */
+  border-radius: 50%;
+  /* ★最強のポイント：穴の外側を500vw（画面の5倍）の影で塗りつぶす */
+  box-shadow: 0 0 0 500vmax var(--bg-color); 
+  z-index: 100000;
+  pointer-events: none;
+  /* 最初は Scale(0) で穴を閉じておく（画面全体が影で埋まる） */
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+  visibility: hidden;
+}
+
+/* 実行時：Scaleを500倍にして穴を全開にする */
+body.is-opening #iris-in {
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(500);
+}
+
+/* --- アウト（退場）：板が広がる演出 --- */
+#iris-out {
   position: fixed;
   top: 50%; left: 50%;
   width: 150vmax; height: 150vmax;
-  background-color: var(--bg-color); 
-  z-index: 99999;
+  background-color: var(--bg-color);
+  border-radius: 50%;
+  z-index: 100001;
   pointer-events: none;
-  border-radius: 50%; /* 100%と同じですが、より「円」らしい指定 */
   transform: translate(-50%, -50%) scale(0);
-  /* 「ぐぅぅう...（溜め）」から「わあ！（爆発）」への曲線 */
-  transition: transform 0.6s cubic-bezier(0.65, 0, 0.15, 1);
+  transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-/* 2. 縁は不要なので、表示されないようにする（または削除） */
-body::after {
-  display: none;
-}
-
-/* 3. スイッチが入った瞬間 */
-body.is-exiting::before {
-  transform: translate(-50%, -50%) scale(1.5);
+body.is-exiting #iris-out {
+  transform: translate(-50%, -50%) scale(1.2) !important;
 }
 
 </style>
@@ -215,18 +232,29 @@ body.is-exiting::before {
       body.classList.remove('mode-transition');
     }, 500); // 0.4sのアニメーションより少し長く設定
   });
-  document.querySelectorAll('.page-link').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault(); // すぐにページが飛ばないように止める
-    const targetUrl = link.href;
-
-    // bodyに「今から出るよ」というクラスをつける（これで上のCSSが発動！）
-    document.body.classList.add('is-exiting');
-
-    // 図形が画面を覆い尽くすのを待ってから移動（0.65秒）
+  
+function startIris() {
+  document.body.classList.remove('is-opening', 'is-exiting');
+  // ブラウザの描画を待つために少し遅らせる
+  requestAnimationFrame(() => {
     setTimeout(() => {
-      window.location.href = targetUrl;
-    }, 650);
+      document.body.classList.add('is-opening');
+    }, 50);
+  });
+}
+
+// ページ表示時に必ず実行
+window.addEventListener('pageshow', startIris);
+
+// リンククリック時
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
+    
+    e.preventDefault();
+    document.body.classList.add('is-exiting');
+    setTimeout(() => { window.location.href = href; }, 800);
   });
 });
 </script>
