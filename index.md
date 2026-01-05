@@ -155,42 +155,40 @@ title: Home
     .profile-icon { width: 200px; height: 200px; }
   }
 
-/* 1. 中心から広がるメインのダイヤ型（塗り） */
+/* 1. メインのダイヤ（塗りつぶし）：背景色と同じ色にする */
 body::before {
   content: "";
   position: fixed;
   top: 50%; left: 50%;
   width: 150vmax; height: 150vmax;
-  background-color: var(--text-color);
+  /* ここがポイント！背景と同じ色（白なら白、黒なら黒） */
+  background-color: var(--bg-color); 
   z-index: 99999;
   pointer-events: none;
-  /* ダイヤ型に切り抜く */
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  /* 最初は小さく */
   transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.7s cubic-bezier(0.85, 0, 0.15, 1);
+  transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-/* 2. 重なって広がる細いひし形の「線」 */
+/* 2. 重なるダイヤの線（縁取り）：文字色と同じ色にする */
 body::after {
   content: "";
   position: fixed;
   top: 50%; left: 50%;
-  width: 145vmax; height: 145vmax; /* メインより少し小さく */
-  border: 2px solid var(--text-color); /* 線だけにする */
-  z-index: 99998; /* メインの少し後ろ */
+  width: 148vmax; height: 148vmax;
+  /* ここがポイント！文字色と同じ（白なら黒、黒なら白） */
+  border: 2px solid var(--text-color); 
+  z-index: 100000;
   pointer-events: none;
-  /* 縦に細長いひし形に切り抜く */
-  clip-path: polygon(50% 10%, 60% 50%, 50% 90%, 40% 50%);
+  clip-path: polygon(50% 5%, 95% 50%, 50% 95%, 5% 50%);
   transform: translate(-50%, -50%) scale(0);
-  /* 線の方は少しだけ遅れて、かつ速く動かすとカッコいい */
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.65s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-/* 3. スイッチが入った時の動き */
+/* スイッチが入った時の動き */
 body.is-exiting::before,
 body.is-exiting::after {
-  transform: translate(-50%, -50%) scale(1.2);
+  transform: translate(-50%, -50%) scale(1.2); /* 画面を確実に覆い尽くす */
 }
   
 </style>
