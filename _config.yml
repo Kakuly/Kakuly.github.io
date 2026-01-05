@@ -1,5 +1,5 @@
 remote_theme: jekyll/minima
 title: Kakuly
-description: ポートフォリオ
+# 下の2行を正確に追加してください
 plugins:
   - jekyll-remote-theme
