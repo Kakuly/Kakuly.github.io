@@ -161,33 +161,34 @@ title: Home
 
 
 
-/* --- イン（入場）用：サイズを3倍にして隙間を抹殺 --- */
+
+/* --- イン（入場）：穴が広がる演出 --- */
 #iris-in {
   position: fixed;
   top: 50%; left: 50%;
-  /* 300vmax にすれば、地球上のどんなモニターでも端まで届きます */
-  width: 300vmax; height: 300vmax;
-  /* 穴の境界線を少しだけ調整（10% → 5%）して、拡大率に余裕を持たせます */
-  background: radial-gradient(circle, transparent 5%, var(--bg-color) 5.3%);
+  width: 10px; height: 10px; /* 穴の正体はこれ */
+  border-radius: 50%;
+  /* ★最強のポイント：穴の外側を500vw（画面の5倍）の影で塗りつぶす */
+  box-shadow: 0 0 0 500vmax var(--bg-color); 
   z-index: 100000;
   pointer-events: none;
-  /* 最初は 0.01倍（ほぼ点）からスタート */
-  transform: translate(-50%, -50%) scale(0.01);
-  transition: transform 1s cubic-bezier(0.85, 0, 0.15, 1);
+  /* 最初は Scale(0) で穴を閉じておく（画面全体が影で埋まる） */
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
   visibility: hidden;
 }
 
-/* 実行時：20倍くらいまで一気に拡大して穴を全開にする */
+/* 実行時：Scaleを500倍にして穴を全開にする */
 body.is-opening #iris-in {
   visibility: visible;
-  transform: translate(-50%, -50%) scale(20);
+  transform: translate(-50%, -50%) scale(500);
 }
 
-/* --- アウト（退場）用：こちらも巨大化 --- */
+/* --- アウト（退場）：板が広がる演出 --- */
 #iris-out {
   position: fixed;
   top: 50%; left: 50%;
-  width: 300vmax; height: 300vmax;
+  width: 150vmax; height: 150vmax;
   background-color: var(--bg-color);
   border-radius: 50%;
   z-index: 100001;
@@ -197,8 +198,7 @@ body.is-opening #iris-in {
 }
 
 body.is-exiting #iris-out {
-  /* 0.6倍くらいで画面を完全に覆い尽くせます */
-  transform: translate(-50%, -50%) scale(0.6) !important;
+  transform: translate(-50%, -50%) scale(1.2) !important;
 }
 </style>
 
@@ -238,38 +238,28 @@ body.is-exiting #iris-out {
 
 
 
-// ページが表示されるたびに実行される関数
-function startTransition() {
-  // 1. 前回のクラスを全部きれいに掃除する
+function startIris() {
   document.body.classList.remove('is-opening', 'is-exiting');
-
-  // 2. ほんの少しだけ待ってから「イン（穴あけ）」を開始
-  // (一瞬待つことでブラウザにアニメーションの準備をさせる)
-  setTimeout(() => {
-    document.body.classList.add('is-opening');
-  }, 50);
+  // ブラウザの描画を待つために少し遅らせる
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      document.body.classList.add('is-opening');
+    }, 50);
+  });
 }
 
-// ページが新しく読み込まれた時、または「戻る」で表示された時に発火
-window.addEventListener('pageshow', (event) => {
-  // アニメーションを開始
-  startTransition();
-});
+// ページ表示時に必ず実行
+window.addEventListener('pageshow', startIris);
 
-// リンククリック時の処理（ここは前のままでOKですが整理しました）
+// リンククリック時
 document.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', (e) => {
     const href = link.getAttribute('href');
     if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
     
     e.preventDefault();
-    // アウトのアニメを開始
-    document.body.classList.remove('is-opening');
     document.body.classList.add('is-exiting');
-
-    setTimeout(() => {
-      window.location.href = href;
-    }, 800);
+    setTimeout(() => { window.location.href = href; }, 800);
   });
 });
 </script>
