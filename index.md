@@ -143,7 +143,7 @@ body {
   background-color: var(--bg-color) !important; 
   color: var(--text-color) !important; 
   font-family: 'Noto Sans JP', sans-serif !important;
-  font-weight: 500 !important; /* 本文はしっかり太め */
+  font-weight: 700 !important; /* 本文はしっかり太め */
 }
 
 /* ボタンを押した時だけ付与するクラス */
@@ -152,17 +152,27 @@ body.mode-transition {
 }
 
   /* 4. 見出し・タイトルのフォント統一 */
-  h1, h2, h3, .site-title, .page-link, #mode-toggle { 
+  .site-header { background-color: transparent !important; border: none !important; }
+  
+  h1, h2, h3, .site-title { 
     font-family: 'Montserrat', sans-serif !important;
-    font-weight: 500 !important;
+    font-size: 1.4rem !important; 
+    font-weight: 700 !important;
+    letter-spacing: -0.05em !important;
     color: var(--text-color) !important;
   }
 
-  .site-header { background-color: transparent !important; border: none !important; }
-  .site-title { font-size: 1.4rem !important; letter-spacing: -0.05em !important; }
-  .page-link { font-size: 0.9rem !important; margin-left: 20px !important; text-transform: uppercase; text-decoration: none !important; }
-  a { color: var(--link-color); }
-  .rss-subscribe, .feed-icon { display: none !important; }
+  .page-link {
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--text-color) !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase;
+    font-size: 0.9rem !important;
+    margin-left: 20px !important;
+    text-decoration: none !important;
+    transition: 0.3s;
+  }
 
   /* 5. モード切り替えボタン */
   #mode-toggle {
