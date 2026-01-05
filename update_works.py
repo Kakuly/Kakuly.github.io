@@ -36,8 +36,8 @@ for item in items:
         content += f"  <h3 class='video-title'>{title}</h3>\n"
         content += '</div>\n\n'
 
-    content += '<div id="iris-in"></div>'
-    content += '<div id="iris-out"></div>'
+        content += '<div id="iris-in"></div>'
+        content += '<div id="iris-out"></div>'
     
     # デザイン設定（Homeと完全に同期）
     content += """
