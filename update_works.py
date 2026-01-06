@@ -14,9 +14,22 @@ if GEMINI_API_KEY:
     model = genai.GenerativeModel('gemini-1.5-flash')
 
 def get_tags_from_ai(title, description):
-    """AIを使って概要欄からKakulyの担当役割を抽出する"""
-    if not GEMINI_API_KEY:
-        return []
+    tags = []
+    desc_and_title = (title + description).lower()
+    
+    # キーワード判定（Kakulyさんの担当によくある単語）
+    if any(k in desc_and_title for k in ['mix', 'ミックス', '混ぜ']):
+        tags.append('Mix')
+    if any(k in desc_and_title for k in ['arrang', '編曲', 'arrange']):
+        tags.append('Arrangement')
+    if any(k in desc_and_title for k in ['master', 'マスタリング']):
+        tags.append('Mastering')
+    if any(k in desc_and_title for k in ['movie', '映像', '動画']):
+        tags.append('Movie')
+    if any(k in desc_and_title for k in ['music', '作曲', '作詞']):
+        tags.append('Music')
+        
+    return list(set(tags)) # 重複削除
     
 prompt = f"""
     以下のYouTube動画のタイトルと概要欄から、制作者（Kakuly / かくり）が担当した役割を抽出してください。
