@@ -123,7 +123,7 @@ def update_markdown(items):
         title = html.escape(raw_title)
         description = snippet['description']
         video_id = snippet['resourceId']['videoId']
-        thumbnail_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
+        thumbnail_url = f"https://i.ytimg.com/vi/{video_id}/mqdefault.jpg"
         
         tags = get_tags(video_id, title, description)
         tags_attr = ",".join(tags) if tags else ""
