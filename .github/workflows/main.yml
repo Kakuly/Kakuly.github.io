@@ -15,21 +15,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          # 最新の履歴を取得するためにfetch-depthを0に設定（念のため）
+          fetch-depth: 0
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
+
       - name: Install dependencies
         run: pip install requests google-generativeai
+
       - name: Run script
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python update_works.py
+
       - name: Commit and Push
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
-          git add works.md
-          git commit -m "Auto update works.md from YouTube" || exit 0
-          git push
+          
+          # works.md だけでなく、新しく生成される known_works.json も対象に含めます
+          git add works.md known_works.json
+          
+          # 変更がある場合のみコミットし、なければ終了
+          git commit -m "Auto update works.md and cache from YouTube" || exit 0
+          
+          # 重要：プッシュ前にリモートの変更を rebase で取り込んで競合を防ぎます
+          git pull --rebase origin main
+          
+          git push origin main
