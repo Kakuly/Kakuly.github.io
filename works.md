@@ -55,6 +55,30 @@ permalink: /works/
 </div>
 
 <div class="video-item">
+  <a href="https://www.youtube.com/watch?v=LW1KBCgvEPQ" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/LW1KBCgvEPQ/maxresdefault.jpg" alt="花弁、それにまつわる音声 / 初音ミク" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>花弁、それにまつわる音声 / 初音ミク</h3>  <div class="tag-container">
+    <span class="work-tag">Mastering</span>
+  </div>
+</div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=XWUiZPA86tY" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/XWUiZPA86tY/maxresdefault.jpg" alt="アンダーカバー。/ 初音ミク、ゲキヤク" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>アンダーカバー。/ 初音ミク、ゲキヤク</h3>  <div class="tag-container">
+    <span class="work-tag">Mastering</span>
+  </div>
+</div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=t1cC3pdFODA" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/t1cC3pdFODA/maxresdefault.jpg" alt="かなしばりに遭ったら / 歌愛ユキ、ナースロボ＿タイプＴ" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>かなしばりに遭ったら / 歌愛ユキ、ナースロボ＿タイプＴ</h3></div>
+
+<div class="video-item">
   <a href="https://www.youtube.com/watch?v=zAURwtz_AY4" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/zAURwtz_AY4/maxresdefault.jpg" alt="HyperPopCorn!! / 初音ミク - shikisai × Kakuly" class="video-thumbnail" loading="lazy">
   </a>
@@ -103,6 +127,18 @@ permalink: /works/
     <span class="work-tag">Mastering</span>
   </div>
 </div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=njQVjvEXWao" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/njQVjvEXWao/maxresdefault.jpg" alt="死生観にさよなら / 初音ミク" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>死生観にさよなら / 初音ミク</h3></div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=I7Q_xlnS2n8" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/I7Q_xlnS2n8/maxresdefault.jpg" alt="その銃口 / 可不" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>その銃口 / 可不</h3></div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=bqMBuLzCyMc" target="_blank" class="video-link">
