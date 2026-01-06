@@ -574,7 +574,7 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
 #mode-toggle { cursor: pointer; background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; position: fixed; top: 15px; right: 20px; z-index: 9999; font-weight: bold; }
 /* モバイル対応：画面幅が768px以下の時（スマホなど） */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1100px) {
   #mode-toggle {
     top: auto !important;   /* 上固定を解除 */
     bottom: 20px !important; /* 下から20pxの位置に */
