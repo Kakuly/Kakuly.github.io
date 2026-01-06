@@ -40,7 +40,10 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=Ef0_l9GeIR0" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/Ef0_l9GeIR0/maxresdefault.jpg" alt="マジか！ / 梓川　- tato (cover)" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>マジか！ / 梓川　- tato (cover)</h3></div>
+  <h3 class='video-title'>マジか！ / 梓川　- tato (cover)</h3>  <div class="tag-container">
+    <span class="work-tag">Mix</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=OBkLjALyriw" target="_blank" class="video-link">
@@ -55,7 +58,11 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=zwptzlQnSYo" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/zwptzlQnSYo/maxresdefault.jpg" alt="24/7 / 201　- tato (cover)" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>24/7 / 201　- tato (cover)</h3></div>
+  <h3 class='video-title'>24/7 / 201　- tato (cover)</h3>  <div class="tag-container">
+    <span class="work-tag">Mix</span>
+    <span class="work-tag">Movie</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=cknsKkzA2lM" target="_blank" class="video-link">
@@ -70,19 +77,28 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=vMGuvZlP3R8" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/vMGuvZlP3R8/maxresdefault.jpg" alt="しじまのはて / 青は止まれ　- tato (cover)" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>しじまのはて / 青は止まれ　- tato (cover)</h3></div>
+  <h3 class='video-title'>しじまのはて / 青は止まれ　- tato (cover)</h3>  <div class="tag-container">
+    <span class="work-tag">Mix</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=ecDT8mnhgFw" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/ecDT8mnhgFw/maxresdefault.jpg" alt="IN_MY_HEAD / なとり　- tato (cover)" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>IN_MY_HEAD / なとり　- tato (cover)</h3></div>
+  <h3 class='video-title'>IN_MY_HEAD / なとり　- tato (cover)</h3>  <div class="tag-container">
+    <span class="work-tag">Mix</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=wL0tXapyBEo" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/wL0tXapyBEo/maxresdefault.jpg" alt="テレパシ / DECO*27　- tato (cover)" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>テレパシ / DECO*27　- tato (cover)</h3></div>
+  <h3 class='video-title'>テレパシ / DECO*27　- tato (cover)</h3>  <div class="tag-container">
+    <span class="work-tag">Mix</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=LW1KBCgvEPQ" target="_blank" class="video-link">
@@ -194,7 +210,10 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=Ls7AJ_ES3G0" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/Ls7AJ_ES3G0/maxresdefault.jpg" alt="Neighbor / 初音ミク" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>Neighbor / 初音ミク</h3></div>
+  <h3 class='video-title'>Neighbor / 初音ミク</h3>  <div class="tag-container">
+    <span class="work-tag">Movie</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=XsjuHvYlRyc" target="_blank" class="video-link">
@@ -394,16 +413,12 @@ body.is-exiting #iris-out { transform: translate(-50%, -50%) scale(1.2) !importa
 body > *:not([id^="iris-"]) { opacity: 0; transition: opacity 0.8s ease-out; }
 body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 </style>
-
 <button id="mode-toggle">🌙 Dark Mode</button>
-
 <script>
   const btn = document.getElementById('mode-toggle');
   const body = document.body;
   const html = document.documentElement;
-  if (localStorage.getItem('theme') === 'dark') {
-    html.classList.add('dark-mode'); body.classList.add('dark-mode'); btn.textContent = '☀️ Light Mode';
-  }
+  if (localStorage.getItem('theme') === 'dark') { html.classList.add('dark-mode'); body.classList.add('dark-mode'); btn.textContent = '☀️ Light Mode'; }
   btn.addEventListener('click', () => {
     body.classList.add('mode-transition');
     const isDark = html.classList.toggle('dark-mode');
@@ -417,13 +432,4 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
     requestAnimationFrame(() => { setTimeout(() => { document.body.classList.add('is-opening'); }, 50); });
   }
   window.addEventListener('pageshow', startIris);
-  document.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
-      e.preventDefault();
-      document.body.classList.add('is-exiting');
-      setTimeout(() => { window.location.href = href; }, 800);
-    });
-  });
 </script>
