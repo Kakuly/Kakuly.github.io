@@ -9,24 +9,19 @@
 }
 .filter-btn.active { opacity: 1; background: var(--text-color); color: var(--bg-color); }
 
-/* --- 改良したアニメーション --- */
+/* --- 詰まる動き用のアニメーション --- */
 .video-item {
   display: block;
-  opacity: 0; 
-  transform: translateY(10px);
-  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
-  visibility: hidden;
-  height: 0; margin: 0; padding: 0; overflow: hidden; /* 最初は場所を取らない */
+  opacity: 1; 
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  will-change: transform, opacity;
 }
-.video-item.show {
-  opacity: 1;
-  transform: translateY(0);
-  visibility: visible;
-  height: auto;
-  margin-bottom: 0;
+.video-item.hide-anim {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
 }
-/* グリッドから外れた際の隙間を埋める */
-.video-item:not(.show) {
+.video-item.hidden {
   display: none;
 }
 
@@ -80,28 +75,49 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
     });
 
     function applyFilter() {
-      // アニメーションを滑らかにするため、一度非表示にしてから再計算
+      // FLIP: First
+      const firstPositions = items.map(item => item.getBoundingClientRect());
+
       items.forEach(item => {
         const itemTags = item.dataset.tags.split(',');
         const isMatch = activeFilters.size === 0 || Array.from(activeFilters).some(f => itemTags.includes(f));
         
         if (isMatch) {
-          item.style.display = 'block'; // まず存在させる
-          // ブラウザの再描画を待ってからクラス付与
-          requestAnimationFrame(() => {
-            item.classList.add('show');
-          });
+          item.classList.remove('hidden', 'hide-anim');
         } else {
-          item.classList.remove('show');
-          // アニメーションが終わるまで待ってから display: none
+          item.classList.add('hide-anim');
+          // 完全に消すのはアニメーション後
           setTimeout(() => {
-            if (!item.classList.contains('show')) item.style.display = 'none';
+            if (item.classList.contains('hide-anim')) item.classList.add('hidden');
           }, 400);
         }
+      });
+
+      // FLIP: Last, Invert, Play
+      requestAnimationFrame(() => {
+        items.forEach((item, i) => {
+          if (item.classList.contains('hidden') || item.classList.contains('hide-anim')) return;
+
+          const lastPos = item.getBoundingClientRect();
+          const firstPos = firstPositions[i];
+          const dx = firstPos.left - lastPos.left;
+          const dy = firstPos.top - lastPos.top;
+
+          if (dx !== 0 || dy !== 0) {
+            item.style.transition = 'none';
+            item.style.transform = `translate(${dx}px, ${dy}px)`;
+            
+            requestAnimationFrame(() => {
+              item.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease';
+              item.style.transform = 'translate(0, 0)';
+            });
+          }
+        });
       });
     }
   });
 
+  // ダークモード / 演出
   const btn = document.getElementById('mode-toggle');
   const body = document.body;
   const htmlEl = document.documentElement;
