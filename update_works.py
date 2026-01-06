@@ -15,38 +15,19 @@ if GEMINI_API_KEY:
 
 def get_tags_from_ai(title, description):
     tags = []
-    desc_and_title = (title + description).lower()
     
-    # キーワード判定
-    if any(k in desc_and_title for k in ['mix', 'ミックス', '混ぜ']):
-        tags.append('Mix')
-    if any(k in desc_and_title for k in ['arrang', '編曲', 'arrange']):
-        tags.append('Arrangement')
-    if any(k in desc_and_title for k in ['master', 'マスタリング']):
-        tags.append('Mastering')
-    if any(k in desc_and_title for k in ['movie', '映像', '動画']):
-        tags.append('Movie')
-    if any(k in desc_and_title for k in ['music', '作曲', '作詞']):
-        tags.append('Music')
-    
-    # AIでの判定
+    # AI判定を優先する（AIは文脈を読めるので、他人の担当を除外してくれます）
     if GEMINI_API_KEY:
         prompt = f"""
             以下のYouTube動画のタイトルと概要欄から、制作者（Kakuly / かくり）が担当した役割を抽出してください。
             
-            【ヒント】
-            - 「Mix: Kakuly」「かくり(Mix)」「Mixed by Kakuly」などの表記から役割を特定してください。
-            - Kakuly だけでなく「かくり」という表記も同一人物です。
-            - もしクレジットに名前がなくても、タイトルに「Kakuly」が含まれている場合、その動画の Music や Arrangement を担当している可能性が高いです。
-            
-            【抽出対象のキーワード】
-            Mix, Arrangement, Mastering, Movie, Music, Lyric
-            
-            【ルール】
-            1. 他の人の担当（例: Vocal, Illustration）は絶対に含めない。
-            2. 該当する役割を英語で、カンマ区切りで返してください（例: Mix, Mastering）。
-            3. 役割が見当たらない場合は「None」とだけ返してください。
-            4. 余計な説明は一切不要です。
+            【重要なルール】
+            - 「Mix: Kakuly」「かくり(Mix)」「Mixed by Kakuly」「Mix - Kakuly」などの表記から役割を特定してください。
+            - Kakuly だけでなく「かくり」「かくりー」という表記も同一人物です。
+            - もしクレジットに名前がなくても、”タイトル”に「Kakuly」が含まれている場合、その動画の Music や Arrangement を担当している可能性が高いです。
+            - タイトルに含まれていないなら可能性は低いです
+            - XFDと書かれている場合は、そのXFDの映像を作っている場合と、そのアルバム自体にオリジナル曲またはリミックスで参加している可能性が大きいです。
+            - 該当なし、または確証がない場合は「None」とだけ返してください。
             
             タイトル: {title}
             概要欄: {description}
@@ -55,10 +36,21 @@ def get_tags_from_ai(title, description):
             response = model.generate_content(prompt)
             result = response.text.strip()
             if result != "None":
-                ai_tags = [t.strip() for t in result.split(',')]
-                tags.extend(ai_tags)
+                # AIが「Mix, Mastering」と返してきたらそれを採用
+                return [t.strip() for t in result.split(',')]
         except:
-            pass
+            pass # AIがエラーの時だけ下のキーワード判定へ
+
+    # --- AIが使えない、またはエラーの時のバックアップ判定 ---
+    # 単純に単語があるかではなく「Kakuly」という文字列が含まれている場合のみ、
+    # 最低限のキーワード（Mix等）をタイトルから探すなど、精度を上げた判定にします。
+    text = (title + description).lower()
+    if 'kakuly' in text or 'かくり' in text:
+        if any(k in text for k in ['mix', 'ミックス']): tags.append('Mix')
+        if any(k in text for k in ['arrang', '編曲']): tags.append('Arrangement')
+        if any(k in text for k in ['master', 'マスタリング']): tags.append('Mastering')
+        if any(k in text for k in ['movie', '映像', '動画']): tags.append('Movie')
+        if any(k in text for k in ['music', '作曲']): tags.append('Music')
             
     return list(set(tags))
 
