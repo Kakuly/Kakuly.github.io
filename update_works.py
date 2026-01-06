@@ -2,7 +2,7 @@ import os
 import json
 import requests
 import google.generativeai as genai
-import html # タイトルの混同を避けるためのインポート
+import html 
 
 # --- 設定 ---
 API_KEY = os.environ['YOUTUBE_API_KEY']
@@ -13,7 +13,7 @@ CACHE_FILE = 'known_works.json'
 
 # --- JSONキャッシュの読み込み/作成 ---
 def load_known_works():
-    if os.path.exists(CACHE_FILE):
+  if os.path.exists(CACHE_FILE):
         try:
             with open(CACHE_FILE, 'r', encoding='utf-8') as f:
                 return json.load(f)
