@@ -37,8 +37,11 @@ def get_tags_from_ai(title, description):
 
         【検索の指示】
         1. Google検索でこの動画のクレジット（X, YouTube, 楽曲データベース）を調べてください。
-        2. 「Kakuly」または「かくり」が担当した役割（Mix, Arrangement, Mastering, Movie, Music, Lyric）を特定してください。
+        2. 「Kakuly」または「かくり」が担当した役割（Mix, Arrangement, Mastering, Movie, Music, Lyrics, Remix）を特定してください。
         3. 他人の担当（例: Vocal: ○○, Illust: △△）は絶対に除外してください。
+        4. XFD作品は、高確率でXFD映像を作っているか、そのアルバムにオリジナル曲orリミックス　またはその両方で参加している可能性が高いです。
+        5. アルバムに参加している場合にも、Musicに割り振ってください
+        6. その動画のタイトルや概要欄を参照してみてもいいです。
         
         【出力形式】
         英語のタグのみをカンマ区切りで。該当なしは「None」。
@@ -63,6 +66,7 @@ def get_tags_from_ai(title, description):
             if any(k in l_lower for k in ['movie', '映像', '動画']): tags.append('Movie')
             if any(k in l_lower for k in ['music', '作曲']): tags.append('Music')
             if any(k in l_lower for k in ['lyric', '作詞']): tags.append('Lyric')
+            if any(k in l_lower for k in ['remix', 'リミックス']): tags.append('Remix')
             
     return list(set(tags))
 
@@ -119,8 +123,8 @@ def update_markdown(items):
   gap: 7px;
 }
 .work-tag {
-  font-size: 0.65rem;
-  padding: 4px 12px;
+  font-size: 0.57rem;
+  padding: 1px 6px;
   border-radius: 4px;
   border: 0.5px solid var(--text-color);
   opacity: 0.88;
