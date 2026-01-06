@@ -110,11 +110,41 @@ permalink: /works/
 </div>
 
 <div class="video-item">
+  <a href="https://www.youtube.com/watch?v=IFSJK6szxfU" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/IFSJK6szxfU/maxresdefault.jpg" alt="Akari24 - her messages / feat.可不 , 裏命" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>Akari24 - her messages / feat.可不 , 裏命</h3>  <div class="tag-container">
+    <span class="work-tag">Arrangement</span>
+    <span class="work-tag">Lyrics</span>
+    <span class="work-tag">Movie</span>
+    <span class="work-tag">Music</span>
+  </div>
+</div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=UFgA9gCuc7A" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/UFgA9gCuc7A/maxresdefault.jpg" alt="1st Digital EP "Hyper Mode" [XFD]" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>1st Digital EP "Hyper Mode" [XFD]</h3></div>
+
+<div class="video-item">
   <a href="https://www.youtube.com/watch?v=XWUiZPA86tY" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/XWUiZPA86tY/maxresdefault.jpg" alt="アンダーカバー。/ 初音ミク、ゲキヤク" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>アンダーカバー。/ 初音ミク、ゲキヤク</h3>  <div class="tag-container">
     <span class="work-tag">Mastering</span>
+  </div>
+</div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=gF38NoZ4-HI" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/gF38NoZ4-HI/maxresdefault.jpg" alt="Akari24 - Juvenile Delinquency / feat.可不" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>Akari24 - Juvenile Delinquency / feat.可不</h3>  <div class="tag-container">
+    <span class="work-tag">Arrangement</span>
+    <span class="work-tag">Lyrics</span>
+    <span class="work-tag">Movie</span>
+    <span class="work-tag">Music</span>
   </div>
 </div>
 
