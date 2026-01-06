@@ -13,8 +13,8 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/p4M5wHkNHmc/maxresdefault.jpg" alt="「pluie.」feat. mare - Official Video" class="video-thumbnail" loading="lazy">
   </a>
   <div class="tag-container">
-    <span class="work-tag">Movie</span>
     <span class="work-tag">Music</span>
+    <span class="work-tag">Movie</span>
     <span class="work-tag">Mix</span>
   </div>
   <h3 class='video-title'>「pluie.」feat. mare - Official Video</h3>
@@ -36,8 +36,8 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/cknsKkzA2lM/maxresdefault.jpg" alt="サ終あざした / 重音テトSV" class="video-thumbnail" loading="lazy">
   </a>
   <div class="tag-container">
-    <span class="work-tag">Music</span>
     <span class="work-tag">Mastering</span>
+    <span class="work-tag">Music</span>
     <span class="work-tag">Arrangement</span>
   </div>
   <h3 class='video-title'>サ終あざした / 重音テトSV</h3>
@@ -48,11 +48,11 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/zAURwtz_AY4/maxresdefault.jpg" alt="HyperPopCorn!! / 初音ミク - shikisai × Kakuly" class="video-thumbnail" loading="lazy">
   </a>
   <div class="tag-container">
+    <span class="work-tag">Movie</span>
+    <span class="work-tag">Mix</span>
     <span class="work-tag">Mastering</span>
     <span class="work-tag">Arrangement</span>
-    <span class="work-tag">Movie</span>
     <span class="work-tag">Music</span>
-    <span class="work-tag">Mix</span>
   </div>
   <h3 class='video-title'>HyperPopCorn!! / 初音ミク - shikisai × Kakuly</h3>
 </div>
@@ -91,10 +91,10 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/Z7OQL1hQ5WY/maxresdefault.jpg" alt="花溺れ / 初音ミク, 花奏かのんβ" class="video-thumbnail" loading="lazy">
   </a>
   <div class="tag-container">
-    <span class="work-tag">Movie</span>
     <span class="work-tag">Music</span>
-    <span class="work-tag">Mastering</span>
+    <span class="work-tag">Movie</span>
     <span class="work-tag">Mix</span>
+    <span class="work-tag">Mastering</span>
   </div>
   <h3 class='video-title'>花溺れ / 初音ミク, 花奏かのんβ</h3>
 </div>
@@ -134,8 +134,8 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/u3pMZtkugX8/maxresdefault.jpg" alt="【オリジナル曲】スノーダンス/yuru【Vtuber/Vsinger】" class="video-thumbnail" loading="lazy">
   </a>
   <div class="tag-container">
-    <span class="work-tag">Movie</span>
     <span class="work-tag">Music</span>
+    <span class="work-tag">Movie</span>
     <span class="work-tag">Mix</span>
   </div>
   <h3 class='video-title'>【オリジナル曲】スノーダンス/yuru【Vtuber/Vsinger】</h3>
