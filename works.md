@@ -37,12 +37,12 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/zAURwtz_AY4/maxresdefault.jpg" alt="HyperPopCorn!! / 初音ミク - shikisai × Kakuly" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>HyperPopCorn!! / 初音ミク - shikisai × Kakuly</h3>  <div class="tag-container">
-    <span class="work-tag">Music</span>
-    <span class="work-tag">Lyric</span>
-    <span class="work-tag">Mix</span>
     <span class="work-tag">Arrangement</span>
-    <span class="work-tag">Remix</span>
+    <span class="work-tag">Music</span>
     <span class="work-tag">Movie</span>
+    <span class="work-tag">Remix</span>
+    <span class="work-tag">Mix</span>
+    <span class="work-tag">Lyric</span>
   </div>
 </div>
 
@@ -66,8 +66,8 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/YOoRO2OVICo/maxresdefault.jpg" alt="1st Album『(EN)CORE』クロスフェード" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>1st Album『(EN)CORE』クロスフェード</h3>  <div class="tag-container">
-    <span class="work-tag">Remix</span>
     <span class="work-tag">Mix</span>
+    <span class="work-tag">Remix</span>
   </div>
 </div>
 
@@ -77,8 +77,8 @@ permalink: /works/
   </a>
   <h3 class='video-title'>花溺れ / 初音ミク, 花奏かのんβ</h3>  <div class="tag-container">
     <span class="work-tag">Mastering</span>
-    <span class="work-tag">Remix</span>
     <span class="work-tag">Mix</span>
+    <span class="work-tag">Remix</span>
   </div>
 </div>
 
@@ -97,8 +97,8 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/XsjuHvYlRyc/maxresdefault.jpg" alt="SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)</h3>  <div class="tag-container">
-    <span class="work-tag">Mastering</span>
     <span class="work-tag">Movie</span>
+    <span class="work-tag">Mastering</span>
   </div>
 </div>
 
@@ -178,13 +178,70 @@ permalink: /works/
   </div>
 </div>
 
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=aOu8lljw3Z8" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/aOu8lljw3Z8/maxresdefault.jpg" alt="【 MV 】のんです です！ / SAKURAmoti feat.のんです" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>【 MV 】のんです です！ / SAKURAmoti feat.のんです</h3>  <div class="tag-container">
+    <span class="work-tag">Movie</span>
+    <span class="work-tag">Mix</span>
+    <span class="work-tag">Remix</span>
+  </div>
+</div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=YwjJ9m-KFQA" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/YwjJ9m-KFQA/maxresdefault.jpg" alt="前略" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>前略</h3></div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=SYBGaIhZri0" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/SYBGaIhZri0/maxresdefault.jpg" alt="lopeto (Mikumix) (feat. Kakuly)" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>lopeto (Mikumix) (feat. Kakuly)</h3>  <div class="tag-container">
+    <span class="work-tag">Mix</span>
+  </div>
+</div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=f-atLIqnbdI" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/f-atLIqnbdI/maxresdefault.jpg" alt="【結成】新実況グループ「カラフルピーチ 」" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>【結成】新実況グループ「カラフルピーチ 」</h3></div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=4OPusJbC4qg" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/4OPusJbC4qg/maxresdefault.jpg" alt="学生ボカロPがエイリアンエイリアンアレンジリレーしてみた！！" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>学生ボカロPがエイリアンエイリアンアレンジリレーしてみた！！</h3>  <div class="tag-container">
+    <span class="work-tag">Movie</span>
+  </div>
+</div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=adJU8IsRkFs" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/adJU8IsRkFs/maxresdefault.jpg" alt="「憂晴ストーム / ゆう。」Official Music Video" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>「憂晴ストーム / ゆう。」Official Music Video</h3>  <div class="tag-container">
+    <span class="work-tag">Music</span>
+    <span class="work-tag">Lyric</span>
+  </div>
+</div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=n4ieZj-uUF0" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/n4ieZj-uUF0/maxresdefault.jpg" alt="【初音ミクオリジナル曲】復元不能【中学生ボカロP】" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>【初音ミクオリジナル曲】復元不能【中学生ボカロP】</h3></div>
+
 </div>
 
 <div id="iris-in"></div><div id="iris-out"></div>
 <style>
 /* 追加したタグのスタイル */
 .tag-container {
-  margin-top: 2px;
+  margin-top: 4px;
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
@@ -214,14 +271,14 @@ permalink: /works/
 
 .video-title {
   margin-top: 10px;
-  font-size: 0.9rem; /* 本文のサイズ感に調整 */
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 600;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-bottom: 0px !important;
-  font-family: 'Noto Sans JP', sans-serif !important; /* 本文フォントに統一 */
+  margin-bottom: 0px !important; /* タグを吸い付かせる */
+  font-family: 'Noto Sans JP', sans-serif !important;
 }
 
 /* サイト全体の最大幅を上書き */
@@ -270,12 +327,6 @@ h1, h2, h3, .site-title {
   color: var(--text-color) !important;
 }
 
-/* ビデオタイトルだけ個別に本文フォントを適用 */
-.video-item .video-title {
-  font-family: 'Noto Sans JP', sans-serif !important;
-  letter-spacing: 0em !important;
-}
-
 .page-link {
   font-family: 'Montserrat', sans-serif !important;
   color: var(--text-color) !important;
@@ -289,12 +340,15 @@ h1, h2, h3, .site-title {
 .video-grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
-  gap: 30px !important;
+  gap: 60px 40px !important; /* 動画同士の間隔を広く設定 */
 }
 
 .video-item h3 {
+  font-family: 'Noto Sans JP', sans-serif !important;
   font-size: 0.85rem !important;
-  height: 2.6em;
+  /* height固定を解除し、タイトルが1行でもタグがすぐ下に来るようにする */
+  height: auto !important; 
+  min-height: 1.3em;
   overflow: hidden;
   margin-bottom: 0px !important;
   line-height: 1.3;
