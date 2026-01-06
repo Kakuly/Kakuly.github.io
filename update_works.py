@@ -83,7 +83,7 @@ def get_playlist_items():
     return all_items
 
 def update_markdown(items):
-    content = "---\\nlayout: page\\ntitle: Works\\npermalink: /works/\\n---\\n\\n"
+    content = "---\nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
     content += '<div id="filter-container" class="filter-wrapper"></div>\\n\\n'
     content += '<div class="video-grid" id="video-grid">\\n\\n'
     
