@@ -111,7 +111,7 @@ def get_playlist_items():
     return all_items
 
 def update_markdown(items):
-    content = "--- \nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
+    content = "---\nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
     
     # フィルタボタンコンテナ
     content += '<div id="filter-container" class="filter-wrapper"></div>\n\n'
