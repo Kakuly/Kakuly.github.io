@@ -4,7 +4,7 @@ title: Works
 permalink: /works/
 ---
 
-### Music / Mix / Mastering / Movie
+### Arrangement / Music / Lyrics / Mix / Mastering / Movie / Remix /
 
 <div class="video-grid">
 
@@ -18,10 +18,23 @@ permalink: /works/
 </div>
 
 <div class="video-item">
+  <a href="https://www.youtube.com/watch?v=csfPVDnVqiE" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/csfPVDnVqiE/maxresdefault.jpg" alt="ダイアグラム / 初音ミク" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>ダイアグラム / 初音ミク</h3>  <div class="tag-container">
+    <span class="work-tag">Mastering</span>
+  </div>
+</div>
+
+<div class="video-item">
   <a href="https://www.youtube.com/watch?v=XIGbiSGclgA" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/XIGbiSGclgA/maxresdefault.jpg" alt="Departure / 姫野　- tato (cover)" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>Departure / 姫野　- tato (cover)</h3></div>
+  <h3 class='video-title'>Departure / 姫野　- tato (cover)</h3>  <div class="tag-container">
+    <span class="work-tag">Movie</span>
+    <span class="work-tag">Mix</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=cknsKkzA2lM" target="_blank" class="video-link">
@@ -40,9 +53,7 @@ permalink: /works/
     <span class="work-tag">Arrangement</span>
     <span class="work-tag">Music</span>
     <span class="work-tag">Movie</span>
-    <span class="work-tag">Remix</span>
-    <span class="work-tag">Mix</span>
-    <span class="work-tag">Lyric</span>
+    <span class="work-tag">Lyrics</span>
   </div>
 </div>
 
@@ -50,7 +61,11 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=dRd-CYI11fQ" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/dRd-CYI11fQ/maxresdefault.jpg" alt="【 XFD 】Undefined 01" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>【 XFD 】Undefined 01</h3></div>
+  <h3 class='video-title'>【 XFD 】Undefined 01</h3>  <div class="tag-container">
+    <span class="work-tag">Music</span>
+    <span class="work-tag">Lyrics</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=eSfYFhNjiB8" target="_blank" class="video-link">
@@ -66,7 +81,7 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/YOoRO2OVICo/maxresdefault.jpg" alt="1st Album『(EN)CORE』クロスフェード" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>1st Album『(EN)CORE』クロスフェード</h3>  <div class="tag-container">
-    <span class="work-tag">Mix</span>
+    <span class="work-tag">Movie</span>
     <span class="work-tag">Remix</span>
   </div>
 </div>
@@ -77,8 +92,6 @@ permalink: /works/
   </a>
   <h3 class='video-title'>花溺れ / 初音ミク, 花奏かのんβ</h3>  <div class="tag-container">
     <span class="work-tag">Mastering</span>
-    <span class="work-tag">Mix</span>
-    <span class="work-tag">Remix</span>
   </div>
 </div>
 
@@ -106,7 +119,11 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=y7DwWj1gHQE" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/y7DwWj1gHQE/maxresdefault.jpg" alt="映画『カラフルピーチ/魔王と予言の少女』" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>映画『カラフルピーチ/魔王と予言の少女』</h3></div>
+  <h3 class='video-title'>映画『カラフルピーチ/魔王と予言の少女』</h3>  <div class="tag-container">
+    <span class="work-tag">Music</span>
+    <span class="work-tag">Lyrics</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=u3pMZtkugX8" target="_blank" class="video-link">
@@ -114,7 +131,7 @@ permalink: /works/
   </a>
   <h3 class='video-title'>【オリジナル曲】スノーダンス/yuru【Vtuber/Vsinger】</h3>  <div class="tag-container">
     <span class="work-tag">Music</span>
-    <span class="work-tag">Lyric</span>
+    <span class="work-tag">Lyrics</span>
   </div>
 </div>
 
@@ -131,13 +148,20 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=T9oeiJxs2kA" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/T9oeiJxs2kA/maxresdefault.jpg" alt="【マイクラ】サバイバルであった出来事を歌にしてみた【カラフルピーチ】" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>【マイクラ】サバイバルであった出来事を歌にしてみた【カラフルピーチ】</h3></div>
+  <h3 class='video-title'>【マイクラ】サバイバルであった出来事を歌にしてみた【カラフルピーチ】</h3>  <div class="tag-container">
+    <span class="work-tag">Music</span>
+    <span class="work-tag">Lyrics</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=SErUMzCz8sA" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/SErUMzCz8sA/maxresdefault.jpg" alt="［Melodic Dubstep/UKHARDCORE］Kakuly vs Sohukira - Blood of Ainu" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>［Melodic Dubstep/UKHARDCORE］Kakuly vs Sohukira - Blood of Ainu</h3></div>
+  <h3 class='video-title'>［Melodic Dubstep/UKHARDCORE］Kakuly vs Sohukira - Blood of Ainu</h3>  <div class="tag-container">
+    <span class="work-tag">Music</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=tvtcZYBHfiQ" target="_blank" class="video-link">
@@ -161,13 +185,19 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=owXBgyrXQFg" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/owXBgyrXQFg/maxresdefault.jpg" alt="9m" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>9m</h3></div>
+  <h3 class='video-title'>9m</h3>  <div class="tag-container">
+    <span class="work-tag">Arrangement</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=cJ9pKeN1kWI" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/cJ9pKeN1kWI/maxresdefault.jpg" alt="ボカロP１１人がジャンキーナイトタウンオーケストラアレンジリレーしてみた！！" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>ボカロP１１人がジャンキーナイトタウンオーケストラアレンジリレーしてみた！！</h3></div>
+  <h3 class='video-title'>ボカロP１１人がジャンキーナイトタウンオーケストラアレンジリレーしてみた！！</h3>  <div class="tag-container">
+    <span class="work-tag">Remix</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=qLw7EM1W4B4" target="_blank" class="video-link">
@@ -184,8 +214,6 @@ permalink: /works/
   </a>
   <h3 class='video-title'>【 MV 】のんです です！ / SAKURAmoti feat.のんです</h3>  <div class="tag-container">
     <span class="work-tag">Movie</span>
-    <span class="work-tag">Mix</span>
-    <span class="work-tag">Remix</span>
   </div>
 </div>
 
@@ -193,14 +221,17 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=YwjJ9m-KFQA" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/YwjJ9m-KFQA/maxresdefault.jpg" alt="前略" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>前略</h3></div>
+  <h3 class='video-title'>前略</h3>  <div class="tag-container">
+    <span class="work-tag">Arrangement</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=SYBGaIhZri0" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/SYBGaIhZri0/maxresdefault.jpg" alt="lopeto (Mikumix) (feat. Kakuly)" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>lopeto (Mikumix) (feat. Kakuly)</h3>  <div class="tag-container">
-    <span class="work-tag">Mix</span>
+    <span class="work-tag">Arrangemenet</span>
   </div>
 </div>
 
@@ -208,7 +239,10 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=f-atLIqnbdI" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/f-atLIqnbdI/maxresdefault.jpg" alt="【結成】新実況グループ「カラフルピーチ 」" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>【結成】新実況グループ「カラフルピーチ 」</h3></div>
+  <h3 class='video-title'>【結成】新実況グループ「カラフルピーチ 」</h3>  <div class="tag-container">
+    <span class="work-tag">Music</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=4OPusJbC4qg" target="_blank" class="video-link">
@@ -216,6 +250,7 @@ permalink: /works/
   </a>
   <h3 class='video-title'>学生ボカロPがエイリアンエイリアンアレンジリレーしてみた！！</h3>  <div class="tag-container">
     <span class="work-tag">Movie</span>
+    <span class="work-tag">Remix</span>
   </div>
 </div>
 
@@ -225,7 +260,7 @@ permalink: /works/
   </a>
   <h3 class='video-title'>「憂晴ストーム / ゆう。」Official Music Video</h3>  <div class="tag-container">
     <span class="work-tag">Music</span>
-    <span class="work-tag">Lyric</span>
+    <span class="work-tag">Lyrics</span>
   </div>
 </div>
 
@@ -233,7 +268,10 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=n4ieZj-uUF0" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/n4ieZj-uUF0/maxresdefault.jpg" alt="【初音ミクオリジナル曲】復元不能【中学生ボカロP】" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>【初音ミクオリジナル曲】復元不能【中学生ボカロP】</h3></div>
+  <h3 class='video-title'>【初音ミクオリジナル曲】復元不能【中学生ボカロP】</h3>  <div class="tag-container">
+    <span class="work-tag">Movie</span>
+  </div>
+</div>
 
 </div>
 
