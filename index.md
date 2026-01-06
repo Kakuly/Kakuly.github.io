@@ -25,9 +25,9 @@ title: Home
 
 <hr style="width: 50%; margin: 40px auto; border-top: 1px solid var(--text-color); opacity: 0.3;">
 
-CONTACT
-DMonX or
-kakuly.work@gmail.ccom
+<h2>CONTACT</h2><br>
+DMonX or<br>
+kakuly.work@gmail.com<br>
 
 
 <div id="iris-in"></div>
