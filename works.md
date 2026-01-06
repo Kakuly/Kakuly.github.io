@@ -54,15 +54,12 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Lyrics,Mastering,Movie,Music">
+<div class="video-item" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=3WIhsuX1twI" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/3WIhsuX1twI/maxresdefault.jpg" alt="ホロウランド / 可不" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>ホロウランド / 可不</h3>  <div class="tag-container">
-    <span class="work-tag">Lyrics</span>
-    <span class="work-tag">Mastering</span>
     <span class="work-tag">Movie</span>
-    <span class="work-tag">Music</span>
   </div>
 </div>
 
@@ -112,12 +109,11 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mastering,Movie">
+<div class="video-item" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=tpJslyfTvz8" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/tpJslyfTvz8/maxresdefault.jpg" alt="shikisai 2nd Album『WORLDSEND』XFD" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>shikisai 2nd Album『WORLDSEND』XFD</h3>  <div class="tag-container">
-    <span class="work-tag">Mastering</span>
     <span class="work-tag">Movie</span>
   </div>
 </div>
@@ -158,15 +154,12 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Lyrics,Mastering,Movie,Music">
+<div class="video-item" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=gamQG0XaJKU" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/gamQG0XaJKU/maxresdefault.jpg" alt="シャワールーム・ファンタジー / 初音ミク" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>シャワールーム・ファンタジー / 初音ミク</h3>  <div class="tag-container">
-    <span class="work-tag">Lyrics</span>
-    <span class="work-tag">Mastering</span>
     <span class="work-tag">Movie</span>
-    <span class="work-tag">Music</span>
   </div>
 </div>
 
@@ -179,15 +172,12 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Lyrics,Mastering,Movie,Music">
+<div class="video-item" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=LPci3mEA5AA" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/LPci3mEA5AA/maxresdefault.jpg" alt="贅沢と君とカプチーノ / 初音ミク, 鏡音リン" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>贅沢と君とカプチーノ / 初音ミク, 鏡音リン</h3>  <div class="tag-container">
-    <span class="work-tag">Lyrics</span>
-    <span class="work-tag">Mastering</span>
     <span class="work-tag">Movie</span>
-    <span class="work-tag">Music</span>
   </div>
 </div>
 
@@ -200,14 +190,12 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Lyrics,Movie,Music">
+<div class="video-item" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=Lc-TJN8erLk" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/Lc-TJN8erLk/maxresdefault.jpg" alt="晴天のスヌーズ (demo) / 初音ミク" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>晴天のスヌーズ (demo) / 初音ミク</h3>  <div class="tag-container">
-    <span class="work-tag">Lyrics</span>
     <span class="work-tag">Movie</span>
-    <span class="work-tag">Music</span>
   </div>
 </div>
 
@@ -231,15 +219,12 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Lyrics,Mastering,Movie,Music">
+<div class="video-item" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=y3_eKUvco2g" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/y3_eKUvco2g/maxresdefault.jpg" alt="フューチャーノーツ / 初音ミク" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>フューチャーノーツ / 初音ミク</h3>  <div class="tag-container">
-    <span class="work-tag">Lyrics</span>
-    <span class="work-tag">Mastering</span>
     <span class="work-tag">Movie</span>
-    <span class="work-tag">Music</span>
   </div>
 </div>
 
