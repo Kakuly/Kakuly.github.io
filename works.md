@@ -54,15 +54,12 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Lyrics,Mastering,Movie,Music">
+<div class="video-item" data-tags="Mastering">
   <a href="https://www.youtube.com/watch?v=HYdsv2lrAwM" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/HYdsv2lrAwM/maxresdefault.jpg" alt="Laurier - 初音ミク" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>Laurier - 初音ミク</h3>  <div class="tag-container">
-    <span class="work-tag">Lyrics</span>
     <span class="work-tag">Mastering</span>
-    <span class="work-tag">Movie</span>
-    <span class="work-tag">Music</span>
   </div>
 </div>
 
