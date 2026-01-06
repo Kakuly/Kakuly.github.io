@@ -99,7 +99,7 @@ def update_markdown(items):
         content += f'    <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail" loading="lazy">\n'
         content += f'  </a>\n'
 
-        content += f"  <h3 class='video-title'>{title}</h3>\n"
+        content += f"  <h3 class='video-title'>{title}</h3>"
         
         if tags:
             content += '  <div class="tag-container">\n'
