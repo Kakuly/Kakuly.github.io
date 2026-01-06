@@ -113,36 +113,33 @@ def get_playlist_items():
 def update_markdown(items):
     content = "---\nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
     
-    # フィルタボタンコンテナ
     content += '<div id="filter-container" class="filter-wrapper"></div>\n\n'
     content += '<div class="video-grid" id="video-grid">\n\n'
     
     for item in items:
         snippet = item['snippet']
-        raw_title = snippet['title']
-        title = html.escape(raw_title)
-        description = snippet['description']
+        title = html.escape(snippet['title'])
         video_id = snippet['resourceId']['videoId']
         
-        # 基本は最高画質(maxresdefault)を指定。失敗時はJSのonerrorで補完する
-        thumbnail_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
-        # 予備のURL（必ず存在する標準画質）
-        fallback_url = f"https://img.youtube.com/vi/{video_id}/hqdefault.jpg"
+        # サムネイルURLを確実なドメイン(i.ytimg.com)に統一
+        # maxres(最高画質)を指定し、エラー時は hq(標準高画質)に差し替える
+        thumb_max = f"https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg"
+        thumb_fallback = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"
         
-        tags = get_tags(video_id, title, description)
+        tags = get_tags(video_id, title, snippet['description'])
         tags_attr = ",".join(tags) if tags else ""
         
         content += f'<div class="video-item" data-tags="{tags_attr}">\n'
-        content += f'<a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
-        # ここに onerror 処理を追加：読み込みに失敗したら fallback_url に差し替える
-        content += f'<img src="{thumbnail_url}" alt="{title}" class="video-thumbnail" loading="lazy" onerror="this.src=\'{fallback_url}\'; this.onerror=null;">\n'
-        content += f'</a>\n'
-        content += f"<h3 class='video-title'>{title}</h3>"
+        content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
+        # onerrorの中身をより確実に動作する記述に変更
+        content += f'    <img src="{thumb_max}" alt="{title}" class="video-thumbnail" loading="lazy" onerror="if(this.src!=\'{thumb_fallback}\')this.src=\'{thumb_fallback}\';">\n'
+        content += f'  </a>\n'
+        content += f"  <h3 class='video-title'>{title}</h3>"
         if tags:
-            content += '<div class="tag-container">\n'
+            content += '  <div class="tag-container">\n'
             for tag in tags:
-                content += f'<span class="work-tag">{tag}</span>\n'
-            content += '</div>\n'
+                content += f'    <span class="work-tag">{tag}</span>\n'
+            content += '  </div>\n'
         content += '</div>\n\n'
 
     content += '</div>\n\n'
