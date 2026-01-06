@@ -35,13 +35,15 @@ def get_tags_from_ai(title, description):
         動画タイトル: {title}
         概要欄抜粋: {description[:500]}
 
-        【検索の指示】
+        【検索,特定の指示】
         1. Google検索でこの動画のクレジット（X, YouTube, 楽曲データベース）を調べてください。
         2. 「Kakuly」または「かくり」が担当した役割（Mix, Arrangement, Mastering, Movie, Music, Lyrics, Remix）を特定してください。
         3. 他人の担当（例: Vocal: ○○, Illust: △△）は絶対に除外してください。
         4. XFD作品は、高確率でXFD映像を作っているか、そのアルバムにオリジナル曲orリミックス　またはその両方で参加している可能性が高いです。
         5. アルバムに参加している場合にも、Musicに割り振ってください
-        6. その動画のタイトルや概要欄を参照してみてもいいです。
+        6. 基本的には概要欄やタイトルを参照し、不十分である場合検索をしっかりとかけてください
+        7. タグがないことはありえません。
+        8. MixとRemixは全く別物です、かつ同時につくことはほとんどないです。
         
         【出力形式】
         英語のタグのみをカンマ区切りで。該当なしは「None」。
@@ -96,6 +98,9 @@ def update_markdown(items):
         content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
         content += f'    <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail" loading="lazy">\n'
         content += f'  </a>\n'
+
+        content += f"  <h3 class='video-title'>{title}</h3>\n"
+        content += '</div>\n\n'
         
         if tags:
             content += '  <div class="tag-container">\n'
@@ -103,8 +108,6 @@ def update_markdown(items):
                 content += f'    <span class="work-tag">{tag}</span>\n'
             content += '  </div>\n'
             
-        content += f"  <h3 class='video-title'>{title}</h3>\n"
-        content += '</div>\n\n'
 
     content += '</div>\n\n'
 
@@ -120,7 +123,7 @@ def update_markdown(items):
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
+  gap: 10px;
 }
 .work-tag {
   font-size: 0.57rem;
