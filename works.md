@@ -42,9 +42,10 @@ permalink: /works/
   <div class="tag-container">
     <span class="work-tag">Arrangement</span>
     <span class="work-tag">Lyric</span>
-    <span class="work-tag">Music</span>
     <span class="work-tag">Movie</span>
+    <span class="work-tag">Music</span>
     <span class="work-tag">Mix</span>
+    <span class="work-tag">Remix</span>
   </div>
   <h3 class='video-title'>HyperPopCorn!! / 初音ミク - shikisai × Kakuly</h3>
 </div>
@@ -72,6 +73,7 @@ permalink: /works/
   </a>
   <div class="tag-container">
     <span class="work-tag">Mix</span>
+    <span class="work-tag">Remix</span>
   </div>
   <h3 class='video-title'>1st Album『(EN)CORE』クロスフェード</h3>
 </div>
@@ -83,6 +85,7 @@ permalink: /works/
   <div class="tag-container">
     <span class="work-tag">Mix</span>
     <span class="work-tag">Mastering</span>
+    <span class="work-tag">Remix</span>
   </div>
   <h3 class='video-title'>花溺れ / 初音ミク, 花奏かのんβ</h3>
 </div>
@@ -92,8 +95,8 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/bqMBuLzCyMc/maxresdefault.jpg" alt="Akari24 - 言葉は魔法みたい / feat.初音ミク" class="video-thumbnail" loading="lazy">
   </a>
   <div class="tag-container">
-    <span class="work-tag">Arrangement</span>
     <span class="work-tag">Movie</span>
+    <span class="work-tag">Arrangement</span>
   </div>
   <h3 class='video-title'>Akari24 - 言葉は魔法みたい / feat.初音ミク</h3>
 </div>
@@ -103,8 +106,8 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/XsjuHvYlRyc/maxresdefault.jpg" alt="SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)" class="video-thumbnail" loading="lazy">
   </a>
   <div class="tag-container">
-    <span class="work-tag">Mastering</span>
     <span class="work-tag">Movie</span>
+    <span class="work-tag">Mastering</span>
   </div>
   <h3 class='video-title'>SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)</h3>
 </div>
@@ -207,8 +210,8 @@ permalink: /works/
   gap: 7px;
 }
 .work-tag {
-  font-size: 0.65rem;
-  padding: 4px 12px;
+  font-size: 0.57rem;
+  padding: 1px 6px;
   border-radius: 4px;
   border: 0.5px solid var(--text-color);
   opacity: 0.88;
