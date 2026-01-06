@@ -8,51 +8,51 @@ GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 PLAYLIST_ID = 'PLH9mX0wDlDAou_YCjcU01Q3pR6cCRQPWS'
 FILE_PATH = 'works.md'
 
-# Geminiの設定
+# Geminiの設定（検索ツールを有効化）
+model = None
 if GEMINI_API_KEY:
-    genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    try:
+        genai.configure(api_key=GEMINI_API_KEY)
+        # Google検索ツールをモデルにセット
+        model = genai.GenerativeModel(
+            model_name='gemini-1.5-flash',
+            tools=[{'google_search_retrieval': {}}]
+        )
+    except:
+        model = None
 
 def get_tags_from_ai(title, description):
     tags = []
     
-    # AI判定を優先する（AIは文脈を読めるので、他人の担当を除外してくれます）
-    if GEMINI_API_KEY:
+    # 1. AI判定（ウェブ検索による裏取り付き）
+    if model:
         prompt = f"""
-            以下のYouTube動画のタイトルと概要欄から、制作者（Kakuly / かくり）が担当した役割を抽出してください。
+            以下のYouTube動画について、ネット検索を活用して「Kakuly（かくり）」という人物が実際に担当した役割を特定してください。
             
-            【重要なルール】
-            1. 「Mix: ○○」のように、Kakuly以外の名前が併記されている役割は絶対に含めないでください。
-            2. Kakuly（かくり）本人が担当したことが明らかな役割のみを抽出してください。
-            3. 役割（Mix, Arrangement, Mastering, Movie, Music, Lyrics, Remix）を英語で、カンマ区切りで返してください。
-            4. 該当なし、または確証がない場合は「None」とだけ返してください。
-            - Kakuly だけでなく「かくり」「かくりー」という表記も同一人物です。逆にそれ以外は他人。
-            - もしクレジットに名前がなくても、”タイトル”に「Kakuly」が含まれている場合、その動画の Music や Arrangement を担当している可能性が高いです。
-            - タイトルに含まれていないなら可能性は低いです
-            - XFDと書かれている場合は、そのXFDの映像を作っている場合と、そのアルバム自体にオリジナル曲またはリミックスで参加している可能性が大きいです。
-            - 「調声」はアレンジメントに入りません
-            - 「○○ vs Kakuly」「○○ × Kakuly」「feat.Kakuly」のようなタイトルの場合は99% 音楽です
-            -　
-            
+            【対象動画】
             タイトル: {title}
-            概要欄: {description}
+            
+            【判定のルール】
+            1. 概要欄の情報だけでなく、必要に応じてこの動画のクレジット情報をネットで検索して確認してください。
+            2. 「Kakuly / かくり」本人が担当した役割（Mix, Arrangement, Mastering, Movie, Music, Lyric）のみを抽出してください。
+            3. 他のクリエイターの担当役割は絶対に含めないでください。
+            4. 役割を英語で、カンマ区切りで返してください（例: Mix, Mastering）。
+            5. 確証がない、または担当が不明な場合は「None」とだけ返してください。
+            6. 余計な解説は不要です。
         """
         try:
             response = model.generate_content(prompt)
             result = response.text.strip()
-            if result != "None":
-                # AIが「Mix, Mastering」と返してきたらそれを採用
+            if result != "None" and result != "":
                 return [t.strip() for t in result.split(',')]
         except:
-            pass # AIがエラーの時だけ下のキーワード判定へ
+            pass
 
-    # --- AIが使えない、またはエラーの時のバックアップ判定 ---
-    # 単純に単語があるかではなく「Kakuly」という文字列が含まれている場合のみ、
-    # 最低限のキーワード（Mix等）をタイトルから探すなど、精度を上げた判定にします。
+    # 2. バックアップ：AIが失敗した時の簡易キーワード判定
     text = (title + description).lower()
     if 'kakuly' in text or 'かくり' in text:
         if any(k in text for k in ['mix', 'ミックス']): tags.append('Mix')
-        if any(k in text for k in ['arrang', '編曲']): tags.append('Arrangement')
+        if any(k in text for k in ['arrang', '編曲', 'arrange']): tags.append('Arrangement')
         if any(k in text for k in ['master', 'マスタリング']): tags.append('Mastering')
         if any(k in text for k in ['movie', '映像', '動画']): tags.append('Movie')
         if any(k in text for k in ['music', '作曲']): tags.append('Music')
@@ -61,16 +61,19 @@ def get_tags_from_ai(title, description):
 
 def get_playlist_items():
     url = f"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId={PLAYLIST_ID}&key={API_KEY}"
-    response = requests.get(url).json()
-    return response.get('items', [])
+    try:
+        response = requests.get(url).json()
+        return response.get('items', [])
+    except:
+        return []
 
 def update_markdown(items):
-    # --- 1. ヘッダー部分 ---
+    # ヘッダー
     content = "--- \nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
     content += "### Music / Mix / Mastering / Movie\n\n"
     content += '<div class="video-grid">\n\n'
     
-    # --- 2. 動画リスト部分 ---
+    # 動画リスト
     for item in items:
         snippet = item['snippet']
         title = snippet['title']
@@ -96,10 +99,9 @@ def update_markdown(items):
 
     content += '</div>\n\n'
 
-    # --- 3. 演出用パーツとデザイン（一切変更なし） ---
+    # --- デザイン・演出パーツ（ここから下は一切変更していません） ---
     content += '<div id="iris-in"></div>'
     content += '<div id="iris-out"></div>'
-
     content += """
 <style>
 /* 追加したタグのスタイル */
@@ -327,4 +329,4 @@ if __name__ == "__main__":
     items = get_playlist_items()
     if items:
         update_markdown(items)
-        print("Successfully updated works.md with AI tags")
+        print("Successfully updated works.md with Search-based AI tags")
