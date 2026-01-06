@@ -144,22 +144,35 @@ kakuly.work@gmail.com<br>
   /* 7. 不要な要素の削除（Worksと同じ） */
   .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
 
-  /* 8. モード切り替えボタン（Worksと同じ） */
-  #mode-toggle {
-    cursor: pointer;
-    background: none;
-    border: 1px solid var(--text-color);
-    color: var(--text-color);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    position: fixed;
-    top: 15px;
-    right: 20px;
-    z-index: 9999;
-    font-weight: bold;
-    font-family: 'Montserrat', sans-serif !important;
-  }
+/* --- モード切替ボタンの設定（レスポンシブ対応） --- */
+#mode-toggle { 
+    cursor: pointer; 
+    background: transparent; 
+    border: 1px solid var(--text-color); 
+    color: var(--text-color); 
+    padding: 6px 16px; 
+    border-radius: 20px; 
+    font-size: 0.75rem; 
+    position: fixed; 
+    top: 15px; 
+    right: 20px; 
+    z-index: 9999; 
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif !important; /* フォントを明示的に指定 */
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* 画面幅が1300px以下になったら右下に移動 */
+@media screen and (max-width: 1500px) {
+    #mode-toggle {
+        top: auto !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* 下に移動したときに見やすく */
+    }
+}
 
   /* スマホ対応 */
   @media (max-width: 800px) {
