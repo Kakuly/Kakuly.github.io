@@ -38,11 +38,11 @@ permalink: /works/
   </a>
   <h3 class='video-title'>HyperPopCorn!! / 初音ミク - shikisai × Kakuly</h3>  <div class="tag-container">
     <span class="work-tag">Music</span>
+    <span class="work-tag">Lyric</span>
+    <span class="work-tag">Mix</span>
     <span class="work-tag">Arrangement</span>
     <span class="work-tag">Remix</span>
     <span class="work-tag">Movie</span>
-    <span class="work-tag">Mix</span>
-    <span class="work-tag">Lyric</span>
   </div>
 </div>
 
@@ -66,8 +66,8 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/YOoRO2OVICo/maxresdefault.jpg" alt="1st Album『(EN)CORE』クロスフェード" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>1st Album『(EN)CORE』クロスフェード</h3>  <div class="tag-container">
-    <span class="work-tag">Mix</span>
     <span class="work-tag">Remix</span>
+    <span class="work-tag">Mix</span>
   </div>
 </div>
 
@@ -76,9 +76,9 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/Z7OQL1hQ5WY/maxresdefault.jpg" alt="花溺れ / 初音ミク, 花奏かのんβ" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>花溺れ / 初音ミク, 花奏かのんβ</h3>  <div class="tag-container">
-    <span class="work-tag">Mix</span>
-    <span class="work-tag">Remix</span>
     <span class="work-tag">Mastering</span>
+    <span class="work-tag">Remix</span>
+    <span class="work-tag">Mix</span>
   </div>
 </div>
 
@@ -87,8 +87,8 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/bqMBuLzCyMc/maxresdefault.jpg" alt="Akari24 - 言葉は魔法みたい / feat.初音ミク" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>Akari24 - 言葉は魔法みたい / feat.初音ミク</h3>  <div class="tag-container">
-    <span class="work-tag">Arrangement</span>
     <span class="work-tag">Movie</span>
+    <span class="work-tag">Arrangement</span>
   </div>
 </div>
 
@@ -97,8 +97,8 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/XsjuHvYlRyc/maxresdefault.jpg" alt="SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)</h3>  <div class="tag-container">
-    <span class="work-tag">Movie</span>
     <span class="work-tag">Mastering</span>
+    <span class="work-tag">Movie</span>
   </div>
 </div>
 
@@ -184,7 +184,7 @@ permalink: /works/
 <style>
 /* 追加したタグのスタイル */
 .tag-container {
-  margin-top: 4px; /* タイトルとの隙間 */
+  margin-top: 2px;
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
@@ -214,13 +214,14 @@ permalink: /works/
 
 .video-title {
   margin-top: 10px;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 0.9rem; /* 本文のサイズ感に調整 */
+  font-weight: 700;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-bottom: 0px !important; /* タグを吸い付かせる */
+  margin-bottom: 0px !important;
+  font-family: 'Noto Sans JP', sans-serif !important; /* 本文フォントに統一 */
 }
 
 /* サイト全体の最大幅を上書き */
@@ -269,6 +270,12 @@ h1, h2, h3, .site-title {
   color: var(--text-color) !important;
 }
 
+/* ビデオタイトルだけ個別に本文フォントを適用 */
+.video-item .video-title {
+  font-family: 'Noto Sans JP', sans-serif !important;
+  letter-spacing: 0em !important;
+}
+
 .page-link {
   font-family: 'Montserrat', sans-serif !important;
   color: var(--text-color) !important;
@@ -282,16 +289,12 @@ h1, h2, h3, .site-title {
 .video-grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
-  gap: 60px 40px !important; /* 動画同士の間隔を広げる */
+  gap: 30px !important;
 }
 
-/* ビデオタイトルに本文フォントを適用 */
 .video-item h3 {
-  font-family: 'Noto Sans JP', sans-serif !important;
   font-size: 0.85rem !important;
-  /* height固定を解除し、タイトルが1行でもタグがすぐ下に来るようにする */
-  height: auto !important; 
-  min-height: 1.3em;
+  height: 2.6em;
   overflow: hidden;
   margin-bottom: 0px !important;
   line-height: 1.3;
