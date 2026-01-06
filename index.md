@@ -23,6 +23,12 @@ title: Home
 エレクトロポップ／ハイパーポップを中心に、たくさん迷いながら音楽を作っている。
 元気に生きるために音楽を摂取します。いつもありがとう。
 
+<hr style="width: 50%; margin: 40px auto; border-top: 1px solid var(--text-color); opacity: 0.3;">
+
+CONTACT
+DMonX or
+kakuly.work@gmail.ccom
+
 
 <div id="iris-in"></div>
 <div id="iris-out"></div>
