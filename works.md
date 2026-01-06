@@ -13,9 +13,9 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/p4M5wHkNHmc/maxresdefault.jpg" alt="「pluie.」feat. mare - Official Video" class="video-thumbnail" loading="lazy">
   </a>
   <div class="tag-container">
-    <span class="work-tag">Music</span>
-    <span class="work-tag">Movie</span>
     <span class="work-tag">Mix</span>
+    <span class="work-tag">Movie</span>
+    <span class="work-tag">Music</span>
   </div>
   <h3 class='video-title'>「pluie.」feat. mare - Official Video</h3>
 </div>
@@ -25,8 +25,8 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/XIGbiSGclgA/maxresdefault.jpg" alt="Departure / 姫野　- tato (cover)" class="video-thumbnail" loading="lazy">
   </a>
   <div class="tag-container">
-    <span class="work-tag">Movie</span>
     <span class="work-tag">Mix</span>
+    <span class="work-tag">Movie</span>
   </div>
   <h3 class='video-title'>Departure / 姫野　- tato (cover)</h3>
 </div>
@@ -37,8 +37,8 @@ permalink: /works/
   </a>
   <div class="tag-container">
     <span class="work-tag">Mastering</span>
-    <span class="work-tag">Music</span>
     <span class="work-tag">Arrangement</span>
+    <span class="work-tag">Music</span>
   </div>
   <h3 class='video-title'>サ終あざした / 重音テトSV</h3>
 </div>
@@ -48,11 +48,11 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/zAURwtz_AY4/maxresdefault.jpg" alt="HyperPopCorn!! / 初音ミク - shikisai × Kakuly" class="video-thumbnail" loading="lazy">
   </a>
   <div class="tag-container">
-    <span class="work-tag">Movie</span>
     <span class="work-tag">Mix</span>
+    <span class="work-tag">Movie</span>
+    <span class="work-tag">Music</span>
     <span class="work-tag">Mastering</span>
     <span class="work-tag">Arrangement</span>
-    <span class="work-tag">Music</span>
   </div>
   <h3 class='video-title'>HyperPopCorn!! / 初音ミク - shikisai × Kakuly</h3>
 </div>
@@ -70,8 +70,8 @@ permalink: /works/
   </a>
   <div class="tag-container">
     <span class="work-tag">Movie</span>
-    <span class="work-tag">Music</span>
     <span class="work-tag">Arrangement</span>
+    <span class="work-tag">Music</span>
   </div>
   <h3 class='video-title'>Akari24 - Crack Cat / feat.初音ミク</h3>
 </div>
@@ -91,10 +91,10 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/Z7OQL1hQ5WY/maxresdefault.jpg" alt="花溺れ / 初音ミク, 花奏かのんβ" class="video-thumbnail" loading="lazy">
   </a>
   <div class="tag-container">
-    <span class="work-tag">Music</span>
-    <span class="work-tag">Movie</span>
     <span class="work-tag">Mix</span>
     <span class="work-tag">Mastering</span>
+    <span class="work-tag">Movie</span>
+    <span class="work-tag">Music</span>
   </div>
   <h3 class='video-title'>花溺れ / 初音ミク, 花奏かのんβ</h3>
 </div>
@@ -105,8 +105,8 @@ permalink: /works/
   </a>
   <div class="tag-container">
     <span class="work-tag">Movie</span>
-    <span class="work-tag">Music</span>
     <span class="work-tag">Arrangement</span>
+    <span class="work-tag">Music</span>
   </div>
   <h3 class='video-title'>Akari24 - 言葉は魔法みたい / feat.初音ミク</h3>
 </div>
@@ -116,8 +116,8 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/XsjuHvYlRyc/maxresdefault.jpg" alt="SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)" class="video-thumbnail" loading="lazy">
   </a>
   <div class="tag-container">
-    <span class="work-tag">Movie</span>
     <span class="work-tag">Mastering</span>
+    <span class="work-tag">Movie</span>
   </div>
   <h3 class='video-title'>SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)</h3>
 </div>
@@ -134,9 +134,9 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/u3pMZtkugX8/maxresdefault.jpg" alt="【オリジナル曲】スノーダンス/yuru【Vtuber/Vsinger】" class="video-thumbnail" loading="lazy">
   </a>
   <div class="tag-container">
-    <span class="work-tag">Music</span>
-    <span class="work-tag">Movie</span>
     <span class="work-tag">Mix</span>
+    <span class="work-tag">Movie</span>
+    <span class="work-tag">Music</span>
   </div>
   <h3 class='video-title'>【オリジナル曲】スノーダンス/yuru【Vtuber/Vsinger】</h3>
 </div>
@@ -173,8 +173,8 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/tvtcZYBHfiQ/maxresdefault.jpg" alt="バットプロローグ/ONE" class="video-thumbnail" loading="lazy">
   </a>
   <div class="tag-container">
-    <span class="work-tag">Music</span>
     <span class="work-tag">Arrangement</span>
+    <span class="work-tag">Music</span>
   </div>
   <h3 class='video-title'>バットプロローグ/ONE</h3>
 </div>
