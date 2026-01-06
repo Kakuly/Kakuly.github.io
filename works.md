@@ -37,6 +37,15 @@ permalink: /works/
 </div>
 
 <div class="video-item">
+  <a href="https://www.youtube.com/watch?v=OBkLjALyriw" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/OBkLjALyriw/maxresdefault.jpg" alt="街の残像 / 可不 × あばらや【YouTube Music Weekend 10.0】" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>街の残像 / 可不 × あばらや【YouTube Music Weekend 10.0】</h3>  <div class="tag-container">
+    <span class="work-tag">Mastering</span>
+  </div>
+</div>
+
+<div class="video-item">
   <a href="https://www.youtube.com/watch?v=cknsKkzA2lM" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/cknsKkzA2lM/maxresdefault.jpg" alt="サ終あざした / 重音テトSV" class="video-thumbnail" loading="lazy">
   </a>
