@@ -92,7 +92,7 @@ def get_tags(video_id, title, description):
                 if any(k in l_lower for k in ['master', 'マスタリング']): tags.append('Mastering')
                 if any(k in l_lower for k in ['movie', '映像', '動画']): tags.append('Movie')
                 if any(k in l_lower for k in ['music', '作曲']): tags.append('Music')
-                if any(k in l_lower for k in ['lyric', '作詞']): tags.append('Lyric')
+                if any(k in l_lower for k in ['lyric', '作詞']): tags.append('Lyrics')
                 if any(k in l_lower for k in ['remix', 'リミックス']): tags.append('Remix')
     
     # 判定結果を「人間が分かりやすいようにタイトル付き」でキャッシュ保存
@@ -130,7 +130,7 @@ def get_playlist_items():
 
 def update_markdown(items):
     content = "--- \nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
-    content += "### Music / Mix / Mastering / Movie\n\n"
+    content += "### Arrangement / Music / Lyrics / Mix / Mastering / Movie / Remix /\n\n"
     content += '<div class="video-grid">\n\n'
     
     for item in items:
