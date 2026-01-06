@@ -25,9 +25,9 @@ title: Home
 
 <hr style="width: 50%; margin: 40px auto; border-top: 1px solid var(--text-color); opacity: 0.3;">
 
-<h2>CONTACT</h2></p><br>
-DM　on　X or</p><br>
-kakuly.work@gmail.com</p><br>
+<h2>CONTACT</h2><br>
+DM　on　X or<br>
+kakuly.work@gmail.com<br>
 
 
 <div id="iris-in"></div>
