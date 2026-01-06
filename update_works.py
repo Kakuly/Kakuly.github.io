@@ -146,7 +146,10 @@ def update_markdown(items):
     
     for item in items:
         snippet = item['snippet']
-        title = snippet['title']
+        raw_title = snippet['title']
+        # --- ここでタイトルをエスケープして混同を防ぐ ---
+        title = html.escape(raw_title)
+        
         description = snippet['description']
         video_id = snippet['resourceId']['videoId']
         thumbnail_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
