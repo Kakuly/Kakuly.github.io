@@ -24,6 +24,7 @@ jobs:
       - name: Run script
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python update_works.py
       - name: Commit and Push
         run: |
