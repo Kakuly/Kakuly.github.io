@@ -1,8 +1,8 @@
 import os
 import json
 import requests
-from google import genai 
-import html 
+import google.generativeai as genai
+import html # タイトルの混同を避けるためのインポートを確実に追加
 
 # --- 設定 ---
 API_KEY = os.environ['YOUTUBE_API_KEY']
@@ -148,7 +148,7 @@ def update_markdown(items):
     for item in items:
         snippet = item['snippet']
         raw_title = snippet['title']
-        # --- ここでタイトルをエスケープして混同を防ぐ ---
+        # --- タイトルをエスケープしてダブルクォーテーションの混同を防止 ---
         title = html.escape(raw_title)
         
         description = snippet['description']
