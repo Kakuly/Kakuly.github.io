@@ -76,12 +76,11 @@ def get_playlist_items():
     all_items = []
     next_page_token = None
     while True:
-        url = f"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId={PLAYLIST_ID}&key={API_KEY}"
+        url = f"https://www.googleapis.com/googleapis/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId={PLAYLIST_ID}&key={API_KEY}"
         if next_page_token: url += f"&pageToken={next_page_token}"
         try:
             r = requests.get(url).json()
             items = r.get('items', [])
-            if not items: break
             all_items.extend(items)
             next_page_token = r.get('nextPageToken')
             if not next_page_token: break
@@ -102,7 +101,7 @@ def update_markdown(items):
         tags = get_tags(video_id, title, snippet['description'])
         tags_attr = ",".join(tags) if tags else ""
         
-        content += f'<div class="video-item" data-tags="{tags_attr}">\\n'
+        content += f'<div class="video-item show" data-tags="{tags_attr}">\\n'
         content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\\n'
         content += f'    <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail" loading="lazy">\\n'
         content += f'  </a>\\n'
@@ -117,7 +116,7 @@ def update_markdown(items):
 
     content += """
 <style>
-/* --- フィルタUI (完全復元) --- */
+/* --- フィルタUI --- */
 .filter-wrapper { margin-bottom: 40px; display: flex; flex-wrap: wrap; gap: 12px; }
 .filter-btn {
   cursor: pointer; font-family: 'Montserrat', sans-serif !important; font-weight: 700 !important;
@@ -126,17 +125,22 @@ def update_markdown(items):
 }
 .filter-btn.active { opacity: 1; background: var(--text-color); color: var(--bg-color); }
 
-/* --- アニメーション制御 (ぼやけ防止) --- */
-.video-item { 
-  display: block; 
+/* --- 詰まる動き用のアニメーション設定 --- */
+.video-item {
+  display: block;
   opacity: 1; 
-  /* ぼやけ防止のため transform 以外は transition に入れない。will-change も削除 */
-  transition: opacity 0.4s ease-out; 
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
-.video-item.hide-anim { opacity: 0; pointer-events: none; }
-.video-item.hidden { display: none; }
+.video-item.hide-anim {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+.video-item.hidden {
+  display: none;
+}
 
-/* --- 元のデザイン設定 (フォントサイズ、マージンを完全復元) --- */
+/* --- 元のデザイン設定 (完全維持) --- */
 .tag-container { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 5px; }
 .work-tag { font-size: 0.57rem; padding: 1px 6px; border-radius: 4px; border: 0.5px solid var(--text-color); opacity: 0.88; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
 .video-thumbnail { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -146,7 +150,7 @@ def update_markdown(items):
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
 :root { --bg-color: #ffffff; --text-color: #111111; }
 html.dark-mode, body.dark-mode { --bg-color: #000000; --text-color: #eeeeee; background-color: #000000 !important; }
-body { background-color: var(--bg-color) !important; color: var(--text-color) !important; font-family: 'Noto Sans JP', sans-serif !important; font-weight: 700 !important; margin: 0; }
+body { background-color: var(--bg-color) !important; color: var(--text-color) !important; font-family: 'Noto Sans JP', sans-serif !important; font-weight: 700 !important; }
 .video-grid { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important; gap: 60px 40px !important; }
 .video-item h3 { font-family: 'Noto Sans JP', sans-serif !important; font-size: 0.85rem !important; height: auto !important; min-height: 1.3em; overflow: hidden; margin-bottom: 0px !important; line-height: 1.3; }
 #mode-toggle { cursor: pointer; background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; position: fixed; top: 15px; right: 20px; z-index: 9999; font-weight: bold; }
@@ -160,110 +164,112 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const grid = document.getElementById('video-grid');
-  if (!grid) return;
-  const items = Array.from(grid.querySelectorAll('.video-item'));
-  const filterContainer = document.getElementById('filter-container');
-  const activeFilters = new Set();
-  const allTags = new Set();
+  document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('video-grid');
+    const items = Array.from(grid.querySelectorAll('.video-item'));
+    const filterContainer = document.getElementById('filter-container');
+    const activeFilters = new Set();
+    const allTags = new Set();
 
-  items.forEach(item => {
-    const tags = item.dataset.tags.split(',').filter(t => t);
-    tags.forEach(t => allTags.add(t));
-  });
-
-  Array.from(allTags).sort().forEach(tag => {
-    const btn = document.createElement('button');
-    btn.className = 'filter-btn';
-    btn.textContent = tag;
-    btn.onclick = () => {
-      btn.classList.toggle('active');
-      if (activeFilters.has(tag)) activeFilters.delete(tag);
-      else activeFilters.add(tag);
-      applyFilter();
-    };
-    filterContainer.appendChild(btn);
-  });
-
-  function applyFilter() {
-    // 1. 位置の記録
-    const firstPositions = items.map(item => {
-      const rect = item.getBoundingClientRect();
-      return { top: rect.top, left: rect.left };
-    });
-
-    // 2. 状態の変更
     items.forEach(item => {
-      const itemTags = item.dataset.tags.split(',');
-      const isMatch = activeFilters.size === 0 || Array.from(activeFilters).some(f => itemTags.includes(f));
-      if (isMatch) {
-        item.classList.remove('hidden', 'hide-anim');
-      } else {
-        item.classList.add('hide-anim');
-        setTimeout(() => { if (item.classList.contains('hide-anim')) item.classList.add('hidden'); }, 400);
-      }
+      const tags = item.dataset.tags.split(',').filter(t => t);
+      tags.forEach(t => allTags.add(t));
     });
 
-    // 3. FLIPアニメーション
-    requestAnimationFrame(() => {
-      items.forEach((item, i) => {
-        if (item.classList.contains('hidden') || item.classList.contains('hide-anim')) return;
-        
-        const lastPos = item.getBoundingClientRect();
-        const firstPos = firstPositions[i];
-        const dx = firstPos.left - lastPos.left;
-        const dy = firstPos.top - lastPos.top;
+    Array.from(allTags).sort().forEach(tag => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-btn';
+      btn.textContent = tag;
+      btn.onclick = () => {
+        btn.classList.toggle('active');
+        if (activeFilters.has(tag)) activeFilters.delete(tag);
+        else activeFilters.add(tag);
+        applyFilter();
+      };
+      filterContainer.appendChild(btn);
+    });
 
-        if (dx !== 0 || dy !== 0) {
-          // 移動をJSのWeb Animations APIで行う（CSS transitionよりぼやけにくい）
-          item.animate([
-            { transform: `translate(${dx}px, ${dy}px)` },
-            { transform: 'translate(0, 0)' }
-          ], {
-            duration: 600,
-            easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
-            fill: 'both'
-          });
+    function applyFilter() {
+      // 1. 移動前の位置を記録 (First)
+      const firstPositions = items.map(item => item.getBoundingClientRect());
+
+      // 2. 表示状態を切り替える (Last)
+      items.forEach(item => {
+        const itemTags = item.dataset.tags.split(',');
+        const isMatch = activeFilters.size === 0 || Array.from(activeFilters).some(f => itemTags.includes(f));
+        
+        if (isMatch) {
+          item.classList.remove('hidden', 'hide-anim');
+        } else {
+          item.classList.add('hide-anim');
+          // フェードアウト後に存在を消す
+          setTimeout(() => {
+            if (item.classList.contains('hide-anim')) item.classList.add('hidden');
+          }, 400);
         }
       });
-    });
-  }
-});
 
-// モードトグルと演出 (完全維持)
-const btn = document.getElementById('mode-toggle');
-const body = document.body;
-const htmlEl = document.documentElement;
-if (localStorage.getItem('theme') === 'dark') { htmlEl.classList.add('dark-mode'); body.classList.add('dark-mode'); btn.textContent = '☀️ Light Mode'; }
-btn.addEventListener('click', () => {
-  body.classList.add('mode-transition');
-  const isDark = htmlEl.classList.toggle('dark-mode');
-  body.classList.toggle('dark-mode');
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
-  setTimeout(() => body.classList.remove('mode-transition'), 500);
-});
-function startIris() {
-  body.classList.remove('is-opening', 'is-exiting');
-  requestAnimationFrame(() => setTimeout(() => body.classList.add('is-opening'), 50));
-}
-window.addEventListener('pageshow', startIris);
-document.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', (e) => {
-    const href = link.getAttribute('href');
-    if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
-    e.preventDefault(); body.classList.add('is-exiting');
-    setTimeout(() => window.location.href = href, 800);
+      // 3. ブラウザが再配置した後の位置との差分をアニメーションさせる (Invert & Play)
+      // requestAnimationFrameを2回使い、DOMの更新を待つ
+      requestAnimationFrame(() => {
+        items.forEach((item, i) => {
+          if (item.classList.contains('hidden')) return;
+
+          const lastPos = item.getBoundingClientRect();
+          const firstPos = firstPositions[i];
+
+          const dx = firstPos.left - lastPos.left;
+          const dy = firstPos.top - lastPos.top;
+
+          if (dx !== 0 || dy !== 0) {
+            // 元の位置に瞬時に戻し、そこからアニメーションで移動させる
+            item.style.transition = 'none';
+            item.style.transform = `translate(${dx}px, ${dy}px)`;
+            
+            requestAnimationFrame(() => {
+              item.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease';
+              item.style.transform = 'translate(0, 0)';
+            });
+          }
+        });
+      });
+    }
   });
-});
+
+  // ダークモード / 演出ロジック (既存維持)
+  const btn = document.getElementById('mode-toggle');
+  const body = document.body;
+  const htmlEl = document.documentElement;
+  if (localStorage.getItem('theme') === 'dark') {
+    htmlEl.classList.add('dark-mode'); body.classList.add('dark-mode'); btn.textContent = '☀️ Light Mode';
+  }
+  btn.addEventListener('click', () => {
+    body.classList.add('mode-transition');
+    const isDark = htmlEl.classList.toggle('dark-mode');
+    body.classList.toggle('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+    setTimeout(() => body.classList.remove('mode-transition'), 500);
+  });
+  function startIris() {
+    body.classList.remove('is-opening', 'is-exiting');
+    requestAnimationFrame(() => setTimeout(() => body.classList.add('is-opening'), 50));
+  }
+  window.addEventListener('pageshow', startIris);
+  document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
+      e.preventDefault(); body.classList.add('is-exiting');
+      setTimeout(() => window.location.href = href, 800);
+    });
+  });
 </script>
+<button id="mode-toggle">🌙 Dark Mode</button>
 """
 
     with open(FILE_PATH, 'w', encoding='utf-8') as f:
         f.write(content)
-        f.flush()
-        os.fsync(f.fileno())
 
 if __name__ == "__main__":
     items = get_playlist_items()
