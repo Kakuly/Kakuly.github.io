@@ -1,18 +1,39 @@
 import os
+import json
 import requests
 import google.generativeai as genai
 
-# 設定
+# --- 設定 ---
 API_KEY = os.environ['YOUTUBE_API_KEY']
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 PLAYLIST_ID = 'PLH9mX0wDlDAou_YCjcU01Q3pR6cCRQPWS'
 FILE_PATH = 'works.md'
+CACHE_FILE = 'known_works.json'
+
+# --- JSONキャッシュの読み込み/作成 ---
+def load_known_works():
+    if os.path.exists(CACHE_FILE):
+        try:
+            with open(CACHE_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except:
+            return {}
+    return {}
+
+def save_known_works(data):
+    with open(CACHE_FILE, 'w', encoding='utf-8') as f:
+        # ensure_ascii=False で日本語タイトルをそのまま保存
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+# 起動時に読み込み
+KNOWN_WORKS = load_known_works()
 
 # Geminiの設定
 model = None
 if GEMINI_API_KEY:
     try:
         genai.configure(api_key=GEMINI_API_KEY)
+        # 最新のモデルで検索機能を有効化
         for m_name in ['gemini-2.0-flash', 'gemini-3.0-flash', 'gemini-1.5-flash']:
             try:
                 model = genai.GenerativeModel(
@@ -25,7 +46,13 @@ if GEMINI_API_KEY:
     except:
         model = None
 
-def get_tags_from_ai(title, description):
+def get_tags(video_id, title, description):
+    # 1. 既知のデータ（JSON）にあればそれを返す（最優先）
+    if video_id in KNOWN_WORKS:
+        return KNOWN_WORKS[video_id].get("tags", [])
+
+    # 2. 未知の動画（新着）のみAI判定
+    tags = []
     if model:
         prompt = f"""
         あなたは楽曲クレジットの専門家です。ネット検索を行い、以下の動画における「Kakuly（かくり）」の正確な担当役割を特定してください。
@@ -50,32 +77,56 @@ def get_tags_from_ai(title, description):
             response = model.generate_content(prompt)
             result = response.text.strip()
             if result != "None" and len(result) > 1:
-                return [t.strip() for t in result.split(',')]
+                tags = [t.strip() for t in result.split(',')]
         except:
             pass
 
-    tags = []
-    lines = (title + "\n" + description).split('\n')
-    for line in lines:
-        l_lower = line.lower()
-        if 'kakuly' in l_lower or 'かくり' in l_lower:
-            if any(k in l_lower for k in ['mix', 'ミックス']): tags.append('Mix')
-            if any(k in l_lower for k in ['arrang', '編曲']): tags.append('Arrangement')
-            if any(k in l_lower for k in ['master', 'マスタリング']): tags.append('Mastering')
-            if any(k in l_lower for k in ['movie', '映像', '動画']): tags.append('Movie')
-            if any(k in l_lower for k in ['music', '作曲']): tags.append('Music')
-            if any(k in l_lower for k in ['lyric', '作詞']): tags.append('Lyric')
-            if any(k in l_lower for k in ['remix', 'リミックス']): tags.append('Remix')
-            
-    return list(set(tags))
+    # 3. AI失敗時のバックアップ判定
+    if not tags:
+        lines = (title + "\n" + description).split('\n')
+        for line in lines:
+            l_lower = line.lower()
+            if 'kakuly' in l_lower or 'かくり' in l_lower:
+                if any(k in l_lower for k in ['mix', 'ミックス']): tags.append('Mix')
+                if any(k in l_lower for k in ['arrang', '編曲']): tags.append('Arrangement')
+                if any(k in l_lower for k in ['master', 'マスタリング']): tags.append('Mastering')
+                if any(k in l_lower for k in ['movie', '映像', '動画']): tags.append('Movie')
+                if any(k in l_lower for k in ['music', '作曲']): tags.append('Music')
+                if any(k in l_lower for k in ['lyric', '作詞']): tags.append('Lyric')
+                if any(k in l_lower for k in ['remix', 'リミックス']): tags.append('Remix')
+    
+    # 判定結果を「人間が分かりやすいようにタイトル付き」でキャッシュ保存
+    processed_tags = list(set(tags))
+    KNOWN_WORKS[video_id] = {
+        "title": title,
+        "tags": processed_tags
+    }
+    save_known_works(KNOWN_WORKS)
+        
+    return processed_tags
 
 def get_playlist_items():
-    url = f"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId={PLAYLIST_ID}&key={API_KEY}"
-    try:
-        r = requests.get(url).json()
-        return r.get('items', [])
-    except:
-        return []
+    all_items = []
+    next_page_token = None
+    
+    # 次のページがある限りリクエストを繰り返す（全件取得）
+    while True:
+        url = f"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId={PLAYLIST_ID}&key={API_KEY}"
+        if next_page_token:
+            url += f"&pageToken={next_page_token}"
+            
+        try:
+            r = requests.get(url).json()
+            items = r.get('items', [])
+            all_items.extend(items)
+            
+            next_page_token = r.get('nextPageToken')
+            if not next_page_token:
+                break
+        except:
+            break
+            
+    return all_items
 
 def update_markdown(items):
     content = "--- \nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
@@ -89,7 +140,8 @@ def update_markdown(items):
         video_id = snippet['resourceId']['videoId']
         thumbnail_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
         
-        tags = get_tags_from_ai(title, description)
+        # IDを考慮したタグ取得（JSONまたはAI）
+        tags = get_tags(video_id, title, description)
         
         content += '<div class="video-item">\n'
         content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
@@ -106,6 +158,8 @@ def update_markdown(items):
         content += '</div>\n\n'
 
     content += '</div>\n\n'
+
+    # --- 3. 演出用パーツとデザイン ---
     content += '<div id="iris-in"></div>'
     content += '<div id="iris-out"></div>'
 
@@ -113,7 +167,7 @@ def update_markdown(items):
 <style>
 /* 追加したタグのスタイル */
 .tag-container {
-  margin-top: 2px;
+  margin-top: 4px;
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
@@ -143,14 +197,14 @@ def update_markdown(items):
 
 .video-title {
   margin-top: 10px;
-  font-size: 0.9rem; /* 本文のサイズ感に調整 */
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 600;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-bottom: 0px !important;
-  font-family: 'Noto Sans JP', sans-serif !important; /* 本文フォントに統一 */
+  margin-bottom: 0px !important; /* タグを吸い付かせる */
+  font-family: 'Noto Sans JP', sans-serif !important;
 }
 
 /* サイト全体の最大幅を上書き */
@@ -199,12 +253,6 @@ h1, h2, h3, .site-title {
   color: var(--text-color) !important;
 }
 
-/* ビデオタイトルだけ個別に本文フォントを適用 */
-.video-item .video-title {
-  font-family: 'Noto Sans JP', sans-serif !important;
-  letter-spacing: 0em !important;
-}
-
 .page-link {
   font-family: 'Montserrat', sans-serif !important;
   color: var(--text-color) !important;
@@ -218,12 +266,15 @@ h1, h2, h3, .site-title {
 .video-grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
-  gap: 30px !important;
+  gap: 60px 40px !important; /* 動画同士の間隔を広く設定 */
 }
 
 .video-item h3 {
+  font-family: 'Noto Sans JP', sans-serif !important;
   font-size: 0.85rem !important;
-  height: 2.6em;
+  /* height固定を解除し、タイトルが1行でもタグがすぐ下に来るようにする */
+  height: auto !important; 
+  min-height: 1.3em;
   overflow: hidden;
   margin-bottom: 0px !important;
   line-height: 1.3;
@@ -343,4 +394,4 @@ if __name__ == "__main__":
     items = get_playlist_items()
     if items:
         update_markdown(items)
-        print("Successfully updated works.md with Noto Sans JP titles and minimal gaps")
+        print(f"Total {len(items)} items processed. Tag history saved in {CACHE_FILE}.")
