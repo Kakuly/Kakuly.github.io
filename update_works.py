@@ -111,7 +111,7 @@ def get_playlist_items():
     return all_items
 
 def update_markdown(items):
-    content = "---\nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
+    content = "----- \nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
     
     # フィルタボタンコンテナ
     content += '<div id="filter-container" class="filter-wrapper"></div>\n\n'
@@ -123,15 +123,19 @@ def update_markdown(items):
         title = html.escape(raw_title)
         description = snippet['description']
         video_id = snippet['resourceId']['videoId']
-        thumbnail_url = f"https://i.ytimg.com/vi/{video_id}/mqdefault.jpg"
+        
+        # 基本は最高画質(maxresdefault)を指定。失敗時はJSのonerrorで補完する
+        thumbnail_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
+        # 予備のURL（必ず存在する標準画質）
+        fallback_url = f"https://img.youtube.com/vi/{video_id}/hqdefault.jpg"
         
         tags = get_tags(video_id, title, description)
         tags_attr = ",".join(tags) if tags else ""
         
-        # 既存の構造を維持しつつ、ソート用属性を付与
         content += f'<div class="video-item" data-tags="{tags_attr}">\n'
         content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
-        content += f'    <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail" loading="lazy">\n'
+        # ここに onerror 処理を追加：読み込みに失敗したら fallback_url に差し替える
+        content += f'    <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail" loading="lazy" onerror="this.src=\'{fallback_url}\'; this.onerror=null;">\n'
         content += f'  </a>\n'
         content += f"  <h3 class='video-title'>{title}</h3>"
         if tags:
@@ -213,7 +217,6 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 /* --- モード切替ボタンの設定（レスポンシブ対応） --- */
 #mode-toggle { 
     cursor: pointer; 
-    background: var(--bg-color); /* 重なったときのために背景色を指定 */
     border: 1px solid var(--text-color); 
     color: var(--text-color); 
     padding: 4px 12px; 
@@ -228,7 +231,7 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 }
 
 /* 画面幅が1000px以下になったら右下に移動 */
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1300px) {
     #mode-toggle {
         top: auto !important;
         bottom: 20px !important;
