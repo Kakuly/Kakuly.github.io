@@ -2,21 +2,21 @@ name: Update Works from YouTube
 
 on:
   push:
-    # pyファイルを編集して push した時に発動
     paths:
       - 'update_works.py'
+      - 'known_works.json'  # JSONの直接編集時にも発動
   schedule:
     - cron: '0 15 * * *'
-  # ↓ これを追加することで「Run workflow」ボタンが復活します！
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # 書き込み権限を明示
     steps:
       - uses: actions/checkout@v3
         with:
-          # 最新の履歴を取得するためにfetch-depthを0に設定（念のため）
           fetch-depth: 0
 
       - name: Set up Python
@@ -35,16 +35,14 @@ jobs:
 
       - name: Commit and Push
         run: |
-          git config --global user.name "GitHub Action"
-          git config --global user.email "action@github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # works.md だけでなく、新しく生成される known_works.json も対象に含めます
           git add works.md known_works.json
           
-          # 変更がある場合のみコミットし、なければ終了
-          git commit -m "Auto update works.md and cache from YouTube" || exit 0
-          
-          # 重要：プッシュ前にリモートの変更を rebase で取り込んで競合を防ぎます
-          git pull --rebase origin main
-          
-          git push origin main
+          # 変更がある場合のみコミット
+          if ! git diff --cached --exit-code --quiet; then
+            git commit -m "Auto update works.md and cache"
+            git pull --rebase origin main
+            git push origin main
+          fi
