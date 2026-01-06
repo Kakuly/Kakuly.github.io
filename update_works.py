@@ -121,18 +121,20 @@ def update_markdown(items):
         title = html.escape(snippet['title'])
         video_id = snippet['resourceId']['videoId']
         
-        # サムネイルURLを確実なドメイン(i.ytimg.com)に統一
-        # maxres(最高画質)を指定し、エラー時は hq(標準高画質)に差し替える
-        thumb_max = f"https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg"
-        thumb_fallback = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"
+        # 3段階のフォールバックURLを用意
+        # 1. 最高画質(maxres) 2. 標準高画質(hq) 3. 絶対にある中画質(mq)
+        t_max = f"https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg"
+        t_hq = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"
+        t_mq = f"https://i.ytimg.com/vi/{video_id}/mqdefault.jpg"
         
         tags = get_tags(video_id, title, snippet['description'])
         tags_attr = ",".join(tags) if tags else ""
         
         content += f'<div class="video-item" data-tags="{tags_attr}">\n'
         content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
-        # onerrorの中身をより確実に動作する記述に変更
-        content += f'    <img src="{thumb_max}" alt="{title}" class="video-thumbnail" loading="lazy" onerror="if(this.src!=\'{thumb_fallback}\')this.src=\'{thumb_fallback}\';">\n'
+        # JSのonerrorを強化：maxresがダメならhq、hqもダメならmqを表示する
+        img_onerror = f"if(this.src=='{t_max}'){{this.src='{t_hq}';}}else if(this.src=='{t_hq}'){{this.src='{t_mq}';}}"
+        content += f'    <img src="{t_max}" alt="{title}" class="video-thumbnail" loading="lazy" onerror="{img_onerror}">\n'
         content += f'  </a>\n'
         content += f"  <h3 class='video-title'>{title}</h3>"
         if tags:
@@ -142,7 +144,7 @@ def update_markdown(items):
             content += '  </div>\n'
         content += '</div>\n\n'
 
-    content += '</div>\n\n'
+    content += '</div>\n\n''</div>\n\n'
     
     # 演出用パーツ
     content += '<div id="iris-in"></div>'
@@ -229,7 +231,6 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
     transition: all 0.3s ease;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    text-transform: uppercase;
 }
 
 /* 画面幅が1300px以下になったら右下に移動 */
