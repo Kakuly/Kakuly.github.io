@@ -111,7 +111,7 @@ def get_playlist_items():
     return all_items
 
 def update_markdown(items):
-    content = "----- \nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
+    content = "---\nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
     
     # フィルタボタンコンテナ
     content += '<div id="filter-container" class="filter-wrapper"></div>\n\n'
@@ -135,7 +135,7 @@ def update_markdown(items):
         content += f'<div class="video-item" data-tags="{tags_attr}">\n'
         content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
         # ここに onerror 処理を追加：読み込みに失敗したら fallback_url に差し替える
-        content += f'    <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail" loading="lazy" onerror="this.src=\'{fallback_url}\'; this.onerror=null;">\n'
+        content += f'  <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail" loading="lazy" onerror="this.src=\'{fallback_url}\'; this.onerror=null;">\n'
         content += f'  </a>\n'
         content += f"  <h3 class='video-title'>{title}</h3>"
         if tags:
@@ -231,7 +231,7 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
     transition: all 0.3s ease;
 }
 
-/* 画面幅が1000px以下になったら右下に移動 */
+/* 画面幅が1300px以下になったら右下に移動 */
 @media screen and (max-width: 1300px) {
     #mode-toggle {
         top: auto !important;
