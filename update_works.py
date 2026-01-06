@@ -33,7 +33,7 @@ def get_tags_from_ai(title, description):
         動画タイトル: {title}
         概要欄抜粋: {description[:500]}
 
-        【検索,特定の指示】
+        【検索の指示】
         1. Google検索でこの動画のクレジット（X, YouTube, 楽曲データベース）を調べてください。
         2. 「Kakuly」または「かくり」が担当した役割（Mix, Arrangement, Mastering, Movie, Music, Lyrics, Remix）を特定してください。
         3. 他人の担当（例: Vocal: ○○, Illust: △△）は絶対に除外してください。
@@ -111,12 +111,12 @@ def update_markdown(items):
 
     content += """
 <style>
-/* 追加したタグのスタイル */
+/* タグコンテナ：タイトルのすぐ下に配置 */
 .tag-container {
-  margin-top: 2px;
+  margin-top: 4px; 
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 6px;
 }
 .work-tag {
   font-size: 0.57rem;
@@ -142,26 +142,24 @@ def update_markdown(items):
 }
 
 .video-title {
-  margin-top: 10px;
-  font-size: 0.9rem; /* 本文のサイズ感に調整 */
+  margin-top: 12px;
+  font-size: 0.9rem;
   font-weight: 700;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-bottom: 0px !important;
-  font-family: 'Noto Sans JP', sans-serif !important; /* 本文フォントに統一 */
+  margin-bottom: 0px !important; /* タグとの隙間をゼロに */
+  font-family: 'Noto Sans JP', sans-serif !important;
+  line-height: 1.4;
+  /* 高さを固定せず、最低限の確保もしないことで1行時にタグを吸い付かせる */
+  height: auto !important; 
 }
 
-/* サイト全体の最大幅を上書き */
 .wrapper {
   max-width: 1100px !important;
   padding-right: 40px !important;
   padding-left: 40px !important;
-}
-
-.site-header .wrapper {
-  max-width: 1100px !important;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
@@ -180,55 +178,30 @@ html.dark-mode, body.dark-mode {
 body { 
   background-color: var(--bg-color) !important; 
   color: var(--text-color) !important; 
-  transition: none !important; 
   font-family: 'Noto Sans JP', sans-serif !important;
   font-weight: 700 !important;
 }
 
-body.mode-transition {
-  transition: background-color 0.5s ease, color 0.5s ease !important;
+.video-grid {
+  display: grid !important;
+  /* 横の間隔を40px、縦の間隔を60pxに広げてゆとりを持たせる */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+  gap: 60px 40px !important;
+  margin-bottom: 100px;
 }
 
-.site-header { background-color: transparent !important; border: none !important; }
-
-h1, h2, h3, .site-title { 
-  font-family: 'Montserrat', sans-serif !important;
-  font-size: 1.4rem !important; 
-  font-weight: 700 !important;
-  letter-spacing: -0.05em !important;
-  color: var(--text-color) !important;
+.video-item {
+  display: flex;
+  flex-direction: column;
 }
 
-/* ビデオタイトルだけ個別に本文フォントを適用 */
+/* タイトルフォントを本文用に強制 */
 .video-item .video-title {
   font-family: 'Noto Sans JP', sans-serif !important;
   letter-spacing: 0em !important;
 }
 
-.page-link {
-  font-family: 'Montserrat', sans-serif !important;
-  color: var(--text-color) !important;
-  font-weight: 700 !important;
-  text-transform: uppercase;
-  font-size: 0.9rem !important;
-  margin-left: 20px !important;
-  text-decoration: none !important;
-}
-
-.video-grid {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
-  gap: 30px !important;
-}
-
-.video-item h3 {
-  font-size: 0.85rem !important;
-  height: 2.6em;
-  overflow: hidden;
-  margin-bottom: 0px !important;
-  line-height: 1.3;
-}
-
+/* 不要なパーツ非表示 */
 .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
 
 #mode-toggle {
@@ -246,6 +219,7 @@ h1, h2, h3, .site-title {
   font-weight: bold;
 }
 
+/* アイリス演出用 */
 #iris-in {
   position: fixed;
   top: 50%; left: 50%;
@@ -257,10 +231,7 @@ h1, h2, h3, .site-title {
   transform: translate(-50%, -50%) scale(0);
   transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
 }
-
-body.is-opening #iris-in {
-  transform: translate(-50%, -50%) scale(500);
-}
+body.is-opening #iris-in { transform: translate(-50%, -50%) scale(500); }
 
 #iris-out {
   position: fixed;
@@ -273,16 +244,12 @@ body.is-opening #iris-in {
   transform: translate(-50%, -50%) scale(0);
   transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
 }
-
-body.is-exiting #iris-out {
-  transform: translate(-50%, -50%) scale(1.2) !important;
-}
+body.is-exiting #iris-out { transform: translate(-50%, -50%) scale(1.2) !important; }
 
 body > *:not([id^="iris-"]) {
   opacity: 0;
   transition: opacity 0.8s ease-out;
 }
-
 body.is-opening > *:not([id^="iris-"]) {
   opacity: 1;
   transition-delay: 0.2s;
@@ -343,4 +310,4 @@ if __name__ == "__main__":
     items = get_playlist_items()
     if items:
         update_markdown(items)
-        print("Successfully updated works.md with Noto Sans JP titles and minimal gaps")
+        print("Successfully updated works.md: Wider grid gaps & adaptive tag positions.")
