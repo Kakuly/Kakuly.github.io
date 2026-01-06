@@ -109,6 +109,15 @@ permalink: /works/
   </div>
 </div>
 
+<div class="video-item" data-tags="Movie">
+  <a href="https://www.youtube.com/watch?v=qWfR7J7Dy5k" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/qWfR7J7Dy5k/maxresdefault.jpg" alt="さようならのそら / feat.カゼヒキV" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>さようならのそら / feat.カゼヒキV</h3>  <div class="tag-container">
+    <span class="work-tag">Movie</span>
+  </div>
+</div>
+
 <div class="video-item" data-tags="Mix">
   <a href="https://www.youtube.com/watch?v=ecDT8mnhgFw" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/ecDT8mnhgFw/maxresdefault.jpg" alt="IN_MY_HEAD / なとり　- tato (cover)" class="video-thumbnail" loading="lazy">
@@ -503,6 +512,14 @@ permalink: /works/
 
 <div id="iris-in"></div><div id="iris-out"></div>
 <style>
+/* モバイル対応：画面幅が768px以下の時（スマホなど） */
+@media screen and (max-width: 768px) {
+  #mode-toggle {
+    top: auto !important;   /* 上固定を解除 */
+    bottom: 20px !important; /* 下から20pxの位置に */
+    right: 20px !important;
+  }
+}
 /* --- フィルタUI --- */
 .filter-wrapper {
   margin-bottom: 40px;
