@@ -50,7 +50,7 @@ def get_playlist_items():
 
 def update_markdown(items):
     # --- 1. ヘッダー部分（元のまま） ---
-    content = "----- \nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
+    content = "--- \nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
     content += "### Music / Mix / Mastering / Movie\n\n"
     
     content += '<div class="video-grid">\n\n'
