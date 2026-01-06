@@ -39,15 +39,16 @@ prompt = f"""
     概要欄: {description}
     """
     
-    try:
+try:
         response = model.generate_content(prompt)
         result = response.text.strip()
-        if result == "None":
+        if "None" in result or not result:
             return []
-        # 「Mix, Arrangement」といった文字列をリストに変換
-        return [tag.strip() for tag in result.split(',')]
+        # AIが「Role: Mix」のように返してきても大丈夫なように処理
+        tags = [tag.strip().replace("Role: ", "") for tag in result.split(',')]
+        return [t for t in tags if t]
     except:
-        return []
+        return [][]
 
 def get_playlist_items():
     # snippetに加えてcontentDetails（または概要欄取得用）を確実に取得
