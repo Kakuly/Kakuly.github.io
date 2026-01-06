@@ -133,16 +133,16 @@ def update_markdown(items):
         tags_attr = ",".join(tags) if tags else ""
         
         content += f'<div class="video-item" data-tags="{tags_attr}">\n'
-        content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
+        content += f'<a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
         # ここに onerror 処理を追加：読み込みに失敗したら fallback_url に差し替える
-        content += f'  <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail" loading="lazy" onerror="this.src=\'{fallback_url}\'; this.onerror=null;">\n'
-        content += f'  </a>\n'
-        content += f"  <h3 class='video-title'>{title}</h3>"
+        content += f'<img src="{thumbnail_url}" alt="{title}" class="video-thumbnail" loading="lazy" onerror="this.src=\'{fallback_url}\'; this.onerror=null;">\n'
+        content += f'</a>\n'
+        content += f"<h3 class='video-title'>{title}</h3>"
         if tags:
-            content += '  <div class="tag-container">\n'
+            content += '<div class="tag-container">\n'
             for tag in tags:
-                content += f'    <span class="work-tag">{tag}</span>\n'
-            content += '  </div>\n'
+                content += f'<span class="work-tag">{tag}</span>\n'
+            content += '</div>\n'
         content += '</div>\n\n'
 
     content += '</div>\n\n'
@@ -216,19 +216,23 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 
 /* --- モード切替ボタンの設定（レスポンシブ対応） --- */
 #mode-toggle { 
-    cursor: pointer;
-    background: transparent;
+    cursor: pointer; 
+    background: transparent; 
     border: 1px solid var(--text-color); 
     color: var(--text-color); 
-    padding: 4px 12px; 
+    padding: 6px 16px; 
     border-radius: 20px; 
     font-size: 0.75rem; 
     position: fixed; 
     top: 15px; 
     right: 20px; 
     z-index: 9999; 
-    font-weight: bold;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif !important; /* フォントを明示的に指定 */
     transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    text-transform: uppercase;
 }
 
 /* 画面幅が1300px以下になったら右下に移動 */
