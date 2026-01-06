@@ -76,7 +76,10 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=t1cC3pdFODA" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/t1cC3pdFODA/maxresdefault.jpg" alt="かなしばりに遭ったら / 歌愛ユキ、ナースロボ＿タイプＴ" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>かなしばりに遭ったら / 歌愛ユキ、ナースロボ＿タイプＴ</h3></div>
+  <h3 class='video-title'>かなしばりに遭ったら / 歌愛ユキ、ナースロボ＿タイプＴ</h3>  <div class="tag-container">
+    <span class="work-tag">Mastering</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=zAURwtz_AY4" target="_blank" class="video-link">
@@ -132,13 +135,20 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=njQVjvEXWao" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/njQVjvEXWao/maxresdefault.jpg" alt="死生観にさよなら / 初音ミク" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>死生観にさよなら / 初音ミク</h3></div>
+  <h3 class='video-title'>死生観にさよなら / 初音ミク</h3>  <div class="tag-container">
+    <span class="work-tag">Mastering</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=I7Q_xlnS2n8" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/I7Q_xlnS2n8/maxresdefault.jpg" alt="その銃口 / 可不" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>その銃口 / 可不</h3></div>
+  <h3 class='video-title'>その銃口 / 可不</h3>  <div class="tag-container">
+    <span class="work-tag">Mastering</span>
+    <span class="work-tag">Movie</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=bqMBuLzCyMc" target="_blank" class="video-link">
