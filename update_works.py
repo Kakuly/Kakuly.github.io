@@ -29,7 +29,7 @@ def update_markdown(items):
         content += '<div class="video-item">\n'
         # サムネイル（リンク付き）
         content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
-        content += f'    <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail">\n'
+        content += f'    <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail" loading="lazy">\n'
         content += f'  </a>\n'
         # タイトル（下配置）
         content += f"  <h3 class='video-title'>{title}</h3>\n"
