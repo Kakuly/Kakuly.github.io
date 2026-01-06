@@ -100,14 +100,13 @@ def update_markdown(items):
         content += f'  </a>\n'
 
         content += f"  <h3 class='video-title'>{title}</h3>\n"
-        content += '</div>\n\n'
         
         if tags:
             content += '  <div class="tag-container">\n'
             for tag in tags:
                 content += f'    <span class="work-tag">{tag}</span>\n'
             content += '  </div>\n'
-            
+        content += '</div>\n\n'
 
     content += '</div>\n\n'
 
@@ -123,7 +122,7 @@ def update_markdown(items):
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 5px;
 }
 .work-tag {
   font-size: 0.57rem;
