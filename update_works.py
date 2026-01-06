@@ -143,12 +143,69 @@ def update_markdown(items):
 
     content += '</div>\n\n'
     
-    # 演出用パーツ
-    content += '<div id="iris-in"></div>'
-    content += '<div id="iris-out"></div>'
+# --- 演出用パーツ ---
+content += '<div id="iris-in"></div>'
+content += '<div id="iris-out"></div>'
+# loading-overlayを追加（GIFのパスはご自身のものに合わせてください）
+content += '<div id="loading-overlay"><img src="/loading.gif" alt="Loading..."></div>'
 
-    content += """
+content += """
 <style>
+/* --- ロードGIFの配置 --- */
+#loading-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100002; /* アイリス演出より手前 */
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+/* GIFのサイズ（お好みで調整してください） */
+#loading-overlay img {
+  width: 100px; 
+  height: auto;
+}
+
+/* 「画面が閉じている時」または「ページを開いた瞬間」に表示 */
+body.is-exiting #loading-overlay,
+body:not(.is-opening) #loading-overlay {
+  opacity: 1;
+}
+
+/* ページが完全に開ききったら隠す */
+body.is-opening #loading-overlay {
+  opacity: 0;
+}
+
+/* --- 以下、既存のデザイン設定を維持 --- */
+.filter-wrapper { margin-bottom: 40px; display: flex; flex-wrap: wrap; gap: 12px; }
+.filter-btn {
+  cursor: pointer; font-family: 'Montserrat', sans-serif !important; font-weight: 700 !important;
+  font-size: 0.9rem; padding: 6px 16px; border-radius: 30px; border: 1px solid var(--text-color);
+  background: transparent; color: var(--text-color); transition: all 0.3s ease; text-transform: uppercase; opacity: 0.3;
+}
+.filter-btn.active { opacity: 1; background: var(--text-color); color: var(--bg-color); }
+
+/* (中略: .video-item などの設定) */
+
+#iris-in { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 0 500vmax var(--bg-color); z-index: 100000; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1); }
+body.is-opening #iris-in { transform: translate(-50%, -50%) scale(500); }
+#iris-out { position: fixed; top: 50%; left: 50%; width: 150vmax; height: 150vmax; background-color: var(--bg-color); border-radius: 50%; z-index: 100001; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1); }
+body.is-exiting #iris-out { transform: translate(-50%, -50%) scale(1.2) !important; }
+
+/* GIF以外の全要素をフェードさせる設定に loading-overlay を除外追加 */
+body > *:not([id^="iris-"]):not(#loading-overlay) { 
+  opacity: 0; 
+  transition: opacity 0.8s ease-out; 
+}
+body.is-opening > *:not([id^="iris-"]):not(#loading-overlay) { 
+  opacity: 1; 
+  transition-delay: 0.2s; 
+}
+
 /* --- フィルタUI --- */
 .filter-wrapper {
   margin-bottom: 40px;
