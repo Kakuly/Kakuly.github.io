@@ -575,7 +575,8 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 
 /* --- モード切替ボタンの設定（レスポンシブ対応） --- */
 #mode-toggle { 
-    cursor: pointer; 
+    cursor: pointer;
+    background: transparent;
     border: 1px solid var(--text-color); 
     color: var(--text-color); 
     padding: 4px 12px; 
