@@ -72,6 +72,15 @@ permalink: /works/
   </div>
 </div>
 
+<div class="video-item" data-tags="Movie">
+  <a href="https://www.youtube.com/watch?v=5ZQaFyDvkQo" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/5ZQaFyDvkQo/maxresdefault.jpg" alt="アイラビュ / GYU P feat.初音ミク" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>アイラビュ / GYU P feat.初音ミク</h3>  <div class="tag-container">
+    <span class="work-tag">Movie</span>
+  </div>
+</div>
+
 <div class="video-item" data-tags="Mix,Movie">
   <a href="https://www.youtube.com/watch?v=zwptzlQnSYo" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/zwptzlQnSYo/maxresdefault.jpg" alt="24/7 / 201　- tato (cover)" class="video-thumbnail" loading="lazy">
@@ -141,6 +150,15 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/IFSJK6szxfU/maxresdefault.jpg" alt="Akari24 - her messages / feat.可不 , 裏命" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>Akari24 - her messages / feat.可不 , 裏命</h3>  <div class="tag-container">
+    <span class="work-tag">Movie</span>
+  </div>
+</div>
+
+<div class="video-item" data-tags="Movie">
+  <a href="https://www.youtube.com/watch?v=VcP7frBXuWU" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/VcP7frBXuWU/maxresdefault.jpg" alt="ドリームミュージアム / GYU P feat.初音ミク" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>ドリームミュージアム / GYU P feat.初音ミク</h3>  <div class="tag-container">
     <span class="work-tag">Movie</span>
   </div>
 </div>
@@ -272,6 +290,15 @@ permalink: /works/
   </a>
   <h3 class='video-title'>死生観にさよなら / 初音ミク</h3>  <div class="tag-container">
     <span class="work-tag">Mastering</span>
+  </div>
+</div>
+
+<div class="video-item" data-tags="Movie">
+  <a href="https://www.youtube.com/watch?v=VIDSV4pwMt4" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/VIDSV4pwMt4/maxresdefault.jpg" alt="世界は無機物でできている。 / GYU P feat.初音ミク" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>世界は無機物でできている。 / GYU P feat.初音ミク</h3>  <div class="tag-container">
+    <span class="work-tag">Movie</span>
   </div>
 </div>
 
