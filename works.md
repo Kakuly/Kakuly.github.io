@@ -123,9 +123,12 @@ permalink: /works/
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=UFgA9gCuc7A" target="_blank" class="video-link">
-    <img src="https://img.youtube.com/vi/UFgA9gCuc7A/maxresdefault.jpg" alt="1st Digital EP "Hyper Mode" [XFD]" class="video-thumbnail" loading="lazy">
+    <img src="https://img.youtube.com/vi/UFgA9gCuc7A/maxresdefault.jpg" alt="1st Digital EP &quot;Hyper Mode&quot; [XFD]" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>1st Digital EP "Hyper Mode" [XFD]</h3></div>
+  <h3 class='video-title'>1st Digital EP &quot;Hyper Mode&quot; [XFD]</h3>  <div class="tag-container">
+    <span class="work-tag">Movie</span>
+  </div>
+</div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=XWUiZPA86tY" target="_blank" class="video-link">
@@ -141,10 +144,7 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/gF38NoZ4-HI/maxresdefault.jpg" alt="Akari24 - Juvenile Delinquency / feat.可不" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>Akari24 - Juvenile Delinquency / feat.可不</h3>  <div class="tag-container">
-    <span class="work-tag">Arrangement</span>
-    <span class="work-tag">Lyrics</span>
     <span class="work-tag">Movie</span>
-    <span class="work-tag">Music</span>
   </div>
 </div>
 
@@ -241,7 +241,7 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/Ls7AJ_ES3G0/maxresdefault.jpg" alt="Neighbor / 初音ミク" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>Neighbor / 初音ミク</h3>  <div class="tag-container">
-    <span class="work-tag">Movie</span>
+    <span class="work-tag">Mastering</span>
   </div>
 </div>
 
