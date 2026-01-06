@@ -37,6 +37,12 @@ permalink: /works/
 </div>
 
 <div class="video-item">
+  <a href="https://www.youtube.com/watch?v=Ef0_l9GeIR0" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/Ef0_l9GeIR0/maxresdefault.jpg" alt="マジか！ / 梓川　- tato (cover)" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>マジか！ / 梓川　- tato (cover)</h3></div>
+
+<div class="video-item">
   <a href="https://www.youtube.com/watch?v=OBkLjALyriw" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/OBkLjALyriw/maxresdefault.jpg" alt="街の残像 / 可不 × あばらや【YouTube Music Weekend 10.0】" class="video-thumbnail" loading="lazy">
   </a>
@@ -46,6 +52,12 @@ permalink: /works/
 </div>
 
 <div class="video-item">
+  <a href="https://www.youtube.com/watch?v=zwptzlQnSYo" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/zwptzlQnSYo/maxresdefault.jpg" alt="24/7 / 201　- tato (cover)" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>24/7 / 201　- tato (cover)</h3></div>
+
+<div class="video-item">
   <a href="https://www.youtube.com/watch?v=cknsKkzA2lM" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/cknsKkzA2lM/maxresdefault.jpg" alt="サ終あざした / 重音テトSV" class="video-thumbnail" loading="lazy">
   </a>
@@ -53,6 +65,24 @@ permalink: /works/
     <span class="work-tag">Mastering</span>
   </div>
 </div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=vMGuvZlP3R8" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/vMGuvZlP3R8/maxresdefault.jpg" alt="しじまのはて / 青は止まれ　- tato (cover)" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>しじまのはて / 青は止まれ　- tato (cover)</h3></div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=ecDT8mnhgFw" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/ecDT8mnhgFw/maxresdefault.jpg" alt="IN_MY_HEAD / なとり　- tato (cover)" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>IN_MY_HEAD / なとり　- tato (cover)</h3></div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=wL0tXapyBEo" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/wL0tXapyBEo/maxresdefault.jpg" alt="テレパシ / DECO*27　- tato (cover)" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>テレパシ / DECO*27　- tato (cover)</h3></div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=LW1KBCgvEPQ" target="_blank" class="video-link">
@@ -159,6 +189,12 @@ permalink: /works/
     <span class="work-tag">Arrangement</span>
   </div>
 </div>
+
+<div class="video-item">
+  <a href="https://www.youtube.com/watch?v=Ls7AJ_ES3G0" target="_blank" class="video-link">
+    <img src="https://img.youtube.com/vi/Ls7AJ_ES3G0/maxresdefault.jpg" alt="Neighbor / 初音ミク" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>Neighbor / 初音ミク</h3></div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=XsjuHvYlRyc" target="_blank" class="video-link">
