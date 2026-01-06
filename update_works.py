@@ -13,7 +13,6 @@ model = None
 if GEMINI_API_KEY:
     try:
         genai.configure(api_key=GEMINI_API_KEY)
-        # 最新の2.0/3.0系モデルで検索機能を有効化
         for m_name in ['gemini-2.0-flash', 'gemini-3.0-flash', 'gemini-1.5-flash']:
             try:
                 model = genai.GenerativeModel(
@@ -27,7 +26,6 @@ if GEMINI_API_KEY:
         model = None
 
 def get_tags_from_ai(title, description):
-    # 1. AI判定（検索重視・指示をより厳格に）
     if model:
         prompt = f"""
         あなたは楽曲クレジットの専門家です。ネット検索を行い、以下の動画における「Kakuly（かくり）」の正確な担当役割を特定してください。
@@ -56,7 +54,6 @@ def get_tags_from_ai(title, description):
         except:
             pass
 
-    # 2. バックアップ判定（AI失敗時：Kakulyの名前がある行だけを判定）
     tags = []
     lines = (title + "\n" + description).split('\n')
     for line in lines:
@@ -109,17 +106,13 @@ def update_markdown(items):
         content += '</div>\n\n'
 
     content += '</div>\n\n'
-
-    # --- 3. 演出用パーツとデザイン ---
     content += '<div id="iris-in"></div>'
     content += '<div id="iris-out"></div>'
 
-    # デザイン部分は一切変えずにメモを復元
     content += """
 <style>
-/* 追加したタグのスタイル */
 .tag-container {
-  margin-top: 10px;
+  margin-top: 2px; /* タイトルとの隙間を最小限に */
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
@@ -148,16 +141,16 @@ def update_markdown(items):
 }
 
 .video-title {
-  margin-top: 10px; /* タグがある分少し調整 */
+  margin-top: 10px;
   font-size: 1rem;
   font-weight: 600;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  margin-bottom: 0px !important; /* 下の余白を強制的に消去 */
 }
 
-/* サイト全体の最大幅を上書き */
 .wrapper {
   max-width: 1100px !important;
   padding-right: 40px !important;
@@ -222,9 +215,9 @@ h1, h2, h3, .site-title {
 .video-item h3 {
   font-family: 'Montserrat', 'Noto Sans JP', sans-serif !important;
   font-size: 0.85rem !important;
-  height: 3em;
+  height: 2.6em; /* 余白を削るため高さを少し詰め */
   overflow: hidden;
-  margin-bottom: 10px !important;
+  margin-bottom: 0px !important; /* 下の余白を削除 */
   line-height: 1.3;
 }
 
@@ -342,4 +335,4 @@ if __name__ == "__main__":
     items = get_playlist_items()
     if items:
         update_markdown(items)
-        print("Successfully updated works.md with AI Search & Restored Style Comments")
+        print("Successfully updated works.md with minimal tag gaps")
