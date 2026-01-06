@@ -48,7 +48,7 @@ def get_tags(video_id, title, description):
     example_count = 0
     for k, v in KNOWN_WORKS.items():
         if isinstance(v, dict) and v.get("tags"):
-            past_examples += f"- {v['title']}: {', '.join(v['tags'])}\n"
+            past_examples += f"- {v['title']}: {', '.join(v['tags'])}\\n"
             example_count += 1
             if example_count > 15: break
 
@@ -75,12 +75,14 @@ def get_tags(video_id, title, description):
 def get_playlist_items():
     all_items = []
     next_page_token = None
+    # --- URLのタイポを修正 ---
     while True:
-        url = f"https://www.googleapis.com/googleapis/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId={PLAYLIST_ID}&key={API_KEY}"
+        url = f"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId={PLAYLIST_ID}&key={API_KEY}"
         if next_page_token: url += f"&pageToken={next_page_token}"
         try:
             r = requests.get(url).json()
             items = r.get('items', [])
+            if not items: break
             all_items.extend(items)
             next_page_token = r.get('nextPageToken')
             if not next_page_token: break
@@ -125,11 +127,12 @@ def update_markdown(items):
 }
 .filter-btn.active { opacity: 1; background: var(--text-color); color: var(--bg-color); }
 
-/* --- 詰まる動き用のアニメーション設定 --- */
+/* --- 詰まる動き用のアニメーション --- */
 .video-item {
   display: block;
   opacity: 1; 
   transition: opacity 0.4s ease, transform 0.4s ease;
+  will-change: transform, opacity;
 }
 .video-item.hide-anim {
   opacity: 0;
@@ -190,10 +193,9 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
     });
 
     function applyFilter() {
-      // 1. 移動前の位置を記録 (First)
+      // FLIP: First
       const firstPositions = items.map(item => item.getBoundingClientRect());
 
-      // 2. 表示状態を切り替える (Last)
       items.forEach(item => {
         const itemTags = item.dataset.tags.split(',');
         const isMatch = activeFilters.size === 0 || Array.from(activeFilters).some(f => itemTags.includes(f));
@@ -202,27 +204,24 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
           item.classList.remove('hidden', 'hide-anim');
         } else {
           item.classList.add('hide-anim');
-          // フェードアウト後に存在を消す
+          // 完全に消すのはアニメーション後
           setTimeout(() => {
             if (item.classList.contains('hide-anim')) item.classList.add('hidden');
           }, 400);
         }
       });
 
-      // 3. ブラウザが再配置した後の位置との差分をアニメーションさせる (Invert & Play)
-      // requestAnimationFrameを2回使い、DOMの更新を待つ
+      // FLIP: Last, Invert, Play
       requestAnimationFrame(() => {
         items.forEach((item, i) => {
-          if (item.classList.contains('hidden')) return;
+          if (item.classList.contains('hidden') || item.classList.contains('hide-anim')) return;
 
           const lastPos = item.getBoundingClientRect();
           const firstPos = firstPositions[i];
-
           const dx = firstPos.left - lastPos.left;
           const dy = firstPos.top - lastPos.top;
 
           if (dx !== 0 || dy !== 0) {
-            // 元の位置に瞬時に戻し、そこからアニメーションで移動させる
             item.style.transition = 'none';
             item.style.transform = `translate(${dx}px, ${dy}px)`;
             
@@ -236,7 +235,7 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
     }
   });
 
-  // ダークモード / 演出ロジック (既存維持)
+  // ダークモード / 演出
   const btn = document.getElementById('mode-toggle');
   const body = document.body;
   const htmlEl = document.documentElement;
@@ -273,4 +272,8 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 
 if __name__ == "__main__":
     items = get_playlist_items()
-    if items: update_markdown(items)
+    if items:
+        update_markdown(items)
+        print(f"Success: {len(items)} items processed.")
+    else:
+        print("Error: No items found. Check API key or URL.")
