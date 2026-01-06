@@ -149,6 +149,14 @@ def update_markdown(items):
 
     content += """
 <style>
+/* モバイル対応：画面幅が768px以下の時（スマホなど） */
+@media screen and (max-width: 768px) {
+  #mode-toggle {
+    top: auto !important;   /* 上固定を解除 */
+    bottom: 20px !important; /* 下から20pxの位置に */
+    right: 20px !important;
+  }
+}
 /* --- フィルタUI --- */
 .filter-wrapper {
   margin-bottom: 40px;
