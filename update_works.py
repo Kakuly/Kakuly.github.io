@@ -25,7 +25,7 @@ def save_known_works(data):
 
 KNOWN_WORKS = load_known_works()
 
-# Geminiの設定
+# Geminiの設定 (既存維持)
 model = None
 if GEMINI_API_KEY:
     try:
@@ -54,7 +54,7 @@ def get_tags(video_id, title, description):
 
     tags = []
     if model:
-        prompt = f"あなたは楽曲クレジットの専門家です。ネット検索を行い、以下の動画における「Kakuly（かくり）」の正確な担当役割を特定してください。\n\n【参考：Kakulyの過去の実績傾向】\n{past_examples}\n【今回の動画】\n動画タイトル: {title}\n概要欄抜粋: {description[:500]}\n\n【出力形式】\n英語のタグのみをカンマ区切りで。該当なしは「None」。"
+        prompt = f"あなたは楽曲クレジットの専門家です。ネット検索を行い、以下の動画における「Kakuly（かくり）」の正確な担当役割を特定してください。\\n\\n【参考：Kakulyの過去の実績傾向】\\n{past_examples}\\n【今回の動画】\\n動画タイトル: {title}\\n概要欄抜粋: {description[:500]}\\n\\n【出力形式】\\n英語のタグのみをカンマ区切りで。該当なしは「None」。"
         try:
             response = model.generate_content(prompt)
             result = response.text.strip()
@@ -62,7 +62,7 @@ def get_tags(video_id, title, description):
         except: pass
 
     if not tags:
-        l_lower = (title + "\n" + description).lower()
+        l_lower = (title + "\\n" + description).lower()
         patterns = [('mix', 'Mix'), ('編曲', 'Arrangement'), ('master', 'Mastering'), ('movie', 'Movie'), ('映像', 'Movie'), ('music', 'Music'), ('作曲', 'Music'), ('lyric', 'Lyrics'), ('作詞', 'Lyrics'), ('remix', 'Remix')]
         for pat, val in patterns:
             if pat in l_lower: tags.append(val)
@@ -89,9 +89,9 @@ def get_playlist_items():
     return all_items
 
 def update_markdown(items):
-    content = "---\nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
-    content += '<div id="filter-container" class="filter-wrapper"></div>\n\n'
-    content += '<div class="video-grid" id="video-grid">\n\n'
+    content = "--- \\nlayout: page\\ntitle: Works\\npermalink: /works/\\n---\\n\\n"
+    content += '<div id="filter-container" class="filter-wrapper"></div>\\n\\n'
+    content += '<div class="video-grid" id="video-grid">\\n\\n'
     
     for item in items:
         snippet = item['snippet']
@@ -102,21 +102,22 @@ def update_markdown(items):
         tags = get_tags(video_id, title, snippet['description'])
         tags_attr = ",".join(tags) if tags else ""
         
-        content += f'<div class="video-item" data-tags="{tags_attr}">\n'
-        content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
-        content += f'    <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail" loading="lazy">\n'
-        content += f'  </a>\n'
+        content += f'<div class="video-item" data-tags="{tags_attr}">\\n'
+        content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\\n'
+        content += f'    <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail" loading="lazy">\\n'
+        content += f'  </a>\\n'
         content += f"  <h3 class='video-title'>{title}</h3>"
         if tags:
-            content += '  <div class="tag-container">\n'
-            for tag in tags: content += f'    <span class="work-tag">{tag}</span>\n'
-            content += '  </div>\n'
-        content += '</div>\n\n'
+            content += '  <div class="tag-container">\\n'
+            for tag in tags: content += f'    <span class="work-tag">{tag}</span>\\n'
+            content += '  </div>\\n'
+        content += '</div>\\n\\n'
 
-    content += '</div>\n\n<div id="iris-in"></div><div id="iris-out"></div>'
+    content += '</div>\\n\\n<div id="iris-in"></div><div id="iris-out"></div>'
 
     content += """
 <style>
+/* --- フィルタUI (完全復元) --- */
 .filter-wrapper { margin-bottom: 40px; display: flex; flex-wrap: wrap; gap: 12px; }
 .filter-btn {
   cursor: pointer; font-family: 'Montserrat', sans-serif !important; font-weight: 700 !important;
@@ -124,9 +125,18 @@ def update_markdown(items):
   background: transparent; color: var(--text-color); transition: all 0.3s ease; text-transform: uppercase; opacity: 0.3;
 }
 .filter-btn.active { opacity: 1; background: var(--text-color); color: var(--bg-color); }
-.video-item { display: block; opacity: 1; transition: opacity 0.4s ease, transform 0.4s ease; will-change: transform, opacity; }
-.video-item.hide-anim { opacity: 0; transform: scale(0.8); pointer-events: none; }
+
+/* --- アニメーション制御 (ぼやけ防止) --- */
+.video-item { 
+  display: block; 
+  opacity: 1; 
+  /* ぼやけ防止のため transform 以外は transition に入れない。will-change も削除 */
+  transition: opacity 0.4s ease-out; 
+}
+.video-item.hide-anim { opacity: 0; pointer-events: none; }
 .video-item.hidden { display: none; }
+
+/* --- 元のデザイン設定 (フォントサイズ、マージンを完全復元) --- */
 .tag-container { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 5px; }
 .work-tag { font-size: 0.57rem; padding: 1px 6px; border-radius: 4px; border: 0.5px solid var(--text-color); opacity: 0.88; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
 .video-thumbnail { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -148,8 +158,6 @@ body.is-exiting #iris-out { transform: translate(-50%, -50%) scale(1.2) !importa
 body > *:not([id^="iris-"]) { opacity: 0; transition: opacity 0.8s ease-out; }
 body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 </style>
-
-<button id="mode-toggle">🌙 Dark Mode</button>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -179,7 +187,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function applyFilter() {
-    const firstPositions = items.map(item => item.getBoundingClientRect());
+    // 1. 位置の記録
+    const firstPositions = items.map(item => {
+      const rect = item.getBoundingClientRect();
+      return { top: rect.top, left: rect.left };
+    });
+
+    // 2. 状態の変更
     items.forEach(item => {
       const itemTags = item.dataset.tags.split(',');
       const isMatch = activeFilters.size === 0 || Array.from(activeFilters).some(f => itemTags.includes(f));
@@ -191,19 +205,25 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // 3. FLIPアニメーション
     requestAnimationFrame(() => {
       items.forEach((item, i) => {
         if (item.classList.contains('hidden') || item.classList.contains('hide-anim')) return;
+        
         const lastPos = item.getBoundingClientRect();
         const firstPos = firstPositions[i];
         const dx = firstPos.left - lastPos.left;
         const dy = firstPos.top - lastPos.top;
+
         if (dx !== 0 || dy !== 0) {
-          item.style.transition = 'none';
-          item.style.transform = `translate(${dx}px, ${dy}px)`;
-          requestAnimationFrame(() => {
-            item.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease';
-            item.style.transform = 'translate(0, 0)';
+          // 移動をJSのWeb Animations APIで行う（CSS transitionよりぼやけにくい）
+          item.animate([
+            { transform: `translate(${dx}px, ${dy}px)` },
+            { transform: 'translate(0, 0)' }
+          ], {
+            duration: 600,
+            easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+            fill: 'both'
           });
         }
       });
@@ -211,6 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// モードトグルと演出 (完全維持)
 const btn = document.getElementById('mode-toggle');
 const body = document.body;
 const htmlEl = document.documentElement;
@@ -241,11 +262,9 @@ document.querySelectorAll('a').forEach(link => {
 
     with open(FILE_PATH, 'w', encoding='utf-8') as f:
         f.write(content)
-        f.flush() # 書き込みを確実に完了させる
+        f.flush()
         os.fsync(f.fileno())
 
 if __name__ == "__main__":
     items = get_playlist_items()
-    if items:
-        update_markdown(items)
-        print(f"Success: {len(items)} items processed.")
+    if items: update_markdown(items)
