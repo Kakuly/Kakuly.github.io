@@ -368,154 +368,29 @@ permalink: /works/
 
 <div id="iris-in"></div><div id="iris-out"></div>
 <style>
-/* 追加したタグのスタイル */
-.tag-container {
-  margin-top: 4px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-.work-tag {
-  font-size: 0.57rem;
-  padding: 1px 6px;
-  border-radius: 4px;
-  border: 0.5px solid var(--text-color);
-  opacity: 0.88;
-  font-family: 'Montserrat', sans-serif;
-  text-transform: uppercase;
-}
-
-.video-thumbnail {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.video-link:hover .video-thumbnail {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-
-.video-title {
-  margin-top: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin-bottom: 0px !important; /* タグを吸い付かせる */
-  font-family: 'Noto Sans JP', sans-serif !important;
-}
-
-/* サイト全体の最大幅を上書き */
-.wrapper {
-  max-width: 1100px !important;
-  padding-right: 40px !important;
-  padding-left: 40px !important;
-}
-
-.site-header .wrapper {
-  max-width: 1100px !important;
-}
-
+.tag-container { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 5px; }
+.work-tag { font-size: 0.57rem; padding: 1px 6px; border-radius: 4px; border: 0.5px solid var(--text-color); opacity: 0.88; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
+.video-thumbnail { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.video-link:hover .video-thumbnail { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+.video-title { margin-top: 10px; font-size: 1rem; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 0px !important; font-family: 'Noto Sans JP', sans-serif !important; }
+.wrapper { max-width: 1100px !important; padding: 0 40px !important; }
+.site-header .wrapper { max-width: 1100px !important; }
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
-
-:root {
-  --bg-color: #ffffff;
-  --text-color: #111111;
-}
-
-html.dark-mode, body.dark-mode {
-  --bg-color: #000000;
-  --text-color: #eeeeee;
-  background-color: #000000 !important;
-}
-
-body { 
-  background-color: var(--bg-color) !important; 
-  color: var(--text-color) !important; 
-  transition: none !important; 
-  font-family: 'Noto Sans JP', sans-serif !important;
-  font-weight: 700 !important;
-}
-
-body.mode-transition {
-  transition: background-color 0.5s ease, color 0.5s ease !important;
-}
-
+:root { --bg-color: #ffffff; --text-color: #111111; }
+html.dark-mode, body.dark-mode { --bg-color: #000000; --text-color: #eeeeee; background-color: #000000 !important; }
+body { background-color: var(--bg-color) !important; color: var(--text-color) !important; transition: none !important; font-family: 'Noto Sans JP', sans-serif !important; font-weight: 700 !important; }
+body.mode-transition { transition: background-color 0.5s ease, color 0.5s ease !important; }
 .site-header { background-color: transparent !important; border: none !important; }
-
-h1, h2, h3, .site-title { 
-  font-family: 'Montserrat', sans-serif !important;
-  font-size: 1.4rem !important; 
-  font-weight: 700 !important;
-  letter-spacing: -0.05em !important;
-  color: var(--text-color) !important;
-}
-
-.page-link {
-  font-family: 'Montserrat', sans-serif !important;
-  color: var(--text-color) !important;
-  font-weight: 700 !important;
-  text-transform: uppercase;
-  font-size: 0.9rem !important;
-  margin-left: 20px !important;
-  text-decoration: none !important;
-}
-
-.video-grid {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
-  gap: 60px 40px !important; /* 動画同士の間隔を広く設定 */
-}
-
-.video-item h3 {
-  font-family: 'Noto Sans JP', sans-serif !important;
-  font-size: 0.85rem !important;
-  /* height固定を解除し、タイトルが1行でもタグがすぐ下に来るようにする */
-  height: auto !important; 
-  min-height: 1.3em;
-  overflow: hidden;
-  margin-bottom: 0px !important;
-  line-height: 1.3;
-}
-
+h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font-size: 1.4rem !important; font-weight: 700 !important; letter-spacing: -0.05em !important; color: var(--text-color) !important; }
+.page-link { font-family: 'Montserrat', sans-serif !important; color: var(--text-color) !important; font-weight: 700 !important; text-transform: uppercase; font-size: 0.9rem !important; margin-left: 20px !important; text-decoration: none !important; }
+.video-grid { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important; gap: 60px 40px !important; }
+.video-item h3 { font-family: 'Noto Sans JP', sans-serif !important; font-size: 0.85rem !important; height: auto !important; min-height: 1.3em; overflow: hidden; margin-bottom: 0px !important; line-height: 1.3; }
 .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
-
-#mode-toggle {
-  cursor: pointer;
-  background: none;
-  border: 1px solid var(--text-color);
-  color: var(--text-color);
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  position: fixed;
-  top: 15px;
-  right: 20px;
-  z-index: 9999;
-  font-weight: bold;
-}
-
-#iris-in {
-  position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%;
-  box-shadow: 0 0 0 500vmax var(--bg-color); z-index: 100000; pointer-events: none;
-  transform: translate(-50%, -50%) scale(0); transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
-}
-
+#mode-toggle { cursor: pointer; background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; position: fixed; top: 15px; right: 20px; z-index: 9999; font-weight: bold; }
+#iris-in { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 0 500vmax var(--bg-color); z-index: 100000; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1); }
 body.is-opening #iris-in { transform: translate(-50%, -50%) scale(500); }
-
-#iris-out {
-  position: fixed; top: 50%; left: 50%; width: 150vmax; height: 150vmax; background-color: var(--bg-color);
-  border-radius: 50%; z-index: 100001; pointer-events: none; transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
-}
-
+#iris-out { position: fixed; top: 50%; left: 50%; width: 150vmax; height: 150vmax; background-color: var(--bg-color); border-radius: 50%; z-index: 100001; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1); }
 body.is-exiting #iris-out { transform: translate(-50%, -50%) scale(1.2) !important; }
-
 body > *:not([id^="iris-"]) { opacity: 0; transition: opacity 0.8s ease-out; }
 body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 </style>
