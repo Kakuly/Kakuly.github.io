@@ -18,13 +18,21 @@ def get_tags_from_ai(title, description):
     if not GEMINI_API_KEY:
         return []
     
-    prompt = f"""
-    以下のYouTube動画のタイトルと概要欄から、「Kakuly」という人物が担当した役割（職種）のみを抽出してください。
+prompt = f"""
+    以下のYouTube動画のタイトルと概要欄から、制作者（Kakuly / かくり）が担当した役割を抽出してください。
+    
+    【ヒント】
+    - 「Mix: Kakuly」「かくり(Mix)」「Mixed by Kakuly」などの表記から役割を特定してください。
+    - Kakuly だけでなく「かくり」という表記も同一人物です。
+    - もしクレジットに名前がなくても、タイトルに「Kakuly」が含まれている場合、その動画の Music や Arrangement を担当している可能性が高いです。
+    
+    【抽出対象のキーワード】
+    Mix, Arrangement, Mastering, Movie, Music, Lyric
     
     【ルール】
-    1. 他の人の担当（例: Vocal, Illustration等）は絶対に含めないでください。
-    2. Kakulyの担当が「Mix, Arrangement, Mastering, Movie, Music」などの場合、その単語のみをカンマ区切りで返してください。
-    3. 該当がない場合は「None」とだけ返してください。
+    1. 他の人の担当（例: Vocal, Illustration）は絶対に含めない。
+    2. 該当する役割を英語で、カンマ区切りで返してください（例: Mix, Mastering）。
+    3. 役割が見当たらない場合は「None」とだけ返してください。
     4. 余計な説明は一切不要です。
     
     タイトル: {title}
