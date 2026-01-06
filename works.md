@@ -4,7 +4,7 @@ title: Works
 permalink: /works/
 ---
 
-### Arrangement / Music / Lyrics / Mix / Mastering / Movie / Remix /
+### Music / Mix / Mastering / Movie
 
 <div class="video-grid">
 
@@ -465,46 +465,23 @@ h1, h2, h3, .site-title {
 }
 
 #iris-in {
-  position: fixed;
-  top: 50%; left: 50%;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  box-shadow: 0 0 0 500vmax var(--bg-color);
-  z-index: 100000;
-  pointer-events: none;
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+  position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%;
+  box-shadow: 0 0 0 500vmax var(--bg-color); z-index: 100000; pointer-events: none;
+  transform: translate(-50%, -50%) scale(0); transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-body.is-opening #iris-in {
-  transform: translate(-50%, -50%) scale(500);
-}
+body.is-opening #iris-in { transform: translate(-50%, -50%) scale(500); }
 
 #iris-out {
-  position: fixed;
-  top: 50%; left: 50%;
-  width: 150vmax; height: 150vmax;
-  background-color: var(--bg-color);
-  border-radius: 50%;
-  z-index: 100001;
-  pointer-events: none;
-  transform: translate(-50%, -50%) scale(0);
+  position: fixed; top: 50%; left: 50%; width: 150vmax; height: 150vmax; background-color: var(--bg-color);
+  border-radius: 50%; z-index: 100001; pointer-events: none; transform: translate(-50%, -50%) scale(0);
   transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-body.is-exiting #iris-out {
-  transform: translate(-50%, -50%) scale(1.2) !important;
-}
+body.is-exiting #iris-out { transform: translate(-50%, -50%) scale(1.2) !important; }
 
-body > *:not([id^="iris-"]) {
-  opacity: 0;
-  transition: opacity 0.8s ease-out;
-}
-
-body.is-opening > *:not([id^="iris-"]) {
-  opacity: 1;
-  transition-delay: 0.2s;
-}
+body > *:not([id^="iris-"]) { opacity: 0; transition: opacity 0.8s ease-out; }
+body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 </style>
 
 <button id="mode-toggle">🌙 Dark Mode</button>
@@ -513,35 +490,22 @@ body.is-opening > *:not([id^="iris-"]) {
   const btn = document.getElementById('mode-toggle');
   const body = document.body;
   const html = document.documentElement;
-
   if (localStorage.getItem('theme') === 'dark') {
-    html.classList.add('dark-mode');
-    body.classList.add('dark-mode');
-    btn.textContent = '☀️ Light Mode';
+    html.classList.add('dark-mode'); body.classList.add('dark-mode'); btn.textContent = '☀️ Light Mode';
   }
-
   btn.addEventListener('click', () => {
     body.classList.add('mode-transition');
     const isDark = html.classList.toggle('dark-mode');
     body.classList.toggle('dark-mode');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
     btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
-    setTimeout(() => {
-      body.classList.remove('mode-transition');
-    }, 500);
+    setTimeout(() => { body.classList.remove('mode-transition'); }, 500);
   });
-  
   function startIris() {
     document.body.classList.remove('is-opening', 'is-exiting');
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        document.body.classList.add('is-opening');
-      }, 50);
-    });
+    requestAnimationFrame(() => { setTimeout(() => { document.body.classList.add('is-opening'); }, 50); });
   }
-
   window.addEventListener('pageshow', startIris);
-
   document.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
