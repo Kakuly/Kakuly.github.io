@@ -12,8 +12,7 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=p4M5wHkNHmc" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/p4M5wHkNHmc/maxresdefault.jpg" alt="「pluie.」feat. mare - Official Video" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>「pluie.」feat. mare - Official Video</h3>
-  <div class="tag-container">
+  <h3 class='video-title'>「pluie.」feat. mare - Official Video</h3>  <div class="tag-container">
     <span class="work-tag">Movie</span>
   </div>
 </div>
@@ -22,15 +21,13 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=XIGbiSGclgA" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/XIGbiSGclgA/maxresdefault.jpg" alt="Departure / 姫野　- tato (cover)" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>Departure / 姫野　- tato (cover)</h3>
-</div>
+  <h3 class='video-title'>Departure / 姫野　- tato (cover)</h3></div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=cknsKkzA2lM" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/cknsKkzA2lM/maxresdefault.jpg" alt="サ終あざした / 重音テトSV" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>サ終あざした / 重音テトSV</h3>
-  <div class="tag-container">
+  <h3 class='video-title'>サ終あざした / 重音テトSV</h3>  <div class="tag-container">
     <span class="work-tag">Mastering</span>
   </div>
 </div>
@@ -39,13 +36,12 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=zAURwtz_AY4" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/zAURwtz_AY4/maxresdefault.jpg" alt="HyperPopCorn!! / 初音ミク - shikisai × Kakuly" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>HyperPopCorn!! / 初音ミク - shikisai × Kakuly</h3>
-  <div class="tag-container">
+  <h3 class='video-title'>HyperPopCorn!! / 初音ミク - shikisai × Kakuly</h3>  <div class="tag-container">
+    <span class="work-tag">Arrangement</span>
+    <span class="work-tag">Mix</span>
+    <span class="work-tag">Movie</span>
     <span class="work-tag">Remix</span>
     <span class="work-tag">Music</span>
-    <span class="work-tag">Arrangement</span>
-    <span class="work-tag">Movie</span>
-    <span class="work-tag">Mix</span>
     <span class="work-tag">Lyric</span>
   </div>
 </div>
@@ -54,15 +50,13 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=dRd-CYI11fQ" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/dRd-CYI11fQ/maxresdefault.jpg" alt="【 XFD 】Undefined 01" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>【 XFD 】Undefined 01</h3>
-</div>
+  <h3 class='video-title'>【 XFD 】Undefined 01</h3></div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=eSfYFhNjiB8" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/eSfYFhNjiB8/maxresdefault.jpg" alt="Akari24 - Crack Cat / feat.初音ミク" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>Akari24 - Crack Cat / feat.初音ミク</h3>
-  <div class="tag-container">
+  <h3 class='video-title'>Akari24 - Crack Cat / feat.初音ミク</h3>  <div class="tag-container">
     <span class="work-tag">Movie</span>
   </div>
 </div>
@@ -71,8 +65,7 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=YOoRO2OVICo" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/YOoRO2OVICo/maxresdefault.jpg" alt="1st Album『(EN)CORE』クロスフェード" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>1st Album『(EN)CORE』クロスフェード</h3>
-  <div class="tag-container">
+  <h3 class='video-title'>1st Album『(EN)CORE』クロスフェード</h3>  <div class="tag-container">
     <span class="work-tag">Remix</span>
     <span class="work-tag">Mix</span>
   </div>
@@ -82,8 +75,7 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=Z7OQL1hQ5WY" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/Z7OQL1hQ5WY/maxresdefault.jpg" alt="花溺れ / 初音ミク, 花奏かのんβ" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>花溺れ / 初音ミク, 花奏かのんβ</h3>
-  <div class="tag-container">
+  <h3 class='video-title'>花溺れ / 初音ミク, 花奏かのんβ</h3>  <div class="tag-container">
     <span class="work-tag">Remix</span>
     <span class="work-tag">Mix</span>
     <span class="work-tag">Mastering</span>
@@ -94,8 +86,7 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=bqMBuLzCyMc" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/bqMBuLzCyMc/maxresdefault.jpg" alt="Akari24 - 言葉は魔法みたい / feat.初音ミク" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>Akari24 - 言葉は魔法みたい / feat.初音ミク</h3>
-  <div class="tag-container">
+  <h3 class='video-title'>Akari24 - 言葉は魔法みたい / feat.初音ミク</h3>  <div class="tag-container">
     <span class="work-tag">Arrangement</span>
     <span class="work-tag">Movie</span>
   </div>
@@ -105,10 +96,9 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=XsjuHvYlRyc" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/XsjuHvYlRyc/maxresdefault.jpg" alt="SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)</h3>
-  <div class="tag-container">
-    <span class="work-tag">Movie</span>
+  <h3 class='video-title'>SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)</h3>  <div class="tag-container">
     <span class="work-tag">Mastering</span>
+    <span class="work-tag">Movie</span>
   </div>
 </div>
 
@@ -116,15 +106,13 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=y7DwWj1gHQE" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/y7DwWj1gHQE/maxresdefault.jpg" alt="映画『カラフルピーチ/魔王と予言の少女』" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>映画『カラフルピーチ/魔王と予言の少女』</h3>
-</div>
+  <h3 class='video-title'>映画『カラフルピーチ/魔王と予言の少女』</h3></div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=u3pMZtkugX8" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/u3pMZtkugX8/maxresdefault.jpg" alt="【オリジナル曲】スノーダンス/yuru【Vtuber/Vsinger】" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>【オリジナル曲】スノーダンス/yuru【Vtuber/Vsinger】</h3>
-  <div class="tag-container">
+  <h3 class='video-title'>【オリジナル曲】スノーダンス/yuru【Vtuber/Vsinger】</h3>  <div class="tag-container">
     <span class="work-tag">Music</span>
     <span class="work-tag">Lyric</span>
   </div>
@@ -134,8 +122,7 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=HIYdKgIvG0I" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/HIYdKgIvG0I/maxresdefault.jpg" alt="GYU P-『イミタティオ/ 初音ミク』【オリジナルMV】" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>GYU P-『イミタティオ/ 初音ミク』【オリジナルMV】</h3>
-  <div class="tag-container">
+  <h3 class='video-title'>GYU P-『イミタティオ/ 初音ミク』【オリジナルMV】</h3>  <div class="tag-container">
     <span class="work-tag">Movie</span>
   </div>
 </div>
@@ -144,22 +131,19 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=T9oeiJxs2kA" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/T9oeiJxs2kA/maxresdefault.jpg" alt="【マイクラ】サバイバルであった出来事を歌にしてみた【カラフルピーチ】" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>【マイクラ】サバイバルであった出来事を歌にしてみた【カラフルピーチ】</h3>
-</div>
+  <h3 class='video-title'>【マイクラ】サバイバルであった出来事を歌にしてみた【カラフルピーチ】</h3></div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=SErUMzCz8sA" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/SErUMzCz8sA/maxresdefault.jpg" alt="［Melodic Dubstep/UKHARDCORE］Kakuly vs Sohukira - Blood of Ainu" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>［Melodic Dubstep/UKHARDCORE］Kakuly vs Sohukira - Blood of Ainu</h3>
-</div>
+  <h3 class='video-title'>［Melodic Dubstep/UKHARDCORE］Kakuly vs Sohukira - Blood of Ainu</h3></div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=tvtcZYBHfiQ" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/tvtcZYBHfiQ/maxresdefault.jpg" alt="バットプロローグ/ONE" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>バットプロローグ/ONE</h3>
-  <div class="tag-container">
+  <h3 class='video-title'>バットプロローグ/ONE</h3>  <div class="tag-container">
     <span class="work-tag">Arrangement</span>
   </div>
 </div>
@@ -168,8 +152,7 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=o94Im34pHHk" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/o94Im34pHHk/maxresdefault.jpg" alt="【MV】アーティフィシャルスマイル／可不" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>【MV】アーティフィシャルスマイル／可不</h3>
-  <div class="tag-container">
+  <h3 class='video-title'>【MV】アーティフィシャルスマイル／可不</h3>  <div class="tag-container">
     <span class="work-tag">Movie</span>
   </div>
 </div>
@@ -178,22 +161,19 @@ permalink: /works/
   <a href="https://www.youtube.com/watch?v=owXBgyrXQFg" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/owXBgyrXQFg/maxresdefault.jpg" alt="9m" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>9m</h3>
-</div>
+  <h3 class='video-title'>9m</h3></div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=cJ9pKeN1kWI" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/cJ9pKeN1kWI/maxresdefault.jpg" alt="ボカロP１１人がジャンキーナイトタウンオーケストラアレンジリレーしてみた！！" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>ボカロP１１人がジャンキーナイトタウンオーケストラアレンジリレーしてみた！！</h3>
-</div>
+  <h3 class='video-title'>ボカロP１１人がジャンキーナイトタウンオーケストラアレンジリレーしてみた！！</h3></div>
 
 <div class="video-item">
   <a href="https://www.youtube.com/watch?v=qLw7EM1W4B4" target="_blank" class="video-link">
     <img src="https://img.youtube.com/vi/qLw7EM1W4B4/maxresdefault.jpg" alt="GYU P-『世界は無機物でできている / 初音ミク』【オリジナルMV】" class="video-thumbnail" loading="lazy">
   </a>
-  <h3 class='video-title'>GYU P-『世界は無機物でできている / 初音ミク』【オリジナルMV】</h3>
-  <div class="tag-container">
+  <h3 class='video-title'>GYU P-『世界は無機物でできている / 初音ミク』【オリジナルMV】</h3>  <div class="tag-container">
     <span class="work-tag">Movie</span>
   </div>
 </div>
