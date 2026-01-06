@@ -23,11 +23,12 @@ title: Home
 エレクトロポップ／ハイパーポップを中心に、たくさん迷いながら音楽を作っている。
 元気に生きるために音楽を摂取します。いつもありがとう。
 
-<hr style="width: 50%; margin: 40px auto; border-top: 1px solid var(--text-color); opacity: 0.3;">
 
 <h2>CONTACT</h2><br>
 DM on X or<br>
 kakuly.work@gmail.com<br>
+
+<hr style="width: 50%; margin: 40px auto; border-top: 1px solid var(--text-color); opacity: 0.3;">
 
 
 <div id="iris-in"></div>
