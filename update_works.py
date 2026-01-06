@@ -106,8 +106,6 @@ def update_markdown(items):
         content += '</div>\n\n'
 
     content += '</div>\n\n'
-
-    # --- 3. 演出用パーツとデザイン ---
     content += '<div id="iris-in"></div>'
     content += '<div id="iris-out"></div>'
 
@@ -115,7 +113,7 @@ def update_markdown(items):
 <style>
 /* 追加したタグのスタイル */
 .tag-container {
-  margin-top: 4px; /* タイトルとの隙間 */
+  margin-top: 2px;
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
@@ -145,13 +143,14 @@ def update_markdown(items):
 
 .video-title {
   margin-top: 10px;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 0.9rem; /* 本文のサイズ感に調整 */
+  font-weight: 700;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-bottom: 0px !important; /* タグを吸い付かせる */
+  margin-bottom: 0px !important;
+  font-family: 'Noto Sans JP', sans-serif !important; /* 本文フォントに統一 */
 }
 
 /* サイト全体の最大幅を上書き */
@@ -200,6 +199,12 @@ h1, h2, h3, .site-title {
   color: var(--text-color) !important;
 }
 
+/* ビデオタイトルだけ個別に本文フォントを適用 */
+.video-item .video-title {
+  font-family: 'Noto Sans JP', sans-serif !important;
+  letter-spacing: 0em !important;
+}
+
 .page-link {
   font-family: 'Montserrat', sans-serif !important;
   color: var(--text-color) !important;
@@ -213,16 +218,12 @@ h1, h2, h3, .site-title {
 .video-grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
-  gap: 60px 40px !important; /* 動画同士の間隔を広げる */
+  gap: 30px !important;
 }
 
-/* ビデオタイトルに本文フォントを適用 */
 .video-item h3 {
-  font-family: 'Noto Sans JP', sans-serif !important;
   font-size: 0.85rem !important;
-  /* height固定を解除し、タイトルが1行でもタグがすぐ下に来るようにする */
-  height: auto !important; 
-  min-height: 1.3em;
+  height: 2.6em;
   overflow: hidden;
   margin-bottom: 0px !important;
   line-height: 1.3;
@@ -342,4 +343,4 @@ if __name__ == "__main__":
     items = get_playlist_items()
     if items:
         update_markdown(items)
-        print("Successfully updated works.md")
+        print("Successfully updated works.md with Noto Sans JP titles and minimal gaps")
