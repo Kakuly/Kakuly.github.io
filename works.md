@@ -1,4 +1,4 @@
----
+----- 
 layout: page
 title: Works
 permalink: /works/
@@ -152,25 +152,40 @@ permalink: /works/
 
 <div id="iris-in"></div><div id="iris-out"></div>
 <style>
+/* 追加したタグのスタイル */
+.tag-container {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.work-tag {
+  font-size: 0.65rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--text-color);
+  opacity: 0.7;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+}
+
 .video-thumbnail {
   width: 100%;
-  aspect-ratio: 16 / 9; /* 比率を固定 */
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* マウスを乗せた時の演出 */
 .video-link:hover .video-thumbnail {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .video-title {
-  margin-top: 15px;
+  margin-top: 10px; /* タグがある分少し調整 */
   font-size: 1rem;
   font-weight: 600;
-  /* 2行目以降を「...」にする（タイトルが長い時用） */
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -179,52 +194,41 @@ permalink: /works/
 
 /* サイト全体の最大幅を上書き */
 .wrapper {
-  max-width: 1100px !important; /* 800pxから1100pxに拡張 */
+  max-width: 1100px !important;
   padding-right: 40px !important;
   padding-left: 40px !important;
 }
 
-/* ヘッダーの幅も合わせる */
 .site-header .wrapper {
   max-width: 1100px !important;
 }
 
-/* 1. フォント読み込み */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
 
-/* 2. カラー変数（Lightがデフォルト） */
 :root {
   --bg-color: #ffffff;
   --text-color: #111111;
-  --link-color: #0066cc;
 }
 
-/* ダークモード時の上書き */
 html.dark-mode, body.dark-mode {
   --bg-color: #000000;
   --text-color: #eeeeee;
-  --link-color: #80c0ff;
-  background-color: #000000 !important; /* HTMLごと黒くする */
+  background-color: #000000 !important;
 }
 
-/* 3. 全体レイアウト */
 body { 
   background-color: var(--bg-color) !important; 
   color: var(--text-color) !important; 
-  /* 通常時は transition をオフにしてパカつきをゼロにする */
   transition: none !important; 
   font-family: 'Noto Sans JP', sans-serif !important;
   font-weight: 700 !important;
-  -webkit-font-smoothing: antialiased;
 }
 
-/* ボタンを押した時だけ付与するクラス */
 body.mode-transition {
   transition: background-color 0.5s ease, color 0.5s ease !important;
 }
 
-/* 4. ヘッダー・ナビゲーション */
-.site-header { background-color: transparent !important; border: none !important; -webkit-font-smoothing: antialiased; }
+.site-header { background-color: transparent !important; border: none !important; }
 
 h1, h2, h3, .site-title { 
   font-family: 'Montserrat', sans-serif !important;
@@ -232,24 +236,18 @@ h1, h2, h3, .site-title {
   font-weight: 700 !important;
   letter-spacing: -0.05em !important;
   color: var(--text-color) !important;
-  -webkit-font-smoothing: antialiased;
 }
 
 .page-link {
   font-family: 'Montserrat', sans-serif !important;
   color: var(--text-color) !important;
   font-weight: 700 !important;
-  letter-spacing: 0.05em !important;
   text-transform: uppercase;
   font-size: 0.9rem !important;
   margin-left: 20px !important;
   text-decoration: none !important;
-  transition: 0.3s;
-  -webkit-font-smoothing: antialiased;
 }
 
-/* 5. ギャラリー（4列）の設定 */
-/* Worksの動画グリッドをより広々と見せる調整 */
 .video-grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
@@ -265,10 +263,8 @@ h1, h2, h3, .site-title {
   line-height: 1.3;
 }
 
-/* 6. 不要な要素の削除 */
 .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
 
-/* 7. モード切り替えボタン */
 #mode-toggle {
   cursor: pointer;
   background: none;
@@ -282,17 +278,8 @@ h1, h2, h3, .site-title {
   right: 20px;
   z-index: 9999;
   font-weight: bold;
-  font-family: 'Montserrat', sans-serif !important;
 }
 
-/* スマホ対応 */
-@media (max-width: 800px) {
-  .profile-container { flex-direction: column; align-items: flex-start; }
-  .profile-name { font-size: 5rem !important; }
-  .profile-icon { width: 200px; height: 200px; }
-}
-
-/* --- イン（入場）：穴が広がる演出 --- */
 #iris-in {
   position: fixed;
   top: 50%; left: 50%;
@@ -309,7 +296,6 @@ body.is-opening #iris-in {
   transform: translate(-50%, -50%) scale(500);
 }
 
-/* --- アウト（退場）：板が広がる演出 --- */
 #iris-out {
   position: fixed;
   top: 50%; left: 50%;
@@ -326,7 +312,6 @@ body.is-exiting #iris-out {
   transform: translate(-50%, -50%) scale(1.2) !important;
 }
 
-/* コンテンツの中身をフェードイン */
 body > *:not([id^="iris-"]) {
   opacity: 0;
   transition: opacity 0.8s ease-out;
@@ -341,6 +326,7 @@ body.is-opening > *:not([id^="iris-"]) {
 <button id="mode-toggle">🌙 Dark Mode</button>
 
 <script>
+  // (Script部分は変更なしのため維持)
   const btn = document.getElementById('mode-toggle');
   const body = document.body;
   const html = document.documentElement;
