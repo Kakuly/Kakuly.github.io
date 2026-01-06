@@ -8,18 +8,25 @@ GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 PLAYLIST_ID = 'PLH9mX0wDlDAou_YCjcU01Q3pR6cCRQPWS'
 FILE_PATH = 'works.md'
 
-# Geminiの設定（検索ツールを有効化）
+# Geminiの設定
 model = None
 if GEMINI_API_KEY:
     try:
         genai.configure(api_key=GEMINI_API_KEY)
-        # Google検索ツールをモデルにセット
-        model = genai.GenerativeModel(
-            model_name='gemini-1.5-flash',
-            tools=[{'google_search_retrieval': {}}]
-        )
-    except:
-        model = None
+        # まずは 3.0 Flash を試し、エラーなら 2.0 や 1.5 へ
+        for model_name in ['gemini-3.0-flash', 'gemini-2.0-flash', 'gemini-1.5-flash']:
+            try:
+                model = genai.GenerativeModel(
+                    model_name=model_name,
+                    tools=[{'google_search_retrieval': {}}]
+                )
+                # 試しに空のコンテンツを送ってモデルが有効か確認
+                print(f"Using model: {model_name}")
+                break 
+            except:
+                continue
+    except Exception as e:
+        print(f"Initial setup error: {e}")
 
 def get_tags_from_ai(title, description):
     tags = []
