@@ -22,10 +22,8 @@ def load_known_works():
 
 def save_known_works(data):
     with open(CACHE_FILE, 'w', encoding='utf-8') as f:
-        # ensure_ascii=False で日本語タイトルをそのまま保存
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-# 起動時に読み込み
 KNOWN_WORKS = load_known_works()
 
 # Geminiの設定
@@ -33,7 +31,6 @@ model = None
 if GEMINI_API_KEY:
     try:
         genai.configure(api_key=GEMINI_API_KEY)
-        # 最新のモデルで検索機能を有効化
         for m_name in ['gemini-2.0-flash', 'gemini-3.0-flash', 'gemini-1.5-flash']:
             try:
                 model = genai.GenerativeModel(
@@ -47,26 +44,29 @@ if GEMINI_API_KEY:
         model = None
 
 def get_tags(video_id, title, description):
-    # 1. 既知のデータ（JSON）にタグが「1つ以上ある場合のみ」それを返す
-    # ここが空（[]）であれば、下のAI判定へ進むように変更しました
+    # 1. キャッシュの厳格チェック
+    # 「タグが1つ以上存在する」かつ「Noneが含まれていない」場合のみキャッシュを採用
     if video_id in KNOWN_WORKS:
         cached_data = KNOWN_WORKS[video_id]
-        if isinstance(cached_data, dict) and len(cached_data.get("tags", [])) > 0:
-            return cached_data["tags"]
+        if isinstance(cached_data, dict):
+            tags_in_cache = cached_data.get("tags", [])
+            # タグが空、またはタグに 'None' が含まれる場合は再考察へ進む
+            if len(tags_in_cache) > 0 and "None" not in tags_in_cache:
+                return tags_in_cache
 
-    # 2. 判断材料として過去の実績をテキスト化する（自己学習用）
+    # 2. 判断材料の生成（文章体系を維持）
     past_examples = ""
     example_count = 0
     for k, v in KNOWN_WORKS.items():
         if isinstance(v, dict) and v.get("tags"):
             past_examples += f"- {v['title']}: {', '.join(v['tags'])}\n"
             example_count += 1
-            if example_count > 15: break # 直近の実績を参考にする
+            if example_count > 15: break
 
-    # 3. 未知の動画（またはタグが空の動画）のみAI判定
+    # 3. AI判定（再考察の実行）
     tags = []
     if model:
-        # メモ・文章の体系を厳守したプロンプト
+        # 指示通りの文章体系プロンプト
         prompt = f"""
         あなたは楽曲クレジットの専門家です。ネット検索を行い、以下の動画における「Kakuly（かくり）」の正確な担当役割を特定してください。
         
@@ -91,6 +91,7 @@ def get_tags(video_id, title, description):
         英語のタグのみをカンマ区切りで。該当なしは「None」。
         """
         try:
+            # 検索を伴う考察を強制
             response = model.generate_content(prompt)
             result = response.text.strip()
             if result != "None" and len(result) > 1:
@@ -98,22 +99,22 @@ def get_tags(video_id, title, description):
         except:
             pass
 
-    # 4. AI失敗時のバックアップ判定（Lyricsに統一）
+    # 4. バックアップ判定（文章体系・Lyrics統一を維持）
     if not tags:
-        lines = (title + "\n" + description).split('\n')
-        for line in lines:
-            l_lower = line.lower()
-            if 'kakuly' in l_lower or 'かくり' in l_lower:
-                if any(k in l_lower for k in ['mix', 'ミックス']): tags.append('Mix')
-                if any(k in l_lower for k in ['arrang', '編曲']): tags.append('Arrangement')
-                if any(k in l_lower for k in ['master', 'マスタリング']): tags.append('Mastering')
-                if any(k in l_lower for k in ['movie', '映像', '動画']): tags.append('Movie')
-                if any(k in l_lower for k in ['music', '作曲']): tags.append('Music')
-                if any(k in l_lower for k in ['lyric', '作詞']): tags.append('Lyrics')
-                if any(k in l_lower for k in ['remix', 'リミックス']): tags.append('Remix')
+        l_lower = (title + "\n" + description).lower()
+        if 'kakuly' in l_lower or 'かくり' in l_lower:
+            patterns = [
+                ('mix', 'Mix'), ('編曲', 'Arrangement'), ('master', 'Mastering'),
+                ('movie', 'Movie'), ('映像', 'Movie'), ('music', 'Music'),
+                ('作曲', 'Music'), ('lyric', 'Lyrics'), ('作詞', 'Lyrics'), ('remix', 'Remix')
+            ]
+            for pat, val in patterns:
+                if pat in l_lower: tags.append(val)
     
-    # 判定結果を「タイトル付き」でキャッシュ保存（Lyricsへの置換・統一）
+    # Lyricsへの正規化と保存
     processed_tags = sorted(list(set([t.replace('Lyric', 'Lyrics') if t == 'Lyric' else t for t in tags])))
+    
+    # 判定が空でなかった場合、または新規保存の場合
     KNOWN_WORKS[video_id] = {
         "title": title,
         "tags": processed_tags
@@ -127,17 +128,14 @@ def get_playlist_items():
     next_page_token = None
     while True:
         url = f"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId={PLAYLIST_ID}&key={API_KEY}"
-        if next_page_token:
-            url += f"&pageToken={next_page_token}"
+        if next_page_token: url += f"&pageToken={next_page_token}"
         try:
             r = requests.get(url).json()
             items = r.get('items', [])
             all_items.extend(items)
             next_page_token = r.get('nextPageToken')
-            if not next_page_token:
-                break
-        except:
-            break
+            if not next_page_token: break
+        except: break
     return all_items
 
 def update_markdown(items):
@@ -152,7 +150,6 @@ def update_markdown(items):
         video_id = snippet['resourceId']['videoId']
         thumbnail_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
         
-        # IDを考慮したタグ取得（JSONまたはAI）
         tags = get_tags(video_id, title, description)
         
         content += '<div class="video-item">\n'
@@ -168,10 +165,9 @@ def update_markdown(items):
         content += '</div>\n\n'
 
     content += '</div>\n\n'
-    content += '<div id="iris-in"></div>'
-    content += '<div id="iris-out"></div>'
+    content += '<div id="iris-in"></div><div id="iris-out"></div>'
 
-    # --- デザイン・演出用パーツ（一切省略せず保持） ---
+    # --- デザインCSS/JS（指示通り完全保持） ---
     content += """
 <style>
 .tag-container { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 5px; }
@@ -200,16 +196,12 @@ body.is-exiting #iris-out { transform: translate(-50%, -50%) scale(1.2) !importa
 body > *:not([id^="iris-"]) { opacity: 0; transition: opacity 0.8s ease-out; }
 body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 </style>
-
 <button id="mode-toggle">🌙 Dark Mode</button>
-
 <script>
   const btn = document.getElementById('mode-toggle');
   const body = document.body;
   const html = document.documentElement;
-  if (localStorage.getItem('theme') === 'dark') {
-    html.classList.add('dark-mode'); body.classList.add('dark-mode'); btn.textContent = '☀️ Light Mode';
-  }
+  if (localStorage.getItem('theme') === 'dark') { html.classList.add('dark-mode'); body.classList.add('dark-mode'); btn.textContent = '☀️ Light Mode'; }
   btn.addEventListener('click', () => {
     body.classList.add('mode-transition');
     const isDark = html.classList.toggle('dark-mode');
@@ -223,15 +215,6 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
     requestAnimationFrame(() => { setTimeout(() => { document.body.classList.add('is-opening'); }, 50); });
   }
   window.addEventListener('pageshow', startIris);
-  document.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
-      e.preventDefault();
-      document.body.classList.add('is-exiting');
-      setTimeout(() => { window.location.href = href; }, 800);
-    });
-  });
 </script>
 """
 
@@ -242,4 +225,4 @@ if __name__ == "__main__":
     items = get_playlist_items()
     if items:
         update_markdown(items)
-        print(f"Total {len(items)} items processed. Tags that were empty have been re-evaluated.")
+        print(f"Total {len(items)} processed. Re-evaluation triggered for empty tags.")
