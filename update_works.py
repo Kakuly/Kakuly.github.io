@@ -111,8 +111,9 @@ def update_markdown(items):
 
     content += """
 <style>
+/* 追加したタグのスタイル */
 .tag-container {
-  margin-top: 2px; /* タイトルとの隙間を最小限に */
+  margin-top: 2px;
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
@@ -142,15 +143,17 @@ def update_markdown(items):
 
 .video-title {
   margin-top: 10px;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 0.9rem; /* 本文のサイズ感に調整 */
+  font-weight: 700;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-bottom: 0px !important; /* 下の余白を強制的に消去 */
+  margin-bottom: 0px !important;
+  font-family: 'Noto Sans JP', sans-serif !important; /* 本文フォントに統一 */
 }
 
+/* サイト全体の最大幅を上書き */
 .wrapper {
   max-width: 1100px !important;
   padding-right: 40px !important;
@@ -196,6 +199,12 @@ h1, h2, h3, .site-title {
   color: var(--text-color) !important;
 }
 
+/* ビデオタイトルだけ個別に本文フォントを適用 */
+.video-item .video-title {
+  font-family: 'Noto Sans JP', sans-serif !important;
+  letter-spacing: 0em !important;
+}
+
 .page-link {
   font-family: 'Montserrat', sans-serif !important;
   color: var(--text-color) !important;
@@ -213,11 +222,10 @@ h1, h2, h3, .site-title {
 }
 
 .video-item h3 {
-  font-family: 'Montserrat', 'Noto Sans JP', sans-serif !important;
   font-size: 0.85rem !important;
-  height: 2.6em; /* 余白を削るため高さを少し詰め */
+  height: 2.6em;
   overflow: hidden;
-  margin-bottom: 0px !important; /* 下の余白を削除 */
+  margin-bottom: 0px !important;
   line-height: 1.3;
 }
 
@@ -335,4 +343,4 @@ if __name__ == "__main__":
     items = get_playlist_items()
     if items:
         update_markdown(items)
-        print("Successfully updated works.md with minimal tag gaps")
+        print("Successfully updated works.md with Noto Sans JP titles and minimal gaps")
