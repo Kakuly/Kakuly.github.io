@@ -1,7 +1,8 @@
 import os
 import json
 import requests
-import google.generativeai as genai
+from google import genai 
+import html 
 
 # --- 設定 ---
 API_KEY = os.environ['YOUTUBE_API_KEY']
