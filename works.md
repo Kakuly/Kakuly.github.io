@@ -1,4 +1,10 @@
---- \nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n<div id="filter-container" class="filter-wrapper"></div>
+---
+layout: page
+title: Works
+permalink: /works/
+---
+
+<div id="filter-container" class="filter-wrapper"></div>
 
 <div class="video-grid" id="video-grid">
 
