@@ -25,7 +25,7 @@ title: Home
 <br>
 <br>
 <h2>CONTACT</h2><br>
-<span>@<a href="https://x.com/kakuly_">kakuly_</a> ON X or</span><br>
+<span><a href="https://x.com/あなたのユーザー名" target="_blank">DM on X</a></span><br>
 kakuly.work@gmail.com<br>
 
 <hr style="width: 50%; margin: 40px auto; border-top: 1px solid var(--text-color); opacity: 0.3;">
