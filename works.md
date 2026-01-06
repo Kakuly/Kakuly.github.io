@@ -37,11 +37,11 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/zAURwtz_AY4/maxresdefault.jpg" alt="HyperPopCorn!! / 初音ミク - shikisai × Kakuly" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>HyperPopCorn!! / 初音ミク - shikisai × Kakuly</h3>  <div class="tag-container">
-    <span class="work-tag">Arrangement</span>
+    <span class="work-tag">Music</span>
     <span class="work-tag">Mix</span>
     <span class="work-tag">Movie</span>
     <span class="work-tag">Remix</span>
-    <span class="work-tag">Music</span>
+    <span class="work-tag">Arrangement</span>
     <span class="work-tag">Lyric</span>
   </div>
 </div>
@@ -66,8 +66,8 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/YOoRO2OVICo/maxresdefault.jpg" alt="1st Album『(EN)CORE』クロスフェード" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>1st Album『(EN)CORE』クロスフェード</h3>  <div class="tag-container">
-    <span class="work-tag">Remix</span>
     <span class="work-tag">Mix</span>
+    <span class="work-tag">Remix</span>
   </div>
 </div>
 
@@ -76,9 +76,9 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/Z7OQL1hQ5WY/maxresdefault.jpg" alt="花溺れ / 初音ミク, 花奏かのんβ" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>花溺れ / 初音ミク, 花奏かのんβ</h3>  <div class="tag-container">
-    <span class="work-tag">Remix</span>
-    <span class="work-tag">Mix</span>
     <span class="work-tag">Mastering</span>
+    <span class="work-tag">Mix</span>
+    <span class="work-tag">Remix</span>
   </div>
 </div>
 
@@ -87,8 +87,8 @@ permalink: /works/
     <img src="https://img.youtube.com/vi/bqMBuLzCyMc/maxresdefault.jpg" alt="Akari24 - 言葉は魔法みたい / feat.初音ミク" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>Akari24 - 言葉は魔法みたい / feat.初音ミク</h3>  <div class="tag-container">
-    <span class="work-tag">Arrangement</span>
     <span class="work-tag">Movie</span>
+    <span class="work-tag">Arrangement</span>
   </div>
 </div>
 
@@ -182,9 +182,8 @@ permalink: /works/
 
 <div id="iris-in"></div><div id="iris-out"></div>
 <style>
-/* 追加したタグのスタイル */
 .tag-container {
-  margin-top: 10px;
+  margin-top: 2px; /* タイトルとの隙間を最小限に */
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
@@ -213,16 +212,16 @@ permalink: /works/
 }
 
 .video-title {
-  margin-top: 10px; /* タグがある分少し調整 */
+  margin-top: 10px;
   font-size: 1rem;
   font-weight: 600;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  margin-bottom: 0px !important; /* 下の余白を強制的に消去 */
 }
 
-/* サイト全体の最大幅を上書き */
 .wrapper {
   max-width: 1100px !important;
   padding-right: 40px !important;
@@ -287,9 +286,9 @@ h1, h2, h3, .site-title {
 .video-item h3 {
   font-family: 'Montserrat', 'Noto Sans JP', sans-serif !important;
   font-size: 0.85rem !important;
-  height: 3em;
+  height: 2.6em; /* 余白を削るため高さを少し詰め */
   overflow: hidden;
-  margin-bottom: 10px !important;
+  margin-bottom: 0px !important; /* 下の余白を削除 */
   line-height: 1.3;
 }
 
