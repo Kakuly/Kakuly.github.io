@@ -76,7 +76,7 @@ def get_playlist_items():
     all_items = []
     next_page_token = None
     while True:
-        url = f"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId={PLAYLIST_ID}&key={API_KEY}"
+        url = f"https://www.googleapis.com/googleapis/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId={PLAYLIST_ID}&key={API_KEY}"
         if next_page_token: url += f"&pageToken={next_page_token}"
         try:
             r = requests.get(url).json()
@@ -125,24 +125,18 @@ def update_markdown(items):
 }
 .filter-btn.active { opacity: 1; background: var(--text-color); color: var(--bg-color); }
 
-/* --- 改良したアニメーション --- */
+/* --- 詰まる動き用のアニメーション設定 --- */
 .video-item {
   display: block;
-  opacity: 0; 
-  transform: translateY(10px);
-  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
-  visibility: hidden;
-  height: 0; margin: 0; padding: 0; overflow: hidden; /* 最初は場所を取らない */
+  opacity: 1; 
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
-.video-item.show {
-  opacity: 1;
-  transform: translateY(0);
-  visibility: visible;
-  height: auto;
-  margin-bottom: 0;
+.video-item.hide-anim {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
 }
-/* グリッドから外れた際の隙間を埋める */
-.video-item:not(.show) {
+.video-item.hidden {
   display: none;
 }
 
@@ -196,28 +190,53 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
     });
 
     function applyFilter() {
-      // アニメーションを滑らかにするため、一度非表示にしてから再計算
+      // 1. 移動前の位置を記録 (First)
+      const firstPositions = items.map(item => item.getBoundingClientRect());
+
+      // 2. 表示状態を切り替える (Last)
       items.forEach(item => {
         const itemTags = item.dataset.tags.split(',');
         const isMatch = activeFilters.size === 0 || Array.from(activeFilters).some(f => itemTags.includes(f));
         
         if (isMatch) {
-          item.style.display = 'block'; // まず存在させる
-          // ブラウザの再描画を待ってからクラス付与
-          requestAnimationFrame(() => {
-            item.classList.add('show');
-          });
+          item.classList.remove('hidden', 'hide-anim');
         } else {
-          item.classList.remove('show');
-          // アニメーションが終わるまで待ってから display: none
+          item.classList.add('hide-anim');
+          // フェードアウト後に存在を消す
           setTimeout(() => {
-            if (!item.classList.contains('show')) item.style.display = 'none';
+            if (item.classList.contains('hide-anim')) item.classList.add('hidden');
           }, 400);
         }
+      });
+
+      // 3. ブラウザが再配置した後の位置との差分をアニメーションさせる (Invert & Play)
+      // requestAnimationFrameを2回使い、DOMの更新を待つ
+      requestAnimationFrame(() => {
+        items.forEach((item, i) => {
+          if (item.classList.contains('hidden')) return;
+
+          const lastPos = item.getBoundingClientRect();
+          const firstPos = firstPositions[i];
+
+          const dx = firstPos.left - lastPos.left;
+          const dy = firstPos.top - lastPos.top;
+
+          if (dx !== 0 || dy !== 0) {
+            // 元の位置に瞬時に戻し、そこからアニメーションで移動させる
+            item.style.transition = 'none';
+            item.style.transform = `translate(${dx}px, ${dy}px)`;
+            
+            requestAnimationFrame(() => {
+              item.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease';
+              item.style.transform = 'translate(0, 0)';
+            });
+          }
+        });
       });
     }
   });
 
+  // ダークモード / 演出ロジック (既存維持)
   const btn = document.getElementById('mode-toggle');
   const body = document.body;
   const htmlEl = document.documentElement;
