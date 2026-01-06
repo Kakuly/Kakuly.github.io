@@ -572,15 +572,34 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 .video-grid { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important; gap: 60px 40px !important; position: relative; }
 .video-item h3 { font-family: 'Noto Sans JP', sans-serif !important; font-size: 0.85rem !important; height: auto !important; min-height: 1.3em; overflow: hidden; margin-bottom: 0px !important; line-height: 1.3; }
 .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
-#mode-toggle { cursor: pointer; background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; position: fixed; top: 15px; right: 20px; z-index: 9999; font-weight: bold; }
-/* モバイル対応：画面幅が768px以下の時（スマホなど） */
-@media screen and (max-width: 1100px) {
-  #mode-toggle {
-    top: auto !important;   /* 上固定を解除 */
-    bottom: 20px !important; /* 下から20pxの位置に */
-    right: 20px !important;
-  }
+
+/* --- モード切替ボタンの設定（レスポンシブ対応） --- */
+#mode-toggle { 
+    cursor: pointer; 
+    background: var(--bg-color); /* 重なったときのために背景色を指定 */
+    border: 1px solid var(--text-color); 
+    color: var(--text-color); 
+    padding: 4px 12px; 
+    border-radius: 20px; 
+    font-size: 0.75rem; 
+    position: fixed; 
+    top: 15px; 
+    right: 20px; 
+    z-index: 9999; 
+    font-weight: bold;
+    transition: all 0.3s ease;
 }
+
+/* 画面幅が1000px以下になったら右下に移動 */
+@media screen and (max-width: 1000px) {
+    #mode-toggle {
+        top: auto !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* 下に移動したときに見やすく */
+    }
+}
+
 #iris-in { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 0 500vmax var(--bg-color); z-index: 100000; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1); }
 body.is-opening #iris-in { transform: translate(-50%, -50%) scale(500); }
 #iris-out { position: fixed; top: 50%; left: 50%; width: 150vmax; height: 150vmax; background-color: var(--bg-color); border-radius: 50%; z-index: 100001; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1); }
