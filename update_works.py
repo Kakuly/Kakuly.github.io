@@ -47,9 +47,11 @@ if GEMINI_API_KEY:
         model = None
 
 def get_tags(video_id, title, description):
-    # 1. 既知のデータ（JSON）にあればそれを返す（最優先）
-    if video_id in KNOWN_WORKS and KNOWN_WORKS[video_id].get("tags"):
-        return KNOWN_WORKS[video_id].get("tags")
+    # 1. 既知のデータ（JSON）に「タグが存在する場合のみ」それを返す（重要：空なら再考察させる）
+    if video_id in KNOWN_WORKS:
+        cached_tags = KNOWN_WORKS[video_id].get("tags", [])
+        if len(cached_tags) > 0:
+            return cached_tags
 
     # 2. 判断材料として過去の実績をテキスト化する（自己学習用）
     past_examples = ""
@@ -58,12 +60,11 @@ def get_tags(video_id, title, description):
         if v.get("tags"):
             past_examples += f"- {v['title']}: {', '.join(v['tags'])}\n"
             example_count += 1
-            if example_count > 15: break # 直近の実績を参考にする
+            if example_count > 15: break
 
-    # 3. 未知の動画（新着）のみAI判定
+    # 3. キャッシュにタグがない場合、AI判定を実行
     tags = []
     if model:
-        # メモ・文章の体系を厳守したプロンプト
         prompt = f"""
         あなたは楽曲クレジットの専門家です。ネット検索を行い、以下の動画における「Kakuly（かくり）」の正確な担当役割を特定してください。
         
@@ -82,7 +83,7 @@ def get_tags(video_id, title, description):
         5. アルバムに参加している場合にも、Musicに割り振ってください
         6. 基本的には概要欄やタイトルを参照し、不十分である場合検索をしっかりとかけてください
         7. タグがないことはありえません。
-        8. MixとRemixは全く別物です、かつ同時につくことはほとんどないです。
+        8. Mix and Remix are completely different things, and they are rarely credited together.
         
         【出力形式】
         英語のタグのみをカンマ区切りで。該当なしは「None」。
@@ -109,8 +110,10 @@ def get_tags(video_id, title, description):
                 if any(k in l_lower for k in ['lyric', '作詞']): tags.append('Lyrics')
                 if any(k in l_lower for k in ['remix', 'リミックス']): tags.append('Remix')
     
-    # 判定結果を「タイトル付き」でキャッシュ保存（Lyricsへの置換・統一処理）
+    # 判定結果を保存（Lyricsへの置換・統一）
     processed_tags = sorted(list(set([t.replace('Lyric', 'Lyrics') if t == 'Lyric' else t for t in tags])))
+    
+    # AIが何か見つけた場合、あるいは既存タイトルを保持したい場合に保存
     KNOWN_WORKS[video_id] = {
         "title": title,
         "tags": processed_tags
@@ -122,24 +125,17 @@ def get_tags(video_id, title, description):
 def get_playlist_items():
     all_items = []
     next_page_token = None
-    
-    # 次のページがある限りリクエストを繰り返す（全件取得）
     while True:
         url = f"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId={PLAYLIST_ID}&key={API_KEY}"
         if next_page_token:
             url += f"&pageToken={next_page_token}"
-            
         try:
             r = requests.get(url).json()
             items = r.get('items', [])
             all_items.extend(items)
-            
             next_page_token = r.get('nextPageToken')
-            if not next_page_token:
-                break
-        except:
-            break
-            
+            if not next_page_token: break
+        except: break
     return all_items
 
 def update_markdown(items):
@@ -154,16 +150,13 @@ def update_markdown(items):
         video_id = snippet['resourceId']['videoId']
         thumbnail_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
         
-        # IDを考慮したタグ取得（JSONまたはAI）
         tags = get_tags(video_id, title, description)
         
         content += '<div class="video-item">\n'
         content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
         content += f'    <img src="{thumbnail_url}" alt="{title}" class="video-thumbnail" loading="lazy">\n'
         content += f'  </a>\n'
-
         content += f"  <h3 class='video-title'>{title}</h3>"
-        
         if tags:
             content += '  <div class="tag-container">\n'
             for tag in tags:
