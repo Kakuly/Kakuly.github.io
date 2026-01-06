@@ -7,7 +7,10 @@
   },
   "XIGbiSGclgA": {
     "title": "Departure / 姫野　- tato (cover)",
-    "tags": []
+    "tags": [
+      "Movie",
+      "Mix"
+    ]
   },
   "cknsKkzA2lM": {
     "title": "サ終あざした / 重音テトSV",
@@ -21,14 +24,15 @@
       "Arrangement",
       "Music",
       "Movie",
-      "Remix",
-      "Mix",
-      "Lyric"
+      "Lyrics"
     ]
   },
   "dRd-CYI11fQ": {
     "title": "【 XFD 】Undefined 01",
-    "tags": []
+    "tags": [
+      "Music",
+      "Lyrics"
+    ]
   },
   "eSfYFhNjiB8": {
     "title": "Akari24 - Crack Cat / feat.初音ミク",
@@ -39,16 +43,14 @@
   "YOoRO2OVICo": {
     "title": "1st Album『(EN)CORE』クロスフェード",
     "tags": [
-      "Mix",
+      "Movie",
       "Remix"
     ]
   },
   "Z7OQL1hQ5WY": {
     "title": "花溺れ / 初音ミク, 花奏かのんβ",
     "tags": [
-      "Mastering",
-      "Mix",
-      "Remix"
+      "Mastering"
     ]
   },
   "bqMBuLzCyMc": {
@@ -67,13 +69,16 @@
   },
   "y7DwWj1gHQE": {
     "title": "映画『カラフルピーチ/魔王と予言の少女』",
-    "tags": []
+    "tags": [
+      "Music",
+      "Lyrics"
+    ]
   },
   "u3pMZtkugX8": {
     "title": "【オリジナル曲】スノーダンス/yuru【Vtuber/Vsinger】",
     "tags": [
       "Music",
-      "Lyric"
+      "Lyrics"
     ]
   },
   "HIYdKgIvG0I": {
@@ -84,11 +89,16 @@
   },
   "T9oeiJxs2kA": {
     "title": "【マイクラ】サバイバルであった出来事を歌にしてみた【カラフルピーチ】",
-    "tags": []
+    "tags": [
+      "Music",
+      "Lyrics"
+    ]
   },
   "SErUMzCz8sA": {
     "title": "［Melodic Dubstep/UKHARDCORE］Kakuly vs Sohukira - Blood of Ainu",
-    "tags": []
+    "tags": [
+      "Music"
+    ]
   },
   "tvtcZYBHfiQ": {
     "title": "バットプロローグ/ONE",
@@ -104,11 +114,15 @@
   },
   "owXBgyrXQFg": {
     "title": "9m",
-    "tags": []
+    "tags": [
+      "Arrangement"
+    ]
   },
   "cJ9pKeN1kWI": {
     "title": "ボカロP１１人がジャンキーナイトタウンオーケストラアレンジリレーしてみた！！",
-    "tags": []
+    "tags": [
+      "Remix"
+    ]
   },
   "qLw7EM1W4B4": {
     "title": "GYU P-『世界は無機物でできている / 初音ミク』【オリジナルMV】",
@@ -119,40 +133,45 @@
   "aOu8lljw3Z8": {
     "title": "【 MV 】のんです です！ / SAKURAmoti feat.のんです",
     "tags": [
-      "Movie",
-      "Mix",
-      "Remix"
+      "Movie"
     ]
   },
   "YwjJ9m-KFQA": {
     "title": "前略",
-    "tags": []
+    "tags": [
+      "Arrangement"
+    ]
   },
   "SYBGaIhZri0": {
     "title": "lopeto (Mikumix) (feat. Kakuly)",
     "tags": [
-      "Mix"
+      "Arrangemenet"
     ]
   },
   "f-atLIqnbdI": {
     "title": "【結成】新実況グループ「カラフルピーチ 」",
-    "tags": []
+    "tags": [
+      "Music"
+    ]
   },
   "4OPusJbC4qg": {
     "title": "学生ボカロPがエイリアンエイリアンアレンジリレーしてみた！！",
     "tags": [
-      "Movie"
+      "Movie",
+      "Remix"
     ]
   },
   "adJU8IsRkFs": {
     "title": "「憂晴ストーム / ゆう。」Official Music Video",
     "tags": [
       "Music",
-      "Lyric"
+      "Lyrics"
     ]
   },
   "n4ieZj-uUF0": {
     "title": "【初音ミクオリジナル曲】復元不能【中学生ボカロP】",
-    "tags": []
+    "tags": [
+      "Movie"
+    ]
   }
 }
