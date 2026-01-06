@@ -232,7 +232,7 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 }
 
 /* 画面幅が1300px以下になったら右下に移動 */
-@media screen and (max-width: 1350px) {
+@media screen and (max-width: 1500px) {
     #mode-toggle {
         top: auto !important;
         bottom: 20px !important;
