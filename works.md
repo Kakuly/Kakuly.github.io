@@ -416,31 +416,12 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mix,Movie">
-  <a href="https://www.youtube.com/watch?v=0_h4xDOL7pY" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/0_h4xDOL7pY/maxresdefault.jpg" alt="【オリジナルMV】廻廻奇譚歌わせていただきました。" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, '0_h4xDOL7pY')">
-  </a>
-  <h3 class='video-title'>【オリジナルMV】廻廻奇譚歌わせていただきました。</h3>  <div class="tag-container">
-    <span class="work-tag">Mix</span>
-    <span class="work-tag">Movie</span>
-  </div>
-</div>
-
 <div class="video-item" data-tags="Music">
   <a href="https://www.youtube.com/watch?v=SErUMzCz8sA" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/SErUMzCz8sA/maxresdefault.jpg" alt="［Melodic Dubstep/UKHARDCORE］Kakuly vs Sohukira - Blood of Ainu" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'SErUMzCz8sA')">
   </a>
   <h3 class='video-title'>［Melodic Dubstep/UKHARDCORE］Kakuly vs Sohukira - Blood of Ainu</h3>  <div class="tag-container">
     <span class="work-tag">Music</span>
-  </div>
-</div>
-
-<div class="video-item" data-tags="Mix">
-  <a href="https://www.youtube.com/watch?v=byh3JokAPds" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/byh3JokAPds/maxresdefault.jpg" alt="【歌ってみた】マーシャル・マキシマイザー歌わせていただきました。" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'byh3JokAPds')">
-  </a>
-  <h3 class='video-title'>【歌ってみた】マーシャル・マキシマイザー歌わせていただきました。</h3>  <div class="tag-container">
-    <span class="work-tag">Mix</span>
   </div>
 </div>
 
