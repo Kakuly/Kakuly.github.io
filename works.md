@@ -367,15 +367,6 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mix">
-  <a href="https://www.youtube.com/watch?v=y0LyO-GKBmI" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/y0LyO-GKBmI/maxresdefault.jpg" alt="【歌ってみた】トウキョウ・シャンディ・ランデヴ歌わせていただきました。" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'y0LyO-GKBmI')">
-  </a>
-  <h3 class='video-title'>【歌ってみた】トウキョウ・シャンディ・ランデヴ歌わせていただきました。</h3>  <div class="tag-container">
-    <span class="work-tag">Mix</span>
-  </div>
-</div>
-
 <div class="video-item" data-tags="Movie,Mastering">
   <a href="https://www.youtube.com/watch?v=XsjuHvYlRyc" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/XsjuHvYlRyc/maxresdefault.jpg" alt="SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'XsjuHvYlRyc')">
@@ -383,24 +374,6 @@ permalink: /works/
   <h3 class='video-title'>SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)</h3>  <div class="tag-container">
     <span class="work-tag">Movie</span>
     <span class="work-tag">Mastering</span>
-  </div>
-</div>
-
-<div class="video-item" data-tags="Mix">
-  <a href="https://www.youtube.com/watch?v=YulVHfuyKfY" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/YulVHfuyKfY/maxresdefault.jpg" alt="【歌ってみた】アイデンティティ歌わせていただきました。" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'YulVHfuyKfY')">
-  </a>
-  <h3 class='video-title'>【歌ってみた】アイデンティティ歌わせていただきました。</h3>  <div class="tag-container">
-    <span class="work-tag">Mix</span>
-  </div>
-</div>
-
-<div class="video-item" data-tags="Mix">
-  <a href="https://www.youtube.com/watch?v=vz4MbPXD13U" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/vz4MbPXD13U/maxresdefault.jpg" alt="【歌ってみた】ふたりきり歌わせていただきました。" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'vz4MbPXD13U')">
-  </a>
-  <h3 class='video-title'>【歌ってみた】ふたりきり歌わせていただきました。</h3>  <div class="tag-container">
-    <span class="work-tag">Mix</span>
   </div>
 </div>
 
@@ -414,15 +387,6 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mix">
-  <a href="https://www.youtube.com/watch?v=-6BSkSfu4VQ" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/-6BSkSfu4VQ/maxresdefault.jpg" alt="【歌ってみた】酔いどれ知らず歌わせていただきました。" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, '-6BSkSfu4VQ')">
-  </a>
-  <h3 class='video-title'>【歌ってみた】酔いどれ知らず歌わせていただきました。</h3>  <div class="tag-container">
-    <span class="work-tag">Mix</span>
-  </div>
-</div>
-
 <div class="video-item" data-tags="Music,Lyrics">
   <a href="https://www.youtube.com/watch?v=u3pMZtkugX8" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/u3pMZtkugX8/maxresdefault.jpg" alt="【オリジナル曲】スノーダンス/yuru【Vtuber/Vsinger】" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'u3pMZtkugX8')">
@@ -430,24 +394,6 @@ permalink: /works/
   <h3 class='video-title'>【オリジナル曲】スノーダンス/yuru【Vtuber/Vsinger】</h3>  <div class="tag-container">
     <span class="work-tag">Music</span>
     <span class="work-tag">Lyrics</span>
-  </div>
-</div>
-
-<div class="video-item" data-tags="Mix">
-  <a href="https://www.youtube.com/watch?v=f9Y34nXVxgc" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/f9Y34nXVxgc/maxresdefault.jpg" alt="【歌ってみた】誕生日なので全力で「トンデモワンダーズ」歌わせていただきました。" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'f9Y34nXVxgc')">
-  </a>
-  <h3 class='video-title'>【歌ってみた】誕生日なので全力で「トンデモワンダーズ」歌わせていただきました。</h3>  <div class="tag-container">
-    <span class="work-tag">Mix</span>
-  </div>
-</div>
-
-<div class="video-item" data-tags="Mix">
-  <a href="https://www.youtube.com/watch?v=Q9C2oSpOlcE" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/Q9C2oSpOlcE/maxresdefault.jpg" alt="【歌ってみた】神っぽいな歌わせていただきました。" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'Q9C2oSpOlcE')">
-  </a>
-  <h3 class='video-title'>【歌ってみた】神っぽいな歌わせていただきました。</h3>  <div class="tag-container">
-    <span class="work-tag">Mix</span>
   </div>
 </div>
 
