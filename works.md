@@ -127,16 +127,12 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Lyrics,Mastering,Mix,Movie,Music">
+<div class="video-item" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=Tpwp2UGKy_Y" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/Tpwp2UGKy_Y/maxresdefault.jpg" alt="「生活の中で、」feat. yureru. - Official Video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'Tpwp2UGKy_Y')">
   </a>
   <h3 class='video-title'>「生活の中で、」feat. yureru. - Official Video</h3>  <div class="tag-container">
-    <span class="work-tag">Lyrics</span>
-    <span class="work-tag">Mastering</span>
-    <span class="work-tag">Mix</span>
     <span class="work-tag">Movie</span>
-    <span class="work-tag">Music</span>
   </div>
 </div>
 
@@ -167,15 +163,12 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mastering,Mix,Movie,Music">
+<div class="video-item" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=RJo_8VY7fwI" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/RJo_8VY7fwI/maxresdefault.jpg" alt="ennui. / 初音ミク - Music Video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'RJo_8VY7fwI')">
   </a>
   <h3 class='video-title'>ennui. / 初音ミク - Music Video</h3>  <div class="tag-container">
-    <span class="work-tag">Mastering</span>
-    <span class="work-tag">Mix</span>
     <span class="work-tag">Movie</span>
-    <span class="work-tag">Music</span>
   </div>
 </div>
 
@@ -251,15 +244,12 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mastering,Mix,Movie,Music">
+<div class="video-item" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=BWehHq6Yb7c" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/BWehHq6Yb7c/maxresdefault.jpg" alt="「Petrichor.」feat. たこはら - Official Video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'BWehHq6Yb7c')">
   </a>
   <h3 class='video-title'>「Petrichor.」feat. たこはら - Official Video</h3>  <div class="tag-container">
-    <span class="work-tag">Mastering</span>
-    <span class="work-tag">Mix</span>
     <span class="work-tag">Movie</span>
-    <span class="work-tag">Music</span>
   </div>
 </div>
 
