@@ -127,6 +127,7 @@ def update_markdown(items):
         # Python側ではIDだけを渡し、画像URLの切り替えはJSに集約する
         content += f'<div class="video-item" data-tags="{tags_attr}">\n'
         content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
+        content += f'data-error-attempt="0" '
         content += f'    <img src="https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg" '
         content += f'alt="{title}" class="video-thumbnail" loading="lazy" '
         # JSで「失敗したらhq、それも失敗したらmq」と段階的に変える
@@ -250,6 +251,28 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 <button id="mode-toggle">🌙 Dark Mode</button>
 
 <script>
+
+function handleImageError(img, videoId) {
+  // すでに何回かエラーが出ているかを確認するためのカスタム属性
+  const attempt = img.getAttribute('data-error-attempt') || "0";
+  
+  if (attempt === "0") {
+    // 1回目のエラー: maxresdefault がなかったので hqdefault を試す
+    img.setAttribute('data-error-attempt', "1");
+    img.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+  } else if (attempt === "1") {
+    // 2回目のエラー: hqdefault もなかったので mqdefault を試す
+    img.setAttribute('data-error-attempt', "2");
+    img.src = `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`;
+  } else {
+    // それでもダメな場合（通常ありえませんが）はプレースホルダーなど
+    img.onerror = null; 
+    console.error("No thumbnail found for " + videoId);
+  }
+}
+
+
+
   document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('video-grid');
     const items = Array.from(grid.querySelectorAll('.video-item'));
@@ -334,6 +357,8 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
       setTimeout(() => { window.location.href = href; }, 800);
     });
   });
+
+  
 </script>
 """
 
