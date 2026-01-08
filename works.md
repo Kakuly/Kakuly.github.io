@@ -416,15 +416,6 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Music">
-  <a href="https://www.youtube.com/watch?v=SErUMzCz8sA" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/SErUMzCz8sA/maxresdefault.jpg" data-error-attempt="0" alt="［Melodic Dubstep/UKHARDCORE］Kakuly vs Sohukira - Blood of Ainu" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'SErUMzCz8sA')">
-  </a>
-  <h3 class='video-title'>［Melodic Dubstep/UKHARDCORE］Kakuly vs Sohukira - Blood of Ainu</h3>  <div class="tag-container">
-    <span class="work-tag">Music</span>
-  </div>
-</div>
-
 <div class="video-item" data-tags="Arrangement">
   <a href="https://www.youtube.com/watch?v=tvtcZYBHfiQ" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/tvtcZYBHfiQ/maxresdefault.jpg" data-error-attempt="0" alt="バットプロローグ/ONE" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'tvtcZYBHfiQ')">
