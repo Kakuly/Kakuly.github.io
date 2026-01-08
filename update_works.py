@@ -127,8 +127,8 @@ def update_markdown(items):
         # Python側ではIDだけを渡し、画像URLの切り替えはJSに集約する
         content += f'<div class="video-item" data-tags="{tags_attr}">\n'
         content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
-        content += f'data-error-attempt="0" '
         content += f'    <img src="https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg" '
+        content += f'data-error-attempt="0" '
         content += f'alt="{title}" class="video-thumbnail" loading="lazy" '
         # JSで「失敗したらhq、それも失敗したらmq」と段階的に変える
         content += f'onerror="handleImageError(this, \'{video_id}\')">\n'
