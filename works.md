@@ -8,11 +8,14 @@ permalink: /works/
 
 <div class="video-grid" id="video-grid">
 
-<div class="video-item" data-tags="">
+<div class="video-item" data-tags="Arrangement">
   <a href="https://www.youtube.com/watch?v=2lR1nUQQqL8" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/2lR1nUQQqL8/maxresdefault.jpg" data-error-attempt="0" alt="光って☆イルミネーション covered by ねあ" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, '2lR1nUQQqL8')">
   </a>
-  <h3 class='video-title'>光って☆イルミネーション covered by ねあ</h3></div>
+  <h3 class='video-title'>光って☆イルミネーション covered by ねあ</h3>  <div class="tag-container">
+    <span class="work-tag">Arrangement</span>
+  </div>
+</div>
 
 <div class="video-item" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=p4M5wHkNHmc" target="_blank" class="video-link">
@@ -23,12 +26,11 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie,Music">
+<div class="video-item" data-tags="Music">
   <a href="https://www.youtube.com/watch?v=DKWdmJ1uxBc" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/DKWdmJ1uxBc/maxresdefault.jpg" data-error-attempt="0" alt="マイクラで作った「モニタリング」を最強歌い手グループと歌ってみた！！【いれいすコラボ】" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'DKWdmJ1uxBc')">
   </a>
   <h3 class='video-title'>マイクラで作った「モニタリング」を最強歌い手グループと歌ってみた！！【いれいすコラボ】</h3>  <div class="tag-container">
-    <span class="work-tag">Movie</span>
     <span class="work-tag">Music</span>
   </div>
 </div>
