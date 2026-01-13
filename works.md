@@ -13,9 +13,9 @@
 
 <div class="video-item" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=p4M5wHkNHmc" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/p4M5wHkNHmc/maxresdefault.jpg" data-error-attempt="0" alt="「pluie.」feat. mare - Official Video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'p4M5wHkNHmc')">
+    <img src="https://i.ytimg.com/vi/p4M5wHkNHmc/maxresdefault.jpg" data-error-attempt="0" alt="『pluie.』feat. mare - Official Video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'p4M5wHkNHmc')">
   </a>
-  <h3 class='video-title'>「pluie.」feat. mare - Official Video</h3>  <div class="tag-container">
+  <h3 class='video-title'>『pluie.』feat. mare - Official Video</h3>  <div class="tag-container">
     <span class="work-tag">Movie</span>
   </div>
 </div>
@@ -141,9 +141,9 @@
 
 <div class="video-item" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=Tpwp2UGKy_Y" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/Tpwp2UGKy_Y/maxresdefault.jpg" data-error-attempt="0" alt="「生活の中で、」feat. yureru. - Official Video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'Tpwp2UGKy_Y')">
+    <img src="https://i.ytimg.com/vi/Tpwp2UGKy_Y/maxresdefault.jpg" data-error-attempt="0" alt="『生活の中で、』feat. yureru. - Official Video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'Tpwp2UGKy_Y')">
   </a>
-  <h3 class='video-title'>「生活の中で、」feat. yureru. - Official Video</h3>  <div class="tag-container">
+  <h3 class='video-title'>『生活の中で、』feat. yureru. - Official Video</h3>  <div class="tag-container">
     <span class="work-tag">Movie</span>
   </div>
 </div>
@@ -258,9 +258,9 @@
 
 <div class="video-item" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=BWehHq6Yb7c" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/BWehHq6Yb7c/maxresdefault.jpg" data-error-attempt="0" alt="「Petrichor.」feat. たこはら - Official Video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'BWehHq6Yb7c')">
+    <img src="https://i.ytimg.com/vi/BWehHq6Yb7c/maxresdefault.jpg" data-error-attempt="0" alt="『Petrichor.』feat. たこはら - Official Video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'BWehHq6Yb7c')">
   </a>
-  <h3 class='video-title'>「Petrichor.」feat. たこはら - Official Video</h3>  <div class="tag-container">
+  <h3 class='video-title'>『Petrichor.』feat. たこはら - Official Video</h3>  <div class="tag-container">
     <span class="work-tag">Movie</span>
   </div>
 </div>
