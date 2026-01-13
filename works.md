@@ -1,10 +1,4 @@
----
-layout: page
-title: Works
-permalink: /works/
----
-
-<div id="filter-container" class="filter-wrapper"></div>
+僕の関わった／制作した作品<div id="filter-container" class="filter-wrapper"></div>
 
 <div class="video-grid" id="video-grid">
 
