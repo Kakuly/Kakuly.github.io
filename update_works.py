@@ -117,20 +117,6 @@ def update_markdown(items):
     
     
     content += '<div id="filter-container" class="filter-wrapper"></div>\n\n'
-    content += """
-<script>
-function handleImageError(img, videoId) {
-  const attempt = parseInt(img.getAttribute('data-error-attempt') || "0");
-  if (attempt === 0) {
-    img.setAttribute('data-error-attempt', "1");
-    img.src = 'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg';
-  } else if (attempt === 1) {
-    img.setAttribute('data-error-attempt', "2");
-    img.src = 'https://i.ytimg.com/vi/' + videoId + '/mqdefault.jpg';
-  }
-}
-</script>
-"""
     content += '<div class="video-grid" id="video-grid">\n\n'
     
     for item in items:
@@ -268,6 +254,17 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 <button id="mode-toggle">🌙 Dark Mode</button>
 
 <script>
+
+function handleImageError(img, videoId) {
+  const attempt = parseInt(img.getAttribute('data-error-attempt') || "0");
+  if (attempt === 0) {
+    img.setAttribute('data-error-attempt', "1");
+    img.src = 'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg';
+  } else if (attempt === 1) {
+    img.setAttribute('data-error-attempt', "2");
+    img.src = 'https://i.ytimg.com/vi/' + videoId + '/mqdefault.jpg';
+  }
+}
 
 
 
