@@ -1,5 +1,18 @@
 僕の関わった／制作した作品<div id="filter-container" class="filter-wrapper"></div>
 
+
+<script>
+function handleImageError(img, videoId) {
+  const attempt = parseInt(img.getAttribute('data-error-attempt') || "0");
+  if (attempt === 0) {
+    img.setAttribute('data-error-attempt', "1");
+    img.src = 'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg';
+  } else if (attempt === 1) {
+    img.setAttribute('data-error-attempt', "2");
+    img.src = 'https://i.ytimg.com/vi/' + videoId + '/mqdefault.jpg';
+  }
+}
+</script>
 <div class="video-grid" id="video-grid">
 
 <div class="video-item" data-tags="Arrangement">
@@ -644,25 +657,6 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 <button id="mode-toggle">🌙 Dark Mode</button>
 
 <script>
-
-function handleImageError(img, videoId) {
-  // すでに何回かエラーが出ているかを確認するためのカスタム属性
-  const attempt = img.getAttribute('data-error-attempt') || "0";
-  
-  if (attempt === "0") {
-    // 1回目のエラー: maxresdefault がなかったので hqdefault を試す
-    img.setAttribute('data-error-attempt', "1");
-    img.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
-  } else if (attempt === "1") {
-    // 2回目のエラー: hqdefault もなかったので mqdefault を試す
-    img.setAttribute('data-error-attempt', "2");
-    img.src = `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`;
-  } else {
-    // それでもダメな場合（通常ありえませんが）はプレースホルダーなど
-    img.onerror = null; 
-    console.error("No thumbnail found for " + videoId);
-  }
-}
 
 
 
