@@ -4,7 +4,7 @@ title: Works
 permalink: /works/
 ---
 
-僕の関わった／制作した作品
+関わった／制作した作品集
 <div id="filter-container" class="filter-wrapper"></div>
 
 <div class="video-grid" id="video-grid">
