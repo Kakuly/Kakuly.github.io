@@ -298,7 +298,7 @@ function handleImageError(img, videoId) {
     function applyFilter() {
       items.forEach(item => {
         const itemTags = item.dataset.tags.split(',');
-        const isVisible = activeFilters.size === 0 || Array.from(activeFilters).some(f => itemTags.includes(f));
+        const isVisible = activeFilters.size === 0 || Array.from(activeFilters).every(f => itemTags.includes(f));
         
         if (isVisible) {
           item.classList.remove('sort-hide');
