@@ -113,7 +113,7 @@ def get_playlist_items():
 def update_markdown(items):
     content = "---\nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
 
-    content += "僕の関わった／制作した作品"
+    content += "僕の関わった／制作した作品\n"
     
     content += '<div id="filter-container" class="filter-wrapper"></div>\n\n'
     content += '<div class="video-grid" id="video-grid">\n\n'
