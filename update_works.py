@@ -18,8 +18,13 @@ def load_json_data(file_path):
     if os.path.exists(file_path):
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        except:
+                data = json.load(f)
+                # デバッグ用: 読み込めたか確認
+                if "manual" in file_path:
+                    print(f"Loaded {len(data)} manual items.")
+                return data
+        except Exception as e:
+            print(f"Error loading {file_path}: {e}")
             return [] if "manual" in file_path else {}
     return [] if "manual" in file_path else {}
 
@@ -48,14 +53,23 @@ if GEMINI_API_KEY:
     except:
         model = None
 
-def get_tags(video_id, title, description):
+def get_work_data(video_id, title, description, api_date):
+    # すでにキャッシュにある場合は、キャッシュ内のデータを優先（日付修正を反映するため）
     if video_id in KNOWN_WORKS:
-        cached_data = KNOWN_WORKS[video_id]
-        if isinstance(cached_data, dict):
-            tags_in_cache = cached_data.get("tags", [])
-            if len(tags_in_cache) > 0 and "None" not in tags_in_cache:
-                return tags_in_cache
+        cached = KNOWN_WORKS[video_id]
+        if isinstance(cached, dict):
+            # 日付がキャッシュにあればそれを使う。なければAPIの日付を使う。
+            date = cached.get("date", api_date[:10])
+            tags = cached.get("tags", [])
+            # タグが空、または不完全な場合のみ再取得を試みる
+            if tags and "None" not in tags:
+                return date, tags
+        else:
+            date = api_date[:10]
+    else:
+        date = api_date[:10]
 
+    # タグ取得ロジック
     past_examples = ""
     example_count = 0
     for k, v in KNOWN_WORKS.items():
@@ -94,9 +108,12 @@ def get_tags(video_id, title, description):
             if pat in l_lower: tags.append(val)
     
     processed_tags = sorted(list(set([t.replace('Lyric', 'Lyrics') if t == 'Lyric' else t for t in tags])))
-    KNOWN_WORKS[video_id] = {"title": title, "tags": processed_tags}
+    
+    # 日付も含めてキャッシュに保存
+    KNOWN_WORKS[video_id] = {"title": title, "tags": processed_tags, "date": date}
     save_known_works(KNOWN_WORKS)
-    return processed_tags
+    
+    return date, processed_tags
 
 def get_playlist_items():
     all_items = []
@@ -127,12 +144,15 @@ def update_markdown(yt_items):
                 img_url = thumbnails[res]['url']
                 break
         
+        # 日付とタグを取得（キャッシュ優先）
+        date, tags = get_work_data(v_id, snippet['title'], snippet['description'], snippet['publishedAt'])
+        
         all_works.append({
             "title": html.escape(snippet['title']),
-            "date": snippet['publishedAt'][:10], # YYYY-MM-DD
+            "date": date,
             "img": img_url,
             "url": f"https://www.youtube.com/watch?v={v_id}",
-            "tags": get_tags(v_id, snippet['title'], snippet['description'])
+            "tags": tags
         })
 
     # 2. 手動アイテムの追加
