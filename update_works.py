@@ -29,19 +29,8 @@ def save_known_works(data):
 KNOWN_WORKS = load_json_data(CACHE_FILE)
 MANUAL_WORKS = load_json_data(MANUAL_FILE)
 
-# Geminiの設定
-model = None
-if GEMINI_API_KEY:
-    try:
-        genai.configure(api_key=GEMINI_API_KEY)
-        for m_name in ['gemini-2.0-flash', 'gemini-1.5-flash']:
-            try:
-                model = genai.GenerativeModel(model_name=m_name)
-                break
-            except: continue
-    except: model = None
-
 def get_video_details(video_ids):
+    """動画の投稿日を取得"""
     details = {}
     for i in range(0, len(video_ids), 50):
         ids_subset = ','.join(video_ids[i:i+50])
@@ -53,34 +42,8 @@ def get_video_details(video_ids):
         except: pass
     return details
 
-def get_work_data(v_id, title, description, actual_pub_date):
-    if v_id in KNOWN_WORKS and isinstance(KNOWN_WORKS[v_id], dict):
-        date = KNOWN_WORKS[v_id].get("date", actual_pub_date)
-        tags = KNOWN_WORKS[v_id].get("tags", [])
-        if tags and "None" not in tags:
-            return date, tags
-    else:
-        date = actual_pub_date
-
-    tags = []
-    if model:
-        prompt = f"楽曲クレジット専門家として以下の動画の役割をタグ化してください: {title} {description[:300]}"
-        try:
-            res = model.generate_content(prompt)
-            tags = [t.strip() for t in res.text.split(',')] if "None" not in res.text else []
-        except: pass
-
-    if not tags:
-        l_lower = (title + description).lower()
-        for pat, val in [('mix','Mix'),('編曲','Arrangement'),('master','Mastering'),('movie','Movie')]:
-            if pat in l_lower: tags.append(val)
-
-    processed_tags = sorted(list(set(tags)))
-    KNOWN_WORKS[v_id] = {"title": title, "tags": processed_tags, "date": date}
-    save_known_works(KNOWN_WORKS)
-    return date, processed_tags
-
-def get_playlist_items():
+def update_markdown():
+    # 1. YouTubeデータの取得
     items = []
     next_page_token = None
     while True:
@@ -90,20 +53,22 @@ def get_playlist_items():
         items.extend(r.get('items', []))
         next_page_token = r.get('nextPageToken')
         if not next_page_token: break
-    return items
 
-def update_markdown():
-    yt_raw_items = get_playlist_items()
-    video_ids = [it['snippet']['resourceId']['videoId'] for it in yt_raw_items]
+    video_ids = [it['snippet']['resourceId']['videoId'] for it in items]
     actual_dates = get_video_details(video_ids)
 
     all_works = []
-    for it in yt_raw_items:
+    for it in items:
         snippet = it['snippet']
         v_id = snippet['resourceId']['videoId']
         actual_date = actual_dates.get(v_id, snippet['publishedAt'][:10])
-        date, tags = get_work_data(v_id, snippet['title'], snippet['description'], actual_date)
         
+        # キャッシュ確認
+        cached = KNOWN_WORKS.get(v_id, {})
+        date = cached.get("date", actual_date)
+        tags = cached.get("tags", [])
+        
+        # サムネイル
         img_url = ""
         thumbs = snippet.get('thumbnails', {})
         for res in ['maxres', 'standard', 'high', 'medium', 'default']:
@@ -118,39 +83,47 @@ def update_markdown():
             "url": f"https://www.youtube.com/watch?v={v_id}",
             "tags": tags
         })
+        
+        # キャッシュ保存
+        KNOWN_WORKS[v_id] = {"title": snippet['title'], "tags": tags, "date": date}
 
+    save_known_works(KNOWN_WORKS)
+
+    # 2. 手動データの合流とソート
     all_works.extend(MANUAL_WORKS)
     all_works.sort(key=lambda x: x['date'], reverse=True)
 
-    # Markdownヘッダー部分の改行を厳密に管理
-    content = "---\n"
-    content += "layout: page\n"
-    content += "title: Works\n"
-    content += "permalink: /works/\n"
-    content += "---\n\n"
-    content += "関わった／制作した作品集\n\n"
-    content += '<div id="filter-container" class="filter-wrapper"></div>\n\n'
-    content += '<div class="video-grid" id="video-grid">\n\n'
-    
-    for work in all_works:
-        tags_attr = ",".join(work['tags'])
-        content += f'<div class="video-item" data-tags="{tags_attr}">\n'
-        content += f'  <a href="{work["url"]}" target="_blank" class="video-link">\n'
-        content += f'    <img src="{work["img"]}" alt="{work["title"]}" class="video-thumbnail" loading="lazy">\n'
-        content += f'  </a>\n'
-        content += f"  <h3 class='video-title'>{work['title']}</h3>\n"
-        content += f"  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>{work['date']}</p>\n"
-        if work['tags']:
-            content += '  <div class="tag-container">\n'
-            for tag in work['tags']:
-                content += f'    <span class="work-tag">{tag}</span>\n'
-            content += '  </div>\n'
-        content += '</div>\n\n'
+    # 3. ファイル書き出し
+    with open(FILE_PATH, 'w', encoding='utf-8') as f:
+        # ヘッダー (体系を厳守)
+        f.write("---\n")
+        f.write("layout: page\n")
+        f.write("title: Works\n")
+        f.write("permalink: /works/\n")
+        f.write("---\n\n")
+        f.write("関わった／制作した作品集\n\n")
+        f.write('<div id="filter-container" class="filter-wrapper"></div>\n\n')
+        f.write('<div class="video-grid" id="video-grid">\n\n')
+        
+        for work in all_works:
+            tags_attr = ",".join(work['tags'])
+            f.write(f'<div class="video-item" data-tags="{tags_attr}">\n')
+            f.write(f'  <a href="{work["url"]}" target="_blank" class="video-link">\n')
+            f.write(f'    <img src="{work["img"]}" alt="{work["title"]}" class="video-thumbnail" loading="lazy">\n')
+            f.write(f'  </a>\n')
+            f.write(f"  <h3 class='video-title'>{work['title']}</h3>\n")
+            f.write(f"  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>{work['date']}</p>\n")
+            if work['tags']:
+                f.write('  <div class="tag-container">\n')
+                for tag in work['tags']:
+                    f.write(f'    <span class="work-tag">{tag}</span>\n')
+                f.write('  </div>\n')
+            f.write('</div>\n\n')
 
-    content += '</div>\n\n<div id="iris-in"></div><div id="iris-out"></div>\n'
-    
-    # CSS/JS部分は改行含め以前のスタイルを完全に踏襲
-    content += """
+        f.write('</div>\n\n<div id="iris-in"></div><div id="iris-out"></div>\n')
+        
+        # スタイルとスクリプト (改行を以前の形に完全固定)
+        f.write("""
 <style>
 .filter-wrapper { margin-bottom: 40px; display: flex; flex-wrap: wrap; gap: 12px; }
 .filter-btn { cursor: pointer; font-family: 'Montserrat', sans-serif !important; font-weight: 700 !important; font-size: 0.9rem; padding: 6px 16px; border-radius: 30px; border: 1px solid var(--text-color); background: transparent; color: var(--text-color); transition: all 0.3s ease; text-transform: uppercase; opacity: 0.3; }
@@ -215,9 +188,7 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; }
   });
   window.addEventListener('pageshow', () => { setTimeout(() => document.body.classList.add('is-opening'), 50); });
 </script>
-"""
-    with open(FILE_PATH, 'w', encoding='utf-8') as f:
-        f.write(content)
+""")
 
 if __name__ == "__main__":
     update_markdown()
