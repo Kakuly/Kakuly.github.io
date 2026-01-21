@@ -128,11 +128,15 @@ def update_markdown(items):
         tags_attr = ",".join(tags) if tags else ""
         
         # Python側ではIDだけを渡し、画像URLの切り替えはJSに集約する
+        # --- update_markdown 関数内 ---
         content += f'<div class="video-item" data-tags="{tags_attr}">\n'
         content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
+        # 最初に一番高画質なものを指定
         content += f'    <img src="https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg" '
-        content += f'data-error-attempt="0" '
         content += f'alt="{title}" class="video-thumbnail" loading="lazy" '
+        # onerrorの中身を直接記述するか、関数を確実に呼び出す
+        content += f'onerror="this.onerror=null; this.src=\'https://i.ytimg.com/vi/{video_id}/hqdefault.jpg\';">'
+        content += f'  </a>\n'
         # JSで「失敗したらhq、それも失敗したらmq」と段階的に変える
         content += f'onerror="handleImageError(this, \'{video_id}\')">\n'
         content += f'  </a>\n'
