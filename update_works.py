@@ -42,7 +42,6 @@ if GEMINI_API_KEY:
     except: model = None
 
 def get_video_details(video_ids):
-    """動画本来の投稿日を取得する"""
     details = {}
     for i in range(0, len(video_ids), 50):
         ids_subset = ','.join(video_ids[i:i+50])
@@ -65,7 +64,6 @@ def get_work_data(v_id, title, description, actual_pub_date):
 
     tags = []
     if model:
-        # (タグ取得ロジックは維持)
         prompt = f"楽曲クレジット専門家として以下の動画の役割をタグ化してください: {title} {description[:300]}"
         try:
             res = model.generate_content(prompt)
@@ -106,7 +104,6 @@ def update_markdown():
         actual_date = actual_dates.get(v_id, snippet['publishedAt'][:10])
         date, tags = get_work_data(v_id, snippet['title'], snippet['description'], actual_date)
         
-        # サムネイル取得
         img_url = ""
         thumbs = snippet.get('thumbnails', {})
         for res in ['maxres', 'standard', 'high', 'medium', 'default']:
@@ -125,7 +122,13 @@ def update_markdown():
     all_works.extend(MANUAL_WORKS)
     all_works.sort(key=lambda x: x['date'], reverse=True)
 
-    content = f"---\nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n関わった／制作した作品集\n\n"
+    # Markdownヘッダー部分の改行を厳密に管理
+    content = "---\n"
+    content += "layout: page\n"
+    content += "title: Works\n"
+    content += "permalink: /works/\n"
+    content += "---\n\n"
+    content += "関わった／制作した作品集\n\n"
     content += '<div id="filter-container" class="filter-wrapper"></div>\n\n'
     content += '<div class="video-grid" id="video-grid">\n\n'
     
@@ -146,7 +149,7 @@ def update_markdown():
 
     content += '</div>\n\n<div id="iris-in"></div><div id="iris-out"></div>\n'
     
-    # スタイルとスクリプト (そのまま維持)
+    # CSS/JS部分は改行含め以前のスタイルを完全に踏襲
     content += """
 <style>
 .filter-wrapper { margin-bottom: 40px; display: flex; flex-wrap: wrap; gap: 12px; }
