@@ -19,12 +19,8 @@ def load_json_data(file_path):
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-                # デバッグ用: 読み込めたか確認
-                if "manual" in file_path:
-                    print(f"Loaded {len(data)} manual items.")
                 return data
         except Exception as e:
-            print(f"Error loading {file_path}: {e}")
             return [] if "manual" in file_path else {}
     return [] if "manual" in file_path else {}
 
@@ -54,14 +50,11 @@ if GEMINI_API_KEY:
         model = None
 
 def get_work_data(video_id, title, description, api_date):
-    # すでにキャッシュにある場合は、キャッシュ内のデータを優先（日付修正を反映するため）
     if video_id in KNOWN_WORKS:
         cached = KNOWN_WORKS[video_id]
         if isinstance(cached, dict):
-            # 日付がキャッシュにあればそれを使う。なければAPIの日付を使う。
             date = cached.get("date", api_date[:10])
             tags = cached.get("tags", [])
-            # タグが空、または不完全な場合のみ再取得を試みる
             if tags and "None" not in tags:
                 return date, tags
         else:
@@ -69,29 +62,14 @@ def get_work_data(video_id, title, description, api_date):
     else:
         date = api_date[:10]
 
-    # タグ取得ロジック
-    past_examples = ""
-    example_count = 0
-    for k, v in KNOWN_WORKS.items():
-        if isinstance(v, dict) and v.get("tags"):
-            past_examples += f"- {v['title']}: {', '.join(v['tags'])}\n"
-            example_count += 1
-            if example_count > 15: break
-
     tags = []
     if model:
-        prompt = f"""
-        あなたは楽曲クレジットの専門家です。ネット検索を行い、以下の動画における「Kakuly（かくり）」の正確な担当役割を特定してください。
+        past_examples = ""
+        for k, v in list(KNOWN_WORKS.items())[:15]:
+            if isinstance(v, dict) and v.get("tags"):
+                past_examples += f"- {v['title']}: {', '.join(v['tags'])}\n"
         
-        【参考：Kakulyの過去の実績傾向】
-        {past_examples}
-        【今回の動画】
-        動画タイトル: {title}
-        概要欄抜粋: {description[:500]}
-        
-        【出力形式】
-        英語のタグのみをカンマ区切りで。該当なしは「None」。
-        """
+        prompt = f"あなたは楽曲クレジットの専門家です。ネット検索を行い、以下の動画における「Kakuly（かくり）」の正確な担当役割を特定してください。\\n\\n【参考】\\n{past_examples}\\n【動画】\\nタイトル: {title}\\n概要: {description[:500]}\\n\\n【出力形式】英語のタグのみをカンマ区切りで。該当なしはNone。"
         try:
             response = model.generate_content(prompt)
             result = response.text.strip()
@@ -100,7 +78,7 @@ def get_work_data(video_id, title, description, api_date):
         except: pass
 
     if not tags:
-        l_lower = (title + "\n" + description).lower()
+        l_lower = (title + "\\n" + description).lower()
         patterns = [('mix', 'Mix'), ('編曲', 'Arrangement'), ('master', 'Mastering'),
                     ('movie', 'Movie'), ('映像', 'Movie'), ('music', 'Music'),
                     ('作曲', 'Music'), ('lyric', 'Lyrics'), ('作詞', 'Lyrics'), ('remix', 'Remix')]
@@ -108,11 +86,8 @@ def get_work_data(video_id, title, description, api_date):
             if pat in l_lower: tags.append(val)
     
     processed_tags = sorted(list(set([t.replace('Lyric', 'Lyrics') if t == 'Lyric' else t for t in tags])))
-    
-    # 日付も含めてキャッシュに保存
     KNOWN_WORKS[video_id] = {"title": title, "tags": processed_tags, "date": date}
     save_known_works(KNOWN_WORKS)
-    
     return date, processed_tags
 
 def get_playlist_items():
@@ -132,8 +107,6 @@ def get_playlist_items():
 
 def update_markdown(yt_items):
     all_works = []
-
-    # 1. YouTubeアイテムの整形
     for item in yt_items:
         snippet = item['snippet']
         v_id = snippet['resourceId']['videoId']
@@ -143,54 +116,34 @@ def update_markdown(yt_items):
             if res in thumbnails:
                 img_url = thumbnails[res]['url']
                 break
-        
-        # 日付とタグを取得（キャッシュ優先）
         date, tags = get_work_data(v_id, snippet['title'], snippet['description'], snippet['publishedAt'])
-        
-        all_works.append({
-            "title": html.escape(snippet['title']),
-            "date": date,
-            "img": img_url,
-            "url": f"https://www.youtube.com/watch?v={v_id}",
-            "tags": tags
-        })
+        all_works.append({"title": html.escape(snippet['title']), "date": date, "img": img_url, "url": f"https://www.youtube.com/watch?v={v_id}", "tags": tags})
 
-    # 2. 手動アイテムの追加
     all_works.extend(MANUAL_WORKS)
-
-    # 3. 日付でソート（新しい順）
     all_works.sort(key=lambda x: x['date'], reverse=True)
 
-    # --- Markdown生成 ---
-    content = "---\nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
-
-    content += "関わった／制作した作品集\n"
-    
-    content += '<div id="filter-container" class="filter-wrapper"></div>\n\n'
-    content += '<div class="video-grid" id="video-grid">\n\n'
+    content = "---\\nlayout: page\\ntitle: Works\\npermalink: /works/\\n---\\n\\n"
+    content += "関わった／制作した作品集\\n\\n"
+    content += '<div id="filter-container" class="filter-wrapper"></div>\\n\\n'
+    content += '<div class="video-grid" id="video-grid">\\n\\n'
     
     for work in all_works:
         tags_attr = ",".join(work['tags']) if work['tags'] else ""
-        
-        content += f'<div class="video-item" data-tags="{tags_attr}">\n'
-        content += f'  <a href="{work["url"]}" target="_blank" class="video-link">\n'
-        content += f'    <img src="{work["img"]}" alt="{work["title"]}" class="video-thumbnail" loading="lazy">\n'
-        content += f'  </a>\n'
-        content += f"  <h3 class='video-title'>{work['title']}</h3>"
-        content += f"  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>{work['date']}</p>\n"
-        
+        content += f'<div class="video-item" data-tags="{tags_attr}">\\n'
+        content += f'  <a href="{work["url"]}" target="_blank" class="video-link">\\n'
+        content += f'    <img src="{work["img"]}" alt="{work["title"]}" class="video-thumbnail" loading="lazy">\\n'
+        content += f'  </a>\\n'
+        content += f"  <h3 class='video-title'>{work['title']}</h3>\\n"
+        content += f"  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>{work['date']}</p>\\n"
         if work['tags']:
-            content += '  <div class="tag-container">\n'
+            content += '  <div class="tag-container">\\n'
             for tag in work['tags']:
-                content += f'    <span class="work-tag">{tag}</span>\n'
-            content += '  </div>\n'
-        content += '</div>\n\n'
+                content += f'    <span class="work-tag">{tag}</span>\\n'
+            content += '  </div>\\n'
+        content += '</div>\\n\\n'
 
-    content += '</div>\n\n'
-
-    # 演出用パーツ
-    content += '<div id="iris-in"></div>'
-    content += '<div id="iris-out"></div>'
+    content += '</div>\\n\\n'
+    content += '<div id="iris-in"></div><div id="iris-out"></div>\\n'
 
     content += """
 <style>
@@ -231,11 +184,11 @@ def update_markdown(yt_items):
   opacity: 0;
   transform: scale(0.95);
   pointer-events: none;
-  position: absolute; /* レイアウトを詰めさせるための設定 */
+  position: absolute;
   visibility: hidden;
 }
 
-/* --- 元のデザイン設定 (完全維持) --- */
+/* --- デザイン設定 --- */
 .tag-container { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 5px; }
 .work-tag { font-size: 0.57rem; padding: 1px 6px; border-radius: 4px; border: 0.5px solid var(--text-color); opacity: 0.88; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
 .video-thumbnail { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -255,7 +208,6 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 .video-item h3 { font-family: 'Noto Sans JP', sans-serif !important; font-size: 0.85rem !important; height: auto !important; min-height: 1.3em; overflow: hidden; margin-bottom: 0px !important; line-height: 1.3; }
 .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
 
-/* --- モード切替ボタンの設定（レスポンシブ対応） --- */
 #mode-toggle { 
     cursor: pointer; 
     background: transparent; 
@@ -269,19 +221,18 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
     right: 20px; 
     z-index: 9999; 
     font-weight: 700;
-    font-family: 'Montserrat', sans-serif !important; /* フォントを明示的に指定 */
+    font-family: 'Montserrat', sans-serif !important; 
     transition: all 0.3s ease;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
 
-/* 画面幅が1300px以下になったら右下に移動 */
 @media screen and (max-width: 1500px) {
     #mode-toggle {
         top: auto !important;
         bottom: 20px !important;
         right: 20px !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* 下に移動したときに見やすく */
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 }
 
@@ -384,7 +335,7 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 """
 
     with open(FILE_PATH, 'w', encoding='utf-8') as f:
-        f.write(content)
+        f.write(content.replace('\\n', '\n'))
 
 if __name__ == "__main__":
     yt_items = get_playlist_items()
