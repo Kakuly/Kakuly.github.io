@@ -3,6 +3,7 @@ import json
 import requests
 import google.generativeai as genai
 import html
+from datetime import datetime
 
 # --- 設定 ---
 API_KEY = os.environ['YOUTUBE_API_KEY']
@@ -10,23 +11,25 @@ GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 PLAYLIST_ID = 'PLH9mX0wDlDAou_YCjcU01Q3pR6cCRQPWS'
 FILE_PATH = 'works.md'
 CACHE_FILE = 'known_works.json'
+MANUAL_FILE = 'manual_works.json' # 手動実績用JSON
 
-# --- JSONキャッシュの読み込み/作成 ---
-def load_known_works():
-    if os.path.exists(CACHE_FILE):
+# --- JSONデータの読み込み関数 ---
+def load_json_data(file_path):
+    if os.path.exists(file_path):
         try:
-            with open(CACHE_FILE, 'r', encoding='utf-8') as f:
+            with open(file_path, 'r', encoding='utf-8') as f:
                 return json.load(f)
         except:
-            return {}
-    return {}
+            return [] if "manual" in file_path else {}
+    return [] if "manual" in file_path else {}
 
 def save_known_works(data):
     with open(CACHE_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 # 起動時に読み込み
-KNOWN_WORKS = load_known_works()
+KNOWN_WORKS = load_json_data(CACHE_FILE)
+MANUAL_WORKS = load_json_data(MANUAL_FILE)
 
 # Geminiの設定
 model = None
@@ -110,20 +113,13 @@ def get_playlist_items():
         except: break
     return all_items
 
-def update_markdown(items):
-    content = "---\nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
+def update_markdown(yt_items):
+    all_works = []
 
-    content += "関わった／制作した作品集\n"
-    
-    content += '<div id="filter-container" class="filter-wrapper"></div>\n\n'
-    content += '<div class="video-grid" id="video-grid">\n\n'
-    
-    for item in items:
+    # 1. YouTubeアイテムの整形
+    for item in yt_items:
         snippet = item['snippet']
-        title = html.escape(snippet['title'])
-        video_id = snippet['resourceId']['videoId']
-        
-        # サムネイル情報の取得
+        v_id = snippet['resourceId']['videoId']
         thumbnails = snippet.get('thumbnails', {})
         img_url = ""
         for res in ['maxres', 'standard', 'high', 'medium', 'default']:
@@ -131,23 +127,48 @@ def update_markdown(items):
                 img_url = thumbnails[res]['url']
                 break
         
-        tags = get_tags(video_id, title, snippet['description'])
-        tags_attr = ",".join(tags) if tags else ""
+        all_works.append({
+            "title": html.escape(snippet['title']),
+            "date": snippet['publishedAt'][:10], # YYYY-MM-DD
+            "img": img_url,
+            "url": f"https://www.youtube.com/watch?v={v_id}",
+            "tags": get_tags(v_id, snippet['title'], snippet['description'])
+        })
+
+    # 2. 手動アイテムの追加
+    all_works.extend(MANUAL_WORKS)
+
+    # 3. 日付でソート（新しい順）
+    all_works.sort(key=lambda x: x['date'], reverse=True)
+
+    # --- Markdown生成 ---
+    content = "---\nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
+
+    content += "関わった／制作した作品集\n"
+    
+    content += '<div id="filter-container" class="filter-wrapper"></div>\n\n'
+    content += '<div class="video-grid" id="video-grid">\n\n'
+    
+    for work in all_works:
+        tags_attr = ",".join(work['tags']) if work['tags'] else ""
         
         content += f'<div class="video-item" data-tags="{tags_attr}">\n'
-        content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
-        content += f'    <img src="{img_url}" alt="{title}" class="video-thumbnail" loading="lazy">\n'
+        content += f'  <a href="{work["url"]}" target="_blank" class="video-link">\n'
+        content += f'    <img src="{work["img"]}" alt="{work["title"]}" class="video-thumbnail" loading="lazy">\n'
         content += f'  </a>\n'
-        content += f"  <h3 class='video-title'>{title}</h3>"
+        content += f"  <h3 class='video-title'>{work['title']}</h3>"
+        content += f"  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>{work['date']}</p>\n"
         
-        if tags:
+        if work['tags']:
             content += '  <div class="tag-container">\n'
-            for tag in tags:
+            for tag in work['tags']:
                 content += f'    <span class="work-tag">{tag}</span>\n'
             content += '  </div>\n'
         content += '</div>\n\n'
 
     content += '</div>\n\n'
+
+    # 演出用パーツ
     content += '<div id="iris-in"></div>'
     content += '<div id="iris-out"></div>'
 
@@ -190,11 +211,11 @@ def update_markdown(items):
   opacity: 0;
   transform: scale(0.95);
   pointer-events: none;
-  position: absolute;
+  position: absolute; /* レイアウトを詰めさせるための設定 */
   visibility: hidden;
 }
 
-/* --- デザイン設定 --- */
+/* --- 元のデザイン設定 (完全維持) --- */
 .tag-container { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 5px; }
 .work-tag { font-size: 0.57rem; padding: 1px 6px; border-radius: 4px; border: 0.5px solid var(--text-color); opacity: 0.88; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
 .video-thumbnail { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -214,6 +235,7 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 .video-item h3 { font-family: 'Noto Sans JP', sans-serif !important; font-size: 0.85rem !important; height: auto !important; min-height: 1.3em; overflow: hidden; margin-bottom: 0px !important; line-height: 1.3; }
 .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
 
+/* --- モード切替ボタンの設定（レスポンシブ対応） --- */
 #mode-toggle { 
     cursor: pointer; 
     background: transparent; 
@@ -227,18 +249,19 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
     right: 20px; 
     z-index: 9999; 
     font-weight: 700;
-    font-family: 'Montserrat', sans-serif !important; 
+    font-family: 'Montserrat', sans-serif !important; /* フォントを明示的に指定 */
     transition: all 0.3s ease;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
 
+/* 画面幅が1300px以下になったら右下に移動 */
 @media screen and (max-width: 1500px) {
     #mode-toggle {
         top: auto !important;
         bottom: 20px !important;
         right: 20px !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* 下に移動したときに見やすく */
     }
 }
 
@@ -344,6 +367,5 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
         f.write(content)
 
 if __name__ == "__main__":
-    items = get_playlist_items()
-    if items:
-        update_markdown(items)
+    yt_items = get_playlist_items()
+    update_markdown(yt_items)
