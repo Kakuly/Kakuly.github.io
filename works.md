@@ -352,6 +352,18 @@ permalink: /works/
   </div>
 </div>
 
+<div class="video-item" data-tags="Release,Album,Music">
+  <a href="https://big-up.style/AwGSfnO9I3" target="_blank" class="video-link">
+    <img src="https://img.big-up.style/users/71/274271/package/703086/image.jpg" alt="Release New Album "DIRECT & LOOP"" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>Release New Album "DIRECT & LOOP"</h3>  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2025-08-05</p>
+  <div class="tag-container">
+    <span class="work-tag">Release</span>
+    <span class="work-tag">Album</span>
+    <span class="work-tag">Music</span>
+  </div>
+</div>
+
 <div class="video-item" data-tags="Mastering">
   <a href="https://www.youtube.com/watch?v=cknsKkzA2lM" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/cknsKkzA2lM/maxresdefault.jpg" alt="サ終あざした / 重音テトSV" class="video-thumbnail" loading="lazy">
