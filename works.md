@@ -702,44 +702,44 @@ body { background-color: var(--bg-color) !important; color: var(--text-color) !i
 body.is-opening #iris-in { transform: translate(-50%, -50%) scale(500); }
 #iris-out { position: fixed; top: 50%; left: 50%; width: 150vmax; height: 150vmax; background-color: var(--bg-color); border-radius: 50%; z-index: 100001; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1); }
 body.is-exiting #iris-out { transform: translate(-50%, -50%) scale(1.2) !important; }
-body > *:not([id^="iris-"]) { opacity: 0; transition: opacity 0.8s ease-out; }
-body.is-opening > *:not([id^="iris-"]) { opacity: 1; }
+body > *:not([id^='iris-']) { opacity: 0; transition: opacity 0.8s ease-out; }
+body.is-opening > *:not([id^='iris-']) { opacity: 1; }
 </style>
 <button id="mode-toggle">🌙 Dark Mode</button>
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const grid = document.getElementById('video-grid');
-    const items = Array.from(grid.querySelectorAll('.video-item'));
-    const filterContainer = document.getElementById('filter-container');
-    const activeFilters = new Set();
-    const allTags = new Set();
-    items.forEach(item => { item.dataset.tags.split(',').filter(t => t).forEach(t => allTags.add(t)); });
-    Array.from(allTags).sort().forEach(tag => {
-      const btn = document.createElement('button');
-      btn.className = 'filter-btn';
-      btn.textContent = tag;
-      btn.onclick = () => {
-        btn.classList.toggle('active');
-        if (activeFilters.has(tag)) activeFilters.delete(tag);
-        else activeFilters.add(tag);
-        items.forEach(it => {
-          const itTags = it.dataset.tags.split(',');
-          const visible = activeFilters.size === 0 || Array.from(activeFilters).every(f => itTags.includes(f));
-          it.classList.toggle('sort-hide', !visible);
-          it.style.position = visible ? 'relative' : 'absolute';
-        });
-      };
-      filterContainer.appendChild(btn);
-    });
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.getElementById('video-grid');
+  const items = Array.from(grid.querySelectorAll('.video-item'));
+  const filterContainer = document.getElementById('filter-container');
+  const activeFilters = new Set();
+  const allTags = new Set();
+  items.forEach(item => { item.dataset.tags.split(',').filter(t => t).forEach(t => allTags.add(t)); });
+  Array.from(allTags).sort().forEach(tag => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = tag;
+    btn.onclick = () => {
+      btn.classList.toggle('active');
+      if (activeFilters.has(tag)) activeFilters.delete(tag);
+      else activeFilters.add(tag);
+      items.forEach(it => {
+        const itTags = it.dataset.tags.split(',');
+        const visible = activeFilters.size === 0 || Array.from(activeFilters).every(f => itTags.includes(f));
+        it.classList.toggle('sort-hide', !visible);
+        it.style.position = visible ? 'relative' : 'absolute';
+      });
+    };
+    filterContainer.appendChild(btn);
   });
-  const btn = document.getElementById('mode-toggle');
-  const html = document.documentElement;
-  if (localStorage.getItem('theme') === 'dark') { html.classList.add('dark-mode'); document.body.classList.add('dark-mode'); btn.textContent = '☀️ Light Mode'; }
-  btn.addEventListener('click', () => {
-    const isDark = html.classList.toggle('dark-mode');
-    document.body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
-  });
-  window.addEventListener('pageshow', () => { setTimeout(() => document.body.classList.add('is-opening'), 50); });
+});
+const btn = document.getElementById('mode-toggle');
+const html = document.documentElement;
+if (localStorage.getItem('theme') === 'dark') { html.classList.add('dark-mode'); document.body.classList.add('dark-mode'); btn.textContent = '☀️ Light Mode'; }
+btn.addEventListener('click', () => {
+  const isDark = html.classList.toggle('dark-mode');
+  document.body.classList.toggle('dark-mode');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+});
+window.addEventListener('pageshow', () => { setTimeout(() => document.body.classList.add('is-opening'), 50); });
 </script>
