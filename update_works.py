@@ -84,7 +84,6 @@ def update_markdown():
     all_works.extend(MANUAL_WORKS)
     all_works.sort(key=lambda x: x['date'], reverse=True)
 
-    # 書き出し内容の構築
     md_content = []
     md_content.append("---")
     md_content.append("layout: page")
@@ -142,8 +141,8 @@ def update_markdown():
     md_content.append("body.is-opening #iris-in { transform: translate(-50%, -50%) scale(500); }")
     md_content.append("#iris-out { position: fixed; top: 50%; left: 50%; width: 150vmax; height: 150vmax; background-color: var(--bg-color); border-radius: 50%; z-index: 100001; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1); }")
     md_content.append("body.is-exiting #iris-out { transform: translate(-50%, -50%) scale(1.2) !important; }")
-    md_content.append('body > *:not([id^="iris-"]) { opacity: 0; transition: opacity 0.8s ease-out; }')
-    md_content.append("body.is-opening > *:not([id^="iris-"]) { opacity: 1; }")
+    md_content.append("body > *:not([id^='iris-']) { opacity: 0; transition: opacity 0.8s ease-out; }")
+    md_content.append("body.is-opening > *:not([id^='iris-']) { opacity: 1; }")
     md_content.append("</style>")
     md_content.append('<button id="mode-toggle">🌙 Dark Mode</button>')
     md_content.append("<script>")
