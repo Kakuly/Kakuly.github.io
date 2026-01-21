@@ -118,29 +118,28 @@ def update_markdown(items):
     content += '<div id="filter-container" class="filter-wrapper"></div>\n\n'
     content += '<div class="video-grid" id="video-grid">\n\n'
     
-    
     for item in items:
         snippet = item['snippet']
         title = html.escape(snippet['title'])
         video_id = snippet['resourceId']['videoId']
         
+        # サムネイル情報の取得
+        thumbnails = snippet.get('thumbnails', {})
+        img_url = ""
+        for res in ['maxres', 'standard', 'high', 'medium', 'default']:
+            if res in thumbnails:
+                img_url = thumbnails[res]['url']
+                break
+        
         tags = get_tags(video_id, title, snippet['description'])
         tags_attr = ",".join(tags) if tags else ""
         
-        # Python側ではIDだけを渡し、画像URLの切り替えはJSに集約する
-        # --- update_markdown 関数内 ---
         content += f'<div class="video-item" data-tags="{tags_attr}">\n'
         content += f'  <a href="https://www.youtube.com/watch?v={video_id}" target="_blank" class="video-link">\n'
-        # 最初に一番高画質なものを指定
-        content += f'    <img src="https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg" '
-        content += f'alt="{title}" class="video-thumbnail" loading="lazy" '
-        # onerrorの中身を直接記述するか、関数を確実に呼び出す
-        content += f'onerror="this.onerror=null; this.src=\'https://i.ytimg.com/vi/{video_id}/hqdefault.jpg\';">'
-        content += f'  </a>\n'
-        # JSで「失敗したらhq、それも失敗したらmq」と段階的に変える
-        content += f'onerror="handleImageError(this, \'{video_id}\')">\n'
+        content += f'    <img src="{img_url}" alt="{title}" class="video-thumbnail" loading="lazy">\n'
         content += f'  </a>\n'
         content += f"  <h3 class='video-title'>{title}</h3>"
+        
         if tags:
             content += '  <div class="tag-container">\n'
             for tag in tags:
@@ -149,10 +148,6 @@ def update_markdown(items):
         content += '</div>\n\n'
 
     content += '</div>\n\n'
-
-    
-    
-    # 演出用パーツ
     content += '<div id="iris-in"></div>'
     content += '<div id="iris-out"></div>'
 
@@ -195,11 +190,11 @@ def update_markdown(items):
   opacity: 0;
   transform: scale(0.95);
   pointer-events: none;
-  position: absolute; /* レイアウトを詰めさせるための設定 */
+  position: absolute;
   visibility: hidden;
 }
 
-/* --- 元のデザイン設定 (完全維持) --- */
+/* --- デザイン設定 --- */
 .tag-container { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 5px; }
 .work-tag { font-size: 0.57rem; padding: 1px 6px; border-radius: 4px; border: 0.5px solid var(--text-color); opacity: 0.88; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
 .video-thumbnail { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -219,7 +214,6 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 .video-item h3 { font-family: 'Noto Sans JP', sans-serif !important; font-size: 0.85rem !important; height: auto !important; min-height: 1.3em; overflow: hidden; margin-bottom: 0px !important; line-height: 1.3; }
 .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
 
-/* --- モード切替ボタンの設定（レスポンシブ対応） --- */
 #mode-toggle { 
     cursor: pointer; 
     background: transparent; 
@@ -233,19 +227,18 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
     right: 20px; 
     z-index: 9999; 
     font-weight: 700;
-    font-family: 'Montserrat', sans-serif !important; /* フォントを明示的に指定 */
+    font-family: 'Montserrat', sans-serif !important; 
     transition: all 0.3s ease;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
 
-/* 画面幅が1300px以下になったら右下に移動 */
 @media screen and (max-width: 1500px) {
     #mode-toggle {
         top: auto !important;
         bottom: 20px !important;
         right: 20px !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* 下に移動したときに見やすく */
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 }
 
@@ -260,20 +253,6 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 <button id="mode-toggle">🌙 Dark Mode</button>
 
 <script>
-
-function handleImageError(img, videoId) {
-  const attempt = parseInt(img.getAttribute('data-error-attempt') || "0");
-  if (attempt === 0) {
-    img.setAttribute('data-error-attempt', "1");
-    img.src = 'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg';
-  } else if (attempt === 1) {
-    img.setAttribute('data-error-attempt', "2");
-    img.src = 'https://i.ytimg.com/vi/' + videoId + '/mqdefault.jpg';
-  }
-}
-
-
-
   document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('video-grid');
     const items = Array.from(grid.querySelectorAll('.video-item'));
@@ -358,8 +337,6 @@ function handleImageError(img, videoId) {
       setTimeout(() => { window.location.href = href; }, 800);
     });
   });
-
-  
 </script>
 """
 
