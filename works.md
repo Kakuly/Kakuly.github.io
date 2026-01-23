@@ -767,7 +767,7 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 #iris-in { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 0 500vmax var(--bg-color); z-index: 100000; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1); }
 body.is-opening #iris-in { transform: translate(-50%, -50%) scale(500); }
 #iris-out { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--bg-color); z-index: 100000; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1); }
-body.is-exiting #iris-out { transform: translate(-50%, -50%) scale(1.2) !important; }
+body.is-exiting #iris-out { transform: translate(-50%, -50%) scale(500) !important; }
 body > *:not([id^="iris-"]) { opacity: 0; transition: opacity 0.8s ease-out; }
 body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 </style>
@@ -797,7 +797,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const artists = new Set(['ALL']);
   const tags = new Set();
   items.forEach(item => {
-    if (item.dataset.artist) artists.add(item.dataset.artist);
+    if (item.dataset.artist) {
+      // カンマで分割して最初の名前のみをフィルタ用タグとして使用
+      const firstArtist = item.dataset.artist.split(',')[0].trim();
+      artists.add(firstArtist);
+      // フィルタリング時に照合しやすいよう、要素に正規化したアーティスト名を保持させる
+      item.setAttribute('data-filter-artist', firstArtist);
+    }
     item.dataset.tags.split(',').filter(t => t).forEach(t => tags.add(t));
   });
 
@@ -824,7 +830,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function apply() {
     items.forEach(item => {
-      const aMatch = activeArtist === 'ALL' || item.dataset.artist === activeArtist;
+      const aMatch = activeArtist === 'ALL' || item.getAttribute('data-filter-artist') === activeArtist;
       const tMatch = activeTags.size === 0 || Array.from(activeTags).every(t => item.dataset.tags.split(',').includes(t));
       if (aMatch && tMatch) {
         item.classList.remove('sort-hide'); item.style.position = 'relative'; item.style.visibility = 'visible'; item.style.pointerEvents = 'auto';
@@ -854,7 +860,7 @@ document.querySelectorAll('a').forEach(link => {
     const href = link.getAttribute('href');
     if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
     e.preventDefault(); document.body.classList.add('is-exiting');
-    setTimeout(() => { window.location.href = href; }, 800);
+    setTimeout(() => { window.location.href = href; }, 700);
   });
 });
 </script>
