@@ -203,7 +203,7 @@ kakuly.work@gmail.com<br>
     height: 300px;
     border-radius: 7%;
     object-fit: cover;
-    border: 0.1px solid var(--text-color);
+    /* border: 0.1px solid var(--text-color); */
     flex-shrink: 0;
   }
 
@@ -221,7 +221,7 @@ kakuly.work@gmail.com<br>
     transition: 0.3s;
   }
 
-  html.dark-mode .sns-links img { filter: invert(1) grayscale(100%) brightness(1.5); }
+  /* html.dark-mode .sns-links img { filter: invert(1) grayscale(100%) brightness(1.5); } */
 
   /* 7. 不要な要素の削除（Worksと同じ） */
   .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
