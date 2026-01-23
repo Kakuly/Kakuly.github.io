@@ -191,7 +191,6 @@ def update_markdown(items):
     # manual_works.jsonから手動作品を読み込んで追加
     manual_works = load_manual_works()
     for manual_work in manual_works:
-        # "img" または "image" の両方に対応
         thumbnail = manual_work.get('img') or manual_work.get('image', '')
         works_data.append({
             "title": html.escape(manual_work.get('title', 'Untitled')),
@@ -228,17 +227,12 @@ def update_markdown(items):
         content = generate_page_content(page_works, page_num, total_pages)
         
         try:
-            # 既存のファイルを上書き
             with open(file_path, 'w', encoding='utf-8') as f:
                 f.write(content)
             print(f"Generated: {file_path} (Items {start_idx+1} to {end_idx})")
         except Exception as e:
             print(f"Error writing {file_path}: {e}")
     
-    # もし古いページファイル（例：works_page3.md）が残っていて、
-    # 今回の更新で不要になった場合は削除を検討すべきですが、
-    # GitHub Actions環境であればクリーンな状態から始まるため通常は問題ありません。
-
     print(f"生成完了: {total_pages}ページ、合計{total_items}作品")
 
 def generate_page_content(works_data, current_page, total_pages):
@@ -247,7 +241,6 @@ def generate_page_content(works_data, current_page, total_pages):
     if current_page > 1:
         content += f" - Page {current_page}"
     
-    # パーマリンクの設定
     if current_page == 1:
         content += "\npermalink: /works/"
     else:
@@ -275,8 +268,8 @@ def generate_page_content(works_data, current_page, total_pages):
         
         content += f'<div class="video-item" data-tags="{tags_attr}">\n'
         
-        # YouTubeの作品と手動作品で処理を分岐
         if work['type'] == 'youtube':
+            # YouTubeリンク
             content += f'  <a href="https://www.youtube.com/watch?v={work["video_id"]}" target="_blank" class="video-link">\n'
             content += f'    <img src="{work["thumbnail"]}" '
             content += f'data-video-id="{work["video_id"]}" '
@@ -285,14 +278,13 @@ def generate_page_content(works_data, current_page, total_pages):
             content += f'onerror="handleImageError(this)">\n'
             content += f'  </a>\n'
         else:
-            # 手動作品の場合
+            # 手動作品リンク
             content += f'  <a href="{work["url"]}" target="_blank" class="video-link">\n'
             content += f'    <img src="{work["thumbnail"]}" '
             content += f'alt="{work["title"]}" class="video-thumbnail" loading="lazy">\n'
             content += f'  </a>\n'
         
         content += f"  <h3 class='video-title'>{work['title']}</h3>"
-        # 投稿日を表示に追加
         content += f"\n  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>{work['date']}</p>"
         
         if work['tags']:
@@ -304,7 +296,6 @@ def generate_page_content(works_data, current_page, total_pages):
 
     content += '</div>\n\n'
     
-    # ページネーションナビゲーション（下部）
     if total_pages > 1:
         content += '<div class="pagination-nav pagination-bottom">\n'
         if current_page > 1:
@@ -315,11 +306,9 @@ def generate_page_content(works_data, current_page, total_pages):
             content += f'  <a href="/works/page{current_page+1}/" class="pagination-btn">次のページ →</a>\n'
         content += '</div>\n\n'
 
-    # 演出用パーツ
     content += '<div id="iris-in"></div>'
     content += '<div id="iris-out"></div>'
 
-    # スタイルとスクリプト
     content += """
 <style>
 /* --- ページネーション --- */
@@ -395,7 +384,7 @@ def generate_page_content(works_data, current_page, total_pages):
   opacity: 0;
   transform: scale(0.95);
   pointer-events: none;
-  position: absolute; /* レイアウトを詰めさせるための設定 */
+  position: absolute; 
   visibility: hidden;
 }
 
@@ -419,7 +408,6 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 .video-item h3 { font-family: 'Noto Sans JP', sans-serif !important; font-size: 0.85rem !important; height: auto !important; min-height: 1.3em; overflow: hidden; margin-bottom: 0px !important; line-height: 1.3; }
 .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
 
-/* --- モード切替ボタンの設定（レスポンシブ対応） --- */
 #mode-toggle { 
     cursor: pointer; 
     background: transparent; 
@@ -433,19 +421,18 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
     right: 20px; 
     z-index: 9999; 
     font-weight: 700;
-    font-family: 'Montserrat', sans-serif !important; /* フォントを明示的に指定 */
+    font-family: 'Montserrat', sans-serif !important; 
     transition: all 0.3s ease;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
 
-/* 画面幅が1300px以下になったら右下に移動 */
 @media screen and (max-width: 1500px) {
     #mode-toggle {
         top: auto !important;
         bottom: 20px !important;
         right: 20px !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* 下に移動したときに見やすく */
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
     }
 }
 
@@ -463,7 +450,7 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 
 function handleImageError(img) {
   const videoId = img.getAttribute('data-video-id');
-  if (!videoId) return; // 手動作品の場合は何もしない
+  if (!videoId) return; 
   
   const attempt = parseInt(img.getAttribute('data-error-attempt') || "0");
   const fallbackUrls = [
@@ -476,13 +463,10 @@ function handleImageError(img) {
     img.setAttribute('data-error-attempt', (attempt + 1).toString());
     img.src = fallbackUrls[attempt];
   } else {
-    // すべて失敗した場合はプレースホルダー画像を表示
     img.style.backgroundColor = '#333';
     img.alt = '画像を読み込めませんでした';
   }
 }
-
-
 
   document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('video-grid');
@@ -516,14 +500,14 @@ function handleImageError(img) {
         
         if (isVisible) {
           item.classList.remove('sort-hide');
-          item.style.position = 'relative';
+          item.style.display = ''; // 表示を戻す
           item.style.pointerEvents = 'auto';
           item.style.visibility = 'visible';
         } else {
           item.classList.add('sort-hide');
           setTimeout(() => {
             if (item.classList.contains('sort-hide')) {
-              item.style.position = 'absolute';
+              item.style.display = 'none'; // 完全に消す
             }
           }, 400);
         }
@@ -568,8 +552,6 @@ function handleImageError(img) {
       setTimeout(() => { window.location.href = href; }, 800);
     });
   });
-
-  
 </script>
 """
 
