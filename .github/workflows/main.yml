@@ -1,10 +1,11 @@
-name: Update Works from YouTube
+name: Update Works and Release
 on:
   push:
     paths:
       - 'update_works.py'
       - 'known_works.json'
       - 'manual_works.json'
+      - 'manual_release.json'
   schedule:
     - cron: '0 15 * * *'
   workflow_dispatch:
@@ -33,12 +34,12 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # 存在するファイルだけをaddする（エラー回避）
-          git add works.md known_works.json
+          # 生成されたファイルとキャッシュをadd
+          git add works.md release.md known_works.json
           
           # 変更がある場合のみコミット
           if ! git diff --cached --exit-code --quiet; then
-            git commit -m "Auto update works.md and cache"
+            git commit -m "Auto update works.md, release.md and cache"
             git pull --rebase origin main
             git push origin main
           fi
