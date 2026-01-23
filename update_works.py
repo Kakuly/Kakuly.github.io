@@ -321,7 +321,7 @@ function openNewsModal(id) {
   
   // URLを検知して <a> タグに変換する正規表現
   let content = contentElement.innerHTML;
-  const urlRegex = /(https?:\/\/\\/\\/[^\\s<]+)/g;
+  const urlRegex = /https?:\/\/[^\s<]+/g;
   content = content.replace(urlRegex, function(url) {
     return '<a href="' + url + '" target="_blank" rel="noopener noreferrer" style="color: #007bff; text-decoration: underline;">' + url + '</a>';
   });
