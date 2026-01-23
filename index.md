@@ -541,6 +541,8 @@ window.onclick = function(event) {
 <hr style="width: 50%; margin: 40px auto; border-top: 1px solid var(--text-color); opacity: 0.3;">
 
 
+``
+
 <div class="custom-section-nocffie">
   <div class="section-content-nocffie">
 
@@ -605,3 +607,4 @@ nocffie.work@gmail.com<br>
     text-shadow: 0 4px 15px rgba(0,0,0,0.8);
     }
 </style>
+``
