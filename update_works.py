@@ -5,7 +5,6 @@ import google.generativeai as genai
 import html
 
 # --- 設定 ---
-# 環境変数が設定されていない場合のフォールバック（デバッグ用）
 API_KEY = os.environ.get('YOUTUBE_API_KEY', '')
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', '')
 PLAYLIST_ID = 'PLH9mX0wDlDAou_YCjcU01Q3pR6cCRQPWS'
@@ -192,12 +191,14 @@ def update_markdown(items):
     # manual_works.jsonから手動作品を読み込んで追加
     manual_works = load_manual_works()
     for manual_work in manual_works:
+        # "img" または "image" の両方に対応
+        thumbnail = manual_work.get('img') or manual_work.get('image', '')
         works_data.append({
             "title": html.escape(manual_work.get('title', 'Untitled')),
             "video_id": None,
             "tags": manual_work.get('tags', []),
             "date": manual_work.get('date', '2000-01-01'),
-            "thumbnail": manual_work.get('image', ''),
+            "thumbnail": thumbnail,
             "url": manual_work.get('url', '#'),
             "type": "manual"
         })
@@ -205,7 +206,7 @@ def update_markdown(items):
     # 投稿日の降順でソート
     works_data.sort(key=lambda x: x['date'], reverse=True)
 
-    # ページネーション設定 (1ページ51個に変更)
+    # ページネーション設定 (1ページ51個)
     items_per_page = 51
     total_items = len(works_data)
     total_pages = (total_items + items_per_page - 1) // items_per_page
@@ -227,12 +228,17 @@ def update_markdown(items):
         content = generate_page_content(page_works, page_num, total_pages)
         
         try:
+            # 既存のファイルを上書き
             with open(file_path, 'w', encoding='utf-8') as f:
                 f.write(content)
             print(f"Generated: {file_path} (Items {start_idx+1} to {end_idx})")
         except Exception as e:
             print(f"Error writing {file_path}: {e}")
     
+    # もし古いページファイル（例：works_page3.md）が残っていて、
+    # 今回の更新で不要になった場合は削除を検討すべきですが、
+    # GitHub Actions環境であればクリーンな状態から始まるため通常は問題ありません。
+
     print(f"生成完了: {total_pages}ページ、合計{total_items}作品")
 
 def generate_page_content(works_data, current_page, total_pages):
@@ -571,5 +577,4 @@ function handleImageError(img) {
 
 if __name__ == "__main__":
     items = get_playlist_items()
-    # YouTubeアイテムがなくても手動アイテムがあるかもしれないので、空リストでも続行
     update_markdown(items)
