@@ -236,17 +236,17 @@ def update_markdown(items):
     print(f"生成完了: {total_pages}ページ、合計{total_items}作品")
 
 def generate_page_content(works_data, current_page, total_pages):
-    """ページコンテンツを生成"""
+    \"\"\"ページコンテンツを生成\"\"\"
     # タイトルから「- Page X」を削除し、常に「Works」にする
-    content = "---\nlayout: page\ntitle: Works"
+    content = \"---\\nlayout: page\\ntitle: Works\"
     
     if current_page == 1:
-        content += "\npermalink: /works/"
+        content += \"\\npermalink: /works/\"
     else:
-        content += f"\npermalink: /works/page{current_page}/"
-    content += "\n---\n\n"
-    
-    content += "関わった／制作した作品集\n"
+        content += f\"\\npermalink: /works/page{current_page}/\"
+        # 2ページ目以降はナビゲーションメニューから除外する
+        content += \"\\nnav_exclude: true\"
+    content += \"\\n---\\n\\n\""関わった／制作した作品集\n"
     
     # ページネーションナビゲーション
     if total_pages > 1:
