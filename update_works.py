@@ -185,7 +185,8 @@ def update_markdown(items):
             "tags": tags,
             "date": pub_date,
             "thumbnail": thumbnail_url,
-            "type": "youtube"
+            "type": "youtube",
+            "size": "min" # YouTubeは常にmin
         })
     
     # manual_works.jsonから手動作品を読み込んで追加
@@ -199,75 +200,38 @@ def update_markdown(items):
             "date": manual_work.get('date', '2000-01-01'),
             "thumbnail": thumbnail,
             "url": manual_work.get('url', '#'),
-            "type": "manual"
+            "type": "manual",
+            "size": manual_work.get('size', 'min') # min, mid, max
         })
     
     # 投稿日の降順でソート
     works_data.sort(key=lambda x: x['date'], reverse=True)
 
-    # ページネーション設定 (1ページ51個)
-    items_per_page = 51
-    total_items = len(works_data)
-    total_pages = (total_items + items_per_page - 1) // items_per_page
+    # ページネーション廃止：常に1つのファイルに書き出す
+    content = generate_page_content(works_data)
     
-    print(f"Total items: {total_items}, Total pages: {total_pages}")
-
-    # ページごとにファイルを生成
-    for page_num in range(1, total_pages + 1):
-        start_idx = (page_num - 1) * items_per_page
-        end_idx = min(start_idx + items_per_page, total_items)
-        page_works = works_data[start_idx:end_idx]
-        
-        # ファイル名の決定
-        if page_num == 1:
-            file_path = FILE_PATH
-        else:
-            file_path = f'works_page{page_num}.md'
-        
-        content = generate_page_content(page_works, page_num, total_pages)
-        
-        try:
-            with open(file_path, 'w', encoding='utf-8') as f:
-                f.write(content)
-            print(f"Generated: {file_path} (Items {start_idx+1} to {end_idx})")
-        except Exception as e:
-            print(f"Error writing {file_path}: {e}")
+    try:
+        with open(FILE_PATH, 'w', encoding='utf-8') as f:
+            f.write(content)
+        print(f"Generated: {FILE_PATH}")
+    except Exception as e:
+        print(f"Error writing {FILE_PATH}: {e}")
     
-    print(f"生成完了: {total_pages}ページ、合計{total_items}作品")
+    print(f"生成完了: 合計{len(works_data)}作品")
 
-def generate_page_content(works_data, current_page, total_pages):
+def generate_page_content(works_data):
     """ページコンテンツを生成"""
-    # タイトルから「- Page X」を削除し、常に「Works」にする
-    content = "---\nlayout: page\ntitle: Works"
-    
-    if current_page == 1:
-        content += "\npermalink: /works/"
-    else:
-        content += f"\npermalink: /works/page{current_page}/"
-        # 2ページ目以降はナビゲーションメニューから除外する
-        content += "\nnav_exclude: true"
-    content += "\n---\n\n"
-    
-    content += "関わった／制作した作品集\n"
-    
-    # ページネーションナビゲーション
-    if total_pages > 1:
-        content += '<div class="pagination-nav">\n'
-        if current_page > 1:
-            prev_link = '/works/' if current_page == 2 else f'/works/page{current_page-1}/'
-            content += f'  <a href="{prev_link}" class="pagination-btn">← 前のページ</a>\n'
-        content += f'  <span class="pagination-info">Page {current_page} / {total_pages}</span>\n'
-        if current_page < total_pages:
-            content += f'  <a href="/works/page{current_page+1}/" class="pagination-btn">次のページ →</a>\n'
-        content += '</div>\n\n'
+    content = "---\nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
+    content += "関わった／制作した作品集\n\n"
     
     content += '<div id="filter-container" class="filter-wrapper"></div>\n\n'
     content += '<div class="video-grid" id="video-grid">\n\n'
     
     for work in works_data:
         tags_attr = ",".join(work['tags']) if work['tags'] else ""
+        size_class = f"size-{work['size']}"
         
-        content += f'<div class="video-item" data-tags="{tags_attr}">\n'
+        content += f'<div class="video-item {size_class}" data-tags="{tags_attr}">\n'
         
         if work['type'] == 'youtube':
             content += f'  <a href="https://www.youtube.com/watch?v={work["video_id"]}" target="_blank" class="video-link">\n'
@@ -294,58 +258,12 @@ def generate_page_content(works_data, current_page, total_pages):
         content += '</div>\n\n'
 
     content += '</div>\n\n'
-    
-    if total_pages > 1:
-        content += '<div class="pagination-nav pagination-bottom">\n'
-        if current_page > 1:
-            prev_link = '/works/' if current_page == 2 else f'/works/page{current_page-1}/'
-            content += f'  <a href="{prev_link}" class="pagination-btn">← 前のページ</a>\n'
-        content += f'  <span class="pagination-info">Page {current_page} / {total_pages}</span>\n'
-        if current_page < total_pages:
-            content += f'  <a href="/works/page{current_page+1}/" class="pagination-btn">次のページ →</a>\n'
-        content += '</div>\n\n'
 
     content += '<div id="iris-in"></div>'
     content += '<div id="iris-out"></div>'
 
     content += """
 <style>
-/* --- ページネーション --- */
-.pagination-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  margin: 30px 0;
-  flex-wrap: wrap;
-}
-.pagination-bottom {
-  margin-top: 60px;
-}
-.pagination-btn {
-  font-family: 'Montserrat', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 0.9rem;
-  padding: 10px 20px;
-  border-radius: 30px;
-  border: 1px solid var(--text-color);
-  background: transparent;
-  color: var(--text-color);
-  text-decoration: none;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-}
-.pagination-btn:hover {
-  background: var(--text-color);
-  color: var(--bg-color);
-}
-.pagination-info {
-  font-family: 'Montserrat', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 0.9rem;
-  opacity: 0.7;
-}
-
 /* --- フィルタUI --- */
 .filter-wrapper {
   margin-bottom: 40px;
@@ -373,13 +291,43 @@ def generate_page_content(works_data, current_page, total_pages):
   color: var(--bg-color);
 }
 
-/* --- ソートアニメーション用 --- */
+/* --- グリッドレイアウトとサイズ調整 --- */
+.video-grid { 
+  display: grid !important; 
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important; 
+  gap: 60px 40px !important; 
+  position: relative;
+  grid-auto-flow: dense; /* 隙間を埋める設定 */
+}
+
 .video-item {
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform: scale(1);
   opacity: 1;
   backface-visibility: hidden;
 }
+
+/* サイズ調整用クラス */
+.video-item.size-min {
+  grid-column: span 1;
+}
+.video-item.size-mid {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.video-item.size-max {
+  grid-column: span 3;
+  grid-row: span 2;
+}
+
+/* モバイル対応：画面が狭い時は強制的に1カラムにする */
+@media screen and (max-width: 900px) {
+  .video-item.size-mid, .video-item.size-max {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}
+
 .video-item.sort-hide {
   opacity: 0;
   transform: scale(0.95);
@@ -390,6 +338,9 @@ def generate_page_content(works_data, current_page, total_pages):
 .tag-container { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 5px; }
 .work-tag { font-size: 0.57rem; padding: 1px 6px; border-radius: 4px; border: 0.5px solid var(--text-color); opacity: 0.88; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
 .video-thumbnail { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+/* mid, maxサイズの場合はアスペクト比を解除して画像を広げる */
+.size-mid .video-thumbnail, .size-max .video-thumbnail { aspect-ratio: auto; height: auto; min-height: 200px; }
+
 .video-link:hover .video-thumbnail { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 .video-title { margin-top: 10px; font-size: 1rem; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 0px !important; font-family: 'Noto Sans JP', sans-serif !important; }
 .wrapper { max-width: 1100px !important; padding-right: 40px !important; padding-left: 40px !important; }
@@ -402,7 +353,6 @@ body.mode-transition { transition: background-color 0.5s ease, color 0.5s ease !
 .site-header { background-color: transparent !important; border: none !important; }
 h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font-size: 1.4rem !important; font-weight: 700 !important; letter-spacing: -0.05em !important; color: var(--text-color) !important; }
 .page-link { font-family: 'Montserrat', sans-serif !important; color: var(--text-color) !important; font-weight: 700 !important; text-transform: uppercase; font-size: 0.9rem !important; margin-left: 20px !important; text-decoration: none !important; }
-.video-grid { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important; gap: 60px 40px !important; position: relative; }
 .video-item h3 { font-family: 'Noto Sans JP', sans-serif !important; font-size: 0.85rem !important; height: auto !important; min-height: 1.3em; overflow: hidden; margin-bottom: 0px !important; line-height: 1.3; }
 .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
 
