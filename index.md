@@ -160,6 +160,7 @@ kakuly.work@gmail.com<br>
   .profile-name {
     font-size: 8.5rem !important; /* フォントや太さは上でh3等と同期済み */
     line-height: 1;
+    border-color: var(--text-color)
   }
 
   .profile-container {
