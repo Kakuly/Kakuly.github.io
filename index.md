@@ -40,23 +40,30 @@ kakuly.work@gmail.com<br>
 </div>
 
 <style>
-.custom-section {
+  .custom-section {
     width: 100vw;
-    margin-left: calc(-50vw + 50%); /* 画面幅いっぱいに広げる魔法のコード */
+    margin-left: calc(-50vw + 50%);
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* パララックス（視差効果）にしたい場合 */
+    background-attachment: fixed;
     padding: 100px 0;
-    color: white; /* 背景が暗い場合は文字を白に */
-}
+    
+    /* ↓ ここがポイント：画像の上に黒いグラデーションを重ねる */
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)), 
+        url('/assets/img/header_kakuly.jpg');
+    
+    color: #ffffff !important; /* 文字を白に固定 */
+    }
+
 .section-content {
-    max-width: 800px; /* コンテンツの幅を制限 */
+    max-width: 800px;
     margin: 0 auto;
     padding: 0 20px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* 文字を読みやすくする */
-}
+    /* 文字に深みを出す影 */
+    text-shadow: 0 4px 15px rgba(0,0,0,0.8);
+    }
 </style>
-
 
 <hr style="width: 50%; margin: 40px auto; border-top: 1px solid var(--text-color); opacity: 0.3;">
 
@@ -70,28 +77,7 @@ kakuly.work@gmail.com<br>
 <div id="iris-in"></div>
 <div id="iris-out"></div>
 
-<style>
-.custom-section {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%); /* 画面幅いっぱいに広げる魔法のコード */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* パララックス（視差効果）にしたい場合 */
-    padding: 100px 0;
-    color: #ffffff !important;
-    -webkit-text-fill-color: #ffffff !important; /* iPhoneなどのブラウザ対策 */
-    text-decoration-color: #ffffff !important; /* リンクの下線も白に */
-}
-  .custom-section a:hover {
-    opacity: 0.7 !important;
-}
-.section-content {
-    max-width: 800px; /* コンテンツの幅を制限 */
-    margin: 0 auto;
-    padding: 0 20px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* 文字を読みやすくする */
-}
-</style>
+
 
 <style>
   /* 1. サイト全体の最大幅（Worksと同じ位置） */
@@ -161,30 +147,6 @@ kakuly.work@gmail.com<br>
     transition: 0.3s;
 
   }
-
-  .custom-section {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    padding: 100px 0;
-    
-    /* ↓ ここがポイント：画像の上に黒いグラデーションを重ねる */
-    background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)), 
-        url('/assets/img/header_kakuly.jpg');
-    
-    color: #ffffff !important; /* 文字を白に固定 */
-    }
-
-.section-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 20px;
-    /* 文字に深みを出す影 */
-    text-shadow: 0 4px 15px rgba(0,0,0,0.8);
-    }
 
   /* 6. 個別要素（Home専用の設定だが、強さをWorksに合わせる） */
   .profile-name {
@@ -574,3 +536,68 @@ window.onclick = function(event) {
 </script>
 
 <!-- NEWS_END -->
+
+<hr style="width: 50%; margin: 40px auto; border-top: 1px solid var(--text-color); opacity: 0.3;">
+
+
+<div class="custom-section-nocffie">
+  <div class="section-content-nocffie">
+
+    <div class="profile-container">
+      <img src="/assets/img/header_nocffie.png" class="profile-icon">
+  
+      <div class="profile-text">
+        <p class="profile-name">nocffie</p>
+    
+    <div class="sns-links">
+      <a href="https://soundcloud.com/nocffie" target="_blank" rel="noopener">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Antu_soundcloud.svg" alt="SoundCloud">
+      </a>
+      <a href="https://x.com/nocffie" target="_blank" rel="noopener">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" alt="X">
+      </a>
+    </div>
+
+<br>
+
+音楽ユニット。2026年2月から活動を開始。
+貴方の人生に寄り添えるように、ぬいぐるみみたいな暖かい光のような音楽を作ります。
+  </div>
+</div>
+
+<br>
+<br>
+<h2>CONTACT</h2><br>
+<span><a href="https://x.com/nocffie" target="_blank">DM on X</a></span><br>
+nocffie.work@gmail.com<br>
+
+
+
+  </div>
+</div>
+
+<style>
+  .custom-section-nocffie {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 100px 0;
+    
+    /* ↓ ここがポイント：画像の上に黒いグラデーションを重ねる */
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)), 
+        url('/assets/img/header_nocffie.png');
+    
+    color: #ffffff !important; /* 文字を白に固定 */
+    }
+
+.section-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    /* 文字に深みを出す影 */
+    text-shadow: 0 4px 15px rgba(0,0,0,0.8);
+    }
+</style>
