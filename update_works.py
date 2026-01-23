@@ -341,19 +341,28 @@ window.onclick = function(event) {
 }
 </script>
 """
-    if not os.path.exists(INDEX_FILE): return
-    with open(INDEX_FILE, 'r', encoding='utf-8') as f: index_content = f.read()
-    pattern = re.compile(f'{re.escape(NEWS_START_MARKER)}.*?{re.escape(NEWS_END_MARKER)}', re.DOTALL)
+if not os.path.exists(INDEX_FILE): return
+    with open(INDEX_FILE, 'r', encoding='utf-8') as f: 
+        index_content = f.read()
+
+    start_idx = index_content.find(NEWS_START_MARKER)
+    end_idx = index_content.find(NEWS_END_MARKER)
+
     if news_html:
-        new_content = f'{NEWS_START_MARKER}\n{news_html}\n{NEWS_END_MARKER}'
-        if pattern.search(index_content): updated_content = pattern.sub(new_content, index_content)
+        new_block = f"{NEWS_START_MARKER}\n{news_html}\n{NEWS_END_MARKER}"
+        if start_idx != -1 and end_idx != -1:
+            updated_content = index_content[:start_idx] + new_block + index_content[end_idx + len(NEWS_END_MARKER):]
         else:
-            if '## About' in index_content: updated_content = index_content.replace('## About', f'{new_content}\n\n## About')
-            else: updated_content = index_content + "\n" + new_content
+            if '## About' in index_content:
+                updated_content = index_content.replace('## About', f'{new_block}\n\n## About')
+            else:
+                updated_content = index_content + "\n" + new_block
     else:
-        new_content = f'{NEWS_START_MARKER}\n{NEWS_END_MARKER}'
-        if pattern.search(index_content): updated_content = pattern.sub(new_content, index_content)
-        else: updated_content = index_content
+        new_block = f"{NEWS_START_MARKER}\n{NEWS_END_MARKER}"
+        if start_idx != -1 and end_idx != -1:
+            updated_content = index_content[:start_idx] + new_block + index_content[end_idx + len(NEWS_END_MARKER):]
+        else:
+            updated_content = index_content
     with open(INDEX_FILE, 'w', encoding='utf-8') as f: f.write(updated_content)
 
 def generate_page_content(title, works_data, permalink, show_artist):
