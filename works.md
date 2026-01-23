@@ -716,7 +716,7 @@ Works - 作品集
 @media screen and (max-width: 900px) { .video-item.size-mid, .video-item.size-max { grid-column: span 1; grid-row: span 1; } }
 .size-mid .video-thumbnail, .size-max .video-thumbnail { aspect-ratio: auto; height: auto; min-height: 200px; }
 
-/* --- 元のデザイン設定 (完全維持) --- */
+/* --- 元のデザイン設定 (Worksページ用) --- */
 .tag-container { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 5px; }
 .work-tag { font-size: 0.57rem; padding: 1px 6px; border-radius: 4px; border: 0.5px solid var(--text-color); opacity: 0.88; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
 .video-thumbnail { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -736,6 +736,7 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 .video-item h3 { font-family: 'Noto Sans JP', sans-serif !important; font-size: 0.85rem !important; height: auto !important; min-height: 1.3em; overflow: hidden; margin-bottom: 0px !important; line-height: 1.3; }
 .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
 
+/* --- モード切替ボタンの設定（レスポンシブ対応） --- */
 #mode-toggle { 
     cursor: pointer; 
     background: transparent; 
@@ -749,18 +750,19 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
     right: 20px; 
     z-index: 9999; 
     font-weight: 700;
-    font-family: 'Montserrat', sans-serif !important; 
+    font-family: 'Montserrat', sans-serif !important; /* フォントを明示的に指定 */
     transition: all 0.3s ease;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
 
+/* 画面幅が1300px以下になったら右下に移動 */
 @media screen and (max-width: 1500px) {
     #mode-toggle {
         top: auto !important;
         bottom: 20px !important;
         right: 20px !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* 下に移動したときに見やすく */
     }
 }
 
