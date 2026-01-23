@@ -40,7 +40,7 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
           # 生成された全てのworks*.mdとキャッシュを追加
-          git add works.md works_page*.md known_works.json
+          git add works.md known_works.json
           
           if ! git diff --cached --exit-code --quiet; then
             git commit -m "Auto update works pages and cache"
