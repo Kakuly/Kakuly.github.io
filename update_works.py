@@ -225,37 +225,102 @@ def update_index_with_news():
 </div>
 
 <style>
-.news-section { margin: 60px 0; overflow: hidden; }
-.section-title { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; margin-bottom: 30px; letter-spacing: -0.05em; }
+/* ニュースセクション */
+.news-section { margin: 40px 0; overflow: visible; position: relative; z-index: 10; }
+.section-title { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; margin-bottom: 20px; letter-spacing: -0.05em; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
 .news-scroll-container { 
   display: flex; 
   overflow-x: auto; 
   gap: 20px; 
-  padding-bottom: 20px;
+  padding: 20px 5px; /* ホバー時の浮き上がり用余白 */
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 .news-scroll-container::-webkit-scrollbar { display: none; }
+
 .news-card { 
-  flex: 0 0 300px; 
-  background: var(--bg-color); 
-  border: 1px solid var(--text-color); 
+  flex: 0 0 280px; 
+  background: rgba(255, 255, 255, 0.1); 
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2); 
   border-radius: 15px; 
-  padding: 25px; 
+  padding: 20px; 
   cursor: pointer; 
-  transition: all 0.3s ease;
-  opacity: 0.8;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  color: #fff;
 }
-.news-card:hover { opacity: 1; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-.news-card-date { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; opacity: 0.5; margin-bottom: 10px; }
-.news-card-title { font-size: 1.1rem; font-weight: 700; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.modal { display: none; position: fixed; z-index: 100001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
-.modal-content { background-color: var(--bg-color); margin: 10% auto; padding: 40px; border-radius: 20px; width: 80%; max-width: 600px; position: relative; color: var(--text-color); }
+.news-card:hover { 
+  transform: translateY(-10px); 
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3); 
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.news-card-date { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; opacity: 0.7; margin-bottom: 8px; }
+.news-card-title { font-size: 1rem; font-weight: 700; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* モーダル */
+.modal { display: none; position: fixed; z-index: 100001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
+.modal-content { background-color: var(--bg-color); margin: 10% auto; padding: 40px; border-radius: 20px; width: 85%; max-width: 600px; position: relative; color: var(--text-color); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
 .close-modal { position: absolute; right: 25px; top: 20px; font-size: 28px; font-weight: bold; cursor: pointer; opacity: 0.5; }
 .close-modal:hover { opacity: 1; }
 .modal-date { font-family: 'Montserrat', sans-serif; font-size: 0.9rem; opacity: 0.5; margin-bottom: 10px; }
 .modal-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
 .modal-body { font-size: 1rem; line-height: 1.8; white-space: pre-wrap; }
+
+/* ヘッダー画像とオーバーレイ */
+.hero-section {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 100px 0;
+  margin-top: -100px; /* ヘッダー分を相殺 */
+}
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 1100px;
+  color: #fff;
+}
+
+/* セクション背景 */
+.content-section {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 100px 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  z-index: 2;
+}
 </style>
 
 <script>
@@ -289,26 +354,65 @@ window.onclick = function(event) {
         import re
         pattern = r'<!-- NEWS_START -->.*?<!-- NEWS_END -->'
         if re.search(pattern, content, re.DOTALL):
-            new_content = re.sub(pattern, news_html, content, flags=re.DOTALL)
-        else:
-            # 自己紹介（About）とSNSリンクの間に挿入
-            # index.mdの構造に基づき、"---"（フロントマターの終わり）の後の最初の空行の後に挿入
-            parts = content.split('---', 2)
-            if len(parts) >= 3:
-                header = parts[0] + '---' + parts[1] + '---'
-                body = parts[2]
-                # 最初の段落（自己紹介）の後に挿入
-                body_parts = body.split('\n\n', 1)
-                if len(body_parts) >= 2:
-                    new_content = header + body_parts[0] + '\n' + news_html + '\n' + body_parts[1]
-                else:
-                    new_content = content + '\n' + news_html
-            else:
-                new_content = content + '\n' + news_html
+            content = re.sub(pattern, news_html, content, flags=re.DOTALL)
+        
+        # index.mdの構造を大幅に書き換える
+        # フロントマターを取得
+        parts = content.split('---', 2)
+        if len(parts) >= 3:
+            front_matter = parts[1]
+            body = parts[2]
             
-        with open(INDEX_FILE, 'w', encoding='utf-8') as f:
-            f.write(new_content)
-        print("Updated index.md with news section")
+            # ヘッダー画像URLをフロントマターから取得（なければデフォルト）
+            header_img = "https://images.unsplash.com/photo-1514525253361-bee8718a340b?auto=format&fit=crop&w=1920&q=80"
+            if "header_image:" in front_matter:
+                header_img = re.search(r'header_image:\s*(.*)', front_matter).group(1).strip()
+            
+            # AboutセクションとSNSリンクを分離
+            # ユーザーのindex.mdの構造に合わせて調整
+            # アイコン、名前、リンク、コンタクトを抽出
+            # ここでは、bodyを解析してHeroセクションとAboutセクションに分ける
+            
+            # 1. Heroセクション（画像の上にNews, アイコン, 名前, リンク, コンタクト）
+            # 2. Aboutセクション（自己紹介）
+            
+            # 簡易的な分割ロジック
+            body_lines = body.strip().split('\n')
+            about_content = ""
+            hero_info = ""
+            
+            is_about = False
+            for line in body_lines:
+                if "About" in line or "自己紹介" in line:
+                    is_about = True
+                if is_about:
+                    about_content += line + "\n"
+                else:
+                    hero_info += line + "\n"
+            
+            new_body = f"""
+<div class="hero-section" style="background-image: url('{header_img}');">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    {news_html}
+    <div class="profile-overlay">
+      {hero_info}
+    </div>
+  </div>
+</div>
+
+<div class="content-section">
+  <div class="section-inner">
+    {about_content}
+  </div>
+</div>
+"""
+            new_content = f"---{front_matter}---\n{new_body}"
+            
+            with open(INDEX_FILE, 'w', encoding='utf-8') as f:
+                f.write(new_content)
+            print("Updated index.md with new hero layout and news")
+
 
 
 def generate_page_content(title, works_data, permalink, show_artist):
