@@ -1,9 +1,10 @@
 ---
-layout: home
+layout: page
 title: Home
+header_image: https://images.unsplash.com/photo-1514525253361-bee8718a340b?auto=format&fit=crop&w=1920&q=80
 ---
 
-<div class="hero-section" style="background-image: url('');">
+<div class="hero-section" style="background-image: url('https://images.unsplash.com/photo-1514525253361-bee8718a340b?auto=format&fit=crop&w=1920&q=80');">
   <div class="hero-overlay"></div>
   <div class="hero-content">
     
@@ -132,6 +133,26 @@ title: Home
   position: relative;
   z-index: 3;
 }
+
+.profile-overlay {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.profile-overlay img {
+  border-radius: 20px;
+  max-width: 200px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+.profile-overlay h1, .profile-overlay .name {
+  font-size: 4rem;
+  font-weight: 900;
+  margin: 0;
+  line-height: 1;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
 </style>
 
 <script>
@@ -157,42 +178,23 @@ window.onclick = function(event) {
 <!-- NEWS_END -->
 
     <div class="profile-overlay">
+      <img src="https://pbs.twimg.com/profile_images/1879541331043364864/mYp7399t_400x400.jpg" alt="Kakuly">
+      <h1 class="name">Kakuly</h1>
+      <div class="links">
+        <a href="https://soundcloud.com/kakuly" target="_blank">☁️</a>
+        <a href="https://x.com/Kakuly_" target="_blank">X</a>
       </div>
-    </div>
-  </div>
-</div>
-
-  </div>
-</div>
     </div>
   </div>
 </div>
 
 <div class="content-section">
   <div class="section-inner">
-    
+    ## About
+    2006年生まれ。2020年から音楽活動を開始。エレクトロポップ / ハイパーポップを中心に、たくさん迷いながら音楽を作っている。元気に生きるために音楽を摂取します。いつもありがとう。
+
+    ## Contact
+    [DM on X](https://x.com/Kakuly_)
+    kakuly.work@gmail.com
   </div>
 </div>
-
-<style>
-.profile-overlay {
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-}
-/* 元のアイコンや名前のスタイルを維持するための調整 */
-.profile-overlay img {
-  border-radius: 20px;
-  max-width: 200px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-.profile-overlay h1, .profile-overlay .name {
-  font-size: 4rem;
-  font-weight: 900;
-  margin: 0;
-  line-height: 1;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-}
-</style>
