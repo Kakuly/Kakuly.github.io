@@ -321,42 +321,46 @@ document.querySelectorAll('a').forEach(link => {
 
 <div class="news-section-wrapper">
   <h2 class="section-title">NEWS</h2>
-  <div class="news-scroll-container">
-    <div class="news-card" onclick="openNewsModal('1')">
-      <div class="news-card-date">2026-01-23</div>
-      <div class="news-card-title">ポートフォリオサイトをリニューアルしました</div>
-      <div class="news-card-content-hidden" id="news-content-1" style="display:none;">ポートフォリオサイトのデザインを一新し、ニュースセクションを追加しました。今後はこちらで最新情報をお届けします。</div>
+  <div class="news-container-outer">
+    <button class="news-nav-btn prev" onclick="scrollNews(-1)" id="news-prev-btn">&#10094;</button>
+    <div class="news-scroll-container" id="news-scroll-container">
+      <div class="news-card" onclick="openNewsModal('1')">
+        <div class="news-card-date">2026-01-23</div>
+        <div class="news-card-title">ポートフォリオサイトをリニューアルしました</div>
+        <div class="news-card-content-hidden" id="news-content-1" style="display:none;">ポートフォリオサイトのデザインを一新し、ニュースセクションを追加しました。今後はこちらで最新情報をお届けします。</div>
+      </div>
+      <div class="news-card" onclick="openNewsModal('news_1769141876861')">
+        <div class="news-card-date">2026-01-23</div>
+        <div class="news-card-title">pixiv fanboxにて有料記事を公開しました</div>
+        <div class="news-card-content-hidden" id="news-content-news_1769141876861" style="display:none;">先日公開した、snowflakingについて公開しました<br>https://kakuly.fanbox.cc/</div>
+      </div>
+      <div class="news-card" onclick="openNewsModal('news_1769141879300')">
+        <div class="news-card-date">2026-01-23</div>
+        <div class="news-card-title">sd</div>
+        <div class="news-card-content-hidden" id="news-content-news_1769141879300" style="display:none;">dsdsdsd</div>
+      </div>
+      <div class="news-card" onclick="openNewsModal('news_1769141880522')">
+        <div class="news-card-date">2026-01-23</div>
+        <div class="news-card-title">asdads</div>
+        <div class="news-card-content-hidden" id="news-content-news_1769141880522" style="display:none;">asdasd</div>
+      </div>
+      <div class="news-card" onclick="openNewsModal('2')">
+        <div class="news-card-date">2026-01-20</div>
+        <div class="news-card-title">新しい楽曲を公開しました</div>
+        <div class="news-card-content-hidden" id="news-content-2" style="display:none;">YouTubeにて新しい制作楽曲を公開しました。ぜひWorksページからチェックしてください。</div>
+      </div>
+      <div class="news-card" onclick="openNewsModal('news_1769141886557')">
+        <div class="news-card-date">2025-10-08</div>
+        <div class="news-card-title">sfdhs</div>
+        <div class="news-card-content-hidden" id="news-content-news_1769141886557" style="display:none;">fhsdfhsdfh</div>
+      </div>
+      <div class="news-card" onclick="openNewsModal('news_1769141891071')">
+        <div class="news-card-date">2025-07-25</div>
+        <div class="news-card-title">sfdhsdf</div>
+        <div class="news-card-content-hidden" id="news-content-news_1769141891071" style="display:none;">hsdfh</div>
+      </div>
     </div>
-    <div class="news-card" onclick="openNewsModal('news_1769141876861')">
-      <div class="news-card-date">2026-01-23</div>
-      <div class="news-card-title">pixiv fanboxにて有料記事を公開しました</div>
-      <div class="news-card-content-hidden" id="news-content-news_1769141876861" style="display:none;">先日公開した、snowflakingについて公開しました<br>https://kakuly.fanbox.cc/</div>
-    </div>
-    <div class="news-card" onclick="openNewsModal('news_1769141879300')">
-      <div class="news-card-date">2026-01-23</div>
-      <div class="news-card-title">sd</div>
-      <div class="news-card-content-hidden" id="news-content-news_1769141879300" style="display:none;">dsdsdsd</div>
-    </div>
-    <div class="news-card" onclick="openNewsModal('news_1769141880522')">
-      <div class="news-card-date">2026-01-23</div>
-      <div class="news-card-title">asdads</div>
-      <div class="news-card-content-hidden" id="news-content-news_1769141880522" style="display:none;">asdasd</div>
-    </div>
-    <div class="news-card" onclick="openNewsModal('2')">
-      <div class="news-card-date">2026-01-20</div>
-      <div class="news-card-title">新しい楽曲を公開しました</div>
-      <div class="news-card-content-hidden" id="news-content-2" style="display:none;">YouTubeにて新しい制作楽曲を公開しました。ぜひWorksページからチェックしてください。</div>
-    </div>
-    <div class="news-card" onclick="openNewsModal('news_1769141886557')">
-      <div class="news-card-date">2025-10-08</div>
-      <div class="news-card-title">sfdhs</div>
-      <div class="news-card-content-hidden" id="news-content-news_1769141886557" style="display:none;">fhsdfhsdfh</div>
-    </div>
-    <div class="news-card" onclick="openNewsModal('news_1769141891071')">
-      <div class="news-card-date">2025-07-25</div>
-      <div class="news-card-title">sfdhsdf</div>
-      <div class="news-card-content-hidden" id="news-content-news_1769141891071" style="display:none;">hsdfh</div>
-    </div>
+    <button class="news-nav-btn next" onclick="scrollNews(1)" id="news-next-btn">&#10095;</button>
   </div>
 </div>
 
@@ -370,9 +374,9 @@ document.querySelectorAll('a').forEach(link => {
 </div>
 
 <style>
-/* ニュースセクション専用スタイル */
-.news-section-wrapper { margin: 40px 0; overflow: visible; position: relative; z-index: 10; }
+.news-section-wrapper { margin: 40px 0; position: relative; z-index: 10; }
 .news-section-wrapper .section-title { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; margin-bottom: 20px; letter-spacing: -0.05em; }
+.news-container-outer { position: relative; display: flex; align-items: center; }
 .news-scroll-container { 
   display: flex; 
   overflow-x: auto; 
@@ -380,6 +384,8 @@ document.querySelectorAll('a').forEach(link => {
   padding: 20px 5px;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  width: 100%;
 }
 .news-scroll-container::-webkit-scrollbar { display: none; }
 
@@ -394,31 +400,81 @@ document.querySelectorAll('a').forEach(link => {
   color: var(--text-color);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-.news-card:hover { 
-  transform: translateY(-5px); 
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
-  border-color: var(--text-color);
-}
+.news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 .news-card-date { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; opacity: 0.7; margin-bottom: 8px; }
 .news-card-title { font-size: 1rem; font-weight: 700; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
-/* モーダル */
+.news-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.news-container-outer:hover .news-nav-btn.visible { opacity: 1; pointer-events: auto; }
+.news-nav-btn.prev { left: -20px; }
+.news-nav-btn.next { right: -20px; }
+.news-nav-btn:hover { background: var(--text-color); color: var(--bg-color); }
+
 .modal { display: none; position: fixed; z-index: 100001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
 .modal-content { background-color: var(--bg-color); margin: 10% auto; padding: 40px; border-radius: 20px; width: 85%; max-width: 600px; position: relative; color: var(--text-color); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
 .close-modal { color: var(--text-color); float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
 .modal-date { font-family: 'Montserrat', sans-serif; font-size: 0.9rem; opacity: 0.5; margin-bottom: 10px; }
 .modal-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
-.modal-body { font-size: 1rem; line-height: 1.8; white-space: pre-wrap; }
+.modal-body { font-size: 1rem; line-height: 1.8; }
 </style>
 
 <script>
+function scrollNews(direction) {
+  const container = document.getElementById('news-scroll-container');
+  const scrollAmount = 300 * direction;
+  container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+}
+
+function updateNewsNav() {
+  const container = document.getElementById('news-scroll-container');
+  const prevBtn = document.getElementById('news-prev-btn');
+  const nextBtn = document.getElementById('news-next-btn');
+  if (!container || !prevBtn || !nextBtn) return;
+  
+  const isScrollable = container.scrollWidth > container.clientWidth;
+  if (isScrollable) {
+    prevBtn.classList.toggle('visible', container.scrollLeft > 10);
+    nextBtn.classList.toggle('visible', container.scrollLeft < (container.scrollWidth - container.clientWidth - 10));
+  } else {
+    prevBtn.classList.remove('visible');
+    nextBtn.classList.remove('visible');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('news-scroll-container');
+  if (container) {
+    container.addEventListener('scroll', updateNewsNav);
+    window.addEventListener('resize', updateNewsNav);
+    setTimeout(updateNewsNav, 500);
+  }
+});
+
 function openNewsModal(id) {
   const contentElement = document.getElementById(`news-content-${id}`);
   const card = contentElement.closest('.news-card');
   const title = card.querySelector('.news-card-title').innerText;
   const date = card.querySelector('.news-card-date').innerText;
   const content = contentElement.innerHTML;
-  
   document.getElementById('modal-title').innerText = title;
   document.getElementById('modal-date').innerText = date;
   document.getElementById('modal-body').innerHTML = content;
