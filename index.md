@@ -137,6 +137,8 @@ kakuly.work@gmail.com<br>
         url('/assets/img/header_kakuly.jpg');
     
     color: #ffffff !important; /* 文字を白に固定 */
+    -webkit-text-fill-color: #ffffff !important; /* iPhoneなどのブラウザ対策 */
+    text-decoration-color: #ffffff !important; /* リンクの下線も白に */
     }
 
 .section-content {
@@ -591,6 +593,8 @@ nocffie.work@gmail.com<br>
         url('/assets/img/header_nocffie.png');
     
     color: #ffffff !important; /* 文字を白に固定 */
+    -webkit-text-fill-color: #ffffff !important; /* iPhoneなどのブラウザ対策 */
+    text-decoration-color: #ffffff !important; /* リンクの下線も白に */
     }
 
 .section-content-nocffie {
