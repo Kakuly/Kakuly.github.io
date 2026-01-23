@@ -32,7 +32,7 @@ jobs:
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python portfolio_update_v5.py # スクリプト名に合わせて変更
+        run: python update_works.py # スクリプト名に合わせて変更
 
       - name: Commit and Push
         run: |
