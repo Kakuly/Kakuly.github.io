@@ -1,15 +1,13 @@
 name: Update Works from YouTube
-
 on:
   push:
     paths:
-      - 'update_works.py' # スクリプト名に合わせて変更
+      - 'update_works.py'
       - 'known_works.json'
       - 'manual_works.json'
   schedule:
     - cron: '0 15 * * *'
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,31 +17,28 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-
       - name: Install dependencies
         run: pip install requests google-generativeai
-
       - name: Run script
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python update_works.py # スクリプト名に合わせて変更
-
+        run: python update_works.py
       - name: Commit and Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # 生成された全てのworks*.mdとキャッシュを追加
+          # 存在するファイルだけをaddする（エラー回避）
           git add works.md known_works.json
           
+          # 変更がある場合のみコミット
           if ! git diff --cached --exit-code --quiet; then
-            git commit -m "Auto update works pages and cache"
+            git commit -m "Auto update works.md and cache"
             git pull --rebase origin main
             git push origin main
           fi
