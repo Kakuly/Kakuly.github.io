@@ -1,6 +1,7 @@
 [
   {
     "title": "Release New Album \"DIRECT & LOOP\"",
+    "artist": "Kakuly",
     "date": "2025-08-05",
     "tags": ["Album"],
     "img": "https://i9.ytimg.com/s_p/OLAK5uy_kN_SOIxifwhCGm4OMSaQY8ycqXmIzFkEc/maxresdefault.jpg?sqp=CNj4yssGir7X7AMICPm06cUGEAE=&rs=AOn4CLDd88RNpgoiSNJTKxAUe75cnL2kJQ&v=1757043321",
@@ -9,6 +10,7 @@
   },
   {
     "title": "Release New Album \"Everything /// (to break me)\"",
+    "artist": "Kakuly, tato",
     "date": "2024-12-30",
     "tags": ["Album"],
     "img": "https://i9.ytimg.com/s_p/OLAK5uy_nZcJam8ma9bN_41_S6VnsyXdzWlH6EAWs/maxresdefault.jpg?sqp=COyby8sGir7X7AMICNzvm70GEAE=&rs=AOn4CLBAZBEEEiMSsYwYLj0-1gRTOUS-3w&v=1738995676",
@@ -17,10 +19,19 @@
   },
   {
     "title": "Release New EP \"snowflaking\"",
+    "artist": "Kakuly",
     "date": "2025-12-26",
     "tags": ["EP"],
     "img": "https://i9.ytimg.com/s_p/OLAK5uy_mJlf5VGWY5BLOE9qdiwONY2lvvPEaSl8c/maxresdefault.jpg?sqp=COyby8sGir7X7AMICJv9_MoGEAE=&rs=AOn4CLCf-LUaCfhefvq0A23U0_ggmkV7iw&v=1767849627",
     "url": "https://big-up.style/21Wcz2jUF8",
     "size": "mid"
+  },
+    {
+    "title": "don't skip"",
+    "date": "2025-06-22",
+    "tags": ["AUDIO"],
+    "img": "https://i1.sndcdn.com/artworks-eFMHNlD5jIBUqX3G-5lkSAw-t500x500.png",
+    "url": "https://linkco.re/RGevuTAm?lang=ja",
+    "size": "min"
   }
 ]
