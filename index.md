@@ -216,7 +216,7 @@ kakuly.work@gmail.com<br>
   .sns-links img {
     width: 35px;
     height: 35px;
-    filter: grayscale(100%) brightness(1.2);
+    filter: invert(1) grayscale(100%) brightness(1.5);
     opacity: 0.7;
     transition: 0.3s;
   }
