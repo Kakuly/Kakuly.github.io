@@ -77,7 +77,12 @@ kakuly.work@gmail.com<br>
     background-position: center;
     background-attachment: fixed; /* パララックス（視差効果）にしたい場合 */
     padding: 100px 0;
-    color: white; /* 背景が暗い場合は文字を白に */
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important; /* iPhoneなどのブラウザ対策 */
+    text-decoration-color: #ffffff !important; /* リンクの下線も白に */
+}
+  .custom-section a:hover {
+    opacity: 0.7 !important;
 }
 .section-content {
     max-width: 800px; /* コンテンツの幅を制限 */
