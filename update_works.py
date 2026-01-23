@@ -17,6 +17,8 @@ MV_PLAYLIST_ID = 'PLH9mX0wDlDApen7-p7jxmAkDd1tWV9eeI'           # MVタグが付
 CACHE_FILE = 'known_works.json'
 MANUAL_WORKS_FILE = 'manual_works.json'
 MANUAL_RELEASE_FILE = 'manual_release.json'
+NEWS_FILE = 'news.json'
+INDEX_FILE = 'index.md'
 
 def load_json(path):
     if os.path.exists(path):
@@ -63,7 +65,24 @@ def get_tags(video_id, title, description, auto_tag=None):
         l_lower = (title + "\n" + description).lower()
         for pat, val in [('mix', 'Mix'), ('編曲', 'Arrangement'), ('master', 'Mastering'), ('movie', 'Movie'), ('music', 'Music'), ('作曲', 'Music'), ('lyric', 'Lyrics'), ('remix', 'Remix')]:
             if pat in l_lower: tags.append(val)
-    processed = sorted(list(set([t.replace('Lyric', 'Lyrics') if t == 'Lyric' else t for t in tags])))
+    # タグを正規化（先頭大文字、以降小文字）し、重複を排除
+    normalized_tags = []
+    for t in tags:
+        t_clean = t.strip()
+        if not t_clean: continue
+        # 特定の表記揺れを修正
+        if t_clean.lower() in ['lyric', 'lyrics']:
+            t_clean = 'Lyrics'
+        elif t_clean.lower() == 'mv':
+            t_clean = 'MV'
+        elif t_clean.lower() == 'audio':
+            t_clean = 'Audio'
+        else:
+            # 基本は先頭大文字
+            t_clean = t_clean.capitalize()
+        normalized_tags.append(t_clean)
+    
+    processed = sorted(list(set(normalized_tags)))
     KNOWN_WORKS[video_id] = {"title": title, "tags": processed}
     save_json(CACHE_FILE, KNOWN_WORKS)
     return processed
@@ -168,9 +187,133 @@ def update_markdown():
         with open(p['file'], 'w', encoding='utf-8') as f: f.write(content)
         print(f"Generated: {p['file']} ({len(p['data'])} items)")
 
+    # ニュースセクションの更新
+    update_index_with_news()
+
+def update_index_with_news():
+    news_data = load_json(NEWS_FILE)
+    if not news_data: return
+    
+    # 最新のニュースから順に並べる
+    news_data.sort(key=lambda x: x['date'], reverse=True)
+    
+    # ニュースセクションのHTML生成
+    news_html = '\n<!-- NEWS_START -->\n'
+    news_html += '<div class="news-section">\n'
+    news_html += '  <h2 class="section-title">NEWS</h2>\n'
+    news_html += '  <div class="news-scroll-container">\n'
+    
+    for item in news_data:
+        news_html += f'    <div class="news-card" onclick="openNewsModal(\'{item["id"]}\')">\n'
+        news_html += f'      <div class="news-card-date">{item["date"]}</div>\n'
+        news_html += f'      <div class="news-card-title">{item["title"]}</div>\n'
+        news_html += f'      <div class="news-card-content-hidden" id="news-content-{item["id"]}" style="display:none;">{html.escape(item["content"])}</div>\n'
+        news_html += '    </div>\n'
+    
+    news_html += '  </div>\n'
+    news_html += '</div>\n'
+    
+    # モーダルUIとスタイル、スクリプト
+    news_html += """
+<div id="news-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeNewsModal()">&times;</span>
+    <div id="modal-date" class="modal-date"></div>
+    <h2 id="modal-title" class="modal-title"></h2>
+    <div id="modal-body" class="modal-body"></div>
+  </div>
+</div>
+
+<style>
+.news-section { margin: 60px 0; overflow: hidden; }
+.section-title { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; margin-bottom: 30px; letter-spacing: -0.05em; }
+.news-scroll-container { 
+  display: flex; 
+  overflow-x: auto; 
+  gap: 20px; 
+  padding-bottom: 20px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.news-scroll-container::-webkit-scrollbar { display: none; }
+.news-card { 
+  flex: 0 0 300px; 
+  background: var(--bg-color); 
+  border: 1px solid var(--text-color); 
+  border-radius: 15px; 
+  padding: 25px; 
+  cursor: pointer; 
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+.news-card:hover { opacity: 1; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+.news-card-date { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; opacity: 0.5; margin-bottom: 10px; }
+.news-card-title { font-size: 1.1rem; font-weight: 700; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.modal { display: none; position: fixed; z-index: 100001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
+.modal-content { background-color: var(--bg-color); margin: 10% auto; padding: 40px; border-radius: 20px; width: 80%; max-width: 600px; position: relative; color: var(--text-color); }
+.close-modal { position: absolute; right: 25px; top: 20px; font-size: 28px; font-weight: bold; cursor: pointer; opacity: 0.5; }
+.close-modal:hover { opacity: 1; }
+.modal-date { font-family: 'Montserrat', sans-serif; font-size: 0.9rem; opacity: 0.5; margin-bottom: 10px; }
+.modal-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
+.modal-body { font-size: 1rem; line-height: 1.8; white-space: pre-wrap; }
+</style>
+
+<script>
+function openNewsModal(id) {
+  const card = document.querySelector(`#news-content-${id}`).parentElement;
+  const title = card.querySelector('.news-card-title').innerText;
+  const date = card.querySelector('.news-card-date').innerText;
+  const content = document.getElementById(`news-content-${id}`).innerText;
+  document.getElementById('modal-title').innerText = title;
+  document.getElementById('modal-date').innerText = date;
+  document.getElementById('modal-body').innerText = content;
+  document.getElementById('news-modal').style.display = "block";
+  document.body.style.overflow = "hidden";
+}
+function closeNewsModal() {
+  document.getElementById('news-modal').style.display = "none";
+  document.body.style.overflow = "auto";
+}
+window.onclick = function(event) {
+  if (event.target == document.getElementById('news-modal')) closeNewsModal();
+}
+</script>
+<!-- NEWS_END -->
+"""
+
+    if os.path.exists(INDEX_FILE):
+        with open(INDEX_FILE, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # 既存のニュースセクションがある場合は置換、ない場合は挿入
+        import re
+        pattern = r'<!-- NEWS_START -->.*?<!-- NEWS_END -->'
+        if re.search(pattern, content, re.DOTALL):
+            new_content = re.sub(pattern, news_html, content, flags=re.DOTALL)
+        else:
+            # 自己紹介（About）とSNSリンクの間に挿入
+            # index.mdの構造に基づき、"---"（フロントマターの終わり）の後の最初の空行の後に挿入
+            parts = content.split('---', 2)
+            if len(parts) >= 3:
+                header = parts[0] + '---' + parts[1] + '---'
+                body = parts[2]
+                # 最初の段落（自己紹介）の後に挿入
+                body_parts = body.split('\n\n', 1)
+                if len(body_parts) >= 2:
+                    new_content = header + body_parts[0] + '\n' + news_html + '\n' + body_parts[1]
+                else:
+                    new_content = content + '\n' + news_html
+            else:
+                new_content = content + '\n' + news_html
+            
+        with open(INDEX_FILE, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        print("Updated index.md with news section")
+
+
 def generate_page_content(title, works_data, permalink, show_artist):
     content = f"---\nlayout: page\ntitle: {title}\npermalink: {permalink}\n---\n\n"
-    content += f"My {title}\n"
+    content += f"{title} - 作品集\n"
     
     content += '<div id="filter-container" class="filter-wrapper">\n'
     if show_artist:
