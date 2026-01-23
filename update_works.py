@@ -351,7 +351,7 @@ window.onclick = function(event) {
 
 def generate_page_content(title, works_data, permalink, show_artist):
     content = f"---\nlayout: page\ntitle: {title}\npermalink: {permalink}\n---\n\n"
-    content += f"{title} - 作品集\n"
+    content += f"My {title}\n"
     content += '<div id="filter-container" class="filter-wrapper">\n'
     if show_artist: content += '  <div id="artist-filter" style="display:flex; flex-wrap:wrap; gap:12px; width:100%; margin-bottom:10px;"></div>\n'
     content += '  <div id="tag-filter" style="display:flex; flex-wrap:wrap; gap:12px; width:100%;"></div>\n'
