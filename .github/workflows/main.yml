@@ -6,6 +6,8 @@ on:
       - 'known_works.json'
       - 'manual_works.json'
       - 'manual_release.json'
+      - 'news.json'
+      - 'index.md'
   schedule:
     - cron: '0 15 * * *'
   workflow_dispatch:
@@ -35,7 +37,7 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
           # 生成されたファイルとキャッシュをadd
-          git add works.md release.md known_works.json
+          git add works.md release.md index.md known_works.json
           
           # 変更がある場合のみコミット
           if ! git diff --cached --exit-code --quiet; then
