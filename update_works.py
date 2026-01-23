@@ -373,25 +373,28 @@ window.onclick = function(event) {
             if img_match:
                 header_img = img_match.group(1).strip()
             
-            # ボディからAboutセクションとそれ以外を分離
-            body_lines = body.strip().split('\n')
-            about_content = ""
-            hero_info = ""
-            is_about = False
+            # ボディを解析して、プロフィール部分（アイコン、名前、リンク）と自己紹介部分を分離
+            # ユーザーの元の構造を壊さないように、HTMLタグも含めて保持する
+            import re
             
-            for line in body_lines:
-                clean_line = line.strip()
-                if not clean_line or clean_line == "Home": continue # 不要な行をスキップ
-                
-                if "About" in line or "自己紹介" in line or "2006年生まれ" in line:
-                    is_about = True
-                
-                if is_about:
-                    about_content += line + "\n"
-                else:
-                    # HTMLタグが混入している場合は中身だけ抽出
-                    if not line.startswith('<'):
-                        hero_info += line + "\n"
+            # ニュースセクションを除去した後の純粋なコンテンツ
+            clean_body = body.strip()
+            
+            # 自己紹介（About）の開始位置を特定
+            about_markers = ["About", "自己紹介", "2006年生まれ"]
+            about_start_idx = len(clean_body)
+            for marker in about_markers:
+                match = re.search(re.escape(marker), clean_body)
+                if match and match.start() < about_start_idx:
+                    about_start_idx = match.start()
+            
+            # プロフィール部分（Heroに載せる）と自己紹介部分（下に置く）に分割
+            hero_info = clean_body[:about_start_idx].strip()
+            about_content = clean_body[about_start_idx:].strip()
+            
+            # もし分割がうまくいかなかった場合のフォールバック
+            if not hero_info:
+                hero_info = "Kakuly"
             
             # 新しい構造を組み立て
             new_body = f"""
@@ -410,6 +413,29 @@ window.onclick = function(event) {
     {about_content}
   </div>
 </div>
+
+<style>
+.profile-overlay {{
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}}
+/* 元のアイコンや名前のスタイルを維持するための調整 */
+.profile-overlay img {{
+  border-radius: 20px;
+  max-width: 200px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}}
+.profile-overlay h1, .profile-overlay .name {{
+  font-size: 4rem;
+  font-weight: 900;
+  margin: 0;
+  line-height: 1;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}}
+</style>
 """
             new_content = f"---{front_matter}---\n{new_body}"
             
