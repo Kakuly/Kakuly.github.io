@@ -2,11 +2,14 @@
 layout: home
 title: Home
 ---
-<div class="profile-container" style="background-image: url('/assets/img/profile.png"');">
-  <img src="/assets/img/profile.png" class="profile-icon">
+<div class="custom-section" style="background-image: url('画像のURL');">
+  <div class="section-content">
+
+    <div class="profile-container">
+      <img src="/assets/img/profile.png" class="profile-icon">
   
-  <div class="profile-text">
-    <p class="profile-name">Kakuly</p>
+      <div class="profile-text">
+        <p class="profile-name">Kakuly</p>
     
     <div class="sns-links">
       <a href="https://soundcloud.com/kakuly-uni" target="_blank" rel="noopener">
@@ -28,7 +31,36 @@ title: Home
 <span><a href="https://x.com/kakuly_" target="_blank">DM on X</a></span><br>
 kakuly.work@gmail.com<br>
 
+
+
+  </div>
+</div>
+
+<style>
+.custom-section {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%); /* 画面幅いっぱいに広げる魔法のコード */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* パララックス（視差効果）にしたい場合 */
+    padding: 100px 0;
+    color: white; /* 背景が暗い場合は文字を白に */
+}
+.section-content {
+    max-width: 800px; /* コンテンツの幅を制限 */
+    margin: 0 auto;
+    padding: 0 20px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* 文字を読みやすくする */
+}
+</style>
+
+
 <hr style="width: 50%; margin: 40px auto; border-top: 1px solid var(--text-color); opacity: 0.3;">
+
+
+
+
+
 
 
 
