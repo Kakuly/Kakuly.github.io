@@ -578,6 +578,17 @@ permalink: /works/
   </div>
 </div>
 
+<div class="video-item" data-tags="Remix">
+  <a href="https://www.youtube.com/watch?v=cJ9pKeN1kWI" target="_blank" class="video-link">
+    <img src="https://i.ytimg.com/vi/cJ9pKeN1kWI/maxresdefault.jpg" data-video-id="cJ9pKeN1kWI" data-error-attempt="0" alt="ボカロP１１人がジャンキーナイトタウンオーケストラアレンジリレーしてみた！！" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
+  </a>
+  <h3 class='video-title'>ボカロP１１人がジャンキーナイトタウンオーケストラアレンジリレーしてみた！！</h3>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2021-04-25</p>
+  <div class="tag-container">
+    <span class="work-tag">Remix</span>
+  </div>
+</div>
+
 </div>
 
 <div class="pagination-nav pagination-bottom">
