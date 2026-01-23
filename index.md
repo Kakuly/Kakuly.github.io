@@ -9,7 +9,7 @@ title: Home
       <img src="/assets/img/profile.png" class="profile-icon">
   
       <div class="profile-text">
-        <p class="profile-name">Kakuly</p>
+        <p class="profile-name"><span style="color: #ffffff;">Kakuly</span></p>
     
     <div class="sns-links">
       <a href="https://soundcloud.com/kakuly-uni" target="_blank" rel="noopener">
