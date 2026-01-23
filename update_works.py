@@ -10,7 +10,8 @@ GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', '')
 
 # プレイリストID
 WORKS_PLAYLIST_ID = 'PLH9mX0wDlDAou_YCjcU01Q3pR6cCRQPWS'
-RELEASE_PLAYLIST_ID = 'PLH9mX0wDlDApS_YOUR_RELEASE_PLAYLIST_ID' # 必要に応じて設定
+RELEASE_PLAYLIST_ID = 'PLH9mX0wDlDAqZ8WMjS1uVJXpH3IiwTHGm' # Audioタグが付くプレイリスト
+MV_PLAYLIST_ID = 'PLH9mX0wDlDApen7-p7jxmAkDd1tWV9eeI'           # MVタグが付くプレイリスト
 
 # ファイルパス
 CACHE_FILE = 'known_works.json'
@@ -45,8 +46,8 @@ if GEMINI_API_KEY:
             except: continue
     except: model = None
 
-def get_tags(video_id, title, description, is_release=False):
-    if is_release: return ["MV"]
+def get_tags(video_id, title, description, auto_tag=None):
+    if auto_tag: return [auto_tag]
     if video_id in KNOWN_WORKS:
         cached = KNOWN_WORKS[video_id]
         if isinstance(cached, dict) and cached.get("tags"): return cached["tags"]
@@ -107,7 +108,7 @@ def get_playlist_items(playlist_id):
         except: break
     return all_items
 
-def process_items(items, is_release=False):
+def process_items(items, auto_tag=None):
     video_ids = [item['snippet']['resourceId']['videoId'] for item in items]
     details = get_video_details(video_ids)
     processed = []
@@ -117,7 +118,7 @@ def process_items(items, is_release=False):
         processed.append({
             "title": html.escape(item['snippet']['title']),
             "video_id": v_id,
-            "tags": get_tags(v_id, item['snippet']['title'], item['snippet']['description'], is_release),
+            "tags": get_tags(v_id, item['snippet']['title'], item['snippet']['description'], auto_tag),
             "date": info['date'],
             "artist": info['channel'],
             "thumbnail": verify_thumbnail(v_id),
@@ -127,8 +128,9 @@ def process_items(items, is_release=False):
     return processed
 
 def update_markdown():
-    works_yt = process_items(get_playlist_items(WORKS_PLAYLIST_ID), is_release=False)
-    release_yt = process_items(get_playlist_items(RELEASE_PLAYLIST_ID), is_release=True)
+    works_yt = process_items(get_playlist_items(WORKS_PLAYLIST_ID))
+    release_yt = process_items(get_playlist_items(RELEASE_PLAYLIST_ID), auto_tag="Audio")
+    mv_yt = process_items(get_playlist_items(MV_PLAYLIST_ID), auto_tag="MV")
     
     def format_manual(data, default_artist="Kakuly"):
         formatted = []
@@ -147,7 +149,7 @@ def update_markdown():
         return formatted
 
     works_all = sorted(works_yt + format_manual(load_json(MANUAL_WORKS_FILE)), key=lambda x: x['date'], reverse=True)
-    release_all = sorted(release_yt + format_manual(load_json(MANUAL_RELEASE_FILE)), key=lambda x: x['date'], reverse=True)
+    release_all = sorted(release_yt + mv_yt + format_manual(load_json(MANUAL_RELEASE_FILE)), key=lambda x: x['date'], reverse=True)
 
     pages = [
         {"file": "works.md", "title": "Works", "data": works_all, "permalink": "/works/", "show_artist": False},
@@ -163,7 +165,6 @@ def generate_page_content(title, works_data, permalink, show_artist):
     content = f"---\nlayout: page\ntitle: {title}\npermalink: {permalink}\n---\n\n"
     content += f"{title} - 作品集\n"
     
-    # フィルタUI (元のデザインを維持)
     content += '<div id="filter-container" class="filter-wrapper">\n'
     if show_artist:
         content += '  <div id="artist-filter" style="display:flex; flex-wrap:wrap; gap:12px; width:100%; margin-bottom:10px;"></div>\n'
@@ -198,7 +199,6 @@ def generate_page_content(title, works_data, permalink, show_artist):
     
     content += '<div id="iris-in"></div><div id="iris-out"></div>\n'
 
-    # 元のスタイルを「一文字も漏らさず」維持
     content += """
 <style>
 /* --- フィルタUI --- */
