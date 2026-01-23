@@ -269,8 +269,8 @@ def update_index_with_news():
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 .news-container-outer:hover .news-nav-btn.visible { opacity: 1; pointer-events: auto; }
-.news-nav-btn.prev { left: -60px; }
-.news-nav-btn.next { right: -60px; }
+.news-nav-btn.prev { left: -20px; }
+.news-nav-btn.next { right: -20px; }
 .news-nav-btn:hover { background: var(--text-color); color: var(--bg-color); }
 
 .modal { display: none; position: fixed; z-index: 100001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
@@ -284,7 +284,7 @@ def update_index_with_news():
 <script>
 function scrollNews(direction) {
   const container = document.getElementById('news-scroll-container');
-  const scrollAmount = 300 * direction;
+  const scrollAmount = 600 * direction;
   container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
 }
 
