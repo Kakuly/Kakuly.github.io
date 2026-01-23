@@ -21,6 +21,10 @@ MANUAL_RELEASE_FILE = 'manual_release.json'
 NEWS_FILE = 'news.json'
 INDEX_FILE = 'index.md'
 
+# マーカー定義
+NEWS_START_MARKER = '<!-- NEWS_START -->'
+NEWS_END_MARKER = '<!-- NEWS_END -->'
+
 def load_json(path):
     if os.path.exists(path):
         try:
@@ -201,27 +205,29 @@ def update_index_with_news():
         news_data.sort(key=lambda x: x['date'], reverse=True)
         
         # ニュースセクションのHTML生成
-        news_html = '\n<!-- NEWS_START -->\n'
+        # Works/Releaseページで使われているCSSを流用するため、クラス名を調整
+        news_html = '\n'
         news_html += '<div class="news-section-wrapper">\n'
         news_html += '  <h2 class="section-title">NEWS</h2>\n'
         news_html += '  <div class="news-scroll-container">\n'
         
         for item in news_data:
             # ニュース本文の改行を <br> に変換して、HTMLとして安全にエスケープ
-            content_escaped = html.escape(item["content"]).replace('\n', '<br>')
+            # モーダルで表示する際は、改行を <br> に変換したHTMLとして挿入する
+            content_for_modal = item["content"].replace('\n', '<br>')
             
             news_html += f'    <div class="news-card" onclick="openNewsModal(\'{item["id"]}\')">\n'
             news_html += f'      <div class="news-card-date">{item["date"]}</div>\n'
             news_html += f'      <div class="news-card-title">{item["title"]}</div>\n'
             # モーダル用のコンテンツを非表示のまま保持
-            news_html += f'      <div class="news-card-content-hidden" id="news-content-{item["id"]}" style="display:none;">{content_escaped}</div>\n'
+            news_html += f'      <div class="news-card-content-hidden" id="news-content-{item["id"]}" style="display:none;">{content_for_modal}</div>\n'
             news_html += '    </div>\n'
         
         news_html += '  </div>\n'
         news_html += '</div>\n'
         
         # モーダルUIとスタイル、スクリプト
-        # Pythonの .format() でエラーにならないよう、波括弧を二重 {{ }} にする
+        # Works/Releaseページに記述されているスタイルと競合しないよう、最小限のスタイルを定義
         news_html += """
 <div id="news-modal" class="modal">
   <div class="modal-content">
@@ -234,19 +240,19 @@ def update_index_with_news():
 
 <style>
 /* ニュースセクション専用スタイル */
-.news-section-wrapper {{ margin: 40px 0; overflow: visible; position: relative; z-index: 10; }}
-.news-section-wrapper .section-title {{ font-family: 'Montserrat', sans-serif; font-size: 1.8rem; margin-bottom: 20px; letter-spacing: -0.05em; }}
-.news-scroll-container {{ 
+.news-section-wrapper { margin: 40px 0; overflow: visible; position: relative; z-index: 10; }
+.news-section-wrapper .section-title { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; margin-bottom: 20px; letter-spacing: -0.05em; }
+.news-scroll-container { 
   display: flex; 
   overflow-x: auto; 
   gap: 20px; 
   padding: 20px 5px;
   scrollbar-width: none;
   -ms-overflow-style: none;
-}}
-.news-scroll-container::-webkit-scrollbar {{ display: none; }}
+}
+.news-scroll-container::-webkit-scrollbar { display: none; }
 
-.news-card {{ 
+.news-card { 
   flex: 0 0 280px; 
   background: var(--bg-color); 
   border: 1px solid var(--text-color); 
@@ -256,170 +262,87 @@ def update_index_with_news():
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   color: var(--text-color);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}}
-.news-card:hover {{ 
+}
+.news-card:hover { 
   transform: translateY(-5px); 
   box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
   border-color: var(--text-color);
-}}
-.news-card-date {{ font-family: 'Montserrat', sans-serif; font-size: 0.75rem; opacity: 0.7; margin-bottom: 8px; }}
-.news-card-title {{ font-size: 1rem; font-weight: 700; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }}
+}
+.news-card-date { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; opacity: 0.7; margin-bottom: 8px; }
+.news-card-title { font-size: 1rem; font-weight: 700; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
 /* モーダル */
-.modal {{ display: none; position: fixed; z-index: 100001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }}
-.modal-content {{ background-color: var(--bg-color); margin: 10% auto; padding: 40px; border-radius: 20px; width: 85%; max-width: 600px; position: relative; color: var(--text-color); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }}
-.close-modal {{ color: var(--text-color); float: right; font-size: 28px; font-weight: bold; cursor: pointer; }}
-.modal-date {{ font-family: 'Montserrat', sans-serif; font-size: 0.9rem; opacity: 0.5; margin-bottom: 10px; }}
-.modal-title {{ font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }}
-.modal-body {{ font-size: 1rem; line-height: 1.8; white-space: pre-wrap; }}
+.modal { display: none; position: fixed; z-index: 100001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
+.modal-content { background-color: var(--bg-color); margin: 10% auto; padding: 40px; border-radius: 20px; width: 85%; max-width: 600px; position: relative; color: var(--text-color); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+.close-modal { color: var(--text-color); float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+.modal-date { font-family: 'Montserrat', sans-serif; font-size: 0.9rem; opacity: 0.5; margin-bottom: 10px; }
+.modal-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
+.modal-body { font-size: 1rem; line-height: 1.8; white-space: pre-wrap; }
 </style>
 
 <script>
-function openNewsModal(id) {{
-  const contentElement = document.getElementById(`news-content-${{id}}`);
+function openNewsModal(id) {
+  const contentElement = document.getElementById(`news-content-${id}`);
   const card = contentElement.closest('.news-card');
   const title = card.querySelector('.news-card-title').innerText;
   const date = card.querySelector('.news-card-date').innerText;
-  const content = contentElement.innerHTML.replace(/<br>/g, '\\n'); // HTMLを読み込み、改行を復元
+  const content = contentElement.innerHTML; // HTMLとして取得
   
   document.getElementById('modal-title').innerText = title;
   document.getElementById('modal-date').innerText = date;
   document.getElementById('modal-body').innerHTML = content; // HTMLとして挿入
   document.getElementById('news-modal').style.display = "block";
   document.body.style.overflow = "hidden";
-}}
-function closeNewsModal() {{
+}
+function closeNewsModal() {
   document.getElementById('news-modal').style.display = "none";
   document.body.style.overflow = "auto";
-}}
-window.onclick = function(event) {{
+}
+window.onclick = function(event) {
   if (event.target == document.getElementById('news-modal')) closeNewsModal();
-}}
+}
 </script>
-<!-- NEWS_END -->
 """
-
-    # ユーザーが最初に提供した index.md の正しい構造をテンプレートとして定義
-    # Pythonの .format() でエラーにならないよう、波括弧を二重 {{ }} にする
-    INDEX_TEMPLATE = """---
-layout: page
-title: Home
----
-
-<!-- ヘッダー画像とプロファイルオーバーレイのカスタムHTML/CSSを挿入 -->
-<style>
-/* ヘッダー画像とオーバーレイ */
-.kakuly-hero-section {{
-  position: relative;
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  min-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  padding: 100px 0;
-  margin-top: -100px; /* Jekyllのヘッダーを相殺 */
-  z-index: 1;
-  background-image: url('{header_image}');
-}}
-.kakuly-hero-overlay {{
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));
-  z-index: 2;
-}}
-.kakuly-hero-content {{
-  position: relative;
-  z-index: 3;
-  width: 90%;
-  max-width: 1100px;
-  color: #fff;
-  padding: 0 40px; /* 左右のパディングを確保 */
-}}
-.kakuly-profile-overlay {{
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-}}
-.kakuly-profile-overlay img {{
-  border-radius: 20px;
-  max-width: 200px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}}
-.kakuly-profile-overlay h1, .kakuly-profile-overlay .name {{
-  font-size: 4rem;
-  font-weight: 900;
-  margin: 0;
-  line-height: 1;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-}}
-.kakuly-profile-overlay .links a {{
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.5rem;
-    margin-right: 15px;
-    transition: opacity 0.3s;
-}}
-.kakuly-profile-overlay .links a:hover {{ opacity: 0.7; }}
-
-/* 既存のJekyllラッパーを尊重するための調整 */
-.wrapper {{
-    max-width: 1100px !important;
-    padding-right: 40px !important;
-    padding-left: 40px !important;
-}}
-</style>
-
-<div class="kakuly-hero-section">
-  <div class="kakuly-hero-overlay"></div>
-  <div class="kakuly-hero-content">
-    <div class="kakuly-profile-overlay">
-      <img src="https://pbs.twimg.com/profile_images/1879541331043364864/mYp7399t_400x400.jpg" alt="Kakuly">
-      <h1 class="name">Kakuly</h1>
-      <div class="links">
-        <a href="https://soundcloud.com/kakuly" target="_blank">☁️</a>
-        <a href="https://x.com/Kakuly_" target="_blank">X</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ニュースセクションを挿入 -->
-{news_html}
-
-<!-- 既存のAboutセクションをMarkdownで記述 -->
-## About
-2006年生まれ。2020年から音楽活動を開始。エレクトロポップ / ハイパーポップを中心に、たくさん迷いながら音楽を作っている。元気に生きるために音楽を摂取します。いつもありがとう。
-
-## Contact
-[DM on X](https://x.com/Kakuly_)
-kakuly.work@gmail.com
-"""
-
-    # ヘッダー画像URLを既存の index.md から取得（なければデフォルト）
-    header_img = "https://images.unsplash.com/photo-1514525253361-bee8718a340b?auto=format&fit=crop&w=1920&q=80"
     
-    # テンプレートに流し込んで index.md を完全再生成
-    new_content = INDEX_TEMPLATE.format(
-        header_image=header_img,
-        news_html=news_html
-    )
+    # index.md の内容を読み込む
+    if not os.path.exists(INDEX_FILE):
+        print(f"Error: {INDEX_FILE} not found. Please create it with {NEWS_START_MARKER} and {NEWS_END_MARKER} markers.")
+        return
 
+    with open(INDEX_FILE, 'r', encoding='utf-8') as f:
+        index_content = f.read()
+
+    # マーカー間の内容を置換する
+    pattern = re.compile(f'{re.escape(NEWS_START_MARKER)}.*?{re.escape(NEWS_END_MARKER)}', re.DOTALL)
+    
+    # ニュースデータがある場合のみ置換
+    if news_html:
+        new_content = f'{NEWS_START_MARKER}\n{news_html}\n{NEWS_END_MARKER}'
+        
+        if pattern.search(index_content):
+            # マーカーが存在する場合、その間を置換
+            updated_content = pattern.sub(new_content, index_content)
+        else:
+            # マーカーが存在しない場合、コンテンツの末尾に追加（ユーザーに手動挿入を促すため、この処理は避けるべきだが、安全策として）
+            updated_content = index_content + "\n" + new_content
+            print(f"Warning: Markers not found in {INDEX_FILE}. Appending news section to the end.")
+    else:
+        # ニュースデータがない場合、マーカー間を空にする
+        new_content = f'{NEWS_START_MARKER}\n{NEWS_END_MARKER}'
+        if pattern.search(index_content):
+            updated_content = pattern.sub(new_content, index_content)
+        else:
+            updated_content = index_content
+            
+    # ファイルに書き戻す
     with open(INDEX_FILE, 'w', encoding='utf-8') as f:
-        f.write(new_content)
-    print("Regenerated index.md from template to prevent design corruption")
+        f.write(updated_content)
+    print(f"Updated {INDEX_FILE} using partial replacement method.")
 
 
 def generate_page_content(title, works_data, permalink, show_artist):
+    # ... (Worksページの生成ロジックは変更なし) ...
+    # 簡略化のため、元のコードをそのまま残す
     content = f"---\nlayout: page\ntitle: {title}\npermalink: {permalink}\n---\n\n"
     content += f"{title} - 作品集\n"
     
