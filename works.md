@@ -508,7 +508,7 @@ Works - 作品集
 
 <div class="video-item size-min" data-tags="Movie" data-artist="GYU P">
   <a href="https://www.youtube.com/watch?v=HIYdKgIvG0I" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/HIYdKgIvG0I/mqdefault.jpg" data-video-id="HIYdKgIvG0I" data-error-attempt="0" alt="GYU P-『イミタティオ/ 初音ミク』【オリジナルMV】" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'HIYdKgIvG0I')">
+    <img src="https://i.ytimg.com/vi/HIYdKgIvG0I/hqdefault.jpg" data-video-id="HIYdKgIvG0I" data-error-attempt="0" alt="GYU P-『イミタティオ/ 初音ミク』【オリジナルMV】" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'HIYdKgIvG0I')">
   </a>
   <h3 class='video-title'>GYU P-『イミタティオ/ 初音ミク』【オリジナルMV】</h3>
   <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2021-12-31</p>
