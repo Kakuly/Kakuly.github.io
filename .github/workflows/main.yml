@@ -3,8 +3,9 @@ name: Update Works from YouTube
 on:
   push:
     paths:
-      - 'update_works.py'
-      - 'known_works.json'  # JSONの直接編集時にも発動
+      - 'portfolio_update_v5.py' # スクリプト名に合わせて変更
+      - 'known_works.json'
+      - 'manual_works.json'
   schedule:
     - cron: '0 15 * * *'
   workflow_dispatch:
@@ -13,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # 書き込み権限を明示
+      contents: write
     steps:
       - uses: actions/checkout@v3
         with:
@@ -31,18 +32,18 @@ jobs:
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python update_works.py
+        run: python portfolio_update_v5.py # スクリプト名に合わせて変更
 
       - name: Commit and Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          git add works.md known_works.json
+          # 生成された全てのworks*.mdとキャッシュを追加
+          git add works.md works_page*.md known_works.json
           
-          # 変更がある場合のみコミット
           if ! git diff --cached --exit-code --quiet; then
-            git commit -m "Auto update works.md and cache"
+            git commit -m "Auto update works pages and cache"
             git pull --rebase origin main
             git push origin main
           fi
