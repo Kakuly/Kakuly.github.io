@@ -39,32 +39,6 @@ kakuly.work@gmail.com<br>
   </div>
 </div>
 
-<style>
-  .custom-section {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    padding: 100px 0;
-    
-    /* ↓ ここがポイント：画像の上に黒いグラデーションを重ねる */
-    background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)), 
-        url('/assets/img/header_kakuly.jpg');
-    
-    color: #ffffff !important; /* 文字を白に固定 */
-    }
-
-.section-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 20px;
-    /* 文字に深みを出す影 */
-    text-shadow: 0 4px 15px rgba(0,0,0,0.8);
-    }
-</style>
-
 <hr style="width: 50%; margin: 40px auto; border-top: 1px solid var(--text-color); opacity: 0.3;">
 
 
@@ -147,6 +121,30 @@ kakuly.work@gmail.com<br>
     transition: 0.3s;
 
   }
+
+    .custom-section {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 100px 0;
+    
+    /* ↓ ここがポイント：画像の上に黒いグラデーションを重ねる */
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)), 
+        url('/assets/img/header_kakuly.jpg');
+    
+    color: #ffffff !important; /* 文字を白に固定 */
+    }
+
+.section-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    /* 文字に深みを出す影 */
+    text-shadow: 0 4px 15px rgba(0,0,0,0.8);
+    }
 
   /* 6. 個別要素（Home専用の設定だが、強さをWorksに合わせる） */
   .profile-name {
@@ -593,7 +591,7 @@ nocffie.work@gmail.com<br>
     color: #ffffff !important; /* 文字を白に固定 */
     }
 
-.section-content {
+.section-content-nocffie {
     max-width: 800px;
     margin: 0 auto;
     padding: 0 20px;
