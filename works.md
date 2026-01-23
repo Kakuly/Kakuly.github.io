@@ -278,6 +278,19 @@ permalink: /works/
   </div>
 </div>
 
+<div class="video-item size-mid" data-tags="Release,Album,Music">
+  <a href="https://big-up.style/Rfjwgu1vFD" target="_blank" class="video-link">
+    <img src="https://i9.ytimg.com/s_p/OLAK5uy_nZcJam8ma9bN_41_S6VnsyXdzWlH6EAWs/maxresdefault.jpg?sqp=COyby8sGir7X7AMICNzvm70GEAE=&rs=AOn4CLBAZBEEEiMSsYwYLj0-1gRTOUS-3w&v=1738995676" alt="Release New Album &quot;Everything /// (to break me)&quot;" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>Release New Album &quot;Everything /// (to break me)&quot;</h3>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2024-12-30</p>
+  <div class="tag-container">
+    <span class="work-tag">Release</span>
+    <span class="work-tag">Album</span>
+    <span class="work-tag">Music</span>
+  </div>
+</div>
+
 <div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=gamQG0XaJKU" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/gamQG0XaJKU/maxresdefault.jpg" data-video-id="gamQG0XaJKU" data-error-attempt="0" alt="シャワールーム・ファンタジー / 初音ミク" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
