@@ -10,6 +10,7 @@ GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 PLAYLIST_ID = 'PLH9mX0wDlDAou_YCjcU01Q3pR6cCRQPWS'
 FILE_PATH = 'works.md'
 CACHE_FILE = 'known_works.json'
+MANUAL_WORKS_FILE = 'manual_works.json'
 
 # --- JSONキャッシュの読み込み/作成 ---
 def load_known_works():
@@ -24,6 +25,16 @@ def load_known_works():
 def save_known_works(data):
     with open(CACHE_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
+def load_manual_works():
+    """manual_works.jsonから手動作品を読み込む"""
+    if os.path.exists(MANUAL_WORKS_FILE):
+        try:
+            with open(MANUAL_WORKS_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except:
+            return []
+    return []
 
 # 起動時に読み込み
 KNOWN_WORKS = load_known_works()
@@ -66,7 +77,7 @@ def get_tags(video_id, title, description):
         prompt = f"""
         あなたは楽曲クレジットの専門家です。ネット検索を行い、以下の動画における「Kakuly（かくり）」の正確な担当役割を特定してください。
         
-        【参考：Kakulyの過去の実績傾向】
+        【参考:Kakulyの過去の実績傾向】
         {past_examples}
         【今回の動画】
         動画タイトル: {title}
@@ -102,11 +113,31 @@ def get_video_published_dates(video_ids):
         subset = ','.join(video_ids[i:i+50])
         url = f"https://www.googleapis.com/youtube/v3/videos?part=snippet&id={subset}&key={API_KEY}"
         try:
-            r = requests.get(url).json()
+            r = requests.get(url, timeout=10).json()
             for item in r.get('items', []):
                 dates[item['id']] = item['snippet']['publishedAt'][:10]
         except: pass
     return dates
+
+def verify_thumbnail(video_id):
+    """サムネイルが存在するか確認し、最適なURLを返す"""
+    thumbnail_urls = [
+        f'https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg',
+        f'https://i.ytimg.com/vi/{video_id}/hqdefault.jpg',
+        f'https://i.ytimg.com/vi/{video_id}/mqdefault.jpg',
+        f'https://i.ytimg.com/vi/{video_id}/default.jpg'
+    ]
+    
+    for url in thumbnail_urls:
+        try:
+            response = requests.head(url, timeout=5)
+            if response.status_code == 200:
+                return url
+        except:
+            continue
+    
+    # すべて失敗した場合はデフォルトを返す
+    return thumbnail_urls[-1]
 
 def get_playlist_items():
     all_items = []
@@ -115,7 +146,7 @@ def get_playlist_items():
         url = f"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId={PLAYLIST_ID}&key={API_KEY}"
         if next_page_token: url += f"&pageToken={next_page_token}"
         try:
-            r = requests.get(url).json()
+            r = requests.get(url, timeout=10).json()
             items = r.get('items', [])
             all_items.extend(items)
             next_page_token = r.get('nextPageToken')
@@ -128,7 +159,7 @@ def update_markdown(items):
     video_ids = [item['snippet']['resourceId']['videoId'] for item in items]
     actual_dates = get_video_published_dates(video_ids)
 
-    # データを投稿日でソートするために整理
+    # YouTubeから取得したデータを整理
     works_data = []
     for item in items:
         snippet = item['snippet']
@@ -136,18 +167,81 @@ def update_markdown(items):
         # 公開日を取得（取得できなければフォールバック）
         pub_date = actual_dates.get(v_id, snippet['publishedAt'][:10])
         tags = get_tags(v_id, snippet['title'], snippet['description'])
+        
+        # サムネイルURLを事前に検証
+        thumbnail_url = verify_thumbnail(v_id)
+        
         works_data.append({
             "title": html.escape(snippet['title']),
             "video_id": v_id,
             "tags": tags,
-            "date": pub_date
+            "date": pub_date,
+            "thumbnail": thumbnail_url,
+            "type": "youtube"
+        })
+    
+    # manual_works.jsonから手動作品を読み込んで追加
+    manual_works = load_manual_works()
+    for manual_work in manual_works:
+        works_data.append({
+            "title": html.escape(manual_work.get('title', 'Untitled')),
+            "video_id": None,
+            "tags": manual_work.get('tags', []),
+            "date": manual_work.get('date', '2000-01-01'),
+            "thumbnail": manual_work.get('image', ''),
+            "url": manual_work.get('url', '#'),
+            "type": "manual"
         })
     
     # 投稿日の降順でソート
     works_data.sort(key=lambda x: x['date'], reverse=True)
 
-    content = "---\nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
+    # ページネーション設定
+    items_per_page = 50
+    total_pages = (len(works_data) + items_per_page - 1) // items_per_page
+    
+    # ページごとにファイルを生成
+    for page_num in range(1, total_pages + 1):
+        start_idx = (page_num - 1) * items_per_page
+        end_idx = min(start_idx + items_per_page, len(works_data))
+        page_works = works_data[start_idx:end_idx]
+        
+        # ファイル名の決定
+        if page_num == 1:
+            file_path = FILE_PATH
+        else:
+            file_path = f'works_page{page_num}.md'
+        
+        content = generate_page_content(page_works, page_num, total_pages)
+        
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(content)
+    
+    print(f"生成完了: {total_pages}ページ、合計{len(works_data)}作品")
+
+def generate_page_content(works_data, current_page, total_pages):
+    """ページコンテンツを生成"""
+    content = "---\nlayout: page\ntitle: Works"
+    if current_page > 1:
+        content += f" - Page {current_page}"
+    content += "\npermalink: /works/"
+    if current_page > 1:
+        content += f"page{current_page}/"
+    content += "\n---\n\n"
+    
     content += "関わった／制作した作品集\n"
+    
+    # ページネーションナビゲーション
+    if total_pages > 1:
+        content += '<div class="pagination-nav">\n'
+        if current_page > 1:
+            prev_link = '/works/' if current_page == 2 else f'/works/page{current_page-1}/'
+            content += f'  <a href="{prev_link}" class="pagination-btn">← 前のページ</a>\n'
+        content += f'  <span class="pagination-info">Page {current_page} / {total_pages}</span>\n'
+        if current_page < total_pages:
+            content += f'  <a href="/works/page{current_page+1}/" class="pagination-btn">次のページ →</a>\n'
+        content += '</div>\n\n'
+    
     content += '<div id="filter-container" class="filter-wrapper"></div>\n\n'
     content += '<div class="video-grid" id="video-grid">\n\n'
     
@@ -155,12 +249,23 @@ def update_markdown(items):
         tags_attr = ",".join(work['tags']) if work['tags'] else ""
         
         content += f'<div class="video-item" data-tags="{tags_attr}">\n'
-        content += f'  <a href="https://www.youtube.com/watch?v={work["video_id"]}" target="_blank" class="video-link">\n'
-        content += f'    <img src="https://i.ytimg.com/vi/{work["video_id"]}/maxresdefault.jpg" '
-        content += f'data-error-attempt="0" '
-        content += f'alt="{work["title"]}" class="video-thumbnail" loading="lazy" '
-        content += f'onerror="handleImageError(this, \'{work["video_id"]}\')">\n'
-        content += f'  </a>\n'
+        
+        # YouTubeの作品と手動作品で処理を分岐
+        if work['type'] == 'youtube':
+            content += f'  <a href="https://www.youtube.com/watch?v={work["video_id"]}" target="_blank" class="video-link">\n'
+            content += f'    <img src="{work["thumbnail"]}" '
+            content += f'data-video-id="{work["video_id"]}" '
+            content += f'data-error-attempt="0" '
+            content += f'alt="{work["title"]}" class="video-thumbnail" loading="lazy" '
+            content += f'onerror="handleImageError(this)">\n'
+            content += f'  </a>\n'
+        else:
+            # 手動作品の場合
+            content += f'  <a href="{work["url"]}" target="_blank" class="video-link">\n'
+            content += f'    <img src="{work["thumbnail"]}" '
+            content += f'alt="{work["title"]}" class="video-thumbnail" loading="lazy">\n'
+            content += f'  </a>\n'
+        
         content += f"  <h3 class='video-title'>{work['title']}</h3>"
         # 投稿日を表示に追加
         content += f"\n  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>{work['date']}</p>"
@@ -173,14 +278,61 @@ def update_markdown(items):
         content += '</div>\n\n'
 
     content += '</div>\n\n'
+    
+    # ページネーションナビゲーション（下部）
+    if total_pages > 1:
+        content += '<div class="pagination-nav pagination-bottom">\n'
+        if current_page > 1:
+            prev_link = '/works/' if current_page == 2 else f'/works/page{current_page-1}/'
+            content += f'  <a href="{prev_link}" class="pagination-btn">← 前のページ</a>\n'
+        content += f'  <span class="pagination-info">Page {current_page} / {total_pages}</span>\n'
+        if current_page < total_pages:
+            content += f'  <a href="/works/page{current_page+1}/" class="pagination-btn">次のページ →</a>\n'
+        content += '</div>\n\n'
 
     # 演出用パーツ
     content += '<div id="iris-in"></div>'
     content += '<div id="iris-out"></div>'
 
-    # ユーザー提供のスタイル・スクリプトを「一文字も漏らさず」維持
+    # スタイルとスクリプト
     content += """
 <style>
+/* --- ページネーション --- */
+.pagination-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+.pagination-bottom {
+  margin-top: 60px;
+}
+.pagination-btn {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 1px solid var(--text-color);
+  background: transparent;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+.pagination-btn:hover {
+  background: var(--text-color);
+  color: var(--bg-color);
+}
+.pagination-info {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
 /* --- フィルタUI --- */
 .filter-wrapper {
   margin-bottom: 40px;
@@ -274,7 +426,7 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 
 #iris-in { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 0 500vmax var(--bg-color); z-index: 100000; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1); }
 body.is-opening #iris-in { transform: translate(-50%, -50%) scale(500); }
-#iris-out { position: fixed; top: 50%; left: 50%; width: 150vmax; height: 150vmax; background-color: var(--bg-color); border-radius: 50%; z-index: 100001; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1); }
+#iris-out { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--bg-color); z-index: 100000; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1); }
 body.is-exiting #iris-out { transform: translate(-50%, -50%) scale(1.2) !important; }
 body > *:not([id^="iris-"]) { opacity: 0; transition: opacity 0.8s ease-out; }
 body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
@@ -284,14 +436,24 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 
 <script>
 
-function handleImageError(img, videoId) {
+function handleImageError(img) {
+  const videoId = img.getAttribute('data-video-id');
+  if (!videoId) return; // 手動作品の場合は何もしない
+  
   const attempt = parseInt(img.getAttribute('data-error-attempt') || "0");
-  if (attempt === 0) {
-    img.setAttribute('data-error-attempt', "1");
-    img.src = 'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg';
-  } else if (attempt === 1) {
-    img.setAttribute('data-error-attempt', "2");
-    img.src = 'https://i.ytimg.com/vi/' + videoId + '/mqdefault.jpg';
+  const fallbackUrls = [
+    'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg',
+    'https://i.ytimg.com/vi/' + videoId + '/mqdefault.jpg',
+    'https://i.ytimg.com/vi/' + videoId + '/default.jpg'
+  ];
+  
+  if (attempt < fallbackUrls.length) {
+    img.setAttribute('data-error-attempt', (attempt + 1).toString());
+    img.src = fallbackUrls[attempt];
+  } else {
+    // すべて失敗した場合はプレースホルダー画像を表示
+    img.style.backgroundColor = '#333';
+    img.alt = '画像を読み込めませんでした';
   }
 }
 
@@ -386,8 +548,7 @@ function handleImageError(img, videoId) {
 </script>
 """
 
-    with open(FILE_PATH, 'w', encoding='utf-8') as f:
-        f.write(content)
+    return content
 
 if __name__ == "__main__":
     items = get_playlist_items()
