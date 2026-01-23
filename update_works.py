@@ -205,15 +205,13 @@ def update_index_with_news():
         news_data.sort(key=lambda x: x['date'], reverse=True)
         
         # ニュースセクションのHTML生成
-        # Works/Releaseページで使われているCSSを流用するため、クラス名を調整
         news_html = '\n'
         news_html += '<div class="news-section-wrapper">\n'
         news_html += '  <h2 class="section-title">NEWS</h2>\n'
         news_html += '  <div class="news-scroll-container">\n'
         
         for item in news_data:
-            # ニュース本文の改行を <br> に変換して、HTMLとして安全にエスケープ
-            # モーダルで表示する際は、改行を <br> に変換したHTMLとして挿入する
+            # ニュース本文の改行を <br> に変換
             content_for_modal = item["content"].replace('\n', '<br>')
             
             news_html += f'    <div class="news-card" onclick="openNewsModal(\'{item["id"]}\')">\n'
@@ -227,7 +225,6 @@ def update_index_with_news():
         news_html += '</div>\n'
         
         # モーダルUIとスタイル、スクリプト
-        # Works/Releaseページに記述されているスタイルと競合しないよう、最小限のスタイルを定義
         news_html += """
 <div id="news-modal" class="modal">
   <div class="modal-content">
@@ -286,11 +283,11 @@ function openNewsModal(id) {
   const card = contentElement.closest('.news-card');
   const title = card.querySelector('.news-card-title').innerText;
   const date = card.querySelector('.news-card-date').innerText;
-  const content = contentElement.innerHTML; // HTMLとして取得
+  const content = contentElement.innerHTML;
   
   document.getElementById('modal-title').innerText = title;
   document.getElementById('modal-date').innerText = date;
-  document.getElementById('modal-body').innerHTML = content; // HTMLとして挿入
+  document.getElementById('modal-body').innerHTML = content;
   document.getElementById('news-modal').style.display = "block";
   document.body.style.overflow = "hidden";
 }
@@ -306,7 +303,7 @@ window.onclick = function(event) {
     
     # index.md の内容を読み込む
     if not os.path.exists(INDEX_FILE):
-        print(f"Error: {INDEX_FILE} not found. Please create it with {NEWS_START_MARKER} and {NEWS_END_MARKER} markers.")
+        print(f"Error: {INDEX_FILE} not found.")
         return
 
     with open(INDEX_FILE, 'r', encoding='utf-8') as f:
@@ -315,34 +312,29 @@ window.onclick = function(event) {
     # マーカー間の内容を置換する
     pattern = re.compile(f'{re.escape(NEWS_START_MARKER)}.*?{re.escape(NEWS_END_MARKER)}', re.DOTALL)
     
-    # ニュースデータがある場合のみ置換
     if news_html:
         new_content = f'{NEWS_START_MARKER}\n{news_html}\n{NEWS_END_MARKER}'
-        
         if pattern.search(index_content):
-            # マーカーが存在する場合、その間を置換
             updated_content = pattern.sub(new_content, index_content)
         else:
-            # マーカーが存在しない場合、コンテンツの末尾に追加（ユーザーに手動挿入を促すため、この処理は避けるべきだが、安全策として）
-            updated_content = index_content + "\n" + new_content
-            print(f"Warning: Markers not found in {INDEX_FILE}. Appending news section to the end.")
+            # マーカーがない場合は、Aboutセクションの直前に挿入を試みる
+            if '## About' in index_content:
+                updated_content = index_content.replace('## About', f'{new_content}\n\n## About')
+            else:
+                updated_content = index_content + "\n" + new_content
     else:
-        # ニュースデータがない場合、マーカー間を空にする
         new_content = f'{NEWS_START_MARKER}\n{NEWS_END_MARKER}'
         if pattern.search(index_content):
             updated_content = pattern.sub(new_content, index_content)
         else:
             updated_content = index_content
             
-    # ファイルに書き戻す
     with open(INDEX_FILE, 'w', encoding='utf-8') as f:
         f.write(updated_content)
-    print(f"Updated {INDEX_FILE} using partial replacement method.")
+    print(f"Updated {INDEX_FILE} successfully.")
 
 
 def generate_page_content(title, works_data, permalink, show_artist):
-    # ... (Worksページの生成ロジックは変更なし) ...
-    # 簡略化のため、元のコードをそのまま残す
     content = f"---\nlayout: page\ntitle: {title}\npermalink: {permalink}\n---\n\n"
     content += f"{title} - 作品集\n"
     
