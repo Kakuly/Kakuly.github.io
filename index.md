@@ -542,7 +542,7 @@ window.onclick = function(event) {
 
 
 
-``
+
 <div class="custom-section-nocffie">
   <div class="section-content-nocffie">
 
@@ -579,10 +579,7 @@ nocffie.work@gmail.com<br>
 
   </div>
 </div>
-``
 
-
-``
 <style>
   .custom-section-nocffie {
     width: 100vw;
@@ -610,4 +607,4 @@ nocffie.work@gmail.com<br>
     text-shadow: 0 4px 15px rgba(0,0,0,0.8);
     }
 </style>
-``
+
