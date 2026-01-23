@@ -323,6 +323,26 @@ def update_index_with_news():
   position: relative;
   z-index: 3;
 }
+
+.profile-overlay {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.profile-overlay img {
+  border-radius: 20px;
+  max-width: 200px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+.profile-overlay h1, .profile-overlay .name {
+  font-size: 4rem;
+  font-weight: 900;
+  margin: 0;
+  line-height: 1;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
 </style>
 
 <script>
@@ -348,100 +368,60 @@ window.onclick = function(event) {
 <!-- NEWS_END -->
 """
 
-    if os.path.exists(INDEX_FILE):
-        with open(INDEX_FILE, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        # 1. 重複したニュースセクションをすべて削除
-        import re
-        pattern = r'<!-- NEWS_START -->.*?<!-- NEWS_END -->'
-        content = re.sub(pattern, '', content, flags=re.DOTALL)
-        
-        # 2. 重複したHTMLタグ（hero-section, content-section）をクリーンアップ
-        content = re.sub(r'<div class="hero-section".*?</div>\s*</div>\s*</div>', '', content, flags=re.DOTALL)
-        content = re.sub(r'<div class="content-section">.*?</div>\s*</div>', '', content, flags=re.DOTALL)
-        
-        # 3. フロントマターとボディを分離
-        parts = content.split('---', 2)
-        if len(parts) >= 3:
-            front_matter = parts[1]
-            body = parts[2]
-            
-            # ヘッダー画像URLをフロントマターから取得
-            header_img = ""
-            img_match = re.search(r'header_image:\s*(.*)', front_matter)
-            if img_match:
-                header_img = img_match.group(1).strip()
-            
-            # ボディを解析して、プロフィール部分（アイコン、名前、リンク）と自己紹介部分を分離
-            # ユーザーの元の構造を壊さないように、HTMLタグも含めて保持する
-            import re
-            
-            # ニュースセクションを除去した後の純粋なコンテンツ
-            clean_body = body.strip()
-            
-            # 自己紹介（About）の開始位置を特定
-            about_markers = ["About", "自己紹介", "2006年生まれ"]
-            about_start_idx = len(clean_body)
-            for marker in about_markers:
-                match = re.search(re.escape(marker), clean_body)
-                if match and match.start() < about_start_idx:
-                    about_start_idx = match.start()
-            
-            # プロフィール部分（Heroに載せる）と自己紹介部分（下に置く）に分割
-            hero_info = clean_body[:about_start_idx].strip()
-            about_content = clean_body[about_start_idx:].strip()
-            
-            # もし分割がうまくいかなかった場合のフォールバック
-            if not hero_info:
-                hero_info = "Kakuly"
-            
-            # 新しい構造を組み立て
-            new_body = f"""
-<div class="hero-section" style="background-image: url('{header_img}');">
+    # ユーザーが最初に提供した index.md の正しい構造をテンプレートとして定義
+    # これをベースに毎回作り直すことで、デザイン崩れを永久に防ぐ
+    INDEX_TEMPLATE = """---
+layout: page
+title: Home
+header_image: {header_image}
+---
+
+<div class="hero-section" style="background-image: url('{header_image}');">
   <div class="hero-overlay"></div>
   <div class="hero-content">
     {news_html}
     <div class="profile-overlay">
-      {hero_info}
+      <img src="https://pbs.twimg.com/profile_images/1879541331043364864/mYp7399t_400x400.jpg" alt="Kakuly">
+      <h1 class="name">Kakuly</h1>
+      <div class="links">
+        <a href="https://soundcloud.com/kakuly" target="_blank">☁️</a>
+        <a href="https://x.com/Kakuly_" target="_blank">X</a>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="content-section">
   <div class="section-inner">
-    {about_content}
+    ## About
+    2006年生まれ。2020年から音楽活動を開始。エレクトロポップ / ハイパーポップを中心に、たくさん迷いながら音楽を作っている。元気に生きるために音楽を摂取します。いつもありがとう。
+
+    ## Contact
+    [DM on X](https://x.com/Kakuly_)
+    kakuly.work@gmail.com
   </div>
 </div>
-
-<style>
-.profile-overlay {{
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-}}
-/* 元のアイコンや名前のスタイルを維持するための調整 */
-.profile-overlay img {{
-  border-radius: 20px;
-  max-width: 200px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}}
-.profile-overlay h1, .profile-overlay .name {{
-  font-size: 4rem;
-  font-weight: 900;
-  margin: 0;
-  line-height: 1;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-}}
-</style>
 """
-            new_content = f"---{front_matter}---\n{new_body}"
-            
-            with open(INDEX_FILE, 'w', encoding='utf-8') as f:
-                f.write(new_content)
-            print("Cleaned and updated index.md with new hero layout")
+
+    # ヘッダー画像URLを既存の index.md から取得（なければデフォルト）
+    header_img = "https://images.unsplash.com/photo-1514525253361-bee8718a340b?auto=format&fit=crop&w=1920&q=80"
+    if os.path.exists(INDEX_FILE):
+        with open(INDEX_FILE, 'r', encoding='utf-8') as f:
+            content = f.read()
+            import re
+            img_match = re.search(r'header_image:\s*(.*)', content)
+            if img_match:
+                header_img = img_match.group(1).strip()
+
+    # テンプレートに流し込んで index.md を完全再生成
+    new_content = INDEX_TEMPLATE.format(
+        header_image=header_img,
+        news_html=news_html
+    )
+
+    with open(INDEX_FILE, 'w', encoding='utf-8') as f:
+        f.write(new_content)
+    print("Regenerated index.md from template to prevent design corruption")
 
 
 
