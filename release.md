@@ -84,30 +84,6 @@ Release - 作品集
   </div>
 </div>
 
-<div class="video-item size-mid" data-tags="EP" data-artist="Kakuly">
-  <a href="https://big-up.style/21Wcz2jUF8" target="_blank" class="video-link">
-    <img src="https://i9.ytimg.com/s_p/OLAK5uy_mJlf5VGWY5BLOE9qdiwONY2lvvPEaSl8c/maxresdefault.jpg?sqp=COyby8sGir7X7AMICJv9_MoGEAE=&rs=AOn4CLCf-LUaCfhefvq0A23U0_ggmkV7iw&v=1767849627" alt="Release New EP &quot;snowflaking&quot;" class="video-thumbnail" loading="lazy">
-  </a>
-  <h3 class='video-title'>Release New EP &quot;snowflaking&quot;</h3>
-  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Kakuly</p>
-  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2025-12-26</p>
-  <div class="tag-container">
-    <span class="work-tag">EP</span>
-  </div>
-</div>
-
-<div class="video-item size-min" data-tags="Audio" data-artist="Kakuly">
-  <a href="https://www.youtube.com/watch?v=1MByrl5Iq_A" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/1MByrl5Iq_A/maxresdefault.jpg" data-video-id="1MByrl5Iq_A" data-error-attempt="0" alt="Digital EP &quot;snowflaking&quot; [XFD]" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, '1MByrl5Iq_A')">
-  </a>
-  <h3 class='video-title'>Digital EP &quot;snowflaking&quot; [XFD]</h3>
-  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Kakuly</p>
-  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2025-12-25</p>
-  <div class="tag-container">
-    <span class="work-tag">Audio</span>
-  </div>
-</div>
-
 <div class="video-item size-min" data-tags="MV" data-artist="Kakuly">
   <a href="https://www.youtube.com/watch?v=x0VqpfLdEVI" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/x0VqpfLdEVI/maxresdefault.jpg" data-video-id="x0VqpfLdEVI" data-error-attempt="0" alt="枕元 / kafu" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'x0VqpfLdEVI')">
@@ -276,30 +252,6 @@ Release - 作品集
   </div>
 </div>
 
-<div class="video-item size-min" data-tags="Audio" data-artist="Kakuly">
-  <a href="https://www.youtube.com/watch?v=nJwjaBef_jI" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/nJwjaBef_jI/maxresdefault.jpg" data-video-id="nJwjaBef_jI" data-error-attempt="0" alt="Digital Album &quot;DIRECT &amp; LOOP&quot; [XFD]" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'nJwjaBef_jI')">
-  </a>
-  <h3 class='video-title'>Digital Album &quot;DIRECT &amp; LOOP&quot; [XFD]</h3>
-  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Kakuly</p>
-  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2025-08-05</p>
-  <div class="tag-container">
-    <span class="work-tag">Audio</span>
-  </div>
-</div>
-
-<div class="video-item size-mid" data-tags="Album" data-artist="Kakuly">
-  <a href="https://big-up.style/AwGSfnO9I3" target="_blank" class="video-link">
-    <img src="https://i9.ytimg.com/s_p/OLAK5uy_kN_SOIxifwhCGm4OMSaQY8ycqXmIzFkEc/maxresdefault.jpg?sqp=CNj4yssGir7X7AMICPm06cUGEAE=&rs=AOn4CLDd88RNpgoiSNJTKxAUe75cnL2kJQ&v=1757043321" alt="Release New Album &quot;DIRECT &amp; LOOP&quot;" class="video-thumbnail" loading="lazy">
-  </a>
-  <h3 class='video-title'>Release New Album &quot;DIRECT &amp; LOOP&quot;</h3>
-  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Kakuly</p>
-  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2025-08-05</p>
-  <div class="tag-container">
-    <span class="work-tag">Album</span>
-  </div>
-</div>
-
 <div class="video-item size-min" data-tags="MV" data-artist="Kakuly">
   <a href="https://www.youtube.com/watch?v=BWAdNu7HnJE" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/BWAdNu7HnJE/maxresdefault.jpg" data-video-id="BWAdNu7HnJE" data-error-attempt="0" alt="[VocaDuo2025] いちご納豆ごはん - garden" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'BWAdNu7HnJE')">
@@ -345,18 +297,6 @@ Release - 作品集
   <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2025-02-25</p>
   <div class="tag-container">
     <span class="work-tag">MV</span>
-  </div>
-</div>
-
-<div class="video-item size-mid" data-tags="Album" data-artist="Kakuly">
-  <a href="https://big-up.style/Rfjwgu1vFD" target="_blank" class="video-link">
-    <img src="https://i9.ytimg.com/s_p/OLAK5uy_nZcJam8ma9bN_41_S6VnsyXdzWlH6EAWs/maxresdefault.jpg?sqp=COyby8sGir7X7AMICNzvm70GEAE=&rs=AOn4CLBAZBEEEiMSsYwYLj0-1gRTOUS-3w&v=1738995676" alt="Release New Album &quot;Everything /// (to break me)&quot;" class="video-thumbnail" loading="lazy">
-  </a>
-  <h3 class='video-title'>Release New Album &quot;Everything /// (to break me)&quot;</h3>
-  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Kakuly</p>
-  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2024-12-30</p>
-  <div class="tag-container">
-    <span class="work-tag">Album</span>
   </div>
 </div>
 
