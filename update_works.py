@@ -7,149 +7,101 @@ import html
 # --- 設定 ---
 API_KEY = os.environ.get('YOUTUBE_API_KEY', '')
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', '')
-PLAYLIST_ID = 'PLH9mX0wDlDAou_YCjcU01Q3pR6cCRQPWS'
-FILE_PATH = 'works.md'
+
+# プレイリストID
+WORKS_PLAYLIST_ID = 'PLH9mX0wDlDAou_YCjcU01Q3pR6cCRQPWS'
+RELEASE_PLAYLIST_ID = 'PLH9mX0wDlDApS_YOUR_RELEASE_PLAYLIST_ID' # ここにRelease用のプレイリストIDを設定してください
+
+# ファイルパス
 CACHE_FILE = 'known_works.json'
 MANUAL_WORKS_FILE = 'manual_works.json'
+MANUAL_RELEASE_FILE = 'manual_release.json'
 
-# --- JSONキャッシュの読み込み/作成 ---
-def load_known_works():
-    if os.path.exists(CACHE_FILE):
+# --- JSON読み込み ---
+def load_json(path):
+    if os.path.exists(path):
         try:
-            with open(CACHE_FILE, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        except:
-            return {}
-    return {}
-
-def save_known_works(data):
-    with open(CACHE_FILE, 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-
-def load_manual_works():
-    """manual_works.jsonから手動作品を読み込む"""
-    if os.path.exists(MANUAL_WORKS_FILE):
-        try:
-            with open(MANUAL_WORKS_FILE, 'r', encoding='utf-8') as f:
+            with open(path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-                return data if isinstance(data, list) else []
-        except Exception as e:
-            print(f"Error loading manual_works.json: {e}")
-            return []
+                return data if isinstance(data, (list, dict)) else []
+        except: return []
     return []
 
-# 起動時に読み込み
-KNOWN_WORKS = load_known_works()
+def save_json(path, data):
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
 
-# Geminiの設定
+KNOWN_WORKS = load_json(CACHE_FILE)
+if isinstance(KNOWN_WORKS, list): KNOWN_WORKS = {} # 互換性維持
+
+# Gemini設定
 model = None
 if GEMINI_API_KEY:
     try:
         genai.configure(api_key=GEMINI_API_KEY)
         for m_name in ['gemini-2.0-flash', 'gemini-1.5-flash']:
             try:
-                model = genai.GenerativeModel(
-                    model_name=m_name,
-                    tools=[{'google_search_retrieval': {}}]
-                )
+                model = genai.GenerativeModel(model_name=m_name, tools=[{'google_search_retrieval': {}}])
                 break
-            except:
-                continue
-    except:
-        model = None
+            except: continue
+    except: model = None
 
-def get_tags(video_id, title, description):
+def get_tags(video_id, title, description, is_release=False):
+    if is_release: return ["MV"] # Releaseは固定でMV
+    
     if video_id in KNOWN_WORKS:
-        cached_data = KNOWN_WORKS[video_id]
-        if isinstance(cached_data, dict):
-            tags_in_cache = cached_data.get("tags", [])
-            if len(tags_in_cache) > 0 and "None" not in tags_in_cache:
-                return tags_in_cache
-
-    past_examples = ""
-    example_count = 0
-    for k, v in KNOWN_WORKS.items():
-        if isinstance(v, dict) and v.get("tags"):
-            past_examples += f"- {v['title']}: {', '.join(v['tags'])}\n"
-            example_count += 1
-            if example_count > 15: break
+        cached = KNOWN_WORKS[video_id]
+        if isinstance(cached, dict) and cached.get("tags"): return cached["tags"]
 
     tags = []
     if model:
-        prompt = f"""
-        あなたは楽曲クレジットの専門家です。ネット検索を行い、以下の動画における「Kakuly（かくり）」の正確な担当役割を特定してください。
-        
-        【参考:Kakulyの過去の実績傾向】
-        {past_examples}
-        【今回の動画】
-        動画タイトル: {title}
-        概要欄抜粋: {description[:500]}
-        
-        【出力形式】
-        英語のタグのみをカンマ区切りで。該当なしは「None」。
-        """
         try:
+            prompt = f"楽曲クレジット専門家として、動画「{title}」でのKakulyの担当役割を特定し、英語タグのみカンマ区切りで出力してください。概要: {description[:300]}"
             response = model.generate_content(prompt)
             result = response.text.strip()
-            if result != "None" and len(result) > 1:
-                tags = [t.strip() for t in result.split(',')]
+            if result != "None": tags = [t.strip() for t in result.split(',')]
         except: pass
 
     if not tags:
         l_lower = (title + "\n" + description).lower()
-        patterns = [('mix', 'Mix'), ('編曲', 'Arrangement'), ('master', 'Mastering'),
-                    ('movie', 'Movie'), ('映像', 'Movie'), ('music', 'Music'),
-                    ('作曲', 'Music'), ('lyric', 'Lyrics'), ('作詞', 'Lyrics'), ('remix', 'Remix')]
-        for pat, val in patterns:
+        for pat, val in [('mix', 'Mix'), ('編曲', 'Arrangement'), ('master', 'Mastering'), ('movie', 'Movie'), ('music', 'Music'), ('作曲', 'Music'), ('lyric', 'Lyrics'), ('remix', 'Remix')]:
             if pat in l_lower: tags.append(val)
     
-    processed_tags = sorted(list(set([t.replace('Lyric', 'Lyrics') if t == 'Lyric' else t for t in tags])))
-    KNOWN_WORKS[video_id] = {"title": title, "tags": processed_tags}
-    save_known_works(KNOWN_WORKS)
-    return processed_tags
+    processed = sorted(list(set([t.replace('Lyric', 'Lyrics') if t == 'Lyric' else t for t in tags])))
+    KNOWN_WORKS[video_id] = {"title": title, "tags": processed}
+    save_json(CACHE_FILE, KNOWN_WORKS)
+    return processed
 
-def get_video_published_dates(video_ids):
-    """動画本来の投稿日を一括取得するための追加関数"""
-    dates = {}
-    if not API_KEY: return dates
+def get_video_details(video_ids):
+    details = {}
+    if not API_KEY or not video_ids: return details
     for i in range(0, len(video_ids), 50):
         subset = ','.join(video_ids[i:i+50])
         url = f"https://www.googleapis.com/youtube/v3/videos?part=snippet&id={subset}&key={API_KEY}"
         try:
             r = requests.get(url, timeout=10).json()
             for item in r.get('items', []):
-                dates[item['id']] = item['snippet']['publishedAt'][:10]
+                details[item['id']] = {
+                    "date": item['snippet']['publishedAt'][:10],
+                    "channel": item['snippet']['channelTitle']
+                }
         except: pass
-    return dates
+    return details
 
 def verify_thumbnail(video_id):
-    """サムネイルが存在するか確認し、最適なURLを返す"""
-    thumbnail_urls = [
-        f'https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg',
-        f'https://i.ytimg.com/vi/{video_id}/hqdefault.jpg',
-        f'https://i.ytimg.com/vi/{video_id}/mqdefault.jpg',
-        f'https://i.ytimg.com/vi/{video_id}/default.jpg'
-    ]
-    
-    for url in thumbnail_urls:
+    for res in ['maxresdefault', 'hqdefault', 'mqdefault', 'default']:
+        url = f'https://i.ytimg.com/vi/{video_id}/{res}.jpg'
         try:
-            response = requests.head(url, timeout=5)
-            if response.status_code == 200:
-                return url
-        except:
-            continue
-    
-    # すべて失敗した場合はデフォルトを返す
-    return thumbnail_urls[-1]
+            if requests.head(url, timeout=5).status_code == 200: return url
+        except: continue
+    return f'https://i.ytimg.com/vi/{video_id}/default.jpg'
 
-def get_playlist_items():
+def get_playlist_items(playlist_id):
     all_items = []
-    if not API_KEY:
-        print("Warning: YOUTUBE_API_KEY is not set.")
-        return []
+    if not API_KEY or not playlist_id or 'YOUR' in playlist_id: return []
     next_page_token = None
     while True:
-        url = f"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId={PLAYLIST_ID}&key={API_KEY}"
+        url = f"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId={playlist_id}&key={API_KEY}"
         if next_page_token: url += f"&pageToken={next_page_token}"
         try:
             r = requests.get(url, timeout=10).json()
@@ -157,357 +109,201 @@ def get_playlist_items():
             all_items.extend(items)
             next_page_token = r.get('nextPageToken')
             if not next_page_token: break
-        except Exception as e:
-            print(f"Error fetching playlist: {e}")
-            break
+        except: break
     return all_items
 
-def update_markdown(items):
-    # 動画IDのリストを作成して投稿日を一括取得
+def process_items(items, is_release=False):
     video_ids = [item['snippet']['resourceId']['videoId'] for item in items]
-    actual_dates = get_video_published_dates(video_ids)
-
-    # YouTubeから取得したデータを整理
-    works_data = []
+    details = get_video_details(video_ids)
+    processed = []
     for item in items:
-        snippet = item['snippet']
-        v_id = snippet['resourceId']['videoId']
-        # 公開日を取得（取得できなければフォールバック）
-        pub_date = actual_dates.get(v_id, snippet['publishedAt'][:10])
-        tags = get_tags(v_id, snippet['title'], snippet['description'])
-        
-        # サムネイルURLを事前に検証
-        thumbnail_url = verify_thumbnail(v_id)
-        
-        works_data.append({
-            "title": html.escape(snippet['title']),
+        v_id = item['snippet']['resourceId']['videoId']
+        info = details.get(v_id, {"date": item['snippet']['publishedAt'][:10], "channel": "Unknown"})
+        processed.append({
+            "title": html.escape(item['snippet']['title']),
             "video_id": v_id,
-            "tags": tags,
-            "date": pub_date,
-            "thumbnail": thumbnail_url,
+            "tags": get_tags(v_id, item['snippet']['title'], item['snippet']['description'], is_release),
+            "date": info['date'],
+            "artist": info['channel'], # YouTubeはチャンネル名をデフォルトアーティストに
+            "thumbnail": verify_thumbnail(v_id),
             "type": "youtube",
-            "size": "min" # YouTubeは常にmin
+            "size": "min"
         })
-    
-    # manual_works.jsonから手動作品を読み込んで追加
-    manual_works = load_manual_works()
-    for manual_work in manual_works:
-        thumbnail = manual_work.get('img') or manual_work.get('image', '')
-        works_data.append({
-            "title": html.escape(manual_work.get('title', 'Untitled')),
-            "video_id": None,
-            "tags": manual_work.get('tags', []),
-            "date": manual_work.get('date', '2000-01-01'),
-            "thumbnail": thumbnail,
-            "url": manual_work.get('url', '#'),
-            "type": "manual",
-            "size": manual_work.get('size', 'min') # min, mid, max
-        })
-    
-    # 投稿日の降順でソート
-    works_data.sort(key=lambda x: x['date'], reverse=True)
+    return processed
 
-    # ページネーション廃止：常に1つのファイルに書き出す
-    content = generate_page_content(works_data)
+def update_markdown():
+    # データ取得
+    works_yt = process_items(get_playlist_items(WORKS_PLAYLIST_ID), is_release=False)
+    release_yt = process_items(get_playlist_items(RELEASE_PLAYLIST_ID), is_release=True)
     
-    try:
-        with open(FILE_PATH, 'w', encoding='utf-8') as f:
-            f.write(content)
-        print(f"Generated: {FILE_PATH}")
-    except Exception as e:
-        print(f"Error writing {FILE_PATH}: {e}")
+    works_manual = load_json(MANUAL_WORKS_FILE)
+    release_manual = load_json(MANUAL_RELEASE_FILE)
     
-    print(f"生成完了: 合計{len(works_data)}作品")
+    def format_manual(data, default_artist="Kakuly"):
+        formatted = []
+        for d in data:
+            formatted.append({
+                "title": html.escape(d.get('title', 'Untitled')),
+                "video_id": None,
+                "tags": d.get('tags', []),
+                "date": d.get('date', '2000-01-01'),
+                "artist": d.get('artist', default_artist),
+                "thumbnail": d.get('img') or d.get('image', ''),
+                "url": d.get('url', '#'),
+                "type": "manual",
+                "size": d.get('size', 'min')
+            })
+        return formatted
 
-def generate_page_content(works_data):
-    """ページコンテンツを生成"""
-    content = "---\nlayout: page\ntitle: Works\npermalink: /works/\n---\n\n"
-    content += "関わった／制作した作品集\n\n"
+    works_all = sorted(works_yt + format_manual(works_manual), key=lambda x: x['date'], reverse=True)
+    release_all = sorted(release_yt + format_manual(release_manual), key=lambda x: x['date'], reverse=True)
+
+    pages = [
+        {"file": "works.md", "title": "Works", "data": works_all, "permalink": "/works/"},
+        {"file": "release.md", "title": "Release", "data": release_all, "permalink": "/release/"}
+    ]
+
+    for p in pages:
+        content = generate_page_content(p['title'], p['data'], p['permalink'])
+        with open(p['file'], 'w', encoding='utf-8') as f: f.write(content)
+        print(f"Generated: {p['file']} ({len(p['data'])} items)")
+
+def generate_page_content(title, works_data, permalink):
+    content = f"---\nlayout: page\ntitle: {title}\npermalink: {permalink}\n---\n\n"
+    content += f"{title} - 作品集\n\n"
     
-    content += '<div id="filter-container" class="filter-wrapper"></div>\n\n'
+    # フィルタUI
+    content += '<div class="filter-section">\n'
+    content += '  <div class="filter-label">Artist:</div>\n'
+    content += '  <div id="artist-filter" class="filter-wrapper"></div>\n'
+    content += '  <div class="filter-label">Tags:</div>\n'
+    content += '  <div id="tag-filter" class="filter-wrapper"></div>\n'
+    content += '</div>\n\n'
+    
     content += '<div class="video-grid" id="video-grid">\n\n'
-    
     for work in works_data:
-        tags_attr = ",".join(work['tags']) if work['tags'] else ""
-        size_class = f"size-{work['size']}"
-        
-        content += f'<div class="video-item {size_class}" data-tags="{tags_attr}">\n'
-        
+        tags_attr = ",".join(work['tags'])
+        content += f'<div class="video-item size-{work["size"]}" data-tags="{tags_attr}" data-artist="{work["artist"]}">\n'
         if work['type'] == 'youtube':
             content += f'  <a href="https://www.youtube.com/watch?v={work["video_id"]}" target="_blank" class="video-link">\n'
-            content += f'    <img src="{work["thumbnail"]}" '
-            content += f'data-video-id="{work["video_id"]}" '
-            content += f'data-error-attempt="0" '
-            content += f'alt="{work["title"]}" class="video-thumbnail" loading="lazy" '
-            content += f'onerror="handleImageError(this)">\n'
+            content += f'    <img src="{work["thumbnail"]}" data-video-id="{work["video_id"]}" data-error-attempt="0" alt="{work["title"]}" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">\n'
             content += f'  </a>\n'
         else:
             content += f'  <a href="{work["url"]}" target="_blank" class="video-link">\n'
-            content += f'    <img src="{work["thumbnail"]}" '
-            content += f'alt="{work["title"]}" class="video-thumbnail" loading="lazy">\n'
+            content += f'    <img src="{work["thumbnail"]}" alt="{work["title"]}" class="video-thumbnail" loading="lazy">\n'
             content += f'  </a>\n'
-        
-        content += f"  <h3 class='video-title'>{work['title']}</h3>"
-        content += f"\n  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>{work['date']}</p>"
-        
+        content += f"  <h3 class='video-title'>{work['title']}</h3>\n"
+        content += f"  <p class='video-artist'>{work['artist']}</p>\n"
+        content += f"  <p class='video-date'>{work['date']}</p>\n"
         if work['tags']:
-            content += '\n  <div class="tag-container">\n'
-            for tag in work['tags']:
-                content += f'    <span class="work-tag">{tag}</span>\n'
-            content += '  </div>\n'
+            content += '  <div class="tag-container">' + "".join([f'<span class="work-tag">{t}</span>' for t in work['tags']]) + '</div>\n'
         content += '</div>\n\n'
-
-    content += '</div>\n\n'
-
-    content += '<div id="iris-in"></div>'
-    content += '<div id="iris-out"></div>'
+    content += '</div>\n<div id="iris-in"></div><div id="iris-out"></div>\n'
 
     content += """
 <style>
-/* --- フィルタUI --- */
-.filter-wrapper {
-  margin-bottom: 40px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.filter-btn {
-  cursor: pointer;
-  font-family: 'Montserrat', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 0.9rem;
-  padding: 6px 16px;
-  border-radius: 30px;
-  border: 1px solid var(--text-color);
-  background: transparent;
-  color: var(--text-color);
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  opacity: 0.3;
-}
-.filter-btn.active {
-  opacity: 1;
-  background: var(--text-color);
-  color: var(--bg-color);
-}
-
-/* --- グリッドレイアウトとサイズ調整 --- */
-.video-grid { 
-  display: grid !important; 
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important; 
-  gap: 60px 40px !important; 
-  position: relative;
-  grid-auto-flow: dense; /* 隙間を埋める設定 */
-}
-
-.video-item {
-  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: scale(1);
-  opacity: 1;
-  backface-visibility: hidden;
-}
-
-/* サイズ調整用クラス */
-.video-item.size-min {
-  grid-column: span 1;
-}
-.video-item.size-mid {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-.video-item.size-max {
-  grid-column: span 3;
-  grid-row: span 2;
-}
-
-/* モバイル対応：画面が狭い時は強制的に1カラムにする */
-@media screen and (max-width: 900px) {
-  .video-item.size-mid, .video-item.size-max {
-    grid-column: span 1;
-    grid-row: span 1;
-  }
-}
-
-.video-item.sort-hide {
-  opacity: 0;
-  transform: scale(0.95);
-  pointer-events: none;
-}
-
-/* --- 元のデザイン設定 (完全維持) --- */
-.tag-container { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 5px; }
-.work-tag { font-size: 0.57rem; padding: 1px 6px; border-radius: 4px; border: 0.5px solid var(--text-color); opacity: 0.88; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
-.video-thumbnail { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-/* mid, maxサイズの場合はアスペクト比を解除して画像を広げる */
+.filter-section { margin-bottom: 40px; }
+.filter-label { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.7rem; text-transform: uppercase; opacity: 0.5; margin-bottom: 8px; margin-top: 15px; }
+.filter-wrapper { display: flex; flex-wrap: wrap; gap: 10px; }
+.filter-btn { cursor: pointer; font-family: 'Montserrat', sans-serif !important; font-weight: 700 !important; font-size: 0.8rem; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--text-color); background: transparent; color: var(--text-color); transition: all 0.3s ease; text-transform: uppercase; opacity: 0.3; }
+.filter-btn.active { opacity: 1; background: var(--text-color); color: var(--bg-color); }
+.video-grid { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important; gap: 60px 40px !important; grid-auto-flow: dense; }
+.video-item { transition: opacity 0.4s ease, transform 0.4s ease; backface-visibility: hidden; }
+.video-item.size-mid { grid-column: span 2; grid-row: span 2; }
+.video-item.size-max { grid-column: span 3; grid-row: span 2; }
+@media screen and (max-width: 900px) { .video-item.size-mid, .video-item.size-max { grid-column: span 1; grid-row: span 1; } }
+.video-item.sort-hide { opacity: 0; transform: scale(0.95); pointer-events: none; }
+.video-thumbnail { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; transition: transform 0.3s ease; }
 .size-mid .video-thumbnail, .size-max .video-thumbnail { aspect-ratio: auto; height: auto; min-height: 200px; }
-
-.video-link:hover .video-thumbnail { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-.video-title { margin-top: 10px; font-size: 1rem; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 0px !important; font-family: 'Noto Sans JP', sans-serif !important; }
-.wrapper { max-width: 1100px !important; padding-right: 40px !important; padding-left: 40px !important; }
-.site-header .wrapper { max-width: 1100px !important; }
+.video-title { margin-top: 10px; font-size: 0.95rem; font-weight: 700; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-family: 'Noto Sans JP', sans-serif !important; }
+.video-artist { font-size: 0.75rem; font-weight: 700; margin: 4px 0 2px 0; opacity: 0.8; font-family: 'Montserrat', sans-serif; }
+.video-date { font-size: 0.65rem; opacity: 0.5; margin: 0; }
+.tag-container { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px; }
+.work-tag { font-size: 0.55rem; padding: 1px 6px; border-radius: 4px; border: 0.5px solid var(--text-color); opacity: 0.7; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
+.wrapper { max-width: 1100px !important; }
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
 :root { --bg-color: #ffffff; --text-color: #111111; }
 html.dark-mode, body.dark-mode { --bg-color: #000000; --text-color: #eeeeee; background-color: #000000 !important; }
-body { background-color: var(--bg-color) !important; color: var(--text-color) !important; transition: none !important; font-family: 'Noto Sans JP', sans-serif !important; font-weight: 700 !important; }
-body.mode-transition { transition: background-color 0.5s ease, color 0.5s ease !important; }
-.site-header { background-color: transparent !important; border: none !important; }
-h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font-size: 1.4rem !important; font-weight: 700 !important; letter-spacing: -0.05em !important; color: var(--text-color) !important; }
-.page-link { font-family: 'Montserrat', sans-serif !important; color: var(--text-color) !important; font-weight: 700 !important; text-transform: uppercase; font-size: 0.9rem !important; margin-left: 20px !important; text-decoration: none !important; }
-.video-item h3 { font-family: 'Noto Sans JP', sans-serif !important; font-size: 0.85rem !important; height: auto !important; min-height: 1.3em; overflow: hidden; margin-bottom: 0px !important; line-height: 1.3; }
-.rss-subscribe, .feed-icon, .site-footer { display: none !important; }
-
-#mode-toggle { 
-    cursor: pointer; 
-    background: transparent; 
-    border: 1px solid var(--text-color); 
-    color: var(--text-color); 
-    padding: 6px 16px; 
-    border-radius: 20px; 
-    font-size: 0.75rem; 
-    position: fixed; 
-    top: 15px; 
-    right: 20px; 
-    z-index: 9999; 
-    font-weight: 700;
-    font-family: 'Montserrat', sans-serif !important; 
-    transition: all 0.3s ease;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-}
-
-@media screen and (max-width: 1500px) {
-    #mode-toggle {
-        top: auto !important;
-        bottom: 20px !important;
-        right: 20px !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
-    }
-}
-
-#iris-in { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 0 500vmax var(--bg-color); z-index: 100000; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1); }
+body { background-color: var(--bg-color) !important; color: var(--text-color) !important; font-family: 'Noto Sans JP', sans-serif !important; font-weight: 700 !important; }
+#mode-toggle { cursor: pointer; background: transparent; border: 1px solid var(--text-color); color: var(--text-color); padding: 6px 16px; border-radius: 20px; font-size: 0.75rem; position: fixed; top: 15px; right: 20px; z-index: 9999; font-weight: 700; font-family: 'Montserrat', sans-serif !important; }
+#iris-in, #iris-out { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; z-index: 100000; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 1s ease; }
+#iris-in { box-shadow: 0 0 0 500vmax var(--bg-color); }
+#iris-out { background: var(--bg-color); }
 body.is-opening #iris-in { transform: translate(-50%, -50%) scale(500); }
-#iris-out { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--bg-color); z-index: 100000; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1); }
-body.is-exiting #iris-out { transform: translate(-50%, -50%) scale(1.2) !important; }
-body > *:not([id^="iris-"]) { opacity: 0; transition: opacity 0.8s ease-out; }
-body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
+body.is-exiting #iris-out { transform: translate(-50%, -50%) scale(1.2); }
 </style>
-
 <button id="mode-toggle">🌙 Dark Mode</button>
-
 <script>
-
 function handleImageError(img) {
-  const videoId = img.getAttribute('data-video-id');
-  if (!videoId) return; 
-  
-  const attempt = parseInt(img.getAttribute('data-error-attempt') || "0");
-  const fallbackUrls = [
-    'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg',
-    'https://i.ytimg.com/vi/' + videoId + '/mqdefault.jpg',
-    'https://i.ytimg.com/vi/' + videoId + '/default.jpg'
-  ];
-  
-  if (attempt < fallbackUrls.length) {
-    img.setAttribute('data-error-attempt', (attempt + 1).toString());
-    img.src = fallbackUrls[attempt];
-  } else {
-    img.style.backgroundColor = '#333';
-    img.alt = '画像を読み込めませんでした';
-  }
+  const vId = img.dataset.videoId; if (!vId) return;
+  const attempt = parseInt(img.dataset.errorAttempt || "0");
+  const urls = [`https://i.ytimg.com/vi/${vId}/hqdefault.jpg`,`https://i.ytimg.com/vi/${vId}/mqdefault.jpg`,`https://i.ytimg.com/vi/${vId}/default.jpg`];
+  if (attempt < urls.length) { img.dataset.errorAttempt = attempt + 1; img.src = urls[attempt]; }
 }
+document.addEventListener('DOMContentLoaded', () => {
+  const items = Array.from(document.querySelectorAll('.video-item'));
+  const artistFilter = document.getElementById('artist-filter');
+  const tagFilter = document.getElementById('tag-filter');
+  let activeArtist = 'ALL';
+  let activeTags = new Set();
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const grid = document.getElementById('video-grid');
-    const items = Array.from(grid.querySelectorAll('.video-item'));
-    const filterContainer = document.getElementById('filter-container');
-    const activeFilters = new Set();
+  const artists = new Set(['ALL']);
+  const tags = new Set();
+  items.forEach(item => {
+    artists.add(item.dataset.artist);
+    item.dataset.tags.split(',').filter(t => t).forEach(t => tags.add(t));
+  });
 
-    const allTags = new Set();
+  function createBtn(text, container, onClick, isAll=False) {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn' + (isAll ? ' active' : '');
+    btn.textContent = text;
+    btn.onclick = () => onClick(btn, text);
+    container.appendChild(btn);
+  }
+
+  Array.from(artists).sort().forEach(a => createBtn(a, artistFilter, (btn, val) => {
+    artistFilter.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active'); activeArtist = val; apply();
+  }, a === 'ALL'));
+
+  Array.from(tags).sort().forEach(t => createBtn(t, tagFilter, (btn, val) => {
+    btn.classList.toggle('active');
+    if (activeTags.has(val)) activeTags.delete(val); else activeTags.add(val);
+    apply();
+  }));
+
+  function apply() {
     items.forEach(item => {
-      const tags = item.dataset.tags.split(',').filter(t => t);
-      tags.forEach(t => allTags.add(t));
-    });
-
-    Array.from(allTags).sort().forEach(tag => {
-      const btn = document.createElement('button');
-      btn.className = 'filter-btn';
-      btn.textContent = tag;
-      btn.onclick = () => {
-        btn.classList.toggle('active');
-        if (activeFilters.has(tag)) activeFilters.delete(tag);
-        else activeFilters.add(tag);
-        applyFilter();
-      };
-      filterContainer.appendChild(btn);
-    });
-
-    function applyFilter() {
-      items.forEach(item => {
-        const itemTags = item.dataset.tags.split(',');
-        const isVisible = activeFilters.size === 0 || Array.from(activeFilters).every(f => itemTags.includes(f));
-        
-        if (isVisible) {
-          item.classList.remove('sort-hide');
-          item.style.display = ''; 
-          item.style.position = 'relative';
-          item.style.pointerEvents = 'auto';
-          item.style.visibility = 'visible';
-        } else {
-          item.classList.add('sort-hide');
-          item.style.pointerEvents = 'none';
-          setTimeout(() => {
-            if (item.classList.contains('sort-hide')) {
-              item.style.display = 'none';
-              item.style.position = 'absolute';
-            }
-          }, 400);
-        }
-      });
-    }
-  });
-
-  const btn = document.getElementById('mode-toggle');
-  const body = document.body;
-  const html = document.documentElement;
-
-  if (localStorage.getItem('theme') === 'dark') {
-    html.classList.add('dark-mode');
-    body.classList.add('dark-mode');
-    btn.textContent = '☀️ Light Mode';
-  }
-
-  btn.addEventListener('click', () => {
-    body.classList.add('mode-transition');
-    const isDark = html.classList.toggle('dark-mode');
-    body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
-    setTimeout(() => { body.classList.remove('mode-transition'); }, 500);
-  });
-  
-  function startIris() {
-    document.body.classList.remove('is-opening', 'is-exiting');
-    requestAnimationFrame(() => {
-      setTimeout(() => { document.body.classList.add('is-opening'); }, 50);
+      const aMatch = activeArtist === 'ALL' || item.dataset.artist === activeArtist;
+      const tMatch = activeTags.size === 0 || Array.from(activeTags).every(t => item.dataset.tags.split(',').includes(t));
+      if (aMatch && tMatch) {
+        item.classList.remove('sort-hide'); item.style.display = ''; item.style.position = 'relative';
+      } else {
+        item.classList.add('sort-hide'); setTimeout(() => { if (item.classList.contains('sort-hide')) { item.style.display = 'none'; item.style.position = 'absolute'; } }, 400);
+      }
     });
   }
-
-  window.addEventListener('pageshow', startIris);
-
-  document.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
-      e.preventDefault();
-      document.body.classList.add('is-exiting');
-      setTimeout(() => { window.location.href = href; }, 800);
-    });
-  });
+});
+const btn = document.getElementById('mode-toggle');
+if (localStorage.getItem('theme') === 'dark') { document.documentElement.classList.add('dark-mode'); btn.textContent = '☀️ Light Mode'; }
+btn.onclick = () => {
+  const isDark = document.documentElement.classList.toggle('dark-mode');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+};
+window.addEventListener('pageshow', () => { document.body.classList.add('is-opening'); });
+document.querySelectorAll('a').forEach(link => {
+  link.onclick = (e) => {
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || link.target === "_blank") return;
+    e.preventDefault(); document.body.classList.add('is-exiting');
+    setTimeout(() => { window.location.href = href; }, 800);
+  };
+});
 </script>
 """
-
     return content
 
 if __name__ == "__main__":
-    items = get_playlist_items()
-    update_markdown(items)
+    update_markdown()
