@@ -2,10 +2,7 @@
 layout: home
 title: Home
 ---
-<div class="kakuly-section" style="background-image: url('/assets/img/profile.png"');">
-  <div class="section-content">
-    
-<div class="profile-container">
+<div class="profile-container" style="background-image: url('/assets/img/profile.png"');">
   <img src="/assets/img/profile.png" class="profile-icon">
   
   <div class="profile-text">
@@ -30,9 +27,6 @@ title: Home
 <h2>CONTACT</h2><br>
 <span><a href="https://x.com/kakuly_" target="_blank">DM on X</a></span><br>
 kakuly.work@gmail.com<br>
-
-  </div>
-</div>
 
 <hr style="width: 50%; margin: 40px auto; border-top: 1px solid var(--text-color); opacity: 0.3;">
 
