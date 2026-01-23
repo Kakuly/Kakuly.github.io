@@ -3,7 +3,7 @@ name: Update Works from YouTube
 on:
   push:
     paths:
-      - 'portfolio_update_v5.py' # スクリプト名に合わせて変更
+      - 'update_works.py' # スクリプト名に合わせて変更
       - 'known_works.json'
       - 'manual_works.json'
   schedule:
