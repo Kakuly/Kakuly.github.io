@@ -11,8 +11,8 @@ GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', '')
 
 # プレイリストID
 WORKS_PLAYLIST_ID = 'PLH9mX0wDlDAou_YCjcU01Q3pR6cCRQPWS'
-RELEASE_PLAYLIST_ID = 'PLH9mX0wDlDAqZ8WMjS1uVJXpH3IiwTHGm' # Audioタグが付くプレイリスト
-MV_PLAYLIST_ID = 'PLH9mX0wDlDApen7-p7jxmAkDd1tWV9eeI'           # MVタグが付くプレイリスト
+RELEASE_PLAYLIST_ID = 'PLH9mX0wDlDAqZ8WMjS1uVJXpH3IiwTHGm'
+MV_PLAYLIST_ID = 'PLH9mX0wDlDApen7-p7jxmAkDd1tWV9eeI'
 
 # ファイルパス
 CACHE_FILE = 'known_works.json'
@@ -70,21 +70,15 @@ def get_tags(video_id, title, description, auto_tag=None):
         l_lower = (title + "\n" + description).lower()
         for pat, val in [('mix', 'Mix'), ('編曲', 'Arrangement'), ('master', 'Mastering'), ('movie', 'Movie'), ('music', 'Music'), ('作曲', 'Music'), ('lyric', 'Lyrics'), ('remix', 'Remix')]:
             if pat in l_lower: tags.append(val)
-    # タグを正規化（先頭大文字、以降小文字）し、重複を排除
+    
     normalized_tags = []
     for t in tags:
         t_clean = t.strip()
         if not t_clean: continue
-        # 特定の表記揺れを修正
-        if t_clean.lower() in ['lyric', 'lyrics']:
-            t_clean = 'Lyrics'
-        elif t_clean.lower() == 'mv':
-            t_clean = 'MV'
-        elif t_clean.lower() == 'audio':
-            t_clean = 'Audio'
-        else:
-            # 基本は先頭大文字
-            t_clean = t_clean.capitalize()
+        if t_clean.lower() in ['lyric', 'lyrics']: t_clean = 'Lyrics'
+        elif t_clean.lower() == 'mv': t_clean = 'MV'
+        elif t_clean.lower() == 'audio': t_clean = 'Audio'
+        else: t_clean = t_clean.capitalize()
         normalized_tags.append(t_clean)
     
     processed = sorted(list(set(normalized_tags)))
@@ -154,14 +148,10 @@ def process_items(items, auto_tag=None):
 def update_markdown():
     print(f"Fetching Works: {WORKS_PLAYLIST_ID}")
     works_yt = process_items(get_playlist_items(WORKS_PLAYLIST_ID))
-    
     print(f"Fetching Release (Audio): {RELEASE_PLAYLIST_ID}")
     release_yt = process_items(get_playlist_items(RELEASE_PLAYLIST_ID), auto_tag="Audio")
-    
     print(f"Fetching Release (MV): {MV_PLAYLIST_ID}")
     mv_yt = process_items(get_playlist_items(MV_PLAYLIST_ID), auto_tag="MV")
-    
-    print(f"Counts - Works: {len(works_yt)}, Audio: {len(release_yt)}, MV: {len(mv_yt)}")
     
     def format_manual(data, default_artist="Kakuly"):
         formatted = []
@@ -190,41 +180,33 @@ def update_markdown():
     for p in pages:
         content = generate_page_content(p['title'], p['data'], p['permalink'], p['show_artist'])
         with open(p['file'], 'w', encoding='utf-8') as f: f.write(content)
-        print(f"Generated: {p['file']} ({len(p['data'])} items)")
 
-    # ニュースセクションの更新
     update_index_with_news()
 
 def update_index_with_news():
     news_data = load_json(NEWS_FILE)
-    
-    # ニュースセクションのHTML生成
     news_html = ''
     if news_data:
-        # 最新のニュースから順に並べる
         news_data.sort(key=lambda x: x['date'], reverse=True)
-        
-        # ニュースセクションのHTML生成
-        news_html = '\n'
-        news_html += '<div class="news-section-wrapper">\n'
+        news_html = '\n<div class="news-section-wrapper">\n'
         news_html += '  <h2 class="section-title">NEWS</h2>\n'
-        news_html += '  <div class="news-scroll-container">\n'
+        news_html += '  <div class="news-container-outer">\n'
+        news_html += '    <button class="news-nav-btn prev" onclick="scrollNews(-1)" id="news-prev-btn">&#10094;</button>\n'
+        news_html += '    <div class="news-scroll-container" id="news-scroll-container">\n'
         
         for item in news_data:
-            # ニュース本文の改行を <br> に変換
             content_for_modal = item["content"].replace('\n', '<br>')
-            
-            news_html += f'    <div class="news-card" onclick="openNewsModal(\'{item["id"]}\')">\n'
-            news_html += f'      <div class="news-card-date">{item["date"]}</div>\n'
-            news_html += f'      <div class="news-card-title">{item["title"]}</div>\n'
-            # モーダル用のコンテンツを非表示のまま保持
-            news_html += f'      <div class="news-card-content-hidden" id="news-content-{item["id"]}" style="display:none;">{content_for_modal}</div>\n'
-            news_html += '    </div>\n'
+            news_html += f'      <div class="news-card" onclick="openNewsModal(\'{item["id"]}\')">\n'
+            news_html += f'        <div class="news-card-date">{item["date"]}</div>\n'
+            news_html += f'        <div class="news-card-title">{item["title"]}</div>\n'
+            news_html += f'        <div class="news-card-content-hidden" id="news-content-{item["id"]}" style="display:none;">{content_for_modal}</div>\n'
+            news_html += '      </div>\n'
         
+        news_html += '    </div>\n'
+        news_html += '    <button class="news-nav-btn next" onclick="scrollNews(1)" id="news-next-btn">&#10095;</button>\n'
         news_html += '  </div>\n'
         news_html += '</div>\n'
         
-        # モーダルUIとスタイル、スクリプト
         news_html += """
 <div id="news-modal" class="modal">
   <div class="modal-content">
@@ -236,9 +218,9 @@ def update_index_with_news():
 </div>
 
 <style>
-/* ニュースセクション専用スタイル */
-.news-section-wrapper { margin: 40px 0; overflow: visible; position: relative; z-index: 10; }
+.news-section-wrapper { margin: 40px 0; position: relative; z-index: 10; }
 .news-section-wrapper .section-title { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; margin-bottom: 20px; letter-spacing: -0.05em; }
+.news-container-outer { position: relative; display: flex; align-items: center; }
 .news-scroll-container { 
   display: flex; 
   overflow-x: auto; 
@@ -246,6 +228,8 @@ def update_index_with_news():
   padding: 20px 5px;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  width: 100%;
 }
 .news-scroll-container::-webkit-scrollbar { display: none; }
 
@@ -260,31 +244,81 @@ def update_index_with_news():
   color: var(--text-color);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-.news-card:hover { 
-  transform: translateY(-5px); 
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
-  border-color: var(--text-color);
-}
+.news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 .news-card-date { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; opacity: 0.7; margin-bottom: 8px; }
 .news-card-title { font-size: 1rem; font-weight: 700; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
-/* モーダル */
+.news-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.news-container-outer:hover .news-nav-btn.visible { opacity: 1; pointer-events: auto; }
+.news-nav-btn.prev { left: -20px; }
+.news-nav-btn.next { right: -20px; }
+.news-nav-btn:hover { background: var(--text-color); color: var(--bg-color); }
+
 .modal { display: none; position: fixed; z-index: 100001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
 .modal-content { background-color: var(--bg-color); margin: 10% auto; padding: 40px; border-radius: 20px; width: 85%; max-width: 600px; position: relative; color: var(--text-color); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
 .close-modal { color: var(--text-color); float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
 .modal-date { font-family: 'Montserrat', sans-serif; font-size: 0.9rem; opacity: 0.5; margin-bottom: 10px; }
 .modal-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
-.modal-body { font-size: 1rem; line-height: 1.8; white-space: pre-wrap; }
+.modal-body { font-size: 1rem; line-height: 1.8; }
 </style>
 
 <script>
+function scrollNews(direction) {
+  const container = document.getElementById('news-scroll-container');
+  const scrollAmount = 300 * direction;
+  container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+}
+
+function updateNewsNav() {
+  const container = document.getElementById('news-scroll-container');
+  const prevBtn = document.getElementById('news-prev-btn');
+  const nextBtn = document.getElementById('news-next-btn');
+  if (!container || !prevBtn || !nextBtn) return;
+  
+  const isScrollable = container.scrollWidth > container.clientWidth;
+  if (isScrollable) {
+    prevBtn.classList.toggle('visible', container.scrollLeft > 10);
+    nextBtn.classList.toggle('visible', container.scrollLeft < (container.scrollWidth - container.clientWidth - 10));
+  } else {
+    prevBtn.classList.remove('visible');
+    nextBtn.classList.remove('visible');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('news-scroll-container');
+  if (container) {
+    container.addEventListener('scroll', updateNewsNav);
+    window.addEventListener('resize', updateNewsNav);
+    setTimeout(updateNewsNav, 500);
+  }
+});
+
 function openNewsModal(id) {
   const contentElement = document.getElementById(`news-content-${id}`);
   const card = contentElement.closest('.news-card');
   const title = card.querySelector('.news-card-title').innerText;
   const date = card.querySelector('.news-card-date').innerText;
   const content = contentElement.innerHTML;
-  
   document.getElementById('modal-title').innerText = title;
   document.getElementById('modal-date').innerText = date;
   document.getElementById('modal-body').innerHTML = content;
@@ -300,55 +334,32 @@ window.onclick = function(event) {
 }
 </script>
 """
-    
-    # index.md の内容を読み込む
-    if not os.path.exists(INDEX_FILE):
-        print(f"Error: {INDEX_FILE} not found.")
-        return
-
-    with open(INDEX_FILE, 'r', encoding='utf-8') as f:
-        index_content = f.read()
-
-    # マーカー間の内容を置換する
+    if not os.path.exists(INDEX_FILE): return
+    with open(INDEX_FILE, 'r', encoding='utf-8') as f: index_content = f.read()
     pattern = re.compile(f'{re.escape(NEWS_START_MARKER)}.*?{re.escape(NEWS_END_MARKER)}', re.DOTALL)
-    
     if news_html:
         new_content = f'{NEWS_START_MARKER}\n{news_html}\n{NEWS_END_MARKER}'
-        if pattern.search(index_content):
-            updated_content = pattern.sub(new_content, index_content)
+        if pattern.search(index_content): updated_content = pattern.sub(new_content, index_content)
         else:
-            # マーカーがない場合は、Aboutセクションの直前に挿入を試みる
-            if '## About' in index_content:
-                updated_content = index_content.replace('## About', f'{new_content}\n\n## About')
-            else:
-                updated_content = index_content + "\n" + new_content
+            if '## About' in index_content: updated_content = index_content.replace('## About', f'{new_content}\n\n## About')
+            else: updated_content = index_content + "\n" + new_content
     else:
         new_content = f'{NEWS_START_MARKER}\n{NEWS_END_MARKER}'
-        if pattern.search(index_content):
-            updated_content = pattern.sub(new_content, index_content)
-        else:
-            updated_content = index_content
-            
-    with open(INDEX_FILE, 'w', encoding='utf-8') as f:
-        f.write(updated_content)
-    print(f"Updated {INDEX_FILE} successfully.")
-
+        if pattern.search(index_content): updated_content = pattern.sub(new_content, index_content)
+        else: updated_content = index_content
+    with open(INDEX_FILE, 'w', encoding='utf-8') as f: f.write(updated_content)
 
 def generate_page_content(title, works_data, permalink, show_artist):
     content = f"---\nlayout: page\ntitle: {title}\npermalink: {permalink}\n---\n\n"
     content += f"{title} - 作品集\n"
-    
     content += '<div id="filter-container" class="filter-wrapper">\n'
-    if show_artist:
-        content += '  <div id="artist-filter" style="display:flex; flex-wrap:wrap; gap:12px; width:100%; margin-bottom:10px;"></div>\n'
+    if show_artist: content += '  <div id="artist-filter" style="display:flex; flex-wrap:wrap; gap:12px; width:100%; margin-bottom:10px;"></div>\n'
     content += '  <div id="tag-filter" style="display:flex; flex-wrap:wrap; gap:12px; width:100%;"></div>\n'
     content += '</div>\n\n'
-    
     content += '<div class="video-grid" id="video-grid">\n\n'
     for work in works_data:
         tags_attr = ",".join(work['tags'])
         size_class = f"size-{work['size']}"
-        
         content += f'<div class="video-item {size_class}" data-tags="{tags_attr}" data-artist="{work["artist"]}">\n'
         if work['type'] == 'youtube':
             content += f'  <a href="https://www.youtube.com/watch?v={work["video_id"]}" target="_blank" class="video-link">\n'
@@ -359,70 +370,26 @@ def generate_page_content(title, works_data, permalink, show_artist):
             content += f'    <img src="{work["thumbnail"]}" alt="{work["title"]}" class="video-thumbnail" loading="lazy">\n'
             content += f'  </a>\n'
         content += f"  <h3 class='video-title'>{work['title']}</h3>\n"
-        if show_artist:
-            content += f"  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:\"Montserrat\", sans-serif;'>{work['artist']}</p>\n"
+        if show_artist: content += f"  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:\"Montserrat\", sans-serif;'>{work['artist']}</p>\n"
         content += f"  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>{work['date']}</p>\n"
         if work['tags']:
             content += '  <div class="tag-container">\n'
-            for tag in work['tags']:
-                content += f'    <span class="work-tag">{tag}</span>\n'
+            for tag in work['tags']: content += f'    <span class="work-tag">{tag}</span>\n'
             content += '  </div>\n'
         content += '</div>\n\n'
-    content += '</div>\n\n'
-    
-    content += '<div id="iris-in"></div><div id="iris-out"></div>\n'
-
+    content += '</div>\n\n<div id="iris-in"></div><div id="iris-out"></div>\n'
     content += """
 <style>
-/* --- フィルタUI --- */
-.filter-wrapper {
-  margin-bottom: 40px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.filter-btn {
-  cursor: pointer;
-  font-family: 'Montserrat', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 0.9rem;
-  padding: 6px 16px;
-  border-radius: 30px;
-  border: 1px solid var(--text-color);
-  background: transparent;
-  color: var(--text-color);
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  opacity: 0.3;
-}
-.filter-btn.active {
-  opacity: 1;
-  background: var(--text-color);
-  color: var(--bg-color);
-}
-
-/* --- ソートアニメーション用 --- */
-.video-item {
-  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: scale(1);
-  opacity: 1;
-}
-.video-item.sort-hide {
-  opacity: 0;
-  transform: scale(0.95);
-  pointer-events: none;
-  position: absolute; /* レイアウトを詰めさせるための設定 */
-  visibility: hidden;
-}
-
-/* サイズ調整用 (追加分) */
+.filter-wrapper { margin-bottom: 40px; display: flex; flex-wrap: wrap; gap: 12px; }
+.filter-btn { cursor: pointer; font-family: 'Montserrat', sans-serif !important; font-weight: 700 !important; font-size: 0.9rem; padding: 6px 16px; border-radius: 30px; border: 1px solid var(--text-color); background: transparent; color: var(--text-color); transition: all 0.3s ease; text-transform: uppercase; opacity: 0.3; }
+.filter-btn.active { opacity: 1; background: var(--text-color); color: var(--bg-color); }
+.video-item { transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: scale(1); opacity: 1; }
+.video-item.sort-hide { opacity: 0; transform: scale(0.95); pointer-events: none; position: absolute; visibility: hidden; }
 .video-grid { grid-auto-flow: dense; }
 .video-item.size-mid { grid-column: span 2; grid-row: span 2; }
 .video-item.size-max { grid-column: span 3; grid-row: span 2; }
 @media screen and (max-width: 900px) { .video-item.size-mid, .video-item.size-max { grid-column: span 1; grid-row: span 1; } }
 .size-mid .video-thumbnail, .size-max .video-thumbnail { aspect-ratio: auto; height: auto; min-height: 200px; }
-
-/* --- 元のデザイン設定 (Worksページ用) --- */
 .tag-container { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 5px; }
 .work-tag { font-size: 0.57rem; padding: 1px 6px; border-radius: 4px; border: 0.5px solid var(--text-color); opacity: 0.88; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
 .video-thumbnail { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -441,37 +408,8 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 .video-grid { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important; gap: 60px 40px !important; position: relative; }
 .video-item h3 { font-family: 'Noto Sans JP', sans-serif !important; font-size: 0.85rem !important; height: auto !important; min-height: 1.3em; overflow: hidden; margin-bottom: 0px !important; line-height: 1.3; }
 .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
-
-/* --- モード切替ボタンの設定（レスポンシブ対応） --- */
-#mode-toggle { 
-    cursor: pointer; 
-    background: transparent; 
-    border: 1px solid var(--text-color); 
-    color: var(--text-color); 
-    padding: 6px 16px; 
-    border-radius: 20px; 
-    font-size: 0.75rem; 
-    position: fixed; 
-    top: 15px; 
-    right: 20px; 
-    z-index: 9999; 
-    font-weight: 700;
-    font-family: 'Montserrat', sans-serif !important; /* フォントを明示的に指定 */
-    transition: all 0.3s ease;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-}
-
-/* 画面幅が1300px以下になったら右下に移動 */
-@media screen and (max-width: 1500px) {
-    #mode-toggle {
-        top: auto !important;
-        bottom: 20px !important;
-        right: 20px !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* 下に移動したときに見やすく */
-    }
-}
-
+#mode-toggle { cursor: pointer; background: transparent; border: 1px solid var(--text-color); color: var(--text-color); padding: 6px 16px; border-radius: 20px; font-size: 0.75rem; position: fixed; top: 15px; right: 20px; z-index: 9999; font-weight: 700; font-family: 'Montserrat', sans-serif !important; transition: all 0.3s ease; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+@media screen and (max-width: 1500px) { #mode-toggle { top: auto !important; bottom: 20px !important; right: 20px !important; box-shadow: 0 4px 12px rgba(0,0,0,0.15); } }
 #iris-in { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 0 500vmax var(--bg-color); z-index: 100000; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1); }
 body.is-opening #iris-in { transform: translate(-50%, -50%) scale(500); }
 #iris-out { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--bg-color); z-index: 100000; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1); }
@@ -479,21 +417,13 @@ body.is-exiting #iris-out { transform: translate(-50%, -50%) scale(500) !importa
 body > *:not([id^="iris-"]) { opacity: 0; transition: opacity 0.8s ease-out; }
 body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 </style>
-
 <button id="mode-toggle">🌙 Dark Mode</button>
-
 <script>
 function handleImageError(img, videoId) {
   const attempt = parseInt(img.getAttribute('data-error-attempt') || "0");
-  if (attempt === 0) {
-    img.setAttribute('data-error-attempt', "1");
-    img.src = 'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg';
-  } else if (attempt === 1) {
-    img.setAttribute('data-error-attempt', "2");
-    img.src = 'https://i.ytimg.com/vi/' + videoId + '/mqdefault.jpg';
-  }
+  if (attempt === 0) { img.setAttribute('data-error-attempt', "1"); img.src = 'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg'; }
+  else if (attempt === 1) { img.setAttribute('data-error-attempt', "2"); img.src = 'https://i.ytimg.com/vi/' + videoId + '/mqdefault.jpg'; }
 }
-
 document.addEventListener('DOMContentLoaded', () => {
   const grid = document.getElementById('video-grid');
   const items = Array.from(grid.querySelectorAll('.video-item'));
@@ -501,20 +431,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const tagFilter = document.getElementById('tag-filter');
   let activeArtist = 'ALL';
   let activeTags = new Set();
-
   const artists = new Set(['ALL']);
   const tags = new Set();
   items.forEach(item => {
     if (item.dataset.artist) {
-      // カンマで分割して最初の名前のみをフィルタ用タグとして使用
       const firstArtist = item.dataset.artist.split(',')[0].trim();
       artists.add(firstArtist);
-      // フィルタリング時に照合しやすいよう、要素に正規化したアーティスト名を保持させる
       item.setAttribute('data-filter-artist', firstArtist);
     }
     item.dataset.tags.split(',').filter(t => t).forEach(t => tags.add(t));
   });
-
   function createBtn(text, container, onClick, isAll=false) {
     const btn = document.createElement('button');
     btn.className = 'filter-btn' + (isAll ? ' active' : '');
@@ -522,33 +448,26 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.onclick = () => onClick(btn, text);
     container.appendChild(btn);
   }
-
   if (artistFilter) {
     Array.from(artists).sort().forEach(a => createBtn(a, artistFilter, (btn, val) => {
       artistFilter.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active'); activeArtist = val; apply();
     }, a === 'ALL'));
   }
-
   Array.from(tags).sort().forEach(t => createBtn(t, tagFilter, (btn, val) => {
     btn.classList.toggle('active');
     if (activeTags.has(val)) activeTags.delete(val); else activeTags.add(val);
     apply();
   }));
-
   function apply() {
     items.forEach(item => {
       const aMatch = activeArtist === 'ALL' || item.getAttribute('data-filter-artist') === activeArtist;
       const tMatch = activeTags.size === 0 || Array.from(activeTags).every(t => item.dataset.tags.split(',').includes(t));
-      if (aMatch && tMatch) {
-        item.classList.remove('sort-hide'); item.style.position = 'relative'; item.style.visibility = 'visible'; item.style.pointerEvents = 'auto';
-      } else {
-        item.classList.add('sort-hide'); setTimeout(() => { if (item.classList.contains('sort-hide')) { item.style.position = 'absolute'; } }, 400);
-      }
+      if (aMatch && tMatch) { item.classList.remove('sort-hide'); item.style.position = 'relative'; item.style.visibility = 'visible'; item.style.pointerEvents = 'auto'; }
+      else { item.classList.add('sort-hide'); setTimeout(() => { if (item.classList.contains('sort-hide')) { item.style.position = 'absolute'; } }, 400); }
     });
   }
 });
-
 const btn = document.getElementById('mode-toggle');
 const body = document.body;
 const html = document.documentElement;
