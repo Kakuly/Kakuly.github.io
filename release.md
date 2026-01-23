@@ -24,12 +24,12 @@ Release - 作品集
   </div>
 </div>
 
-<div class="video-item size-mid" data-tags="Album" data-artist="Kakuly">
+<div class="video-item size-mid" data-tags="Album" data-artist="Kakuly, tato">
   <a href="https://big-up.style/AwGSfnO9I3" target="_blank" class="video-link">
     <img src="https://i9.ytimg.com/s_p/OLAK5uy_kN_SOIxifwhCGm4OMSaQY8ycqXmIzFkEc/maxresdefault.jpg?sqp=CNj4yssGir7X7AMICPm06cUGEAE=&rs=AOn4CLDd88RNpgoiSNJTKxAUe75cnL2kJQ&v=1757043321" alt="Release New Album &quot;DIRECT &amp; LOOP&quot;" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>Release New Album &quot;DIRECT &amp; LOOP&quot;</h3>
-  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Kakuly</p>
+  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Kakuly, tato</p>
   <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2025-08-05</p>
   <div class="tag-container">
     <span class="work-tag">Album</span>
@@ -48,12 +48,12 @@ Release - 作品集
   </div>
 </div>
 
-<div class="video-item size-mid" data-tags="Album" data-artist="Kakuly, tato">
+<div class="video-item size-mid" data-tags="Album" data-artist="Kakuly">
   <a href="https://big-up.style/Rfjwgu1vFD" target="_blank" class="video-link">
     <img src="https://i9.ytimg.com/s_p/OLAK5uy_nZcJam8ma9bN_41_S6VnsyXdzWlH6EAWs/maxresdefault.jpg?sqp=COyby8sGir7X7AMICNzvm70GEAE=&rs=AOn4CLBAZBEEEiMSsYwYLj0-1gRTOUS-3w&v=1738995676" alt="Release New Album &quot;Everything /// (to break me)&quot;" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>Release New Album &quot;Everything /// (to break me)&quot;</h3>
-  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Kakuly, tato</p>
+  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Kakuly</p>
   <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2024-12-30</p>
   <div class="tag-container">
     <span class="work-tag">Album</span>
