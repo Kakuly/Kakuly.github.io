@@ -232,7 +232,7 @@ def update_index_with_news():
   display: flex; 
   overflow-x: auto; 
   gap: 20px; 
-  padding: 20px 5px; /* ホバー時の浮き上がり用余白 */
+  padding: 20px 5px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -285,17 +285,18 @@ def update_index_with_news():
   background-position: center;
   background-attachment: fixed;
   padding: 100px 0;
-  margin-top: -100px; /* ヘッダー分を相殺 */
+  margin-top: -100px;
+  z-index: 1;
 }
 .hero-overlay {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
-  z-index: 1;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));
+  z-index: 2;
 }
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   width: 90%;
   max-width: 1100px;
   color: #fff;
@@ -313,13 +314,14 @@ def update_index_with_news():
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  z-index: 1;
 }
 .section-inner {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 40px;
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 </style>
 
@@ -350,46 +352,48 @@ window.onclick = function(event) {
         with open(INDEX_FILE, 'r', encoding='utf-8') as f:
             content = f.read()
         
-        # 既存のニュースセクションがある場合は置換、ない場合は挿入
+        # 1. 重複したニュースセクションをすべて削除
         import re
         pattern = r'<!-- NEWS_START -->.*?<!-- NEWS_END -->'
-        if re.search(pattern, content, re.DOTALL):
-            content = re.sub(pattern, news_html, content, flags=re.DOTALL)
+        content = re.sub(pattern, '', content, flags=re.DOTALL)
         
-        # index.mdの構造を大幅に書き換える
-        # フロントマターを取得
+        # 2. 重複したHTMLタグ（hero-section, content-section）をクリーンアップ
+        content = re.sub(r'<div class="hero-section".*?</div>\s*</div>\s*</div>', '', content, flags=re.DOTALL)
+        content = re.sub(r'<div class="content-section">.*?</div>\s*</div>', '', content, flags=re.DOTALL)
+        
+        # 3. フロントマターとボディを分離
         parts = content.split('---', 2)
         if len(parts) >= 3:
             front_matter = parts[1]
             body = parts[2]
             
-            # ヘッダー画像URLをフロントマターから取得（なければデフォルト）
-            header_img = "https://images.unsplash.com/photo-1514525253361-bee8718a340b?auto=format&fit=crop&w=1920&q=80"
-            if "header_image:" in front_matter:
-                header_img = re.search(r'header_image:\s*(.*)', front_matter).group(1).strip()
+            # ヘッダー画像URLをフロントマターから取得
+            header_img = ""
+            img_match = re.search(r'header_image:\s*(.*)', front_matter)
+            if img_match:
+                header_img = img_match.group(1).strip()
             
-            # AboutセクションとSNSリンクを分離
-            # ユーザーのindex.mdの構造に合わせて調整
-            # アイコン、名前、リンク、コンタクトを抽出
-            # ここでは、bodyを解析してHeroセクションとAboutセクションに分ける
-            
-            # 1. Heroセクション（画像の上にNews, アイコン, 名前, リンク, コンタクト）
-            # 2. Aboutセクション（自己紹介）
-            
-            # 簡易的な分割ロジック
+            # ボディからAboutセクションとそれ以外を分離
             body_lines = body.strip().split('\n')
             about_content = ""
             hero_info = ""
-            
             is_about = False
+            
             for line in body_lines:
-                if "About" in line or "自己紹介" in line:
+                clean_line = line.strip()
+                if not clean_line or clean_line == "Home": continue # 不要な行をスキップ
+                
+                if "About" in line or "自己紹介" in line or "2006年生まれ" in line:
                     is_about = True
+                
                 if is_about:
                     about_content += line + "\n"
                 else:
-                    hero_info += line + "\n"
+                    # HTMLタグが混入している場合は中身だけ抽出
+                    if not line.startswith('<'):
+                        hero_info += line + "\n"
             
+            # 新しい構造を組み立て
             new_body = f"""
 <div class="hero-section" style="background-image: url('{header_img}');">
   <div class="hero-overlay"></div>
@@ -411,7 +415,7 @@ window.onclick = function(event) {
             
             with open(INDEX_FILE, 'w', encoding='utf-8') as f:
                 f.write(new_content)
-            print("Updated index.md with new hero layout and news")
+            print("Cleaned and updated index.md with new hero layout")
 
 
 
