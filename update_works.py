@@ -3,6 +3,7 @@ import json
 import requests
 import google.generativeai as genai
 import html
+import re
 
 # --- 設定 ---
 API_KEY = os.environ.get('YOUTUBE_API_KEY', '')
@@ -192,29 +193,35 @@ def update_markdown():
 
 def update_index_with_news():
     news_data = load_json(NEWS_FILE)
-    if not news_data: return
-    
-    # 最新のニュースから順に並べる
-    news_data.sort(key=lambda x: x['date'], reverse=True)
     
     # ニュースセクションのHTML生成
-    news_html = '\n<!-- NEWS_START -->\n'
-    news_html += '<div class="news-section">\n'
-    news_html += '  <h2 class="section-title">NEWS</h2>\n'
-    news_html += '  <div class="news-scroll-container">\n'
-    
-    for item in news_data:
-        news_html += f'    <div class="news-card" onclick="openNewsModal(\'{item["id"]}\')">\n'
-        news_html += f'      <div class="news-card-date">{item["date"]}</div>\n'
-        news_html += f'      <div class="news-card-title">{item["title"]}</div>\n'
-        news_html += f'      <div class="news-card-content-hidden" id="news-content-{item["id"]}" style="display:none;">{html.escape(item["content"])}</div>\n'
-        news_html += '    </div>\n'
-    
-    news_html += '  </div>\n'
-    news_html += '</div>\n'
-    
-    # モーダルUIとスタイル、スクリプト
-    news_html += """
+    news_html = ''
+    if news_data:
+        # 最新のニュースから順に並べる
+        news_data.sort(key=lambda x: x['date'], reverse=True)
+        
+        # ニュースセクションのHTML生成
+        news_html = '\n<!-- NEWS_START -->\n'
+        news_html += '<div class="news-section-wrapper">\n'
+        news_html += '  <h2 class="section-title">NEWS</h2>\n'
+        news_html += '  <div class="news-scroll-container">\n'
+        
+        for item in news_data:
+            # ニュース本文の改行を <br> に変換して、HTMLとして安全にエスケープ
+            content_escaped = html.escape(item["content"]).replace('\n', '<br>')
+            
+            news_html += f'    <div class="news-card" onclick="openNewsModal(\'{item["id"]}\')">\n'
+            news_html += f'      <div class="news-card-date">{item["date"]}</div>\n'
+            news_html += f'      <div class="news-card-title">{item["title"]}</div>\n'
+            # モーダル用のコンテンツを非表示のまま保持
+            news_html += f'      <div class="news-card-content-hidden" id="news-content-{item["id"]}" style="display:none;">{content_escaped}</div>\n'
+            news_html += '    </div>\n'
+        
+        news_html += '  </div>\n'
+        news_html += '</div>\n'
+        
+        # モーダルUIとスタイル、スクリプト
+        news_html += """
 <div id="news-modal" class="modal">
   <div class="modal-content">
     <span class="close-modal" onclick="closeNewsModal()">&times;</span>
@@ -225,9 +232,9 @@ def update_index_with_news():
 </div>
 
 <style>
-/* ニュースセクション */
-.news-section { margin: 40px 0; overflow: visible; position: relative; z-index: 10; }
-.section-title { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; margin-bottom: 20px; letter-spacing: -0.05em; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+/* ニュースセクション専用スタイル */
+.news-section-wrapper { margin: 40px 0; overflow: visible; position: relative; z-index: 10; }
+.news-section-wrapper .section-title { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; margin-bottom: 20px; letter-spacing: -0.05em; }
 .news-scroll-container { 
   display: flex; 
   overflow-x: auto; 
@@ -240,21 +247,19 @@ def update_index_with_news():
 
 .news-card { 
   flex: 0 0 280px; 
-  background: rgba(255, 255, 255, 0.1); 
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2); 
+  background: var(--bg-color); 
+  border: 1px solid var(--text-color); 
   border-radius: 15px; 
   padding: 20px; 
   cursor: pointer; 
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-  color: #fff;
+  color: var(--text-color);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 .news-card:hover { 
-  transform: translateY(-10px); 
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.3); 
-  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-5px); 
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
+  border-color: var(--text-color);
 }
 .news-card-date { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; opacity: 0.7; margin-bottom: 8px; }
 .news-card-title { font-size: 1rem; font-weight: 700; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
@@ -262,98 +267,23 @@ def update_index_with_news():
 /* モーダル */
 .modal { display: none; position: fixed; z-index: 100001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
 .modal-content { background-color: var(--bg-color); margin: 10% auto; padding: 40px; border-radius: 20px; width: 85%; max-width: 600px; position: relative; color: var(--text-color); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-.close-modal { position: absolute; right: 25px; top: 20px; font-size: 28px; font-weight: bold; cursor: pointer; opacity: 0.5; }
-.close-modal:hover { opacity: 1; }
+.close-modal { color: var(--text-color); float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
 .modal-date { font-family: 'Montserrat', sans-serif; font-size: 0.9rem; opacity: 0.5; margin-bottom: 10px; }
 .modal-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
 .modal-body { font-size: 1rem; line-height: 1.8; white-space: pre-wrap; }
-
-/* ヘッダー画像とオーバーレイ */
-.hero-section {
-  position: relative;
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  min-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  padding: 100px 0;
-  margin-top: -100px;
-  z-index: 1;
-}
-.hero-overlay {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));
-  z-index: 2;
-}
-.hero-content {
-  position: relative;
-  z-index: 3;
-  width: 90%;
-  max-width: 1100px;
-  color: #fff;
-}
-
-/* セクション背景 */
-.content-section {
-  position: relative;
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  padding: 100px 0;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  z-index: 1;
-}
-.section-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 40px;
-  position: relative;
-  z-index: 3;
-}
-
-.profile-overlay {
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-}
-.profile-overlay img {
-  border-radius: 20px;
-  max-width: 200px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-.profile-overlay h1, .profile-overlay .name {
-  font-size: 4rem;
-  font-weight: 900;
-  margin: 0;
-  line-height: 1;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-}
 </style>
 
 <script>
 function openNewsModal(id) {
-  const card = document.querySelector(`#news-content-${id}`).parentElement;
+  const contentElement = document.getElementById(`news-content-${id}`);
+  const card = contentElement.closest('.news-card');
   const title = card.querySelector('.news-card-title').innerText;
   const date = card.querySelector('.news-card-date').innerText;
-  const content = document.getElementById(`news-content-${id}`).innerText;
+  const content = contentElement.innerHTML.replace(/<br>/g, '\\n'); // HTMLを読み込み、改行を復元
+  
   document.getElementById('modal-title').innerText = title;
   document.getElementById('modal-date').innerText = date;
-  document.getElementById('modal-body').innerText = content;
+  document.getElementById('modal-body').innerHTML = content; // HTMLとして挿入
   document.getElementById('news-modal').style.display = "block";
   document.body.style.overflow = "hidden";
 }
@@ -369,18 +299,89 @@ window.onclick = function(event) {
 """
 
     # ユーザーが最初に提供した index.md の正しい構造をテンプレートとして定義
-    # これをベースに毎回作り直すことで、デザイン崩れを永久に防ぐ
+    # ニュースセクションをAboutの上に挿入し、ヘッダー画像はCSSで実現する
     INDEX_TEMPLATE = """---
 layout: page
 title: Home
-header_image: {header_image}
 ---
 
-<div class="hero-section" style="background-image: url('{header_image}');">
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    {news_html}
-    <div class="profile-overlay">
+<!-- ヘッダー画像とプロファイルオーバーレイのカスタムHTML/CSSを挿入 -->
+<style>
+/* ヘッダー画像とオーバーレイ */
+.kakuly-hero-section {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 100px 0;
+  margin-top: -100px; /* Jekyllのヘッダーを相殺 */
+  z-index: 1;
+  background-image: url('{header_image}');
+}
+.kakuly-hero-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));
+  z-index: 2;
+}
+.kakuly-hero-content {
+  position: relative;
+  z-index: 3;
+  width: 90%;
+  max-width: 1100px;
+  color: #fff;
+  padding: 0 40px; /* 左右のパディングを確保 */
+}
+.kakuly-profile-overlay {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.kakuly-profile-overlay img {
+  border-radius: 20px;
+  max-width: 200px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+.kakuly-profile-overlay h1, .kakuly-profile-overlay .name {
+  font-size: 4rem;
+  font-weight: 900;
+  margin: 0;
+  line-height: 1;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+.kakuly-profile-overlay .links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5rem;
+    margin-right: 15px;
+    transition: opacity 0.3s;
+}
+.kakuly-profile-overlay .links a:hover { opacity: 0.7; }
+
+/* 既存のJekyllラッパーを尊重するための調整 */
+.wrapper {
+    max-width: 1100px !important;
+    padding-right: 40px !important;
+    padding-left: 40px !important;
+}
+</style>
+
+<div class="kakuly-hero-section">
+  <div class="kakuly-hero-overlay"></div>
+  <div class="kakuly-hero-content">
+    <div class="kakuly-profile-overlay">
       <img src="https://pbs.twimg.com/profile_images/1879541331043364864/mYp7399t_400x400.jpg" alt="Kakuly">
       <h1 class="name">Kakuly</h1>
       <div class="links">
@@ -391,28 +392,22 @@ header_image: {header_image}
   </div>
 </div>
 
-<div class="content-section">
-  <div class="section-inner">
-    ## About
-    2006年生まれ。2020年から音楽活動を開始。エレクトロポップ / ハイパーポップを中心に、たくさん迷いながら音楽を作っている。元気に生きるために音楽を摂取します。いつもありがとう。
+<!-- ニュースセクションを挿入 -->
+{news_html}
 
-    ## Contact
-    [DM on X](https://x.com/Kakuly_)
-    kakuly.work@gmail.com
-  </div>
-</div>
+<!-- 既存のAboutセクションをMarkdownで記述 -->
+## About
+2006年生まれ。2020年から音楽活動を開始。エレクトロポップ / ハイパーポップを中心に、たくさん迷いながら音楽を作っている。元気に生きるために音楽を摂取します。いつもありがとう。
+
+## Contact
+[DM on X](https://x.com/Kakuly_)
+kakuly.work@gmail.com
 """
 
     # ヘッダー画像URLを既存の index.md から取得（なければデフォルト）
+    # ユーザーが指定したURLを優先
     header_img = "https://images.unsplash.com/photo-1514525253361-bee8718a340b?auto=format&fit=crop&w=1920&q=80"
-    if os.path.exists(INDEX_FILE):
-        with open(INDEX_FILE, 'r', encoding='utf-8') as f:
-            content = f.read()
-            import re
-            img_match = re.search(r'header_image:\s*(.*)', content)
-            if img_match:
-                header_img = img_match.group(1).strip()
-
+    
     # テンプレートに流し込んで index.md を完全再生成
     new_content = INDEX_TEMPLATE.format(
         header_image=header_img,
@@ -424,8 +419,9 @@ header_image: {header_image}
     print("Regenerated index.md from template to prevent design corruption")
 
 
-
 def generate_page_content(title, works_data, permalink, show_artist):
+    # ... (Worksページの生成ロジックは変更なし) ...
+    # 簡略化のため、元のコードをそのまま残す
     content = f"---\nlayout: page\ntitle: {title}\npermalink: {permalink}\n---\n\n"
     content += f"{title} - 作品集\n"
     
@@ -513,7 +509,7 @@ def generate_page_content(title, works_data, permalink, show_artist):
 @media screen and (max-width: 900px) { .video-item.size-mid, .video-item.size-max { grid-column: span 1; grid-row: span 1; } }
 .size-mid .video-thumbnail, .size-max .video-thumbnail { aspect-ratio: auto; height: auto; min-height: 200px; }
 
-/* --- 元のデザイン設定 (完全維持) --- */
+/* --- 元のデザイン設定 (Worksページ用) --- */
 .tag-container { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 5px; }
 .work-tag { font-size: 0.57rem; padding: 1px 6px; border-radius: 4px; border: 0.5px solid var(--text-color); opacity: 0.88; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
 .video-thumbnail { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -533,6 +529,7 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 .video-item h3 { font-family: 'Noto Sans JP', sans-serif !important; font-size: 0.85rem !important; height: auto !important; min-height: 1.3em; overflow: hidden; margin-bottom: 0px !important; line-height: 1.3; }
 .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
 
+/* --- モード切替ボタンの設定（レスポンシブ対応） --- */
 #mode-toggle { 
     cursor: pointer; 
     background: transparent; 
@@ -546,18 +543,19 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
     right: 20px; 
     z-index: 9999; 
     font-weight: 700;
-    font-family: 'Montserrat', sans-serif !important; 
+    font-family: 'Montserrat', sans-serif !important; /* フォントを明示的に指定 */
     transition: all 0.3s ease;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
 
+/* 画面幅が1300px以下になったら右下に移動 */
 @media screen and (max-width: 1500px) {
     #mode-toggle {
         top: auto !important;
         bottom: 20px !important;
         right: 20px !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* 下に移動したときに見やすく */
     }
 }
 
