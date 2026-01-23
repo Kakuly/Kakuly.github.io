@@ -666,13 +666,14 @@ permalink: /works/
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform: scale(1);
   opacity: 1;
+  /* アニメーション中の重なりを防ぐ */
+  backface-visibility: hidden;
 }
 .video-item.sort-hide {
   opacity: 0;
   transform: scale(0.95);
   pointer-events: none;
-  position: absolute; 
-  visibility: hidden;
+  /* visibilityを即座に変えず、アニメーション後にJSで制御する */
 }
 
 /* --- 元のデザイン設定 (完全維持) --- */
@@ -787,14 +788,18 @@ function handleImageError(img) {
         
         if (isVisible) {
           item.classList.remove('sort-hide');
-          item.style.display = ''; // 表示を戻す
+          item.style.display = ''; 
+          item.style.position = 'relative';
           item.style.pointerEvents = 'auto';
           item.style.visibility = 'visible';
         } else {
           item.classList.add('sort-hide');
+          item.style.pointerEvents = 'none';
+          // アニメーション時間(0.4s)待ってから完全に消す
           setTimeout(() => {
             if (item.classList.contains('sort-hide')) {
-              item.style.display = 'none'; // 完全に消す
+              item.style.display = 'none';
+              item.style.position = 'absolute';
             }
           }, 400);
         }
