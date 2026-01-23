@@ -4,7 +4,7 @@ title: Works
 permalink: /works/
 ---
 
-Works - 作品集
+My Works
 <div id="filter-container" class="filter-wrapper">
   <div id="tag-filter" style="display:flex; flex-wrap:wrap; gap:12px; width:100%;"></div>
 </div>

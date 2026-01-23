@@ -4,7 +4,7 @@ title: Release
 permalink: /release/
 ---
 
-Release - 作品集
+My Release
 <div id="filter-container" class="filter-wrapper">
   <div id="artist-filter" style="display:flex; flex-wrap:wrap; gap:12px; width:100%; margin-bottom:10px;"></div>
   <div id="tag-filter" style="display:flex; flex-wrap:wrap; gap:12px; width:100%;"></div>
