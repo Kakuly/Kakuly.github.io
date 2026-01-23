@@ -19,12 +19,14 @@ title: Home
         <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" alt="X">
       </a>
     </div>
-  </div>
-</div>
+
 
 2006年生まれ。2020年から音楽活動を開始。
 エレクトロポップ／ハイパーポップを中心に、たくさん迷いながら音楽を作っている。
 元気に生きるために音楽を摂取します。いつもありがとう。
+  </div>
+</div>
+
 <br>
 <br>
 <h2>CONTACT</h2><br>
