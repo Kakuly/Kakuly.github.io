@@ -321,7 +321,7 @@ function openNewsModal(id) {
   
   // URLを検知して <a> タグに変換する正規表現
   let content = contentElement.innerHTML;
-  const urlRegex = /https?:\/\/[^ \s<]+/g;
+  const urlRegex = /https?:\/\/[^\s<]+/g;
   content = content.replace(urlRegex, function(url) {
     return '<a href="' + url + '" target="_blank" rel="noopener noreferrer" style="color: #007bff; text-decoration: underline;">' + url + '</a>';
   });
@@ -342,7 +342,7 @@ window.onclick = function(event) {
 </script>
 """
 if not os.path.exists(INDEX_FILE): return
-    with open(INDEX_FILE, 'r', encoding='utf-8') as f: 
+    with open(INDEX_FILE, 'r', encoding='utf-8') as f:
         index_content = f.read()
 
     start_idx = index_content.find(NEWS_START_MARKER)
@@ -363,7 +363,9 @@ if not os.path.exists(INDEX_FILE): return
             updated_content = index_content[:start_idx] + new_block + index_content[end_idx + len(NEWS_END_MARKER):]
         else:
             updated_content = index_content
-    with open(INDEX_FILE, 'w', encoding='utf-8') as f: f.write(updated_content)
+
+    with open(INDEX_FILE, 'w', encoding='utf-8') as f:
+        f.write(updated_content)
 
 def generate_page_content(title, works_data, permalink, show_artist):
     content = f"---\nlayout: page\ntitle: {title}\npermalink: {permalink}\n---\n\n"
