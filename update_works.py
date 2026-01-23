@@ -170,7 +170,7 @@ def update_markdown():
 
 def generate_page_content(title, works_data, permalink, show_artist):
     content = f"---\nlayout: page\ntitle: {title}\npermalink: {permalink}\n---\n\n"
-    content += f"{title} - 作品集\n"
+    content += f"My {title}\n"
     
     content += '<div id="filter-container" class="filter-wrapper">\n'
     if show_artist:
