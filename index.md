@@ -93,6 +93,7 @@ title: Home
 <!-- ニュースセクションを挿入 -->
 
 <!-- NEWS_START -->
+
 <div class="news-section-wrapper">
   <h2 class="section-title">NEWS</h2>
   <div class="news-scroll-container">
@@ -120,19 +121,19 @@ title: Home
 
 <style>
 /* ニュースセクション専用スタイル */
-.news-section-wrapper {{ margin: 40px 0; overflow: visible; position: relative; z-index: 10; }}
-.news-section-wrapper .section-title {{ font-family: 'Montserrat', sans-serif; font-size: 1.8rem; margin-bottom: 20px; letter-spacing: -0.05em; }}
-.news-scroll-container {{ 
+.news-section-wrapper { margin: 40px 0; overflow: visible; position: relative; z-index: 10; }
+.news-section-wrapper .section-title { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; margin-bottom: 20px; letter-spacing: -0.05em; }
+.news-scroll-container { 
   display: flex; 
   overflow-x: auto; 
   gap: 20px; 
   padding: 20px 5px;
   scrollbar-width: none;
   -ms-overflow-style: none;
-}}
-.news-scroll-container::-webkit-scrollbar {{ display: none; }}
+}
+.news-scroll-container::-webkit-scrollbar { display: none; }
 
-.news-card {{ 
+.news-card { 
   flex: 0 0 280px; 
   background: var(--bg-color); 
   border: 1px solid var(--text-color); 
@@ -142,46 +143,47 @@ title: Home
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   color: var(--text-color);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}}
-.news-card:hover {{ 
+}
+.news-card:hover { 
   transform: translateY(-5px); 
   box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
   border-color: var(--text-color);
-}}
-.news-card-date {{ font-family: 'Montserrat', sans-serif; font-size: 0.75rem; opacity: 0.7; margin-bottom: 8px; }}
-.news-card-title {{ font-size: 1rem; font-weight: 700; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }}
+}
+.news-card-date { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; opacity: 0.7; margin-bottom: 8px; }
+.news-card-title { font-size: 1rem; font-weight: 700; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
 /* モーダル */
-.modal {{ display: none; position: fixed; z-index: 100001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }}
-.modal-content {{ background-color: var(--bg-color); margin: 10% auto; padding: 40px; border-radius: 20px; width: 85%; max-width: 600px; position: relative; color: var(--text-color); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }}
-.close-modal {{ color: var(--text-color); float: right; font-size: 28px; font-weight: bold; cursor: pointer; }}
-.modal-date {{ font-family: 'Montserrat', sans-serif; font-size: 0.9rem; opacity: 0.5; margin-bottom: 10px; }}
-.modal-title {{ font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }}
-.modal-body {{ font-size: 1rem; line-height: 1.8; white-space: pre-wrap; }}
+.modal { display: none; position: fixed; z-index: 100001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
+.modal-content { background-color: var(--bg-color); margin: 10% auto; padding: 40px; border-radius: 20px; width: 85%; max-width: 600px; position: relative; color: var(--text-color); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+.close-modal { color: var(--text-color); float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+.modal-date { font-family: 'Montserrat', sans-serif; font-size: 0.9rem; opacity: 0.5; margin-bottom: 10px; }
+.modal-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
+.modal-body { font-size: 1rem; line-height: 1.8; white-space: pre-wrap; }
 </style>
 
 <script>
-function openNewsModal(id) {{
-  const contentElement = document.getElementById(`news-content-${{id}}`);
+function openNewsModal(id) {
+  const contentElement = document.getElementById(`news-content-${id}`);
   const card = contentElement.closest('.news-card');
   const title = card.querySelector('.news-card-title').innerText;
   const date = card.querySelector('.news-card-date').innerText;
-  const content = contentElement.innerHTML.replace(/<br>/g, '\n'); // HTMLを読み込み、改行を復元
+  const content = contentElement.innerHTML; // HTMLとして取得
   
   document.getElementById('modal-title').innerText = title;
   document.getElementById('modal-date').innerText = date;
   document.getElementById('modal-body').innerHTML = content; // HTMLとして挿入
   document.getElementById('news-modal').style.display = "block";
   document.body.style.overflow = "hidden";
-}}
-function closeNewsModal() {{
+}
+function closeNewsModal() {
   document.getElementById('news-modal').style.display = "none";
   document.body.style.overflow = "auto";
-}}
-window.onclick = function(event) {{
+}
+window.onclick = function(event) {
   if (event.target == document.getElementById('news-modal')) closeNewsModal();
-}}
+}
 </script>
+
 <!-- NEWS_END -->
 
 
