@@ -2,7 +2,7 @@
 layout: home
 title: Home
 ---
-<div class="custom-section" style="background-image: url('/assets/img/header_kakuly.png');">
+<div class="custom-section" style="background-image: url('/assets/img/header_kakuly.jpg');">
   <div class="section-content">
 
     <div class="profile-container">
