@@ -19,6 +19,88 @@ title: Home
   </div>
 </div>
 
+<!-- NEWS_START -->
+<div class="news-section">
+  <h2 class="section-title">NEWS</h2>
+  <div class="news-scroll-container">
+    <div class="news-card" onclick="openNewsModal('1')">
+      <div class="news-card-date">2026-01-23</div>
+      <div class="news-card-title">ポートフォリオサイトをリニューアルしました</div>
+      <div class="news-card-content-hidden" id="news-content-1" style="display:none;">ポートフォリオサイトのデザインを一新し、ニュースセクションを追加しました。今後はこちらで最新情報をお届けします。</div>
+    </div>
+    <div class="news-card" onclick="openNewsModal('2')">
+      <div class="news-card-date">2026-01-20</div>
+      <div class="news-card-title">新しい楽曲を公開しました</div>
+      <div class="news-card-content-hidden" id="news-content-2" style="display:none;">YouTubeにて新しい制作楽曲を公開しました。ぜひWorksページからチェックしてください。</div>
+    </div>
+  </div>
+</div>
+
+<div id="news-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeNewsModal()">&times;</span>
+    <div id="modal-date" class="modal-date"></div>
+    <h2 id="modal-title" class="modal-title"></h2>
+    <div id="modal-body" class="modal-body"></div>
+  </div>
+</div>
+
+<style>
+.news-section { margin: 60px 0; overflow: hidden; }
+.section-title { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; margin-bottom: 30px; letter-spacing: -0.05em; }
+.news-scroll-container { 
+  display: flex; 
+  overflow-x: auto; 
+  gap: 20px; 
+  padding-bottom: 20px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.news-scroll-container::-webkit-scrollbar { display: none; }
+.news-card { 
+  flex: 0 0 300px; 
+  background: var(--bg-color); 
+  border: 1px solid var(--text-color); 
+  border-radius: 15px; 
+  padding: 25px; 
+  cursor: pointer; 
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+.news-card:hover { opacity: 1; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+.news-card-date { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; opacity: 0.5; margin-bottom: 10px; }
+.news-card-title { font-size: 1.1rem; font-weight: 700; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.modal { display: none; position: fixed; z-index: 100001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
+.modal-content { background-color: var(--bg-color); margin: 10% auto; padding: 40px; border-radius: 20px; width: 80%; max-width: 600px; position: relative; color: var(--text-color); }
+.close-modal { position: absolute; right: 25px; top: 20px; font-size: 28px; font-weight: bold; cursor: pointer; opacity: 0.5; }
+.close-modal:hover { opacity: 1; }
+.modal-date { font-family: 'Montserrat', sans-serif; font-size: 0.9rem; opacity: 0.5; margin-bottom: 10px; }
+.modal-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
+.modal-body { font-size: 1rem; line-height: 1.8; white-space: pre-wrap; }
+</style>
+
+<script>
+function openNewsModal(id) {
+  const card = document.querySelector(`#news-content-${id}`).parentElement;
+  const title = card.querySelector('.news-card-title').innerText;
+  const date = card.querySelector('.news-card-date').innerText;
+  const content = document.getElementById(`news-content-${id}`).innerText;
+  document.getElementById('modal-title').innerText = title;
+  document.getElementById('modal-date').innerText = date;
+  document.getElementById('modal-body').innerText = content;
+  document.getElementById('news-modal').style.display = "block";
+  document.body.style.overflow = "hidden";
+}
+function closeNewsModal() {
+  document.getElementById('news-modal').style.display = "none";
+  document.body.style.overflow = "auto";
+}
+window.onclick = function(event) {
+  if (event.target == document.getElementById('news-modal')) closeNewsModal();
+}
+</script>
+<!-- NEWS_END -->
+
 2006年生まれ。2020年から音楽活動を開始。
 エレクトロポップ／ハイパーポップを中心に、たくさん迷いながら音楽を作っている。
 元気に生きるために音楽を摂取します。いつもありがとう。
