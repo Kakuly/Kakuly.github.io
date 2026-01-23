@@ -167,11 +167,11 @@ function openNewsModal(id) {
   const card = contentElement.closest('.news-card');
   const title = card.querySelector('.news-card-title').innerText;
   const date = card.querySelector('.news-card-date').innerText;
-  const content = contentElement.innerHTML; // HTMLとして取得
+  const content = contentElement.innerHTML;
   
   document.getElementById('modal-title').innerText = title;
   document.getElementById('modal-date').innerText = date;
-  document.getElementById('modal-body').innerHTML = content; // HTMLとして挿入
+  document.getElementById('modal-body').innerHTML = content;
   document.getElementById('news-modal').style.display = "block";
   document.body.style.overflow = "hidden";
 }
