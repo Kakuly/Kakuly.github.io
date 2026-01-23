@@ -21,6 +21,19 @@ permalink: /works/
   </div>
 </div>
 
+<div class="video-item size-mid" data-tags="Release,EP,Music">
+  <a href="https://big-up.style/21Wcz2jUF8" target="_blank" class="video-link">
+    <img src="https://i9.ytimg.com/s_p/OLAK5uy_mJlf5VGWY5BLOE9qdiwONY2lvvPEaSl8c/maxresdefault.jpg?sqp=COyby8sGir7X7AMICJv9_MoGEAE=&rs=AOn4CLCf-LUaCfhefvq0A23U0_ggmkV7iw&v=1767849627" alt="Release New EP &quot;snowflaking&quot;" class="video-thumbnail" loading="lazy">
+  </a>
+  <h3 class='video-title'>Release New EP &quot;snowflaking&quot;</h3>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2025-12-26</p>
+  <div class="tag-container">
+    <span class="work-tag">Release</span>
+    <span class="work-tag">EP</span>
+    <span class="work-tag">Music</span>
+  </div>
+</div>
+
 <div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=p4M5wHkNHmc" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/p4M5wHkNHmc/maxresdefault.jpg" data-video-id="p4M5wHkNHmc" data-error-attempt="0" alt="『pluie.』feat. mare - Official Video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
