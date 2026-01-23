@@ -2,6 +2,7 @@
 layout: page
 title: Works
 permalink: /works/page2/
+nav_exclude: true
 ---
 
 関わった／制作した作品集
