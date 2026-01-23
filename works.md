@@ -5,16 +5,12 @@ permalink: /works/
 ---
 
 関わった／制作した作品集
-<div class="pagination-nav">
-  <span class="pagination-info">Page 1 / 2</span>
-  <a href="/works/page2/" class="pagination-btn">次のページ →</a>
-</div>
 
 <div id="filter-container" class="filter-wrapper"></div>
 
 <div class="video-grid" id="video-grid">
 
-<div class="video-item" data-tags="Arrangement">
+<div class="video-item size-min" data-tags="Arrangement">
   <a href="https://www.youtube.com/watch?v=2lR1nUQQqL8" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/2lR1nUQQqL8/maxresdefault.jpg" data-video-id="2lR1nUQQqL8" data-error-attempt="0" alt="光って☆イルミネーション covered by ねあ" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -25,7 +21,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=p4M5wHkNHmc" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/p4M5wHkNHmc/maxresdefault.jpg" data-video-id="p4M5wHkNHmc" data-error-attempt="0" alt="『pluie.』feat. mare - Official Video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -36,7 +32,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Arrangement">
+<div class="video-item size-min" data-tags="Arrangement">
   <a href="https://www.youtube.com/watch?v=DKWdmJ1uxBc" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/DKWdmJ1uxBc/maxresdefault.jpg" data-video-id="DKWdmJ1uxBc" data-error-attempt="0" alt="マイクラで作った「モニタリング」を最強歌い手グループと歌ってみた！！【いれいすコラボ】" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -47,7 +43,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mastering">
+<div class="video-item size-min" data-tags="Mastering">
   <a href="https://www.youtube.com/watch?v=csfPVDnVqiE" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/csfPVDnVqiE/maxresdefault.jpg" data-video-id="csfPVDnVqiE" data-error-attempt="0" alt="ダイアグラム / 初音ミク" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -58,7 +54,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie,Mix">
+<div class="video-item size-min" data-tags="Movie,Mix">
   <a href="https://www.youtube.com/watch?v=XIGbiSGclgA" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/XIGbiSGclgA/maxresdefault.jpg" data-video-id="XIGbiSGclgA" data-error-attempt="0" alt="Departure / 姫野　- tato (cover)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -70,7 +66,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mix">
+<div class="video-item size-min" data-tags="Mix">
   <a href="https://www.youtube.com/watch?v=Ef0_l9GeIR0" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/Ef0_l9GeIR0/maxresdefault.jpg" data-video-id="Ef0_l9GeIR0" data-error-attempt="0" alt="マジか！ / 梓川　- tato (cover)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -81,7 +77,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mastering">
+<div class="video-item size-min" data-tags="Mastering">
   <a href="https://www.youtube.com/watch?v=OBkLjALyriw" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/OBkLjALyriw/maxresdefault.jpg" data-video-id="OBkLjALyriw" data-error-attempt="0" alt="街の残像 / 可不 × あばらや【YouTube Music Weekend 10.0】" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -92,7 +88,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=3WIhsuX1twI" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/3WIhsuX1twI/maxresdefault.jpg" data-video-id="3WIhsuX1twI" data-error-attempt="0" alt="ホロウランド / 可不" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -103,7 +99,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mastering">
+<div class="video-item size-min" data-tags="Mastering">
   <a href="https://www.youtube.com/watch?v=HYdsv2lrAwM" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/HYdsv2lrAwM/maxresdefault.jpg" data-video-id="HYdsv2lrAwM" data-error-attempt="0" alt="Laurier - 初音ミク" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -114,7 +110,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=5ZQaFyDvkQo" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/5ZQaFyDvkQo/maxresdefault.jpg" data-video-id="5ZQaFyDvkQo" data-error-attempt="0" alt="アイラビュ / GYU P feat.初音ミク" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -125,7 +121,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Release,Album,Music">
+<div class="video-item size-min" data-tags="Release,Album,Music">
   <a href="https://big-up.style/AwGSfnO9I3" target="_blank" class="video-link">
     <img src="https://i9.ytimg.com/s_p/OLAK5uy_kN_SOIxifwhCGm4OMSaQY8ycqXmIzFkEc/maxresdefault.jpg?sqp=CNj4yssGir7X7AMICPm06cUGEAE=&rs=AOn4CLDd88RNpgoiSNJTKxAUe75cnL2kJQ&v=1757043321" alt="Release New Album &quot;DIRECT &amp; LOOP&quot;" class="video-thumbnail" loading="lazy">
   </a>
@@ -138,7 +134,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mix,Movie">
+<div class="video-item size-min" data-tags="Mix,Movie">
   <a href="https://www.youtube.com/watch?v=zwptzlQnSYo" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/zwptzlQnSYo/maxresdefault.jpg" data-video-id="zwptzlQnSYo" data-error-attempt="0" alt="24/7 / 201　- tato (cover)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -150,7 +146,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mastering">
+<div class="video-item size-min" data-tags="Mastering">
   <a href="https://www.youtube.com/watch?v=cknsKkzA2lM" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/cknsKkzA2lM/maxresdefault.jpg" data-video-id="cknsKkzA2lM" data-error-attempt="0" alt="サ終あざした / 重音テトSV" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -161,7 +157,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mix">
+<div class="video-item size-min" data-tags="Mix">
   <a href="https://www.youtube.com/watch?v=vMGuvZlP3R8" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/vMGuvZlP3R8/maxresdefault.jpg" data-video-id="vMGuvZlP3R8" data-error-attempt="0" alt="しじまのはて / 青は止まれ　- tato (cover)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -172,7 +168,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=qWfR7J7Dy5k" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/qWfR7J7Dy5k/maxresdefault.jpg" data-video-id="qWfR7J7Dy5k" data-error-attempt="0" alt="さようならのそら / feat.カゼヒキV" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -183,7 +179,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mix">
+<div class="video-item size-min" data-tags="Mix">
   <a href="https://www.youtube.com/watch?v=ecDT8mnhgFw" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/ecDT8mnhgFw/maxresdefault.jpg" data-video-id="ecDT8mnhgFw" data-error-attempt="0" alt="IN_MY_HEAD / なとり　- tato (cover)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -194,7 +190,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=Tpwp2UGKy_Y" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/Tpwp2UGKy_Y/maxresdefault.jpg" data-video-id="Tpwp2UGKy_Y" data-error-attempt="0" alt="『生活の中で、』feat. yureru. - Official Video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -205,7 +201,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=tpJslyfTvz8" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/tpJslyfTvz8/maxresdefault.jpg" data-video-id="tpJslyfTvz8" data-error-attempt="0" alt="shikisai 2nd Album『WORLDSEND』XFD" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -216,7 +212,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mix">
+<div class="video-item size-min" data-tags="Mix">
   <a href="https://www.youtube.com/watch?v=wL0tXapyBEo" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/wL0tXapyBEo/maxresdefault.jpg" data-video-id="wL0tXapyBEo" data-error-attempt="0" alt="テレパシ / DECO*27　- tato (cover)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -227,7 +223,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mastering">
+<div class="video-item size-min" data-tags="Mastering">
   <a href="https://www.youtube.com/watch?v=LW1KBCgvEPQ" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/LW1KBCgvEPQ/maxresdefault.jpg" data-video-id="LW1KBCgvEPQ" data-error-attempt="0" alt="花弁、それにまつわる音声 / 初音ミク" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -238,7 +234,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=RJo_8VY7fwI" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/RJo_8VY7fwI/maxresdefault.jpg" data-video-id="RJo_8VY7fwI" data-error-attempt="0" alt="ennui. / 初音ミク - Music Video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -249,7 +245,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=IFSJK6szxfU" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/IFSJK6szxfU/maxresdefault.jpg" data-video-id="IFSJK6szxfU" data-error-attempt="0" alt="Akari24 - her messages / feat.可不 , 裏命" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -260,7 +256,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=VcP7frBXuWU" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/VcP7frBXuWU/hqdefault.jpg" data-video-id="VcP7frBXuWU" data-error-attempt="0" alt="ドリームミュージアム / GYU P feat.初音ミク" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -271,7 +267,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=UFgA9gCuc7A" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/UFgA9gCuc7A/maxresdefault.jpg" data-video-id="UFgA9gCuc7A" data-error-attempt="0" alt="1st Digital EP &quot;Hyper Mode&quot; [XFD]" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -282,7 +278,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=gamQG0XaJKU" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/gamQG0XaJKU/maxresdefault.jpg" data-video-id="gamQG0XaJKU" data-error-attempt="0" alt="シャワールーム・ファンタジー / 初音ミク" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -293,7 +289,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mastering">
+<div class="video-item size-min" data-tags="Mastering">
   <a href="https://www.youtube.com/watch?v=XWUiZPA86tY" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/XWUiZPA86tY/maxresdefault.jpg" data-video-id="XWUiZPA86tY" data-error-attempt="0" alt="アンダーカバー。/ 初音ミク、ゲキヤク" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -304,7 +300,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=LPci3mEA5AA" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/LPci3mEA5AA/maxresdefault.jpg" data-video-id="LPci3mEA5AA" data-error-attempt="0" alt="贅沢と君とカプチーノ / 初音ミク, 鏡音リン" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -315,7 +311,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=gF38NoZ4-HI" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/gF38NoZ4-HI/maxresdefault.jpg" data-video-id="gF38NoZ4-HI" data-error-attempt="0" alt="Akari24 - Juvenile Delinquency / feat.可不" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -326,7 +322,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=Lc-TJN8erLk" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/Lc-TJN8erLk/maxresdefault.jpg" data-video-id="Lc-TJN8erLk" data-error-attempt="0" alt="晴天のスヌーズ (demo) / 初音ミク" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -337,7 +333,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=BWehHq6Yb7c" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/BWehHq6Yb7c/maxresdefault.jpg" data-video-id="BWehHq6Yb7c" data-error-attempt="0" alt="『Petrichor.』feat. たこはら - Official Video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -348,7 +344,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mastering">
+<div class="video-item size-min" data-tags="Mastering">
   <a href="https://www.youtube.com/watch?v=t1cC3pdFODA" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/t1cC3pdFODA/maxresdefault.jpg" data-video-id="t1cC3pdFODA" data-error-attempt="0" alt="かなしばりに遭ったら / 歌愛ユキ、ナースロボ＿タイプＴ" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -359,7 +355,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Arrangement,Music,Movie">
+<div class="video-item size-min" data-tags="Arrangement,Music,Movie">
   <a href="https://www.youtube.com/watch?v=zAURwtz_AY4" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/zAURwtz_AY4/maxresdefault.jpg" data-video-id="zAURwtz_AY4" data-error-attempt="0" alt="HyperPopCorn!! / 初音ミク - shikisai × Kakuly" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -372,7 +368,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=y3_eKUvco2g" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/y3_eKUvco2g/maxresdefault.jpg" data-video-id="y3_eKUvco2g" data-error-attempt="0" alt="フューチャーノーツ / 初音ミク" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -383,7 +379,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Music,Lyrics">
+<div class="video-item size-min" data-tags="Music,Lyrics">
   <a href="https://www.youtube.com/watch?v=dRd-CYI11fQ" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/dRd-CYI11fQ/maxresdefault.jpg" data-video-id="dRd-CYI11fQ" data-error-attempt="0" alt="【 XFD 】Undefined 01" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -395,7 +391,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=eSfYFhNjiB8" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/eSfYFhNjiB8/maxresdefault.jpg" data-video-id="eSfYFhNjiB8" data-error-attempt="0" alt="Akari24 - Crack Cat / feat.初音ミク" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -406,7 +402,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie,Remix">
+<div class="video-item size-min" data-tags="Movie,Remix">
   <a href="https://www.youtube.com/watch?v=YOoRO2OVICo" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/YOoRO2OVICo/maxresdefault.jpg" data-video-id="YOoRO2OVICo" data-error-attempt="0" alt="1st Album『(EN)CORE』クロスフェード" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -418,7 +414,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mastering">
+<div class="video-item size-min" data-tags="Mastering">
   <a href="https://www.youtube.com/watch?v=Z7OQL1hQ5WY" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/Z7OQL1hQ5WY/maxresdefault.jpg" data-video-id="Z7OQL1hQ5WY" data-error-attempt="0" alt="花溺れ / 初音ミク, 花奏かのんβ" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -429,7 +425,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mastering">
+<div class="video-item size-min" data-tags="Mastering">
   <a href="https://www.youtube.com/watch?v=njQVjvEXWao" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/njQVjvEXWao/maxresdefault.jpg" data-video-id="njQVjvEXWao" data-error-attempt="0" alt="死生観にさよなら / 初音ミク" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -440,7 +436,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=VIDSV4pwMt4" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/VIDSV4pwMt4/hqdefault.jpg" data-video-id="VIDSV4pwMt4" data-error-attempt="0" alt="世界は無機物でできている。 / GYU P feat.初音ミク" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -451,7 +447,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mastering,Movie">
+<div class="video-item size-min" data-tags="Mastering,Movie">
   <a href="https://www.youtube.com/watch?v=I7Q_xlnS2n8" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/I7Q_xlnS2n8/hqdefault.jpg" data-video-id="I7Q_xlnS2n8" data-error-attempt="0" alt="その銃口 / 可不" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -463,7 +459,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie,Arrangement">
+<div class="video-item size-min" data-tags="Movie,Arrangement">
   <a href="https://www.youtube.com/watch?v=bqMBuLzCyMc" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/bqMBuLzCyMc/maxresdefault.jpg" data-video-id="bqMBuLzCyMc" data-error-attempt="0" alt="Akari24 - 言葉は魔法みたい / feat.初音ミク" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -475,7 +471,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Mastering">
+<div class="video-item size-min" data-tags="Mastering">
   <a href="https://www.youtube.com/watch?v=Ls7AJ_ES3G0" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/Ls7AJ_ES3G0/maxresdefault.jpg" data-video-id="Ls7AJ_ES3G0" data-error-attempt="0" alt="Neighbor / 初音ミク" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -486,7 +482,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie,Mastering">
+<div class="video-item size-min" data-tags="Movie,Mastering">
   <a href="https://www.youtube.com/watch?v=XsjuHvYlRyc" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/XsjuHvYlRyc/maxresdefault.jpg" data-video-id="XsjuHvYlRyc" data-error-attempt="0" alt="SOLD OUT / あばらや feat.可不 (SOLD OUT / Abaraya feat. KAFU)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -498,7 +494,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Music,Lyrics">
+<div class="video-item size-min" data-tags="Music,Lyrics">
   <a href="https://www.youtube.com/watch?v=y7DwWj1gHQE" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/y7DwWj1gHQE/maxresdefault.jpg" data-video-id="y7DwWj1gHQE" data-error-attempt="0" alt="映画『カラフルピーチ/魔王と予言の少女』" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -510,7 +506,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Music,Lyrics">
+<div class="video-item size-min" data-tags="Music,Lyrics">
   <a href="https://www.youtube.com/watch?v=u3pMZtkugX8" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/u3pMZtkugX8/maxresdefault.jpg" data-video-id="u3pMZtkugX8" data-error-attempt="0" alt="【オリジナル曲】スノーダンス/yuru【Vtuber/Vsinger】" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -522,7 +518,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=HIYdKgIvG0I" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/HIYdKgIvG0I/hqdefault.jpg" data-video-id="HIYdKgIvG0I" data-error-attempt="0" alt="GYU P-『イミタティオ/ 初音ミク』【オリジナルMV】" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -533,7 +529,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Music,Lyrics">
+<div class="video-item size-min" data-tags="Music,Lyrics">
   <a href="https://www.youtube.com/watch?v=T9oeiJxs2kA" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/T9oeiJxs2kA/maxresdefault.jpg" data-video-id="T9oeiJxs2kA" data-error-attempt="0" alt="【マイクラ】サバイバルであった出来事を歌にしてみた【カラフルピーチ】" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -545,7 +541,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Arrangement">
+<div class="video-item size-min" data-tags="Arrangement">
   <a href="https://www.youtube.com/watch?v=tvtcZYBHfiQ" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/tvtcZYBHfiQ/maxresdefault.jpg" data-video-id="tvtcZYBHfiQ" data-error-attempt="0" alt="バットプロローグ/ONE" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -556,7 +552,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Movie">
+<div class="video-item size-min" data-tags="Movie">
   <a href="https://www.youtube.com/watch?v=o94Im34pHHk" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/o94Im34pHHk/maxresdefault.jpg" data-video-id="o94Im34pHHk" data-error-attempt="0" alt="【MV】アーティフィシャルスマイル／可不" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -567,7 +563,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Arrangement">
+<div class="video-item size-min" data-tags="Arrangement">
   <a href="https://www.youtube.com/watch?v=owXBgyrXQFg" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/owXBgyrXQFg/maxresdefault.jpg" data-video-id="owXBgyrXQFg" data-error-attempt="0" alt="9m" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -578,7 +574,7 @@ permalink: /works/
   </div>
 </div>
 
-<div class="video-item" data-tags="Remix">
+<div class="video-item size-min" data-tags="Remix">
   <a href="https://www.youtube.com/watch?v=cJ9pKeN1kWI" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/cJ9pKeN1kWI/maxresdefault.jpg" data-video-id="cJ9pKeN1kWI" data-error-attempt="0" alt="ボカロP１１人がジャンキーナイトタウンオーケストラアレンジリレーしてみた！！" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
   </a>
@@ -589,51 +585,100 @@ permalink: /works/
   </div>
 </div>
 
+<div class="video-item size-min" data-tags="Movie">
+  <a href="https://www.youtube.com/watch?v=qLw7EM1W4B4" target="_blank" class="video-link">
+    <img src="https://i.ytimg.com/vi/qLw7EM1W4B4/maxresdefault.jpg" data-video-id="qLw7EM1W4B4" data-error-attempt="0" alt="GYU P-『世界は無機物でできている / 初音ミク』【オリジナルMV】" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
+  </a>
+  <h3 class='video-title'>GYU P-『世界は無機物でできている / 初音ミク』【オリジナルMV】</h3>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2020-12-31</p>
+  <div class="tag-container">
+    <span class="work-tag">Movie</span>
+  </div>
 </div>
 
-<div class="pagination-nav pagination-bottom">
-  <span class="pagination-info">Page 1 / 2</span>
-  <a href="/works/page2/" class="pagination-btn">次のページ →</a>
+<div class="video-item size-min" data-tags="Movie">
+  <a href="https://www.youtube.com/watch?v=aOu8lljw3Z8" target="_blank" class="video-link">
+    <img src="https://i.ytimg.com/vi/aOu8lljw3Z8/maxresdefault.jpg" data-video-id="aOu8lljw3Z8" data-error-attempt="0" alt="【 MV 】のんです です！ / SAKURAmoti feat.のんです" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
+  </a>
+  <h3 class='video-title'>【 MV 】のんです です！ / SAKURAmoti feat.のんです</h3>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2020-11-27</p>
+  <div class="tag-container">
+    <span class="work-tag">Movie</span>
+  </div>
+</div>
+
+<div class="video-item size-min" data-tags="Arrangement">
+  <a href="https://www.youtube.com/watch?v=YwjJ9m-KFQA" target="_blank" class="video-link">
+    <img src="https://i.ytimg.com/vi/YwjJ9m-KFQA/maxresdefault.jpg" data-video-id="YwjJ9m-KFQA" data-error-attempt="0" alt="前略" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
+  </a>
+  <h3 class='video-title'>前略</h3>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2020-11-11</p>
+  <div class="tag-container">
+    <span class="work-tag">Arrangement</span>
+  </div>
+</div>
+
+<div class="video-item size-min" data-tags="Arrangement">
+  <a href="https://www.youtube.com/watch?v=SYBGaIhZri0" target="_blank" class="video-link">
+    <img src="https://i.ytimg.com/vi/SYBGaIhZri0/maxresdefault.jpg" data-video-id="SYBGaIhZri0" data-error-attempt="0" alt="lopeto (Mikumix) (feat. Kakuly)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
+  </a>
+  <h3 class='video-title'>lopeto (Mikumix) (feat. Kakuly)</h3>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2020-11-11</p>
+  <div class="tag-container">
+    <span class="work-tag">Arrangement</span>
+  </div>
+</div>
+
+<div class="video-item size-min" data-tags="Music">
+  <a href="https://www.youtube.com/watch?v=f-atLIqnbdI" target="_blank" class="video-link">
+    <img src="https://i.ytimg.com/vi/f-atLIqnbdI/maxresdefault.jpg" data-video-id="f-atLIqnbdI" data-error-attempt="0" alt="【結成】新実況グループ「カラフルピーチ 」" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
+  </a>
+  <h3 class='video-title'>【結成】新実況グループ「カラフルピーチ 」</h3>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2020-06-28</p>
+  <div class="tag-container">
+    <span class="work-tag">Music</span>
+  </div>
+</div>
+
+<div class="video-item size-min" data-tags="Movie,Remix">
+  <a href="https://www.youtube.com/watch?v=4OPusJbC4qg" target="_blank" class="video-link">
+    <img src="https://i.ytimg.com/vi/4OPusJbC4qg/maxresdefault.jpg" data-video-id="4OPusJbC4qg" data-error-attempt="0" alt="学生ボカロPがエイリアンエイリアンアレンジリレーしてみた！！" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
+  </a>
+  <h3 class='video-title'>学生ボカロPがエイリアンエイリアンアレンジリレーしてみた！！</h3>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2020-06-20</p>
+  <div class="tag-container">
+    <span class="work-tag">Movie</span>
+    <span class="work-tag">Remix</span>
+  </div>
+</div>
+
+<div class="video-item size-min" data-tags="Music,Lyrics">
+  <a href="https://www.youtube.com/watch?v=adJU8IsRkFs" target="_blank" class="video-link">
+    <img src="https://i.ytimg.com/vi/adJU8IsRkFs/maxresdefault.jpg" data-video-id="adJU8IsRkFs" data-error-attempt="0" alt="「憂晴ストーム / ゆう。」Official Music Video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
+  </a>
+  <h3 class='video-title'>「憂晴ストーム / ゆう。」Official Music Video</h3>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2020-04-04</p>
+  <div class="tag-container">
+    <span class="work-tag">Music</span>
+    <span class="work-tag">Lyrics</span>
+  </div>
+</div>
+
+<div class="video-item size-min" data-tags="Movie">
+  <a href="https://www.youtube.com/watch?v=n4ieZj-uUF0" target="_blank" class="video-link">
+    <img src="https://i.ytimg.com/vi/n4ieZj-uUF0/maxresdefault.jpg" data-video-id="n4ieZj-uUF0" data-error-attempt="0" alt="【初音ミクオリジナル曲】復元不能【中学生ボカロP】" class="video-thumbnail" loading="lazy" onerror="handleImageError(this)">
+  </a>
+  <h3 class='video-title'>【初音ミクオリジナル曲】復元不能【中学生ボカロP】</h3>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2020-04-02</p>
+  <div class="tag-container">
+    <span class="work-tag">Movie</span>
+  </div>
+</div>
+
 </div>
 
 <div id="iris-in"></div><div id="iris-out"></div>
 <style>
-/* --- ページネーション --- */
-.pagination-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  margin: 30px 0;
-  flex-wrap: wrap;
-}
-.pagination-bottom {
-  margin-top: 60px;
-}
-.pagination-btn {
-  font-family: 'Montserrat', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 0.9rem;
-  padding: 10px 20px;
-  border-radius: 30px;
-  border: 1px solid var(--text-color);
-  background: transparent;
-  color: var(--text-color);
-  text-decoration: none;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-}
-.pagination-btn:hover {
-  background: var(--text-color);
-  color: var(--bg-color);
-}
-.pagination-info {
-  font-family: 'Montserrat', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 0.9rem;
-  opacity: 0.7;
-}
-
 /* --- フィルタUI --- */
 .filter-wrapper {
   margin-bottom: 40px;
@@ -661,13 +706,43 @@ permalink: /works/
   color: var(--bg-color);
 }
 
-/* --- ソートアニメーション用 --- */
+/* --- グリッドレイアウトとサイズ調整 --- */
+.video-grid { 
+  display: grid !important; 
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important; 
+  gap: 60px 40px !important; 
+  position: relative;
+  grid-auto-flow: dense; /* 隙間を埋める設定 */
+}
+
 .video-item {
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform: scale(1);
   opacity: 1;
   backface-visibility: hidden;
 }
+
+/* サイズ調整用クラス */
+.video-item.size-min {
+  grid-column: span 1;
+}
+.video-item.size-mid {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.video-item.size-max {
+  grid-column: span 3;
+  grid-row: span 2;
+}
+
+/* モバイル対応：画面が狭い時は強制的に1カラムにする */
+@media screen and (max-width: 900px) {
+  .video-item.size-mid, .video-item.size-max {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}
+
 .video-item.sort-hide {
   opacity: 0;
   transform: scale(0.95);
@@ -678,6 +753,9 @@ permalink: /works/
 .tag-container { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 5px; }
 .work-tag { font-size: 0.57rem; padding: 1px 6px; border-radius: 4px; border: 0.5px solid var(--text-color); opacity: 0.88; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
 .video-thumbnail { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+/* mid, maxサイズの場合はアスペクト比を解除して画像を広げる */
+.size-mid .video-thumbnail, .size-max .video-thumbnail { aspect-ratio: auto; height: auto; min-height: 200px; }
+
 .video-link:hover .video-thumbnail { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 .video-title { margin-top: 10px; font-size: 1rem; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 0px !important; font-family: 'Noto Sans JP', sans-serif !important; }
 .wrapper { max-width: 1100px !important; padding-right: 40px !important; padding-left: 40px !important; }
@@ -690,7 +768,6 @@ body.mode-transition { transition: background-color 0.5s ease, color 0.5s ease !
 .site-header { background-color: transparent !important; border: none !important; }
 h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font-size: 1.4rem !important; font-weight: 700 !important; letter-spacing: -0.05em !important; color: var(--text-color) !important; }
 .page-link { font-family: 'Montserrat', sans-serif !important; color: var(--text-color) !important; font-weight: 700 !important; text-transform: uppercase; font-size: 0.9rem !important; margin-left: 20px !important; text-decoration: none !important; }
-.video-grid { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important; gap: 60px 40px !important; position: relative; }
 .video-item h3 { font-family: 'Noto Sans JP', sans-serif !important; font-size: 0.85rem !important; height: auto !important; min-height: 1.3em; overflow: hidden; margin-bottom: 0px !important; line-height: 1.3; }
 .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
 
