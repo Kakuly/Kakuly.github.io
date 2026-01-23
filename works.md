@@ -127,7 +127,7 @@ permalink: /works/
 
 <div class="video-item" data-tags="Release,Album,Music">
   <a href="https://big-up.style/AwGSfnO9I3" target="_blank" class="video-link">
-    <img src="" alt="Release New Album &quot;DIRECT &amp; LOOP&quot;" class="video-thumbnail" loading="lazy">
+    <img src="https://i9.ytimg.com/s_p/OLAK5uy_kN_SOIxifwhCGm4OMSaQY8ycqXmIzFkEc/maxresdefault.jpg?sqp=CNj4yssGir7X7AMICPm06cUGEAE=&rs=AOn4CLDd88RNpgoiSNJTKxAUe75cnL2kJQ&v=1757043321" alt="Release New Album &quot;DIRECT &amp; LOOP&quot;" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>Release New Album &quot;DIRECT &amp; LOOP&quot;</h3>
   <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2025-08-05</p>
