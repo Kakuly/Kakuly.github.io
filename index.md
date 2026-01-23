@@ -2,7 +2,7 @@
 layout: home
 title: Home
 ---
-<div class="custom-section" style="background-image: url('画像のURL');">
+<div class="custom-section" style="background-image: url('/assets/img/profile.png');">
   <div class="section-content">
 
     <div class="profile-container">
