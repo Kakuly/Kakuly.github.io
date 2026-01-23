@@ -300,7 +300,7 @@ Release - 作品集
   </div>
 </div>
 
-<div class="video-item size-min" data-tags="AUDIO" data-artist="Kakuly">
+<div class="video-item size-min" data-tags="Audio" data-artist="Kakuly">
   <a href="https://linkco.re/RGevuTAm?lang=ja" target="_blank" class="video-link">
     <img src="https://i1.sndcdn.com/artworks-eFMHNlD5jIBUqX3G-5lkSAw-t500x500.png" alt="don&#x27;t skip" class="video-thumbnail" loading="lazy">
   </a>
@@ -308,7 +308,7 @@ Release - 作品集
   <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Kakuly</p>
   <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2025-06-22</p>
   <div class="tag-container">
-    <span class="work-tag">AUDIO</span>
+    <span class="work-tag">Audio</span>
   </div>
 </div>
 
