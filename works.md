@@ -671,7 +671,7 @@ permalink: /works/
   opacity: 0;
   transform: scale(0.95);
   pointer-events: none;
-  position: absolute; /* レイアウトを詰めさせるための設定 */
+  position: absolute; 
   visibility: hidden;
 }
 
@@ -695,7 +695,6 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 .video-item h3 { font-family: 'Noto Sans JP', sans-serif !important; font-size: 0.85rem !important; height: auto !important; min-height: 1.3em; overflow: hidden; margin-bottom: 0px !important; line-height: 1.3; }
 .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
 
-/* --- モード切替ボタンの設定（レスポンシブ対応） --- */
 #mode-toggle { 
     cursor: pointer; 
     background: transparent; 
@@ -709,19 +708,18 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
     right: 20px; 
     z-index: 9999; 
     font-weight: 700;
-    font-family: 'Montserrat', sans-serif !important; /* フォントを明示的に指定 */
+    font-family: 'Montserrat', sans-serif !important; 
     transition: all 0.3s ease;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
 
-/* 画面幅が1300px以下になったら右下に移動 */
 @media screen and (max-width: 1500px) {
     #mode-toggle {
         top: auto !important;
         bottom: 20px !important;
         right: 20px !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* 下に移動したときに見やすく */
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
     }
 }
 
@@ -739,7 +737,7 @@ body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 
 function handleImageError(img) {
   const videoId = img.getAttribute('data-video-id');
-  if (!videoId) return; // 手動作品の場合は何もしない
+  if (!videoId) return; 
   
   const attempt = parseInt(img.getAttribute('data-error-attempt') || "0");
   const fallbackUrls = [
@@ -752,13 +750,10 @@ function handleImageError(img) {
     img.setAttribute('data-error-attempt', (attempt + 1).toString());
     img.src = fallbackUrls[attempt];
   } else {
-    // すべて失敗した場合はプレースホルダー画像を表示
     img.style.backgroundColor = '#333';
     img.alt = '画像を読み込めませんでした';
   }
 }
-
-
 
   document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('video-grid');
@@ -792,14 +787,14 @@ function handleImageError(img) {
         
         if (isVisible) {
           item.classList.remove('sort-hide');
-          item.style.position = 'relative';
+          item.style.display = ''; // 表示を戻す
           item.style.pointerEvents = 'auto';
           item.style.visibility = 'visible';
         } else {
           item.classList.add('sort-hide');
           setTimeout(() => {
             if (item.classList.contains('sort-hide')) {
-              item.style.position = 'absolute';
+              item.style.display = 'none'; // 完全に消す
             }
           }, 400);
         }
@@ -844,6 +839,4 @@ function handleImageError(img) {
       setTimeout(() => { window.location.href = href; }, 800);
     });
   });
-
-  
 </script>
