@@ -237,9 +237,8 @@ def update_markdown(items):
 
 def generate_page_content(works_data, current_page, total_pages):
     """ページコンテンツを生成"""
+    # タイトルから「- Page X」を削除し、常に「Works」にする
     content = "---\nlayout: page\ntitle: Works"
-    if current_page > 1:
-        content += f" - Page {current_page}"
     
     if current_page == 1:
         content += "\npermalink: /works/"
@@ -377,14 +376,12 @@ def generate_page_content(works_data, current_page, total_pages):
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform: scale(1);
   opacity: 1;
-  /* アニメーション中の重なりを防ぐ */
   backface-visibility: hidden;
 }
 .video-item.sort-hide {
   opacity: 0;
   transform: scale(0.95);
   pointer-events: none;
-  /* visibilityを即座に変えず、アニメーション後にJSで制御する */
 }
 
 /* --- 元のデザイン設定 (完全維持) --- */
@@ -506,7 +503,6 @@ function handleImageError(img) {
         } else {
           item.classList.add('sort-hide');
           item.style.pointerEvents = 'none';
-          // アニメーション時間(0.4s)待ってから完全に消す
           setTimeout(() => {
             if (item.classList.contains('sort-hide')) {
               item.style.display = 'none';
