@@ -10,8 +10,8 @@ GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', '')
 
 # プレイリストID
 WORKS_PLAYLIST_ID = 'PLH9mX0wDlDAou_YCjcU01Q3pR6cCRQPWS'
-RELEASE_PLAYLIST_ID = 'PLH9mX0wDlDApS_YOUR_RELEASE_PLAYLIST_ID' # Audioタグが付くプレイリスト
-MV_PLAYLIST_ID = 'PLH9mX0wDlDApS_YOUR_MV_PLAYLIST_ID'           # MVタグが付くプレイリスト
+RELEASE_PLAYLIST_ID = 'PLH9mX0wDlDAqZ8WMjS1uVJXpH3IiwTHGm' # Audioタグが付くプレイリスト
+MV_PLAYLIST_ID = 'PLH9mX0wDlDApen7-p7jxmAkDd1tWV9eeI'           # MVタグが付くプレイリスト
 
 # ファイルパス
 CACHE_FILE = 'known_works.json'
@@ -128,9 +128,16 @@ def process_items(items, auto_tag=None):
     return processed
 
 def update_markdown():
+    print(f"Fetching Works: {WORKS_PLAYLIST_ID}")
     works_yt = process_items(get_playlist_items(WORKS_PLAYLIST_ID))
+    
+    print(f"Fetching Release (Audio): {RELEASE_PLAYLIST_ID}")
     release_yt = process_items(get_playlist_items(RELEASE_PLAYLIST_ID), auto_tag="Audio")
+    
+    print(f"Fetching Release (MV): {MV_PLAYLIST_ID}")
     mv_yt = process_items(get_playlist_items(MV_PLAYLIST_ID), auto_tag="MV")
+    
+    print(f"Counts - Works: {len(works_yt)}, Audio: {len(release_yt)}, MV: {len(mv_yt)}")
     
     def format_manual(data, default_artist="Kakuly"):
         formatted = []
