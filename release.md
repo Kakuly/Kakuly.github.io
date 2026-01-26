@@ -86,7 +86,7 @@ My Release
 
 <div class="video-item size-mid" data-tags="EP" data-artist="Kakuly">
   <a href="https://big-up.style/21Wcz2jUF8" target="_blank" class="video-link">
-    <img src="/assets/images/snowflaking_cover.png" alt="Release New EP &quot;snowflaking&quot;" class="video-thumbnail" loading="lazy">
+    <img src="/assets/img/snowflaking_cover.png" alt="Release New EP &quot;snowflaking&quot;" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>Release New EP &quot;snowflaking&quot;</h3>
   <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Kakuly</p>
@@ -266,7 +266,7 @@ My Release
 
 <div class="video-item size-mid" data-tags="Album" data-artist="Kakuly, tato">
   <a href="https://big-up.style/AwGSfnO9I3" target="_blank" class="video-link">
-    <img src="/assets/images/direct_and_loop_cover.png" alt="Release New Album &quot;DIRECT &amp; LOOP&quot;" class="video-thumbnail" loading="lazy">
+    <img src="/assets/img/direct_and_loop_cover.png" alt="Release New Album &quot;DIRECT &amp; LOOP&quot;" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>Release New Album &quot;DIRECT &amp; LOOP&quot;</h3>
   <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Kakuly, tato</p>
@@ -338,7 +338,7 @@ My Release
 
 <div class="video-item size-mid" data-tags="Album" data-artist="Kakuly">
   <a href="https://big-up.style/Rfjwgu1vFD" target="_blank" class="video-link">
-    <img src="/assets/images/everything_cover.png" alt="Release New Album &quot;Everything /// (to break me)&quot;" class="video-thumbnail" loading="lazy">
+    <img src="/assets/img/everything_cover.png" alt="Release New Album &quot;Everything /// (to break me)&quot;" class="video-thumbnail" loading="lazy">
   </a>
   <h3 class='video-title'>Release New Album &quot;Everything /// (to break me)&quot;</h3>
   <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Kakuly</p>
