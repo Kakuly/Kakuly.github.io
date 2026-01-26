@@ -781,7 +781,7 @@ document.addEventListener('DOMContentLoaded', () => {
     items.forEach(item => {
       const itemTags = item.dataset.tags ? item.dataset.tags.split(',') : [];
       const aMatch = activeArtist === 'ALL' || item.getAttribute('data-filter-artist') === activeArtist;
-      const tMatch = activeTags.size === 0 || Array.from(activeTags).every(t => itemTags.includes(t));
+      const tMatch = activeTags.size === 0 || Array.from(activeTags).some(t => itemTags.includes(t));
       
       if (aMatch && tMatch) { 
         item.classList.remove('sort-hide'); 
