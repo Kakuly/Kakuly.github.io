@@ -12,13 +12,13 @@ My Release
 
 <div class="video-grid" id="video-grid">
 
-<div class="video-item size-min" data-tags="MV" data-artist="Unknown">
+<div class="video-item size-min" data-tags="MV" data-artist="Kakuly">
   <a href="https://www.youtube.com/watch?v=ow162MWRYXM" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/ow162MWRYXM/default.jpg" data-video-id="ow162MWRYXM" data-error-attempt="0" alt="Private video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'ow162MWRYXM')">
+    <img src="https://i.ytimg.com/vi/ow162MWRYXM/hqdefault.jpg" data-video-id="ow162MWRYXM" data-error-attempt="0" alt="Kakuly - snowflaking (feat.tato)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'ow162MWRYXM')">
   </a>
-  <h3 class='video-title'>Private video</h3>
-  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Unknown</p>
-  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2026-01-27</p>
+  <h3 class='video-title'>Kakuly - snowflaking (feat.tato)</h3>
+  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Kakuly</p>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2026-01-29</p>
   <div class="tag-container">
     <span class="work-tag">MV</span>
   </div>
