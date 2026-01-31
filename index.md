@@ -370,7 +370,7 @@ document.querySelectorAll('a').forEach(link => {
   <div class="news-container-outer">
     <button class="news-nav-btn prev" onclick="scrollNews(-1)" id="news-prev-btn">&#10094;</button>
     <div class="news-scroll-container" id="news-scroll-container">
-      <div class="news-card" onclick="openNewsModal('news_1769852051678')" data-url="https://kakuly.fanbox.cc/posts/11132781">
+      <div class="news-card" onclick="openNewsModal('news_1769852051678')" data-url="https://kakuly.fanbox.cc/posts/11132781" >
         <div class="news-card-date">2026-01-31</div>
         <div class="news-card-title">pixiv fanboxにて有料記事を公開しました</div>
         <div class="news-card-content-hidden" id="news-content-news_1769852051678" style="display:none;">先日公開したEP「snowflaking」の裏話や歌詞について記事を書きました</div>
@@ -418,6 +418,31 @@ document.querySelectorAll('a').forEach(link => {
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   color: var(--text-color);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  position: relative; /* 背景画像用 */
+  overflow: hidden; /* 背景画像用 */
+}
+.news-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); /* テキストを見やすくするためのオーバーレイ */
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.news-card[style*="background-image"] {
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+.news-card[style*="background-image"] > * {
+    position: relative;
+    z-index: 2;
+}
+.news-card[style*="background-image"]:hover::before {
+    opacity: 0.5;
 }
 .news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 .news-card-date { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; opacity: 0.7; margin-bottom: 8px; }
