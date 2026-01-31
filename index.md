@@ -370,40 +370,10 @@ document.querySelectorAll('a').forEach(link => {
   <div class="news-container-outer">
     <button class="news-nav-btn prev" onclick="scrollNews(-1)" id="news-prev-btn">&#10094;</button>
     <div class="news-scroll-container" id="news-scroll-container">
-      <div class="news-card" onclick="openNewsModal('2')" >
-        <div class="news-card-date">2026-01-25</div>
-        <div class="news-card-title">新しい楽曲を公開しました</div>
-        <div class="news-card-content-hidden" id="news-content-2" style="display:none;">YouTubeにて新しい制作楽曲を公開しました。ぜひWorksページからチェックしてください。</div>
-      </div>
-      <div class="news-card" onclick="openNewsModal('1')" >
-        <div class="news-card-date">2026-01-23</div>
-        <div class="news-card-title">ポートフォリオサイトをリニューアルしました</div>
-        <div class="news-card-content-hidden" id="news-content-1" style="display:none;">ポートフォリオサイトのデザインを一新し、ニュースセクションを追加しました。今後はこちらで最新情報をお届けします。</div>
-      </div>
-      <div class="news-card" onclick="openNewsModal('news_1769141876861')" >
-        <div class="news-card-date">2026-01-23</div>
+      <div class="news-card" onclick="openNewsModal('news_1769852051678')" data-url="https://kakuly.fanbox.cc/posts/11132781">
+        <div class="news-card-date">2026-01-31</div>
         <div class="news-card-title">pixiv fanboxにて有料記事を公開しました</div>
-        <div class="news-card-content-hidden" id="news-content-news_1769141876861" style="display:none;">先日公開した、snowflakingについて公開しました<br>https://kakuly.fanbox.cc/</div>
-      </div>
-      <div class="news-card" onclick="openNewsModal('news_1769141879300')" >
-        <div class="news-card-date">2026-01-20</div>
-        <div class="news-card-title">sd</div>
-        <div class="news-card-content-hidden" id="news-content-news_1769141879300" style="display:none;">dsdsdsd</div>
-      </div>
-      <div class="news-card" onclick="openNewsModal('news_1769141880522')" >
-        <div class="news-card-date">2026-01-10</div>
-        <div class="news-card-title">asdads</div>
-        <div class="news-card-content-hidden" id="news-content-news_1769141880522" style="display:none;">asdasd</div>
-      </div>
-      <div class="news-card" onclick="openNewsModal('news_1769141886557')" >
-        <div class="news-card-date">2025-12-08</div>
-        <div class="news-card-title">sfdhs</div>
-        <div class="news-card-content-hidden" id="news-content-news_1769141886557" style="display:none;">fhsdfhsdfh</div>
-      </div>
-      <div class="news-card" onclick="openNewsModal('news_1769141891071')" >
-        <div class="news-card-date">2025-07-25</div>
-        <div class="news-card-title">sfdhsdf</div>
-        <div class="news-card-content-hidden" id="news-content-news_1769141891071" style="display:none;">hsdfh</div>
+        <div class="news-card-content-hidden" id="news-content-news_1769852051678" style="display:none;">先日公開したEP「snowflaking」の裏話や歌詞について記事を書きました</div>
       </div>
     </div>
     <button class="news-nav-btn next" onclick="scrollNews(1)" id="news-next-btn">&#10095;</button>
