@@ -370,7 +370,7 @@ document.querySelectorAll('a').forEach(link => {
   <div class="news-container-outer">
     <button class="news-nav-btn prev" onclick="scrollNews(-1)" id="news-prev-btn">&#10094;</button>
     <div class="news-scroll-container" id="news-scroll-container">
-      <div class="news-card" onclick="openNewsModal('news_1769852051678')" data-url="https://kakuly.fanbox.cc/posts/11132781" >
+      <div class="news-card" onclick="openNewsModal('news_1769852051678')" data-url="https://kakuly.fanbox.cc/posts/11132781" style="background-image: url('/assets/img/snowflaking_cover.png'); background-size: cover; background-position: center; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.8);">
         <div class="news-card-date">2026-01-31</div>
         <div class="news-card-title">pixiv fanboxにて有料記事を公開しました</div>
         <div class="news-card-content-hidden" id="news-content-news_1769852051678" style="display:none;">先日公開したEP「snowflaking」の裏話や歌詞について記事を書きました</div>
