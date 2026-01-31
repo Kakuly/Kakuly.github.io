@@ -219,7 +219,7 @@ def update_index_with_news():
     <h2 id="modal-title" class="modal-title"></h2>
     <div id="modal-body" class="modal-body"></div>
     <div id="modal-link-container" style="margin-top: 20px; text-align: right;">
-      <a id="modal-link" href="#" target="_blank" style="font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--text-color); text-decoration: none; border: 1px solid var(--text-color); padding: 8px 15px; border-radius: 20px; transition: all 0.3s ease;">詳細を見る &rarr;</a>
+      <a id="modal-link" href="#" target="_blank" style="font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--text-color); text-decoration: none; border: 1px solid var(--text-color); padding: 8px 15px; border-radius: 20px; transition: all 0.3s ease;">LINK &rarr;</a>
     </div>
   </div>
 </div>
