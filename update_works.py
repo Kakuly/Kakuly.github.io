@@ -200,7 +200,13 @@ def update_index_with_news():
             # URLがある場合は data-url 属性に追加
             url_attr = f'data-url="{item.get("url", "")}"' if item.get("url") else ''
             
-            news_html += f'      <div class="news-card" onclick="openNewsModal(\'{item["id"]}\')" {url_attr}>\n'
+            # 背景画像がある場合は style 属性に追加し、テキスト色を調整
+            bg_img = item.get("bg_img")
+            style_attr = ''
+            if bg_img:
+                style_attr = f'style="background-image: url(\'{bg_img}\'); background-size: cover; background-position: center; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.8);"'
+            
+            news_html += f'      <div class="news-card" onclick="openNewsModal(\'{item["id"]}\')" {url_attr} {style_attr}>\n'
             news_html += f'        <div class="news-card-date">{item["date"]}</div>\n'
             news_html += f'        <div class="news-card-title">{item["title"]}</div>\n'
             news_html += f'        <div class="news-card-content-hidden" id="news-content-{item["id"]}" style="display:none;">{content_for_modal}</div>\n'
@@ -250,6 +256,31 @@ def update_index_with_news():
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   color: var(--text-color);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  position: relative; /* 背景画像用 */
+  overflow: hidden; /* 背景画像用 */
+}
+.news-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); /* テキストを見やすくするためのオーバーレイ */
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.news-card[style*="background-image"] {
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+.news-card[style*="background-image"] > * {
+    position: relative;
+    z-index: 2;
+}
+.news-card[style*="background-image"]:hover::before {
+    opacity: 0.5;
 }
 .news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 .news-card-date { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; opacity: 0.7; margin-bottom: 8px; }
