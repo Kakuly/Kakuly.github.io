@@ -370,37 +370,37 @@ document.querySelectorAll('a').forEach(link => {
   <div class="news-container-outer">
     <button class="news-nav-btn prev" onclick="scrollNews(-1)" id="news-prev-btn">&#10094;</button>
     <div class="news-scroll-container" id="news-scroll-container">
-      <div class="news-card" onclick="openNewsModal('2')">
+      <div class="news-card" onclick="openNewsModal('2')" >
         <div class="news-card-date">2026-01-25</div>
         <div class="news-card-title">新しい楽曲を公開しました</div>
         <div class="news-card-content-hidden" id="news-content-2" style="display:none;">YouTubeにて新しい制作楽曲を公開しました。ぜひWorksページからチェックしてください。</div>
       </div>
-      <div class="news-card" onclick="openNewsModal('1')">
+      <div class="news-card" onclick="openNewsModal('1')" >
         <div class="news-card-date">2026-01-23</div>
         <div class="news-card-title">ポートフォリオサイトをリニューアルしました</div>
         <div class="news-card-content-hidden" id="news-content-1" style="display:none;">ポートフォリオサイトのデザインを一新し、ニュースセクションを追加しました。今後はこちらで最新情報をお届けします。</div>
       </div>
-      <div class="news-card" onclick="openNewsModal('news_1769141876861')">
+      <div class="news-card" onclick="openNewsModal('news_1769141876861')" >
         <div class="news-card-date">2026-01-23</div>
         <div class="news-card-title">pixiv fanboxにて有料記事を公開しました</div>
         <div class="news-card-content-hidden" id="news-content-news_1769141876861" style="display:none;">先日公開した、snowflakingについて公開しました<br>https://kakuly.fanbox.cc/</div>
       </div>
-      <div class="news-card" onclick="openNewsModal('news_1769141879300')">
+      <div class="news-card" onclick="openNewsModal('news_1769141879300')" >
         <div class="news-card-date">2026-01-20</div>
         <div class="news-card-title">sd</div>
         <div class="news-card-content-hidden" id="news-content-news_1769141879300" style="display:none;">dsdsdsd</div>
       </div>
-      <div class="news-card" onclick="openNewsModal('news_1769141880522')">
+      <div class="news-card" onclick="openNewsModal('news_1769141880522')" >
         <div class="news-card-date">2026-01-10</div>
         <div class="news-card-title">asdads</div>
         <div class="news-card-content-hidden" id="news-content-news_1769141880522" style="display:none;">asdasd</div>
       </div>
-      <div class="news-card" onclick="openNewsModal('news_1769141886557')">
+      <div class="news-card" onclick="openNewsModal('news_1769141886557')" >
         <div class="news-card-date">2025-12-08</div>
         <div class="news-card-title">sfdhs</div>
         <div class="news-card-content-hidden" id="news-content-news_1769141886557" style="display:none;">fhsdfhsdfh</div>
       </div>
-      <div class="news-card" onclick="openNewsModal('news_1769141891071')">
+      <div class="news-card" onclick="openNewsModal('news_1769141891071')" >
         <div class="news-card-date">2025-07-25</div>
         <div class="news-card-title">sfdhsdf</div>
         <div class="news-card-content-hidden" id="news-content-news_1769141891071" style="display:none;">hsdfh</div>
@@ -416,6 +416,9 @@ document.querySelectorAll('a').forEach(link => {
     <div id="modal-date" class="modal-date"></div>
     <h2 id="modal-title" class="modal-title"></h2>
     <div id="modal-body" class="modal-body"></div>
+    <div id="modal-link-container" style="margin-top: 20px; text-align: right;">
+      <a id="modal-link" href="#" target="_blank" style="font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--text-color); text-decoration: none; border: 1px solid var(--text-color); padding: 8px 15px; border-radius: 20px; transition: all 0.3s ease;">詳細を見る &rarr;</a>
+    </div>
   </div>
 </div>
 
@@ -486,7 +489,7 @@ document.querySelectorAll('a').forEach(link => {
 <script>
 function scrollNews(direction) {
   const container = document.getElementById('news-scroll-container');
-  const scrollAmount = 600 * direction;
+  const scrollAmount = 300 * direction;
   container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
 }
 
@@ -516,14 +519,28 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function openNewsModal(id) {
+  const card = document.querySelector(`.news-card[onclick="openNewsModal('${id}')"]`);
   const contentElement = document.getElementById(`news-content-${id}`);
-  const card = contentElement.closest('.news-card');
+  
   const title = card.querySelector('.news-card-title').innerText;
   const date = card.querySelector('.news-card-date').innerText;
   const content = contentElement.innerHTML;
+  const url = card.getAttribute('data-url'); // URLを取得
+  
   document.getElementById('modal-title').innerText = title;
   document.getElementById('modal-date').innerText = date;
   document.getElementById('modal-body').innerHTML = content;
+  
+  const linkContainer = document.getElementById('modal-link-container');
+  const linkElement = document.getElementById('modal-link');
+  
+  if (url) {
+    linkElement.href = url;
+    linkContainer.style.display = 'block'; // リンクを表示
+  } else {
+    linkContainer.style.display = 'none'; // リンクを非表示
+  }
+  
   document.getElementById('news-modal').style.display = "block";
   document.body.style.overflow = "hidden";
 }
