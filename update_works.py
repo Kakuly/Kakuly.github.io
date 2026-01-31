@@ -196,7 +196,11 @@ def update_index_with_news():
         
         for item in news_data:
             content_for_modal = item["content"].replace('\n', '<br>')
-            news_html += f'      <div class="news-card" onclick="openNewsModal(\'{item["id"]}\')">\n'
+            
+            # URLがある場合は data-url 属性に追加
+            url_attr = f'data-url="{item.get("url", "")}"' if item.get("url") else ''
+            
+            news_html += f'      <div class="news-card" onclick="openNewsModal(\'{item["id"]}\')" {url_attr}>\n'
             news_html += f'        <div class="news-card-date">{item["date"]}</div>\n'
             news_html += f'        <div class="news-card-title">{item["title"]}</div>\n'
             news_html += f'        <div class="news-card-content-hidden" id="news-content-{item["id"]}" style="display:none;">{content_for_modal}</div>\n'
@@ -214,6 +218,9 @@ def update_index_with_news():
     <div id="modal-date" class="modal-date"></div>
     <h2 id="modal-title" class="modal-title"></h2>
     <div id="modal-body" class="modal-body"></div>
+    <div id="modal-link-container" style="margin-top: 20px; text-align: right;">
+      <a id="modal-link" href="#" target="_blank" style="font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--text-color); text-decoration: none; border: 1px solid var(--text-color); padding: 8px 15px; border-radius: 20px; transition: all 0.3s ease;">詳細を見る &rarr;</a>
+    </div>
   </div>
 </div>
 
@@ -284,7 +291,7 @@ def update_index_with_news():
 <script>
 function scrollNews(direction) {
   const container = document.getElementById('news-scroll-container');
-  const scrollAmount = 600 * direction;
+  const scrollAmount = 300 * direction;
   container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
 }
 
@@ -314,14 +321,28 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function openNewsModal(id) {
+  const card = document.querySelector(`.news-card[onclick="openNewsModal('${id}')"]`);
   const contentElement = document.getElementById(`news-content-${id}`);
-  const card = contentElement.closest('.news-card');
+  
   const title = card.querySelector('.news-card-title').innerText;
   const date = card.querySelector('.news-card-date').innerText;
   const content = contentElement.innerHTML;
+  const url = card.getAttribute('data-url'); // URLを取得
+  
   document.getElementById('modal-title').innerText = title;
   document.getElementById('modal-date').innerText = date;
   document.getElementById('modal-body').innerHTML = content;
+  
+  const linkContainer = document.getElementById('modal-link-container');
+  const linkElement = document.getElementById('modal-link');
+  
+  if (url) {
+    linkElement.href = url;
+    linkContainer.style.display = 'block'; // リンクを表示
+  } else {
+    linkContainer.style.display = 'none'; // リンクを非表示
+  }
+  
   document.getElementById('news-modal').style.display = "block";
   document.body.style.overflow = "hidden";
 }
@@ -351,7 +372,7 @@ window.onclick = function(event) {
 
 def generate_page_content(title, works_data, permalink, show_artist):
     content = f"---\nlayout: page\ntitle: {title}\npermalink: {permalink}\n---\n\n"
-    content += f"My {title}\n"
+    content += f"{title} - 作品集\n"
     content += '<div id="filter-container" class="filter-wrapper">\n'
     if show_artist: content += '  <div id="artist-filter" style="display:flex; flex-wrap:wrap; gap:12px; width:100%; margin-bottom:10px;"></div>\n'
     content += '  <div id="tag-filter" style="display:flex; flex-wrap:wrap; gap:12px; width:100%;"></div>\n'
@@ -378,11 +399,8 @@ def generate_page_content(title, works_data, permalink, show_artist):
             content += '  </div>\n'
         content += '</div>\n\n'
     content += '</div>\n\n<div id="iris-in"></div><div id="iris-out"></div>\n'
-# --- generate_page_content 関数内の該当箇所を以下のように修正 ---
-
     content += """
 <style>
-/* --- 既存のスタイルを維持 --- */
 .filter-wrapper { margin-bottom: 40px; display: flex; flex-wrap: wrap; gap: 12px; }
 .filter-btn { cursor: pointer; font-family: 'Montserrat', sans-serif !important; font-weight: 700 !important; font-size: 0.9rem; padding: 6px 16px; border-radius: 30px; border: 1px solid var(--text-color); background: transparent; color: var(--text-color); transition: all 0.3s ease; text-transform: uppercase; opacity: 0.3; }
 .filter-btn.active { opacity: 1; background: var(--text-color); color: var(--bg-color); }
@@ -413,40 +431,22 @@ h1, h2, h3, .site-title { font-family: 'Montserrat', sans-serif !important; font
 .rss-subscribe, .feed-icon, .site-footer { display: none !important; }
 #mode-toggle { cursor: pointer; background: transparent; border: 1px solid var(--text-color); color: var(--text-color); padding: 6px 16px; border-radius: 20px; font-size: 0.75rem; position: fixed; top: 15px; right: 20px; z-index: 9999; font-weight: 700; font-family: 'Montserrat', sans-serif !important; transition: all 0.3s ease; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 @media screen and (max-width: 1500px) { #mode-toggle { top: auto !important; bottom: 20px !important; right: 20px !important; box-shadow: 0 4px 12px rgba(0,0,0,0.15); } }
-
-/* --- Iris演出の修正箇所 --- */
 #iris-in { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 0 500vmax var(--bg-color); z-index: 100000; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1); }
 body.is-opening #iris-in { transform: translate(-50%, -50%) scale(500); }
 #iris-out { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--bg-color); z-index: 100000; pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1); }
 body.is-exiting #iris-out { transform: translate(-50%, -50%) scale(500) !important; }
-
-/* 透明化の条件を厳格にする（JSが動かない場合の保険） */
-body:not(.is-opening) > *:not([id^="iris-"]) { opacity: 0; }
-body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition: opacity 0.8s ease-out; transition-delay: 0.2s; }
+body > *:not([id^="iris-"]) { opacity: 0; transition: opacity 0.8s ease-out; }
+body.is-opening > *:not([id^="iris-"]) { opacity: 1; transition-delay: 0.2s; }
 </style>
-
 <button id="mode-toggle">🌙 Dark Mode</button>
-
 <script>
 function handleImageError(img, videoId) {
   const attempt = parseInt(img.getAttribute('data-error-attempt') || "0");
   if (attempt === 0) { img.setAttribute('data-error-attempt', "1"); img.src = 'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg'; }
   else if (attempt === 1) { img.setAttribute('data-error-attempt', "2"); img.src = 'https://i.ytimg.com/vi/' + videoId + '/mqdefault.jpg'; }
 }
-
-// 演出開始関数を外に出し、確実に呼べるようにする
-function startIris() {
-  document.body.classList.remove('is-opening', 'is-exiting');
-  setTimeout(() => { document.body.classList.add('is-opening'); }, 100);
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-  // コンテンツの表示を最優先で実行
-  startIris();
-
   const grid = document.getElementById('video-grid');
-  if (!grid) return; // 念のためのガード
-
   const items = Array.from(grid.querySelectorAll('.video-item'));
   const artistFilter = document.getElementById('artist-filter');
   const tagFilter = document.getElementById('tag-filter');
@@ -454,89 +454,60 @@ document.addEventListener('DOMContentLoaded', () => {
   let activeTags = new Set();
   const artists = new Set(['ALL']);
   const tags = new Set();
-
   items.forEach(item => {
-    // データ属性が空の場合の安全策
-    const artistData = item.dataset.artist || "Unknown";
-    const tagsData = item.dataset.tags || "";
-
-    const firstArtist = artistData.split(',')[0].trim() || "Unknown";
-    artists.add(firstArtist);
-    item.setAttribute('data-filter-artist', firstArtist);
-    
-    tagsData.split(',').filter(t => t).forEach(t => tags.add(t));
+    if (item.dataset.artist) {
+      const firstArtist = item.dataset.artist.split(',')[0].trim();
+      artists.add(firstArtist);
+      item.setAttribute('data-filter-artist', firstArtist);
+    }
+    item.dataset.tags.split(',').filter(t => t).forEach(t => tags.add(t));
   });
-
   function createBtn(text, container, onClick, isAll=false) {
-    if (!container) return;
     const btn = document.createElement('button');
     btn.className = 'filter-btn' + (isAll ? ' active' : '');
     btn.textContent = text;
     btn.onclick = () => onClick(btn, text);
     container.appendChild(btn);
   }
-
   if (artistFilter) {
     Array.from(artists).sort().forEach(a => createBtn(a, artistFilter, (btn, val) => {
       artistFilter.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active'); activeArtist = val; apply();
     }, a === 'ALL'));
   }
-
-  if (tagFilter) {
-    Array.from(tags).sort().forEach(t => createBtn(t, tagFilter, (btn, val) => {
-      btn.classList.toggle('active');
-      if (activeTags.has(val)) activeTags.delete(val); else activeTags.add(val);
-      apply();
-    }));
-  }
-
+  Array.from(tags).sort().forEach(t => createBtn(t, tagFilter, (btn, val) => {
+    btn.classList.toggle('active');
+    if (activeTags.has(val)) activeTags.delete(val); else activeTags.add(val);
+    apply();
+  }));
   function apply() {
     items.forEach(item => {
-      const itemTags = item.dataset.tags ? item.dataset.tags.split(',') : [];
       const aMatch = activeArtist === 'ALL' || item.getAttribute('data-filter-artist') === activeArtist;
-      const tMatch = activeTags.size === 0 || Array.from(activeTags).some(t => itemTags.includes(t));
-      
-      if (aMatch && tMatch) { 
-        item.classList.remove('sort-hide'); 
-        item.style.position = 'relative'; 
-        item.style.visibility = 'visible'; 
-        item.style.pointerEvents = 'auto'; 
-      } else { 
-        item.classList.add('sort-hide'); 
-        setTimeout(() => { if (item.classList.contains('sort-hide')) { item.style.position = 'absolute'; } }, 400); 
-      }
+      const tMatch = activeTags.size === 0 || Array.from(activeTags).every(t => item.dataset.tags.split(',').includes(t));
+      if (aMatch && tMatch) { item.classList.remove('sort-hide'); item.style.position = 'relative'; item.style.visibility = 'visible'; item.style.pointerEvents = 'auto'; }
+      else { item.classList.add('sort-hide'); setTimeout(() => { if (item.classList.contains('sort-hide')) { item.style.position = 'absolute'; } }, 400); }
     });
   }
 });
-
-// モード切替などはそのまま維持
 const btn = document.getElementById('mode-toggle');
-if (btn) {
-  const body = document.body;
-  const html = document.documentElement;
-  if (localStorage.getItem('theme') === 'dark') { html.classList.add('dark-mode'); body.classList.add('dark-mode'); btn.textContent = '☀️ Light Mode'; }
-  btn.addEventListener('click', () => {
-    body.classList.add('mode-transition');
-    const isDark = html.classList.toggle('dark-mode');
-    body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
-    setTimeout(() => { body.classList.remove('mode-transition'); }, 500);
-  });
-}
-
-// 画面遷移の演出
-window.addEventListener('pageshow', (event) => {
-  if (event.persisted) startIris();
+const body = document.body;
+const html = document.documentElement;
+if (localStorage.getItem('theme') === 'dark') { html.classList.add('dark-mode'); body.classList.add('dark-mode'); btn.textContent = '☀️ Light Mode'; }
+btn.addEventListener('click', () => {
+  body.classList.add('mode-transition');
+  const isDark = html.classList.toggle('dark-mode');
+  body.classList.toggle('dark-mode');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+  setTimeout(() => { body.classList.remove('mode-transition'); }, 500);
 });
-
+function startIris() { document.body.classList.remove('is-opening', 'is-exiting'); requestAnimationFrame(() => { setTimeout(() => { document.body.classList.add('is-opening'); }, 50); }); }
+window.addEventListener('pageshow', startIris);
 document.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', (e) => {
     const href = link.getAttribute('href');
     if (!href || href.startsWith('#') || href.includes('mailto:') || link.target === "_blank") return;
-    e.preventDefault(); 
-    document.body.classList.add('is-exiting');
+    e.preventDefault(); document.body.classList.add('is-exiting');
     setTimeout(() => { window.location.href = href; }, 700);
   });
 });
