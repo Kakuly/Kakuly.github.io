@@ -57,9 +57,9 @@ My Works
 
 <div class="video-item size-min" data-tags="Movie,Mix" data-artist="tato">
   <a href="https://www.youtube.com/watch?v=XIGbiSGclgA" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/XIGbiSGclgA/maxresdefault.jpg" data-video-id="XIGbiSGclgA" data-error-attempt="0" alt="Departure / 姫野　- tato (cover)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'XIGbiSGclgA')">
+    <img src="https://i.ytimg.com/vi/XIGbiSGclgA/maxresdefault.jpg" data-video-id="XIGbiSGclgA" data-error-attempt="0" alt="【オリジナルMV】Departure / 姫野　- tato (cover)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'XIGbiSGclgA')">
   </a>
-  <h3 class='video-title'>Departure / 姫野　- tato (cover)</h3>
+  <h3 class='video-title'>【オリジナルMV】Departure / 姫野　- tato (cover)</h3>
   <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2025-11-04</p>
   <div class="tag-container">
     <span class="work-tag">Movie</span>
@@ -124,9 +124,9 @@ My Works
 
 <div class="video-item size-min" data-tags="Mix,Movie" data-artist="tato">
   <a href="https://www.youtube.com/watch?v=zwptzlQnSYo" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/zwptzlQnSYo/maxresdefault.jpg" data-video-id="zwptzlQnSYo" data-error-attempt="0" alt="24/7 / 201　- tato (cover)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'zwptzlQnSYo')">
+    <img src="https://i.ytimg.com/vi/zwptzlQnSYo/maxresdefault.jpg" data-video-id="zwptzlQnSYo" data-error-attempt="0" alt="【オリジナルMV】24/7 / 201　- tato (cover)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'zwptzlQnSYo')">
   </a>
-  <h3 class='video-title'>24/7 / 201　- tato (cover)</h3>
+  <h3 class='video-title'>【オリジナルMV】24/7 / 201　- tato (cover)</h3>
   <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2025-07-22</p>
   <div class="tag-container">
     <span class="work-tag">Mix</span>
