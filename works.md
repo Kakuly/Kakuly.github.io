@@ -11,6 +11,18 @@ My Works
 
 <div class="video-grid" id="video-grid">
 
+<div class="video-item size-min" data-tags="Mix,Remix" data-artist="☾*のんです / Nondesu">
+  <a href="https://www.youtube.com/watch?v=l68oHDJmRFo" target="_blank" class="video-link">
+    <img src="https://i.ytimg.com/vi/l68oHDJmRFo/maxresdefault.jpg" data-video-id="l68oHDJmRFo" data-error-attempt="0" alt="僕のかわい子ちゃん -MON7A（Arrange covered by のんです）" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'l68oHDJmRFo')">
+  </a>
+  <h3 class='video-title'>僕のかわい子ちゃん -MON7A（Arrange covered by のんです）</h3>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2026-03-14</p>
+  <div class="tag-container">
+    <span class="work-tag">Mix</span>
+    <span class="work-tag">Remix</span>
+  </div>
+</div>
+
 <div class="video-item size-min" data-tags="Arrangement" data-artist="猫愛(ねあ)">
   <a href="https://www.youtube.com/watch?v=2lR1nUQQqL8" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/2lR1nUQQqL8/maxresdefault.jpg" data-video-id="2lR1nUQQqL8" data-error-attempt="0" alt="光って☆イルミネーション covered by ねあ" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, '2lR1nUQQqL8')">
