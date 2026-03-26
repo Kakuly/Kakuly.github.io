@@ -12,6 +12,18 @@ My Release
 
 <div class="video-grid" id="video-grid">
 
+<div class="video-item size-min" data-tags="MV" data-artist="THE LUV BUGS">
+  <a href="https://www.youtube.com/watch?v=Q2ShSzDHUrw" target="_blank" class="video-link">
+    <img src="https://i.ytimg.com/vi/Q2ShSzDHUrw/maxresdefault.jpg" data-video-id="Q2ShSzDHUrw" data-error-attempt="0" alt="THE LUV BUGS, Kakuly, tato / gucha!（Music Video）" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'Q2ShSzDHUrw')">
+  </a>
+  <h3 class='video-title'>THE LUV BUGS, Kakuly, tato / gucha!（Music Video）</h3>
+  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>THE LUV BUGS</p>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2026-03-25</p>
+  <div class="tag-container">
+    <span class="work-tag">MV</span>
+  </div>
+</div>
+
 <div class="video-item size-min" data-tags="MV" data-artist="Kakuly">
   <a href="https://www.youtube.com/watch?v=2CZwNhqdb9M" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/2CZwNhqdb9M/maxresdefault.jpg" data-video-id="2CZwNhqdb9M" data-error-attempt="0" alt="Kakuly - Despair (feat.初音ミク)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, '2CZwNhqdb9M')">

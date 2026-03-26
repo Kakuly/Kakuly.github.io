@@ -11,6 +11,20 @@ My Works
 
 <div class="video-grid" id="video-grid">
 
+<div class="video-item size-min" data-tags="Lyrics,Mastering,Mix,Music" data-artist="THE LUV BUGS">
+  <a href="https://www.youtube.com/watch?v=Q2ShSzDHUrw" target="_blank" class="video-link">
+    <img src="https://i.ytimg.com/vi/Q2ShSzDHUrw/maxresdefault.jpg" data-video-id="Q2ShSzDHUrw" data-error-attempt="0" alt="THE LUV BUGS, Kakuly, tato / gucha!（Music Video）" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'Q2ShSzDHUrw')">
+  </a>
+  <h3 class='video-title'>THE LUV BUGS, Kakuly, tato / gucha!（Music Video）</h3>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2026-03-25</p>
+  <div class="tag-container">
+    <span class="work-tag">Lyrics</span>
+    <span class="work-tag">Mastering</span>
+    <span class="work-tag">Mix</span>
+    <span class="work-tag">Music</span>
+  </div>
+</div>
+
 <div class="video-item size-min" data-tags="Mix,Remix" data-artist="☾*のんです / Nondesu">
   <a href="https://www.youtube.com/watch?v=l68oHDJmRFo" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/l68oHDJmRFo/maxresdefault.jpg" data-video-id="l68oHDJmRFo" data-error-attempt="0" alt="僕のかわい子ちゃん -MON7A（Arrange covered by のんです）" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'l68oHDJmRFo')">
