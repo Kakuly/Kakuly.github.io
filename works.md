@@ -11,6 +11,17 @@ My Works
 
 <div class="video-grid" id="video-grid">
 
+<div class="video-item size-min" data-tags="Arrangement" data-artist="夜未アガリ">
+  <a href="https://www.youtube.com/watch?v=ZVGbTFcfnn8" target="_blank" class="video-link">
+    <img src="https://i.ytimg.com/vi/ZVGbTFcfnn8/maxresdefault.jpg" data-video-id="ZVGbTFcfnn8" data-error-attempt="0" alt="シャッターチャンス feat. 初音ミク&amp;鏡音リン" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'ZVGbTFcfnn8')">
+  </a>
+  <h3 class='video-title'>シャッターチャンス feat. 初音ミク&amp;鏡音リン</h3>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2026-04-07</p>
+  <div class="tag-container">
+    <span class="work-tag">Arrangement</span>
+  </div>
+</div>
+
 <div class="video-item size-min" data-tags="Lyrics,Mastering,Mix,Music" data-artist="THE LUV BUGS">
   <a href="https://www.youtube.com/watch?v=Q2ShSzDHUrw" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/Q2ShSzDHUrw/maxresdefault.jpg" data-video-id="Q2ShSzDHUrw" data-error-attempt="0" alt="THE LUV BUGS, Kakuly, tato / gucha!（Music Video）" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'Q2ShSzDHUrw')">
