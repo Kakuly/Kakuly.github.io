@@ -12,6 +12,18 @@ My Release
 
 <div class="video-grid" id="video-grid">
 
+<div class="video-item size-min" data-tags="MV" data-artist="Kakuly">
+  <a href="https://www.youtube.com/watch?v=q3KCZ8wtlS8" target="_blank" class="video-link">
+    <img src="https://i.ytimg.com/vi/q3KCZ8wtlS8/maxresdefault.jpg" data-video-id="q3KCZ8wtlS8" data-error-attempt="0" alt="Kakuly - だりい (feat.hatsune miku)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'q3KCZ8wtlS8')">
+  </a>
+  <h3 class='video-title'>Kakuly - だりい (feat.hatsune miku)</h3>
+  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Kakuly</p>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2026-04-19</p>
+  <div class="tag-container">
+    <span class="work-tag">MV</span>
+  </div>
+</div>
+
 <div class="video-item size-min" data-tags="MV" data-artist="THE LUV BUGS">
   <a href="https://www.youtube.com/watch?v=Q2ShSzDHUrw" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/Q2ShSzDHUrw/maxresdefault.jpg" data-video-id="Q2ShSzDHUrw" data-error-attempt="0" alt="THE LUV BUGS, Kakuly, tato / gucha!（Music Video）" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'Q2ShSzDHUrw')">
