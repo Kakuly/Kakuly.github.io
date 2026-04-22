@@ -18,7 +18,7 @@ My Release
   </a>
   <h3 class='video-title'>Kakuly - だりい (feat.hatsune miku)</h3>
   <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Kakuly</p>
-  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2026-04-19</p>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2026-04-22</p>
   <div class="tag-container">
     <span class="work-tag">MV</span>
   </div>
