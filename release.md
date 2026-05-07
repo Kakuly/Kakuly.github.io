@@ -12,13 +12,13 @@ My Release
 
 <div class="video-grid" id="video-grid">
 
-<div class="video-item size-min" data-tags="Audio" data-artist="Unknown">
+<div class="video-item size-min" data-tags="Audio" data-artist="たたまれ　T4TaM@Re">
   <a href="https://www.youtube.com/watch?v=qcxIUlFLYSk" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/qcxIUlFLYSk/default.jpg" data-video-id="qcxIUlFLYSk" data-error-attempt="0" alt="Private video" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'qcxIUlFLYSk')">
+    <img src="https://i.ytimg.com/vi/qcxIUlFLYSk/maxresdefault.jpg" data-video-id="qcxIUlFLYSk" data-error-attempt="0" alt="De-Perfectionism /Kakuly &amp; 可不 (official audio)" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'qcxIUlFLYSk')">
   </a>
-  <h3 class='video-title'>Private video</h3>
-  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>Unknown</p>
-  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2026-05-06</p>
+  <h3 class='video-title'>De-Perfectionism /Kakuly &amp; 可不 (official audio)</h3>
+  <p class='video-artist' style='font-size:0.75rem; font-weight:700; margin:4px 0 2px 0; opacity:0.8; font-family:"Montserrat", sans-serif;'>たたまれ　T4TaM@Re</p>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2026-05-07</p>
   <div class="tag-container">
     <span class="work-tag">Audio</span>
   </div>
