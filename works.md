@@ -11,6 +11,18 @@ My Works
 
 <div class="video-grid" id="video-grid">
 
+<div class="video-item size-min" data-tags="Mix,Movie" data-artist="☾*のんです / Nondesu">
+  <a href="https://www.youtube.com/watch?v=NYzgSVD5ewQ" target="_blank" class="video-link">
+    <img src="https://i.ytimg.com/vi/NYzgSVD5ewQ/maxresdefault.jpg" data-video-id="NYzgSVD5ewQ" data-error-attempt="0" alt="【女の子6人で】「でぃすこみゅーたんと！」歌ってみた!!♡（CUTIE STREET × ナユタン星人）" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'NYzgSVD5ewQ')">
+  </a>
+  <h3 class='video-title'>【女の子6人で】「でぃすこみゅーたんと！」歌ってみた!!♡（CUTIE STREET × ナユタン星人）</h3>
+  <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2026-05-17</p>
+  <div class="tag-container">
+    <span class="work-tag">Mix</span>
+    <span class="work-tag">Movie</span>
+  </div>
+</div>
+
 <div class="video-item size-min" data-tags="Arrangement" data-artist="夜未アガリ">
   <a href="https://www.youtube.com/watch?v=ZVGbTFcfnn8" target="_blank" class="video-link">
     <img src="https://i.ytimg.com/vi/ZVGbTFcfnn8/maxresdefault.jpg" data-video-id="ZVGbTFcfnn8" data-error-attempt="0" alt="シャッターチャンス feat. 初音ミク&amp;鏡音リン" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'ZVGbTFcfnn8')">
@@ -623,9 +635,9 @@ My Works
 
 <div class="video-item size-min" data-tags="Movie" data-artist="☾*のんです / Nondesu">
   <a href="https://www.youtube.com/watch?v=aOu8lljw3Z8" target="_blank" class="video-link">
-    <img src="https://i.ytimg.com/vi/aOu8lljw3Z8/maxresdefault.jpg" data-video-id="aOu8lljw3Z8" data-error-attempt="0" alt="【 MV 】のんです です！ / SAKURAmoti feat.のんです" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'aOu8lljw3Z8')">
+    <img src="https://i.ytimg.com/vi/aOu8lljw3Z8/maxresdefault.jpg" data-video-id="aOu8lljw3Z8" data-error-attempt="0" alt="〖MV〗のんです です！ / SAKURAmoti feat.のんです" class="video-thumbnail" loading="lazy" onerror="handleImageError(this, 'aOu8lljw3Z8')">
   </a>
-  <h3 class='video-title'>【 MV 】のんです です！ / SAKURAmoti feat.のんです</h3>
+  <h3 class='video-title'>〖MV〗のんです です！ / SAKURAmoti feat.のんです</h3>
   <p style='font-size:0.7rem; opacity:0.5; margin: 4px 0;'>2020-11-27</p>
   <div class="tag-container">
     <span class="work-tag">Movie</span>
